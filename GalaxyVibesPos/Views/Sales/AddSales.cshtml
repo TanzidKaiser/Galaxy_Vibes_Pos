@@ -1,0 +1,907 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.Sale>
+@{
+    ViewBag.Title = "AddSales";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #ProductSearch {
+        width: 170px;
+        font-size: 15px;
+        height: 40px;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    input[type="checkbox"] {
+        margin: 0px 3px 0px;
+        /*margin-top: 1px \9;
+            line-height: normal;*/
+    }
+
+    #ColorForCheckboxLebel {
+        color: #08c;
+        font-weight: bold;
+        font-size: 11px;
+    }
+</style>
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Product Sale</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+
+                        @*<div class="form-horizontal">
+                        *@
+
+
+                        <div class="widget-content">
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <input data-val="true" id="PurchaseProductID" name="PurchaseProductID" type="hidden">
+                                    <input data-val="true" id="SalesTime" type="hidden" value="@ViewBag.time" />
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Date</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="date" class="span5" id="SaleDate" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Customer Name</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="SalesCustomerName" class="span8" placeholder="Customer Name" />
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Group Name</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="GroupName" disabled />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Company Name</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="CompanyName" disabled />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Address</label>
+                                        <div class="controls" id="inputMargin">
+                                            <textarea class="span12" id="Address" disabled></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Ref/PO</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="Reference" />
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Product Search</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductSearch" class="span12" placeholder="Product Search" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Sub Category</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="SubCategoryName" disabled />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Product ID</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="SalesProductID" class="span12" disabled />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Unit Type</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="UnitType" disabled />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Discount</label>
+                                        <div class="controls" id="inputMargin">
+                                            <label class="span6"><input type="radio" name="SalesProductDiscount" checked="checked" id="forParcent" style="margin: 0px 4px 7px" /><input type="text" id="parcentValue" style="width:50px" /> % </label>
+                                            <label class="span6"><input type="radio" name="SalesProductDiscount" id="forTaka" style=" margin: 0px 4px 7px" /><input type="text" id="tkValue" style="width:50px" /> Tk </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="span6">
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Tracking No</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="SalesNo" value="@ViewBag.SalesNo" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Previous Due</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="PreviousDue" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Vat Reg No</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" disabled />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Phone/Mobile</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="SalesPurchaseByContact" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Remarks</label>
+                                        <div class="controls" id="inputMargin">
+                                            <textarea class="span12" id="SalesRemarks"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Purchase By</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="SalesPuechaseBy" />
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Current Stock</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="Stoke" disabled />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Product Name</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductName" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Price</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductPrice" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Quantity</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="SalesQuantity" class="span12" placeholder="Quantity" />
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <hr />
+                            @* ------ *@
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <fieldset id="CustomerSubmitForm">
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <table class="table table-bordered table-invoice-full" id="Table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="head0">Product Code</th>
+                                                        <th class="head1">Name</th>
+                                                        <th class="head0 right">Price</th>
+                                                        <th class="head1 right">Quantity</th>
+                                                        <th class="head0 right">Discount</th>
+                                                        <th class="head0 right">Total</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <hr />
+                                <div class="row-fluid">
+                                    <div class="span4">
+
+
+                                        <div class="form-control">
+                                            <button type="button" id="addBtn" class="btn btn-success" style="margin:13px; width:90px; height:35px;font-size:25px; font-weight:bold;">Add</button>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="span4">
+
+
+
+
+
+
+                                    </div>
+                                    <div class="span4">
+
+
+
+                                    </div>
+
+
+                                </div>
+
+                            }
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            @*kjljl*@
+            <div class="span4">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Sales Invoice</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+
+                        @*<div class="form-horizontal">
+                        *@
+
+
+                        <div class="widget-content">
+
+                            <div class="row-fluid">
+                                <div class="col-lg-4 col-md-4">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Item Total</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="TotalItem" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Product Total</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductTotal" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Total</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="TotalAmount" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Dis. Total</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="TotalDiscount" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Total - (Discount)</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="TotalMinusDiscount" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">VAT + (5 %) </label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="TotalVat" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <hr />
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Net Total</label>
+
+                                        <div class="controls" id="inputMargin">
+
+                                            <input type="text" id="NetTotal" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Receive Amount</label>
+                                        <div class="controls" id="inputMargin">
+
+                                            <input type="text" id="ReceiveAmount" class="span12" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Due Amount</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="DueAmount" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Payment Date</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="date" class="span5" id="PaymentDate" />
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Return Amount</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ReturnAmount" class="span12" disabled />
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+
+                                        <div class="controls" id="inputMargin" style=" margin: 15px 18px 0px -7px;">
+                                            <label id="ColorForCheckboxLebel"><input type="checkbox" id="TotalAmount" />Sales Without Print</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+
+
+                                        <div class="controls" id="inputMargin" style="margin: 0px 0px 0px 0px">
+                                            <label class="span4"><input type="radio" id="Cash" name="radio1" value="Cash" checked style="margin: 0px 4px 7px" />Cash </label>
+                                            <label class="span4"><input type="radio" id="Due" name="radio1" value="Due" style=" margin: 0px 4px 7px" />Due </label>
+                                            <label class="span4"><input type="radio" id="Cheque" name="radio1" value="Cheque" style=" margin: 0px 4px 7px" />Cheque </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-control">
+                                    <button type="button" id="SaleBtn" class="btn btn-success" style="margin:13px; width:150px; height:40px;font-size:35px; font-weight:bold;">SALE</button>
+                                </div>
+                                <hr />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+        <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-ui.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var now = new Date();
+                var month = (now.getMonth() + 1);
+                var day = now.getDate();
+                if (month < 10)
+                    month = "0" + month;
+                if (day < 10)
+                    day = "0" + day;
+                var today = now.getFullYear() + '-' + month + '-' + day;
+
+                $('#SaleDate').val(today);
+                $('#PaymentDate').val(today);
+
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+
+                $("#SalesCustomerName").autocomplete({
+
+                    source: function (request, response) {
+
+                        $("#GroupName").val('');
+                        $("#CompanyName").val('');
+                        $("#PreviousDue").val('');
+                        $("#Address").val('');
+                        $.ajax({
+                            url: "/Sales/GetCustomerBySearch",
+                            type: "POST",
+                            dataType: "json",
+                            data: { Prefix: request.term },
+
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    $("#GroupName").val(item.GroupName);
+                                    $("#CompanyName").val(item.CompanyName);
+                                    $("#PreviousDue").val(item.PreviousDue);
+                                    $("#Address").val(item.Address);
+                                    return { label: item.CustomerName, value: item.CustomerName };
+
+                                }))
+                            }
+                        })
+                    },
+                    minLength: 2,
+
+                    messages: {
+                        noResults: "", results: ""
+                    }
+                });
+            })
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $("#ProductSearch").autocomplete({
+
+                    source: function (request, response) {
+
+                        $.ajax({
+                            url: "/Purchase/GetProductBySearch",
+                            type: "POST",
+                            dataType: "json",
+                            data: { Prefix: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+
+                                    $("#Stoke").val(item.Stoke);
+                                    $("#SalesProductID").val(item.ProductDetailsID);
+                                    $("#ProductName").val(item.ProductName);
+                                    $("#UnitType").val(item.UnitID);
+                                    $("#ProductPrice").val(item.SalePrice);
+                                    $("#PurchaseProductID").val(item.ProductDetailsID);
+                                    $("#SubCategoryName").val(item.SubCategoryName);
+                                    return { label: item.Code, value: item.Code };
+
+
+
+
+                                }))
+
+                            }
+                        })
+                    },
+                    minLength: 4,
+                    messages: {
+                        noResults: "", results: ""
+                    }
+                });
+            })
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#addBtn").click(function () {
+
+
+                    var isValidate = CheckValidateForAdd();
+                    var productID = $("#SalesProductID").val();
+                    var productName = $("#ProductName").val();
+                    var price = $("#ProductPrice").val();
+                    var quantity = $("#SalesQuantity").val();
+                    var total = price * quantity;
+                    var discount = getDiscount(total);
+                    if (discount == '') {
+                        discount = 0;
+                    }
+                    var totalAfterDiscount = total - discount;
+                    if (isValidate) {
+
+                        var markup = "<tr><td class=ProductID>" + productID + "</td><td>" + productName + "</td><td class=PurchaseProductPrice>" + price + "</td><td class=totalQuantity>" + quantity + "</td><td class=totalDiscount>" + discount + "</td><td class = SalesTotal>" + totalAfterDiscount + "</td><td>" + ' <button type="button" id="removeBtn" class="btn btn-info btn-lg"><i class="icon-remove-circle"></i></button>' + "</td></tr>";
+
+                        $("#Table tbody").append(markup);
+
+                        ProductQuantitysum();
+                        $("#TotalAmount").val(TotalAmount());
+
+                        $("#TotalVat").val((GetVat(TotalMinusDiscount())));
+
+                        $("#TotalMinusDiscount").val(TotalMinusDiscount());
+
+                        $("#TotalDiscount").val(TotalDiscount());
+                        $("#NetTotal").val(TotalNetAmount());
+
+                        var totalItem = $('#Table tbody tr').length;
+                        $("#TotalItem").val(totalItem);
+
+                        FieldValueNUll();
+
+                    }
+
+
+
+                });
+            });
+
+
+
+            function ProductQuantitysum() {
+                var sum = 0;
+                $('.totalQuantity').each(function () {
+                    var value = $(this).text();
+                    //add only if the value is number
+                    if (!isNaN(value) && value.length != 0) {
+                        sum += parseFloat(value);
+                    }
+
+                });
+                $('#ProductTotal').val(sum);
+            };
+
+            function TotalAmount() {
+                var sum = 0;
+                $('#Table tbody tr').each(function () {
+
+                    $this = $(this);
+
+                    var price = $this.find("td.PurchaseProductPrice").text();
+                    var quantity = $this.find("td.totalQuantity").text();
+
+                    if ((!isNaN(price) && price.length != 0) && (!isNaN(quantity) && quantity.length != 0)) {
+                        sum += (parseFloat(price) * parseFloat(quantity));
+
+                    }
+                });
+                return sum;
+
+            }
+
+
+            function GetVat(totalAfterDiscount) {
+                var totalVat = ((5 * totalAfterDiscount) / 100);
+
+                return totalVat;
+            }
+
+            function TotalMinusDiscount()
+            {
+                return TotalAmount() - TotalDiscount();
+            }
+
+            function TotalDiscount() {
+                var sum = 0;
+                $('.totalDiscount').each(function () {
+
+                    var value = $(this).text();
+
+                    if (!isNaN(value) && value.length != 0) {
+                        sum += parseFloat(value);
+                    }
+                });
+                return sum;
+
+            }
+
+            function TotalNetAmount() {
+                return TotalMinusDiscount() + parseFloat($("#TotalVat").val());
+            }
+
+            function getDiscount(total) {
+                var discount;
+
+                if (document.getElementById('forParcent').checked) {
+                    return discount = (((document.getElementById('parcentValue').value) * total) / 100);
+                }
+                else if (document.getElementById('forTaka').checked) {
+                    return discount = (document.getElementById('tkValue').value);
+                }
+
+            }
+
+            function FieldValueNUll() {
+
+                document.getElementById("ProductSearch").value = "";
+                document.getElementById("SalesQuantity").value = "";
+                document.getElementById("parcentValue").value = "";
+                document.getElementById("tkValue").value = "";
+                document.getElementById("SalesProductID").value = "";
+                document.getElementById("ProductName").value = "";
+                document.getElementById("ProductPrice").value = "";
+                document.getElementById("UnitType").value = "";
+                document.getElementById("Stoke").value = "";
+                document.getElementById("SubCategoryName").value = "";
+            }
+            function InvoiceFieldValueNUll() {
+                $("#TotalAmount").val('');
+                $("#TotalVat").val('');
+                $("#TotalWithVat").val('');
+                $("#TotalDiscount").val('');
+                $("#NetTotal").val('');
+                $("#TotalItem").val('');
+                $("#ProductTotal").val('');
+                $("#ReturnAmount").val('');
+                $("#DueAmount").val('');
+                $("#ReceiveAmount").val('');
+            }
+
+            function CheckValidateForAdd() {
+
+
+
+                var productSearch = $("#ProductSearch").val();
+                var quantity = $('#SalesQuantity').val();
+
+                if (productSearch == "") {
+
+                    alert("Required Product Name ");
+                    return false;
+                };
+                if (quantity == "") {
+
+                    alert("Required Quantity");
+                    return false;
+                };
+                if ($("#Stoke").val() < 1)
+                {
+                    alert("Selected Product are Not Available");
+                    FieldValueNUll();
+                    return false;
+
+                };
+                
+                return true;
+            }
+
+        </script>
+        @*For Remove Btn*@
+
+        <script>
+
+            $('#Table').on('click', '#removeBtn', function () {
+                $(this).parents('tr').remove();
+
+                var totalItem = ($('#Table tbody tr').length + 1) - 1;
+                $("#TotalItem").val(totalItem);
+                ProductQuantitysum();
+                $("#TotalAmount").val(TotalAmount());
+                $("#TotalVat").val((GetVat(TotalMinusDiscount())));
+                //$("#TotalVat").val((GetVat() * 5) / 100);
+                $("#TotalMinusDiscount").val(TotalMinusDiscount());
+                $("#TotalDiscount").val(TotalDiscount());
+                $("#NetTotal").val(TotalNetAmount());
+                if (totalItem == 0) {
+                    InvoiceFieldValueNUll();
+                };
+
+            });
+        </script>
+
+
+        <script>
+            $("#ReceiveAmount").bind('keyup keypress blur', function () {
+                var netAmount = TotalNetAmount();
+                var receiveAmount = $(this).val();
+                if (receiveAmount >= netAmount) {
+                    $("#ReturnAmount").val(receiveAmount - netAmount);
+                    $("#DueAmount").val('');
+                }
+                else {
+                    $("#DueAmount").val(netAmount - receiveAmount);
+                    $("#ReturnAmount").val('');
+                }
+            });
+        </script>
+        @*For Sale*@
+
+        <script>
+            $(document).ready(function () {
+                $("#SaleBtn").click(function () {
+
+                    var totalRow = $('#Table tbody tr').length;
+                    if (totalRow == 0) {
+                        alert("Please Add Minimum One Item");
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+
+                $("#SaleBtn").click(function () {
+                    
+                    //if (document.getElementById("Cash").checked)
+                    //{
+                    //    var cash = document.getElementById("Cash").value();
+                    //}
+
+                    var rowNo = $('#Table tbody tr').length;
+                    var List = [];
+                    if (rowNo >= 1) {
+                        $('#Table tbody tr').each(function () {
+
+                            $this = $(this);
+                            var saleItem = {
+
+
+                                CompanyName: $("#CompanyName").val(),
+                                SalesCustomerName: $("#SalesCustomerName").val(),
+
+                                SalesNo: $("#SalesNo").val(),
+                                SalesDate: $("#SaleDate").val(),
+                                SalesRemarks: $("#SalesRemarks").val(),
+                                Reference: $("#Reference").val(),
+                                SalesTime: $("#SalesTime").val(),
+
+                                SalesProductID: $this.find("td.ProductID").text(),
+                                SalesSalePrice: $this.find('td.PurchaseProductPrice').text(),
+                                SalesQuantity: $this.find('td.totalQuantity').text(),
+                                SalesProductDiscount: $this.find('td.totalDiscount').text(),
+                                SalesTotal: $this.find('td.SalesTotal').text(),
+
+                                SalesReceivedAmount: $("#ReceiveAmount").val(),
+
+
+                                SalesChangeAmount: $("#ReturnAmount").val(),
+                                SalesPuechaseBy: $("#SalesPuechaseBy").val(),
+                                SalesPurchaseByContact: $("#SalesPurchaseByContact").val(),
+
+
+                                DueAmount: parseFloat($("#DueAmount").val()),
+
+                                //......For Sale report
+
+                                SubTotal: ($("#TotalAmount").val()),
+                                TotalDiscount: ($("#TotalDiscount").val()),
+                                SalesVat: ($("#TotalVat").val()),
+                                TotalAmount: ($("#TotalMinusDiscount").val()),
+                                NetPayable: ($("#NetTotal").val()),
+                                ReturnAmount: ($("#ReturnAmount").val()),
+                                                              
+                            };
+
+                            List.push(saleItem);
+                        });
+                        $.ajax({
+                            type: 'post',
+                            url: "/Sales/Save",
+                            dataType: 'json',
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(List),
+                            contentType: 'application/json',
+                            success: function (data) {
+                                alert(data);
+                                window.location.href = "/Sales/AddSales";
+                            },
+                        });
+
+                    }
+                    else {
+                        alert("Please Add Minimum One Item");
+                    };
+                
+
+
+                });
+
+            })
+            
+        </script>
+    }
+

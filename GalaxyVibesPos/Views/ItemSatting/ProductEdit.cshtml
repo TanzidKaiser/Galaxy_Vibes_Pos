@@ -1,0 +1,120 @@
+﻿@model GalaxyVibesPos.Models.ProductDetails
+
+@{
+    ViewBag.Title = "ProductEdit";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <hr />
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Product Edit</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+                                <fieldset id="AddProductDetailsSubmitForm">
+
+                                    <br />
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(model => model.ProductDetailsID)
+
+                                    @*<label class="control-label">Select Main category</label>
+                                        <div class="controls">
+
+                                            @Html.DropDownList("MainCategoryID", String.Empty)
+                                        </div>*@
+
+                                    <div class="control-group">
+                                        <label class="control-label">Product Name:</label>
+                                        <div class="controls">
+
+                                            @Html.EditorFor(model => model.ProductName, new { @class = "span11" })
+                                            @Html.ValidationMessageFor(model => model.ProductName)
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Purchase Price:</label>
+                                        <div class="controls">
+
+                                            @Html.EditorFor(model => model.PurchasePrice, new { @class = "span11" })
+                                            @Html.ValidationMessageFor(model => model.PurchasePrice)
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Sale Price:</label>
+                                        <div class="controls">
+
+                                            @Html.EditorFor(model => model.SalePrice, new { @class = "span11" })
+                                            @Html.ValidationMessageFor(model => model.SalePrice)
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Description:</label>
+                                        <div class="controls">
+
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "span11" })
+                                            @Html.ValidationMessageFor(model => model.Description)
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Minimum Order:</label>
+                                        <div class="controls">
+
+                                            @Html.EditorFor(model => model.MinimumProductQuantity, new { @class = "span11" })
+                                            @Html.ValidationMessageFor(model => model.MinimumProductQuantity)
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-actions">
+                                        <button type="button" id="AddProductDetailsBtn" class="btn btn-success">Save</button>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div>
+                                @Html.ActionLink("Back to List", "ProductIndex")
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @*........ Save Product Details ........... *@
+
+    <script>
+        $("#AddProductDetailsBtn").click(function () {
+            var data = $("#AddProductDetailsSubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/ItemSatting/UpdateProductDetails",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/ItemSatting/ProductIndex";
+
+
+                }
+            })
+        })
+    </script>
+}

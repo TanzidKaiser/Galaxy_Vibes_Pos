@@ -1,0 +1,342 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.Customer>
+@{
+
+    ViewBag.Title = "AddCustomer";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span5">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Customer</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="CustomerSubmitForm">
+                                    <input data-val="true" id="CustomerID" name="CustomerID" type="hidden">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label">Customer Name</label>
+                                        <div class="controls">
+                                            <input type="text" name="CustomerName" id="CustomerName" class="span11" placeholder="Customer Name" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="controls">
+                                       
+                                        <select id="GroupID" name="GroupID">
+                                                <option value="0">Select Group</option>
+                                                @foreach (var a in ViewBag.group)
+                                                {
+                                                    <option value="@a.GroupID">@a.GroupName</option>
+                                                }
+
+                                            </select>                                  
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Select Company</label>
+                                        <div class="controls">
+
+                                            @Html.DropDownList("CompanyID", new SelectList(string.Empty, "Value", "Text"), "Select Company", new { @id = "CompanyID" })
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Gender</label>
+                                        <div class="controls">
+                                            <label>
+                                                <input type="radio" id="Male" value="Male" name="Gender" />
+                                                Male
+                                            </label>
+                                            <label>
+                                                <input type="radio" id="Female" value="Female" name="Gender" />
+                                                Female
+                                            </label>
+                                            <label>
+                                                <input type="radio" id="Other" value="Other" name="Gender" />
+                                                Other
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Phone</label>
+                                        <div class="controls">
+                                            <input type="text" name="Phone" id="Phone" class="span11" placeholder="Customer Phone" />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Email</label>
+                                        <div class="controls">
+                                            <input type="text" name="Email" id="Email" class="span11" placeholder="Customer Email" />
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Vat Reg NO</label>
+                                        <div class="controls">
+                                            <input type="text" name="VatRegNo" id="VatRegNo" class="span11" placeholder="Customer Vat Registration Number" />
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Address</label>
+                                        <div class="controls">
+                                            <textarea class="span11" id="Address" name="Address"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Previous Due</label>
+                                        <div class="controls">
+                                            <input type="text" name="PreviousDue" id="PreviousDue" class="span11" placeholder="Previous Due" />
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
+                                        <button type="button" id="CustomerUpdateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (@ViewBag.Message == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5> Customer Phone Number Already Exist ! </h5>
+                        </div>
+                    }
+                    @if (@ViewBag.Message == 1)
+                    {
+                        <div class="alert alert-success alert-block" id="Msg">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Success!</h4>
+                            <h5>Customer Name Save Successfully !</h5>
+                        </div>
+                    }
+                    @if (@ViewBag.Message == 2)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Warn!</h4>
+                            <h5>Null Field Not Except!</h5>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="span7">
+                    <div class="widget-box">
+                        <div class="widget-title">
+
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Custome List</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped" id="myTable">
+
+                                <thead>
+                                    <tr>
+                                        <td style="font-size:medium">ID</td>
+                                        <td style="font-size:medium">Name</td>
+                                        <td style="font-size:medium">Gender</td>
+                                        <td style="font-size:medium">Phone</td>
+                                        <td style="font-size:medium">Email</td>
+                                        <td style="font-size:medium">Address</td>
+                                        <td style="font-size:medium">Previous Due</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr class="odd gradeX">
+                                            <td>
+
+
+                                                @Html.DisplayFor(modelItem => item.CustomerID)
+
+                                            </td>
+                                            <td>
+
+
+                                                @Html.DisplayFor(modelItem => item.CustomerName)
+
+                                            </td>
+                                            <td>
+
+
+                                                @Html.DisplayFor(modelItem => item.Gender)
+
+                                            </td>
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Phone)
+
+                                            </td>
+
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Email)
+
+                                            </td>
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Address)
+
+                                            </td>
+
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.PreviousDue)
+
+                                            </td>
+                                            <td>
+                                                <button type="button" id="EditCustomer" class="btn" onclick="EditCustomer(@item.CustomerID,this)">Edit</button> |
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+        function EditCustomer(id, num) {
+
+            $.ajax({
+
+                url: '/Customer/EditCustomer',
+                data: { 'CustomerId': id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#CustomerID").val(response.CustomerID);
+                    $("#CustomerName").val(response.CustomerName);                                      
+                    $("#Phone").val(response.Phone);          
+                    $("#Email").val(response.Email);
+                    $("#Address").val(response.Address);
+                    $("#PreviousDue").val(response.PreviousDue);
+                    $("#VatRegNo").val(response.VatRegNo);
+                    if (response.Gender == "Male") {
+                        $("#Male").prop("checked", true);
+                    }
+                    else if (response.Gender == "Female") {
+                        $("#Female").prop("checked", true);
+                    }
+                    else if (response.Gender == "Other") {
+                        $("#Other").prop("checked", true);
+                    }
+
+                   
+                    $("#addBtn").hide();
+                    document.getElementById("PreviousDue").disabled = true;
+
+                },
+
+
+            });
+
+        }
+    </script>
+
+    <script>
+        $("#CustomerUpdateBtn").click(function () {
+            var data = $("#CustomerSubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Customer/UpdateCustomer",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/Customer/AddCustomer";
+
+
+                }
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#GroupID").change(function () {
+
+                var ID = $("#GroupID").val();
+                var select = $("#CompanyID");
+                select.empty();
+                $.ajax({
+                    url: '/Customer/GetCompanyByGroupID',
+                    data: { GroupID: ID },
+                    type: "post",
+                    cache: false,
+                    success: function (response) {
+
+                        if (response != null) {
+                            $.each(response, function (index, itemData) {
+
+                                select.append($('<option/>', {
+
+                                    value: itemData.Value,
+
+                                    text: itemData.Text
+
+                                }));
+
+                            });
+                        }
+                        else {
+
+                            return false;
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+}

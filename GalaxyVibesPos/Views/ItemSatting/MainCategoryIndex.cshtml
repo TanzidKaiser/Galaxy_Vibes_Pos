@@ -1,0 +1,54 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.CategoryMain>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <p>
+                @Html.ActionLink("Create New", "ItemSettings")
+            </p>
+
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Data table</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped" id="myTable">
+                        <thead>
+                            <tr>
+                                <td style="font-size:medium">Main Category</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaincategoryName)
+                                    </td>
+                                    <td>                                      
+                                        @Html.ActionLink("Edit", "MainCategoryEdit", new { id = item.MainCategoryID }) |
+                                        @Html.ActionLink("Details", "MainCategoryDetails", new { id = item.MainCategoryID }) |
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.MainCategoryID })*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

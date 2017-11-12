@@ -1,0 +1,284 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.CustomerLedger>
+@{
+    ViewBag.Title = "AddCustomerLedger";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span5">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Customer Ledger</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="CustomerLedgerSubmitForm">
+                                    <input data-val="true" id="CustomerLedgerID" name="ID" type="hidden">
+                                    <div class="control-group">
+                                        <label class="control-label">Customer Name</label>
+                                        <div class="controls">
+                                            <select id="CustomerID" name="CustomerID" onchange="GetDue(this.value)">
+
+                                                <option value="0">Select Customer Name</option>
+                                                @foreach (var m in ViewBag.Customer)
+                                                {
+                                                    <option value="@m.CustomerID">@m.CustomerName</option>
+                                                }
+
+                                            </select>
+
+                                            @*@Html.DropDownList("CustomerID", ViewBag.CustomerList as List<SelectListItem>, new { @onchange = "GetDue(this.value)"})*@
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Date</label>
+                                        <div class="controls">
+                                            <input type="date" name="ReceiveDate" id="ReceiveDate" class="span5" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Previous Due</label>
+                                        <div class="controls">
+                                            <input type="text" name="PreviouaDue" id="PreviouaDue" class="span11" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Receive Amount</label>
+                                        <div class="controls">
+                                            <input type="text" name="Credit" id="Credit" class="span11" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Remarks</label>
+                                        <div class="controls">
+                                            <textarea class="span11" id="Remarks" name="Remarks"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
+                                        <button type="submit" id="CustomerUpdateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (@ViewBag.Message == 1)
+                    {
+                        <div class="alert alert-success alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Success!</h4>
+                            <h5>Save Successfully</h5>
+                        </div>
+                    }
+                    @if (@ViewBag.Message == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Warn!</h4>
+                            <h5> Null Value Not Accecpted ! </h5>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="span7">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Custome List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">Customers</td>
+                                    <td style="font-size:medium">Date</td>
+                                    <td style="font-size:medium">InvoiceNo</td>
+                                    <td style="font-size:medium">Debit</td>
+                                    <td style="font-size:medium">Credit</td>
+                                    <td style="font-size:medium">Remarks</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    @*<a href="@Url.Action("Read", new { id = item.id })">
+                                            @Html.DisplayFor(modelItem => item.Number)
+                                        </a>*@
+                                    <tr class="odd gradeX">
+                                        <td>
+
+                                            @if(item.CustomerID == 0)
+                                            {
+                                                <label>Cash</label>
+                                            }
+                                            else
+                                            {
+                                             @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                                            }
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => item.ReceiveDate)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => item.InvoiceNo)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.Debit)
+
+                                        </td>
+
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.Credit)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.Remarks)
+
+                                        </td>
+
+
+                                        <td>
+                                            <button type="button" id="EditCustomerLedger" class="btn" onclick="EditCustomerLedger(@item.ID,this)">Edit</button> |
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var now = new Date();
+            var month = (now.getMonth() + 1);
+            var day = now.getDate();
+            if (month < 10)
+                month = "0" + month;
+            if (day < 10)
+                day = "0" + day;
+            var today = now.getFullYear() + '-' + month + '-' + day;
+            $('#ReceiveDate').val(today);
+        });
+
+
+        function GetDue(id) {
+
+            $.ajax({
+
+                url: '/Customer/GetPreviousDueByCustomerID',
+                data: { 'CustomerId': id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    if (response != null) {
+                        $("#PreviouaDue").val(response.PreviousDue);
+                    }
+                    else {
+
+                        $("#PreviouaDue").val("0");
+
+                    }
+
+                },
+
+            });
+
+        }
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        function EditCustomerLedger(id, num) {
+
+            $.ajax({
+
+                url: '/Customer/EditCustomerLedger',
+                data: { 'CustomerId': id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#CustomerLedgerID").val(response.ID);
+                    $("#CustomerID").val(response.CustomerID);
+                    $("#ReceiveDate").val(response.ReceiveDate);
+                    $("#PreviouaDue").val(response.PreviouaDue);
+                    $("#Credit").val(response.Credit);
+                    $("#Remarks").val(response.Remarks);
+
+                    $("#addBtn").hide();
+                    $("#CustomerUpdateBtn").show();
+
+                },
+
+
+            });
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#CustomerUpdateBtn").hide();
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+}

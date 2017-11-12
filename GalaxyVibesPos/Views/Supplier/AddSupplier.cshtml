@@ -1,0 +1,316 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.Supplier>
+@{
+
+    ViewBag.Title = "AddSupplier";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span5">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Supplier</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="SupplierSubmitForm">
+                                    <input data-val="true" id="SupplierID" name="SupplierID" type="hidden">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label">Name</label>
+                                        <div class="controls">
+                                            <input type="text" name="SupplierName" id="SupplierName" class="span11" placeholder="Supplier Name" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Contact Person</label>
+                                        <div class="controls">
+                                            <input type="text" name="SupplierContactPerson" id="SupplierContactPerson" class="span11" placeholder="Contact Person" />
+
+                                        </div>
+
+                                    </div>
+                                    <label class="control-label">Select Group</label>
+                                    <div class="controls">
+                                        <select id="GroupID" name="GroupID">
+                                            <option value="0">Select Group</option>
+                                            @foreach (var a in ViewBag.Suppliergroup)
+                                            {
+                                                <option value="@a.GroupID">@a.GroupName</option>
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Select Company</label>
+                                        <div class="controls">
+
+                                            @Html.DropDownList("CompanyID", new SelectList(string.Empty, "Value", "Text"), "Select Company", new { @id = "CompanyID" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Phone</label>
+                                        <div class="controls">
+                                            <input type="text" name="SupplierPhone" id="SupplierPhone" class="span11" placeholder="Contact Number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Email</label>
+                                        <div class="controls">
+                                            <input type="text" name="SupplierEmail" id="SupplierEmail" class="span11" placeholder="Supplier Email" />
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Vat Reg NO</label>
+                                        <div class="controls">
+                                            <input type="text" name="SupplierVatRegNo" id="SupplierVatRegNo" class="span11" placeholder="Supplier Vat Registration Number" />
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Address</label>
+                                        <div class="controls">
+                                            <textarea class="span11" id="SupplierAddress" name="SupplierAddress"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" id="PreDue">Previous Due</label>
+                                        <div class="controls">
+                                            <input type="text" name="SupplierPreviousDue" id="SupplierPreviousDue" class="span11" placeholder="Previous Due" />
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
+                                        <button type="button" id="SupplierUpdateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (@ViewBag.Message == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5> Customer Phone Number Already Exist ! </h5>
+                        </div>
+                    }
+                    @if (@ViewBag.Message == 1)
+                    {
+                        <div class="alert alert-success alert-block" id="Msg">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Success!</h4>
+                            <h5>Customer Name Save Successfully !</h5>
+                        </div>
+                    }
+                    @if (@ViewBag.Message == 2)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Warn!</h4>
+                            <h5>Null Field Not Except!</h5>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="span7">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Custome List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">ID</td>
+                                    <td style="font-size:medium">Name</td>
+                                    <td style="font-size:medium">Phone</td>
+                                    <td style="font-size:medium">Email</td>
+                                    <td style="font-size:medium">Address</td>
+                                    <td style="font-size:medium">Previous Due</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr class="odd gradeX">
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => item.SupplierID)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => item.SupplierName)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.SupplierPhone)
+
+                                        </td>
+
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.SupplierEmail)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.SupplierAddress)
+
+                                        </td>
+
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.SupplierPreviousDue)
+
+                                        </td>
+                                        <td>
+                                            <button type="button" id="EditCustomer" class="btn" onclick="EditSupplier(@item.SupplierID,this)">Edit</button> |
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+        function EditSupplier(id, num) {
+
+            $.ajax({
+
+                url: '/Supplier/EditSupplier',
+                data: { supplierId: id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#SupplierID").val(response.SupplierID);
+                    $("#SupplierName").val(response.SupplierName);
+                    $("#SupplierContactPerson").val(response.SupplierContactPerson);
+                    $("#SupplierPhone").val(response.SupplierPhone);
+                    $("#SupplierVatRegNo").val(response.SupplierVatRegNo);
+                    $("#SupplierEmail").val(response.SupplierEmail);
+                    $("#SupplierAddress").val(response.SupplierAddress);
+                    $("#SupplierPreviousDue").val(response.SupplierPreviousDue);
+
+                    $("#addBtn").hide();
+                    document.getElementById("SupplierPreviousDue").disabled = true;
+                    
+                },
+            });
+        }
+
+    </script>
+    <script>
+        $("#SupplierUpdateBtn").click(function () {
+            var data = $("#SupplierSubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Supplier/UpdateSupplier",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/Supplier/AddSupplier";
+
+
+                }
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#GroupID").change(function () {
+
+                var ID = $("#GroupID").val();
+                var select = $("#CompanyID");
+                select.empty();
+                $.ajax({
+                    url: '/Supplier/GetCompanyByGroupID',
+                    data: { GroupID: ID },
+                    type: "post",
+                    cache: false,
+                    success: function (response) {
+
+                        if (response != null) {
+                            $.each(response, function (index, itemData) {
+
+                                select.append($('<option/>', {
+
+                                    value: itemData.Value,
+
+                                    text: itemData.Text
+
+                                }));
+
+                            });
+                        }
+                        else {
+
+                            return false;
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+
+}
+

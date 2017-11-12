@@ -1,0 +1,167 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.ProductDetails>
+
+@{
+    ViewBag.Title = "ProductIndex";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <p>
+                @Html.ActionLink("Create New", "ItemSettings")
+            </p>
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5> Index</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped" id="myTable">
+                        <thead>
+                            <tr>
+                                <td style="font-size:medium">Main Category</td>
+                                <td style="font-size:medium">Category</td>
+                                <td style="font-size:medium">Sub Category</td>
+                                <td style="font-size:medium">Product Name</td>
+                                <td style="font-size:medium">Purchase Price</td>
+                                <td style="font-size:medium">Sale Price</td>
+                                <td style="font-size:medium">Description</td>
+                                <td style="font-size:medium">Unit</td>
+                                <td style="font-size:medium">Minimum Order</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CategoryMain.MaincategoryName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CategorySub.SubCategoryName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductName)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PurchasePrice)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SalePrice)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UnitID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MinimumProductQuantity)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "ProductEdit", new { id = item.ProductDetailsID }) |
+                                        @Html.ActionLink("Details", "ProductDetails", new { id = item.ProductDetailsID }) |
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryMain.MaincategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategorySub.SubCategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.PurchasePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalePrice)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinimumProductQuantity)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryMain.MaincategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategorySub.SubCategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchasePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalePrice)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinimumProductQuantity)
+        </td>
+        
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductDetailsID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductDetailsID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductDetailsID })
+        </td>
+    </tr>
+}
+
+</table>*@

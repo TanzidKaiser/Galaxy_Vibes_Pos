@@ -1,0 +1,684 @@
+﻿@model  GalaxyVibesPos.Models.ItemSattingViewModel
+@{
+    ViewBag.Title = "ItemSettings";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+
+        <h1>Item Sattings</h1>
+
+
+    </div>>
+    <div class="container-fluid">
+        <br />
+        <br />
+        <hr />
+
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#MainCatagory" data-toggle="tab">Add Main Catagory</a>
+                            </li>
+
+                            <li>
+                                <a href="#Category" data-toggle="tab">Add Category</a>
+                            </li>
+                            <li>
+                                <a href="#SubCategory" data-toggle="tab">Add Sub Category</a>
+                            </li>
+                            <li>
+                                <a href="#AddProduct" data-toggle="tab">Add Product</a>
+                            </li>
+                            <li>
+                                <a href="#ProductDetails" data-toggle="tab">Add Product Details</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+
+
+                        <div id="MainCatagory" class="tab-pane active">
+                            <div class="widget-content nopadding">
+                                @*<form action="#" method="get" class="form-horizontal">*@
+                                <form class="form-horizontal">
+
+                                    <fieldset id="mainCategorySubmitForm">
+                                        <div class="control-group">
+                                            <br />
+                                            <label class="control-label">Add Main Category:</label>
+                                            <div class="controls">
+                                                <input type="text" id="MainCategoryTxt" name="MaincategoryName" class="span11" placeholder="Add Main Category" />
+
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-control">
+                                            <button type="button" id="MainCategoryBtn" class="btn btn-success" style="margin:15px">Save</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div id="Category" class="tab-pane">
+                            <div class="widget-content nopadding">
+                                <form class="form-horizontal">
+                                    <fieldset id="categorySubmitForm">
+                                        <div class="control-group">
+                                            <label class="control-label">Select Main category</label>
+                                            <div class="controls">
+                                                @*@Html.DropDownListFor(m => m.MainCategoryID, ViewBag.MainCategoryList as SelectList, "Select Main Category", new { @name = "MaincategoryName" })*@
+                                                @*<select name="MaincategoryName">
+                                                        <option value="">Select Main category</option>
+
+                                                        @foreach (var Model in ViewBag.MainCategoryList)
+                                                        {
+                                                            <option value="@Model.MainCategoryID">@Model.MaincategoryName</option>
+                                                        }
+                                                    </select>*@
+                                                @*@Html.DropDownListFor(m => m.MainCategoryID, new SelectList(ViewBag.MainCategoryList as System.Collections.IEnumerable, "MainCategoryID", "MaincategoryName"), "Select Main Category", new { @name = "MaincategoryName" })*@
+
+                                                @Html.DropDownList("MainCategoryID", ViewBag.MainCategoryList as List<SelectListItem>, new { @name = "MaincategoryName", @id = "MainCategory" })
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Add Category:</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" name="CategoryName" placeholder="Add Category" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-actions">
+                                            <button type="button" id="CategoryBtn" class="btn btn-success">Save</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="SubCategory" class="tab-pane">
+                            <div class="widget-content nopadding">
+                                <form class="form-horizontal">
+                                    <fieldset id="SubCategorySubmitForm">
+                                        <div class="control-grohttp://localhost:61211/Home/charts.htmlup">
+                                            <label class="control-label">Select Main category:</label>
+                                            <div class="controls">
+                                                @*@Html.DropDownListFor(m => m.MainCategoryID, ViewBag.MainCategoryList as SelectList, "Select Main Category", new { @id = "MainCategoryDropDwn", @name = "MaincategoryName" })*@
+                                                @*<select name="MaincategoryName" id="MainCategoryDropDwn">
+                                                        <option value="">Select Main category</option>
+                                                        @foreach (var Model in ViewBag.MainCategoryList)
+                                                        {
+                                                            <option value="@Model.MainCategoryID"> @Model.MaincategoryName </option>
+                                                        }
+
+                                                    </select>*@
+                                                @*@Html.DropDownListFor(m => m.MainCategoryID, new SelectList(ViewBag.MainCategoryList as System.Collections.IEnumerable, "MainCategoryID", "MaincategoryName"), "Select Main Category", new { @name = "MaincategoryName", @id = "MainCategoryDropdownForCategory" })*@
+
+                                                @Html.DropDownList("MainCategoryID", ViewBag.MainCategoryList as List<SelectListItem>, new { @name = "MaincategoryName", @id = "MainCategoryDropdownForCategory" })
+
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select category:</label>
+                                            <div class="controls">
+                                                @*@Html.DropDownList("CategoryList", null, new { @id = "CategoryDropDwn", @name = "CategoryName" })*@
+
+                                                @*<select name="CategoryName" id="CategoryDropDwn">
+                                                        <option value="">select...</option>
+                                                    </select>*@
+
+                                                @*@Html.DropDownList("CategoryDropDwn", new SelectList(string.Empty, "Value", "Text"), "--select--", new { @name = "CategoryName" })*@
+
+                                                @Html.DropDownList("CategoryID", new SelectList(string.Empty, "Value", "Text"), "--Select Category--", new { @name = "CategoryName", @id = "CategoryDropdownForCategory" })
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Add Sub Category:</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" name="SubCategoryName" placeholder="Add Sub Category" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-actions">
+                                            <button type="button" id="SubCategoryBtn" class="btn btn-success">Save</button>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="AddProduct" class="tab-pane">
+                            <div class="widget-content nopadding">
+                                <form class="form-horizontal">
+                                    <fieldset id="AddProductSubmitForm">
+                                        <div class="control-group">
+                                            <label class="control-label">Select Main Category:</label>
+                                            <div class="controls">
+
+                                                @*@Html.DropDownListFor(m => m.MainCategoryID, new SelectList(ViewBag.MainCategoryList as System.Collections.IEnumerable, "MainCategoryID", "MaincategoryName"), "Select Main Category", new { @name = "MaincategoryName", @id = "MainCategoryDropDwnForProduct" })*@
+
+                                                @Html.DropDownList("MainCategoryID", ViewBag.MainCategoryList as List<SelectListItem>, new { @name = "MaincategoryName", @id = "MainCategoryDropDwnForProduct" })
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select category:</label>
+                                            <div class="controls">
+
+                                                @Html.DropDownList("CategoryID", new SelectList(string.Empty, "Value", "Text"), "Select Category", new { @name = "CategoryName", @id = "CategoryDropDwnForAddProduct" })
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select Sub category:</label>
+                                            <div class="controls">
+
+                                                @Html.DropDownList("SubCategoryID", new SelectList(string.Empty, "Value", "Text"), "Select Sub Category", new { @name = "CategoryName", @id = "SubCategoryDropDwnForAddProduct" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                            <label class="control-label">Add Product:</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" name="ProductName" placeholder="Add Product" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-actions">
+                                            <button type="button" id="AddProductBtn" class="btn btn-success">Save</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="ProductDetails" class="tab-pane">
+                            <div class="widget-content nopadding">
+                                <form class="form-horizontal">
+                                    <fieldset id="AddProductDetailsSubmitForm">
+                                        <div class="control-group">
+                                            <label class="control-label">Select Main Category:</label>
+                                            <div class="controls">
+
+
+                                                @Html.DropDownList("MainCategoryID", ViewBag.MainCategoryList as List<SelectListItem>, new { @name = "MaincategoryName", @id = "MainCategoryDropDwnForProductDetails" })
+
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select category:</label>
+                                            <div class="controls">
+
+
+                                                @Html.DropDownList("CategoryID", new SelectList(string.Empty, "Value", "Text"), "Select Category", new { @name = "CategoryName", @id = "CategoryDropDwnForProductDetails" })
+
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Add Sub category:</label>
+                                            <div class="controls">
+
+                                                @Html.DropDownList("SubCategoryID", new SelectList(string.Empty, "Value", "Text"), "Select Sub Category", new { @name = "SubCategoryName", @id = "SubCategoryDropDwnForProductDetails", @onchange = "GetCategory(this.value)" })
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select Product:</label>
+                                            <div class="controls">
+
+                                                @Html.DropDownList("ProductDetailsID", new SelectList(string.Empty, "Value", "Text"), "Select Product", new { @name = "ProductName", @id = "ProductDropdownForProductDetails" })
+
+                                                @*@Html.DropDownList("ProductName", new SelectList(string.Empty, "Value", "Text"), "Select Product", new { @name = "ProductName" })*@
+
+
+                                                @*@Html.DropDownListFor(m => m.ProductName, new SelectList(ViewBag.ProductList as System.Collections.IEnumerable,"ProductName"), "Select Product", new { @name = "ProductName" })*@
+
+                                                @*@Html.DropDownListFor(m => m.ProductID, new SelectList(Enumerable.Empty<SelectListItem>(), "ProductID", "ProductName"), "--Select Product--", new { @name = "ProductName", @id = "ProductDropdownForProductDetails" })*@
+
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Purchase Price:</label>
+                                            <div class="controls">
+                                                <input type="text" id="PurchasePrice" name="PurchasePrice" class="span11" placeholder="Purchase Price" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Sale Price:</label>
+                                            <div class="controls">
+                                                <input type="text" id="SalePrice" name="SalePrice" class="span11" placeholder="Sale Price" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Product Description</label>
+                                            <div class="controls">
+                                                <textarea class="span11" id="Description" name="Description"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Minimum Order Level:</label>
+                                            <div class="controls">
+                                                <input type="text" id="MinimumProductQuantity" name="MinimumProductQuantity" class="span11" placeholder="Minimum Order Level" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Unit Name:</label>
+                                            <div class="controls">
+                                                @Html.DropDownListFor(m => m.UnitID, new SelectList(ViewBag.ProductUnit as System.Collections.IEnumerable, "UnitID", "UnitSize"), "Unit Size", new { @name = "UnitSize" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-actions">
+                                            <button type="button" id="AddProductDetailsBtn" class="btn btn-success">Save</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+ 
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @*.........Save Main Category........*@
+    <script>
+        $("#MainCategoryBtn").click(function () {
+            var data = $("#mainCategorySubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/ItemSatting/SaveMainCategoryInDatabase",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/ItemSatting/ItemSettings";
+
+
+                }
+            })
+        })
+    </script>
+    @*.........   Save Category   ........*@
+    <script>
+        $("#CategoryBtn").click(function () {
+            var data = $("#categorySubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/ItemSatting/SaveCategoryInDatabase",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/ItemSatting/ItemSettings";
+
+
+                }
+            })
+        })
+    </script>
+
+    @*.........   Save Sub Category   ........*@
+
+    <script>
+        $("#SubCategoryBtn").click(function () {
+            var data = $("#SubCategorySubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/ItemSatting/SaveSubCategoryInDatabase",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/ItemSatting/ItemSettings";
+
+
+                }
+            })
+        })
+    </script>
+
+    @*........ Save Add Product ........... *@
+
+    <script>
+        $("#AddProductBtn").click(function () {
+            var data = $("#AddProductSubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/ItemSatting/SaveAddProductInDatabase",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/ItemSatting/ItemSettings";
+
+
+                }
+            })
+        })
+    </script>
+
+    @*........ Save Product Details ........... *@
+
+    <script>
+        $("#AddProductDetailsBtn").click(function () {
+            var data = $("#AddProductDetailsSubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/ItemSatting/SaveProductDetailsInDatabase",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/ItemSatting/ItemSettings";
+
+
+                }
+            })
+        })
+    </script>
+
+
+
+
+
+
+
+    @*--Get Category in Category DropDown When Select a Main Category From Main Category Dropdown--*@
+
+
+
+    @*---Cascading Dropdown For Sub Product---*@
+
+
+    @*--Get Category in Category DropDown When Select a Main Category From Main Category Dropdown--*@
+
+
+
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            $("#MainCategoryDropdownForCategory").change(function () {
+                $("#CategoryDropdownForCategory").empty();
+                var mainCategoryID = $(this).val();;
+                var json = { MainCategoryID: mainCategoryID, }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetCategoryByMainCategory", "ItemSatting")',
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(json),
+
+
+                    success: function (response) {
+
+
+                        $.each(response, function (i, state) {
+                            $("#CategoryDropdownForCategory").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve country states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+
+    </script>
+
+
+    @*---Cascading Dropdown For Add Product---*@
+
+
+    @*--Get Category in Category DropDown When Select a Main Category From Main Category Dropdown--*@
+
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            $("#MainCategoryDropDwnForProduct").change(function () {
+                $("#CategoryDropDwnForAddProduct").empty();
+                var mainCategoryID = $("#MainCategoryDropDwnForProduct").val();
+                var json = { MainCategoryID: mainCategoryID, }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetCategoryByMainCategory", "ItemSatting")',
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(json),
+
+
+                    success: function (response) {
+
+
+                        $.each(response, function (i, state) {
+                            $("#CategoryDropDwnForAddProduct").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve country states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+
+    </script>
+
+    @*--Get Sub Category in Sub Category DropDown When Select a Category From Category Dropdown--*@
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#CategoryDropDwnForAddProduct").change(function () {
+
+                var categoryID = $(this).val();
+                //var mainCategoryID = $("#MainCategoryDropDwnForProduct").val();
+
+                $.getJSON("../ItemSatting/GetSubCategoryByCategory", { CategoryID: categoryID },
+
+                       function (data) {
+
+                           var select = $("#SubCategoryDropDwnForAddProduct");
+
+                           select.empty();
+
+                           select.append($('<option/>', {
+
+                               value: 0,
+
+                               text: "--Select sub Category--"
+
+                           }));
+
+                           $.each(data, function (index, itemData) {
+
+                               select.append($('<option/>', {
+
+                                   value: itemData.Value,
+
+                                   text: itemData.Text
+
+                               }));
+
+                           });
+
+                       });
+
+            });
+
+
+        });
+
+    </script>
+
+    @*--- Cascading Dropdown For Product Details ---*@
+
+
+    @*--Get Category in Category DropDown When Select a Main Category From Main Category Dropdown--*@
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            $("#MainCategoryDropDwnForProductDetails").change(function () {
+                $("#CategoryDropDwnForProductDetails").empty();
+                var mainCategoryID = $("#MainCategoryDropDwnForProductDetails").val();
+                var json = { MainCategoryID: mainCategoryID, }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetCategoryByMainCategory", "ItemSatting")',
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(json),
+
+
+                    success: function (response) {
+
+
+                        $.each(response, function (i, state) {
+                            $("#CategoryDropDwnForProductDetails").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve country states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+
+    </script>
+
+
+    @*--Get Sub Category in Sub Category DropDown When Select a Category From Category Dropdown--*@
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#CategoryDropDwnForProductDetails").change(function () {
+
+                var categoryID = $(this).val();
+                //var mainCategoryID = $("#MainCategoryDropDwnForProduct").val();
+
+                $.getJSON("../ItemSatting/GetSubCategoryByCategory", { CategoryID: categoryID },
+
+                       function (data) {
+
+                           var select = $("#SubCategoryDropDwnForProductDetails");
+
+                           select.empty();
+
+                           select.append($('<option/>', {
+
+                               value: 0,
+
+                               text: "--Select sub Category--"
+
+                           }));
+
+                           $.each(data, function (index, itemData) {
+
+                               select.append($('<option/>', {
+
+                                   value: itemData.Value,
+
+                                   text: itemData.Text
+
+                               }));
+
+                           });
+
+                       });
+
+            });
+
+
+        });
+
+    </script>
+
+    @*--Get Product in Product DropDown When Select sub Category From Sub Category Dropdown--*@
+
+    <script>
+        function GetCategory(id) {
+
+            var select = $("#ProductDropdownForProductDetails");
+            select.empty();
+
+            $.ajax({
+                url: '/ItemSatting/GetProductBySubCategoryID',
+                data: { 'ProductId': id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    if (response != null) {
+
+                        $.each(response, function (index, itemData) {
+
+                            select.append($('<option/>', {
+
+                                value: itemData.Value,
+
+                                text: itemData.Text
+
+                            }));
+
+                        });
+                    }
+                    else {
+
+                        return false;
+                    }
+
+                },
+
+            });
+        };
+
+
+    </script>
+
+
+    @* when select product dropdown all input field will bind selected product data  *@
+
+
+
+
+}
+

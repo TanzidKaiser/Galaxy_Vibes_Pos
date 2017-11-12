@@ -1,0 +1,15 @@
+﻿.dataTables_wrapper .dataTables_filter {
+  margin:-25px 20px 0px;
+ }
+.table{
+    font-size:1.20em;
+}
+.dl-horizontal {
+    font-size: 1.30em;
+}
+.dataTables_wrapper .dataTables_info {
+    margin-left: 10px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    margin-bottom: 5px;
+}

@@ -1,0 +1,713 @@
+﻿@model List<GalaxyVibesPos.Models.Purchase>
+@{
+    ViewBag.Title = "PurchaseAdd";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+    }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+</style>
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Product Purchase</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+
+                        @*<div class="form-horizontal">*@
+
+
+                        <div class="widget-content">
+
+                            <div class="row-fluid">
+                                <div class="span3">
+                                    <input data-val="true" id="PurchaseProductID" name="PurchaseProductID" type="hidden">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Supplier Group</label>
+                                        <div class="controls" id="inputMargin">
+                                            <select id="GroupID">
+                                                <option value="0">Select Group</option>
+                                                @foreach (var a in ViewBag.supplierGroups)
+                                                {
+                                                    <option value="@a.GroupID">@a.GroupName</option>
+                                                }
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Supplier Company</label>
+                                        <div class="controls" id="inputMargin">
+                                            @Html.DropDownList("CompanyID", new SelectList(string.Empty, "Value", "Text"), "Select Company")
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Supplier Name</label>
+                                        <div class="controls" id="inputMargin">
+                                            @Html.DropDownList("SupplierID", new SelectList(string.Empty, "Value", "Text"), "Select Supplier", new { @id = "SupplierIDForPurchase", @onchange = "GetAddress(this.value)" })
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Address</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="SupplierAddress" class="span12" placeholder="Supplier Address" disabled />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="span3">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Supplier Invoice No</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="PurchaseSupplierInvoiceNo" id="PurchaseSupplierInvoiceNo" class="span12" placeholder="Invoice No" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Product Search</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductSearch" class="span12" placeholder="Product Search" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Currently Stoke</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="Stoke" id="Stoke" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Date</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="date" name="PurchaseDate" id="PurchaseDate" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="span3">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Track No</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="PurchaseNo" value="@ViewBag.trackNo" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Product Code</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductCode" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Product Name</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductName" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Time</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="CurrentTime" class="span12" value="@ViewBag.time" disabled />
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="span3">
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Unit Type</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="UnitType" id="UnitType" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Price</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="PurchaseProductPrice" id="PurchaseProductPrice" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Quantity</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="PurchaseQuantity" id="PurchaseQuantity" class="span12" placeholder="Quantity" />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <hr />
+                            @* ------ *@
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <fieldset id="CustomerSubmitForm">
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <table class="table table-bordered table-invoice-full" id="Table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="head0">ID</th>
+                                                        <th class="head1">Product ID</th>
+                                                        <th class="head0 right">Product Name</th>
+                                                        <th class="head1 right">Quantity</th>
+                                                        <th class="head0 right">Price</th>
+                                                        <th class="head0 right">Purchase No</th>
+                                                        <th class="head0 right">Total</th>
+                                                        <th></th>
+                                                        <th></th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <hr />
+                                <div class="row-fluid">
+                                    <div class="span3">
+
+                                        <div class="control-group">
+
+                                            <label class="control-label span6" id="levelWidth">Item Total</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="TotalItem" class="span12" />
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="control-group">
+
+                                            <label class="control-label span6" id="levelWidth">Product Total</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="ProductTotal" class="span12" />
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+
+                                        <div class="control-group">
+
+                                            <label class="control-label span6" id="levelWidth">Total Amount</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="TotalAmount" class="span12" />
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+
+                                        <div class="form-control">
+                                            <button type="button" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
+                                            <button type="button" id="submitBtn" class="btn btn-success" style="margin:15px">Purchase</button>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            }
+
+
+                            @*---------*@
+                        </div>
+
+
+                        @*</div>*@
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#GroupID").change(function () {
+
+                var ID = $("#GroupID").val();
+                var select = $("#CompanyID");
+                select.empty();
+                $.ajax({
+                    url: '/Supplier/GetCompanyByGroupID',
+                    data: { GroupID: ID },
+                    type: "post",
+                    cache: false,
+                    success: function (response) {
+
+                        if (response != null) {
+                            $.each(response, function (index, itemData) {
+
+                                select.append($('<option/>', {
+
+                                    value: itemData.Value,
+
+                                    text: itemData.Text
+
+                                }));
+
+                            });
+                        }
+                        else {
+
+                            return false;
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#CompanyID").change(function () {
+
+                var companyID = $(this).val();
+
+                $.getJSON("../Purchase/GetSupplierByCompanyID", { CompanyID: companyID },
+
+                       function (data) {
+
+                           var select = $("#SupplierIDForPurchase");
+
+                           select.empty();
+
+                           select.append($('<option/>', {
+
+                               value: 0,
+
+                               text: "Select Suppliers"
+
+                           }));
+
+                           $.each(data, function (index, itemData) {
+
+                               select.append($('<option/>', {
+
+                                   value: itemData.Value,
+
+                                   text: itemData.Text
+
+                               }));
+
+                           });
+
+                       });
+
+            });
+
+
+        });
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            var now = new Date();
+            var month = (now.getMonth() + 1);
+            var day = now.getDate();
+            if (month < 10)
+                month = "0" + month;
+            if (day < 10)
+                day = "0" + day;
+            var today = now.getFullYear() + '-' + month + '-' + day;
+
+            $('#PurchaseDate').val(today);
+
+        });
+
+        function GetAddress(id, num) {
+
+            $.ajax({
+
+                url: '/Purchase/GetSupplierAddress',
+                data: { Id: id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#SupplierAddress").val(response.SupplierAddress);
+
+                },
+
+
+            });
+
+        }
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#ProductSearch").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Purchase/GetProductBySearch",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                $("#Stoke").val(item.Stoke);
+                                $("#ProductCode").val(item.Code);
+                                $("#ProductName").val(item.ProductName);
+                                $("#UnitType").val(item.UnitID);
+                                $("#PurchaseProductPrice").val(item.PurchasePrice);
+                                $("#PurchaseProductID").val(item.ProductDetailsID);
+                                return { label: item.Code, value: item.Code };
+
+
+
+
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#addBtn").click(function () {
+
+
+                var isValidate = CheckValidateForAdd();
+                var productID = $("#PurchaseProductID").val();
+                var productName = $("#ProductName").val();
+                var quantity = $("#PurchaseQuantity").val();
+                var price = $("#PurchaseProductPrice").val();
+                var purchaseNo = $("#PurchaseNo").val();
+                var total = price * quantity;
+
+                if (isValidate) {
+                    var markup = "<tr><td id=SlNO></td><td class=totalProduct>" + productID + "</td><td>" + productName + "</td><td class=totalQuantity>" + quantity + "</td><td class=PurchaseProductPrice>" + price + "</td><td>" + purchaseNo + "</td><td class =PurchaseTotal>" + total + "</td><td>" + ' <button type="button" id="removeBtn" class="btn btn-info btn-lg"><i class="icon-remove-circle"></i></button>' + "</td></tr>";
+
+                    $("#Table tbody").append(markup);
+
+                    ProductQuantitysum();
+
+                    TotalAmount();
+
+                    var totalItem = $('#Table tbody tr').length;
+                    $("#TotalItem").val(totalItem);
+                    //AddID();
+                    FieldValueNUll();
+                }
+
+
+
+            });
+        });
+    </script>
+    <script>
+
+        // Check Validation
+
+        function CheckValidateForAdd() {
+
+            var groupID = $("#GroupID").val();
+            var companyID = $("#CompanyID").val();
+            var supplierID = $("#SupplierIDForPurchase").val();
+            var invoiceNO = $("#PurchaseSupplierInvoiceNo").val();
+            var productSearch = $("#ProductSearch").val();
+            var quantity = $('#PurchaseQuantity').val();
+
+            if (groupID == "0") {
+
+                alert("Required Group Name");
+                return false;
+            };
+            if (companyID == "0") {
+
+                alert("Required Company Name");
+                return false;
+            };
+            if (supplierID == "0") {
+
+                alert("Required Supplier Name");
+                return false;
+            };
+            if (invoiceNO == "") {
+
+                alert("Required Invoice NO");
+                return false;
+            };
+            if (productSearch == "") {
+
+                alert("Required Product Name ");
+                return false;
+            };
+            if (quantity == "") {
+
+                alert("Required Quantity");
+                return false;
+            };
+
+
+            return true;
+        }
+
+        //Field Value NUll And Disable After Click Add Item
+
+        function FieldValueNUll() {
+            document.getElementById("GroupID").disabled = true;
+            document.getElementById("CompanyID").disabled = true;
+            document.getElementById("SupplierIDForPurchase").disabled = true;
+            document.getElementById("PurchaseSupplierInvoiceNo").disabled = true;
+            document.getElementById("ProductSearch").value = "";
+            document.getElementById("PurchaseQuantity").value = "";
+
+        }
+
+        //Remove cell from Table
+
+        $('#Table').on('click', '#removeBtn', function () {
+            $(this).parents('tr').remove();
+
+            var totalItem = ($('#Table tbody tr').length + 1) - 1;
+            $("#TotalItem").val(totalItem);
+            if (totalItem == 0) {
+                document.getElementById("GroupID").disabled = false;
+                document.getElementById("CompanyID").disabled = false;
+                document.getElementById("SupplierIDForPurchase").disabled = false;
+                document.getElementById("PurchaseSupplierInvoiceNo").disabled = false;
+                document.getElementById("ProductSearch").value = "";
+                document.getElementById("PurchaseQuantity").value = "";
+            }
+        });
+
+    </script>
+    <script>
+        function ProductQuantitysum() {
+            var sum = 0;
+            $('.totalQuantity').each(function () {
+                var value = $(this).text();
+                //add only if the value is number
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+
+            });
+            $('#ProductTotal').val(sum);
+        };
+
+    </script>
+
+
+    <script>
+        function TotalAmount() {
+            var sum = 0;
+            $('.PurchaseTotal').each(function () {
+
+                var value = $(this).text();
+
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            $("#TotalAmount").val(sum);
+        }
+    </script>
+
+    @*<script>
+            function AddID() {
+
+                //var $tableBody = $("#Table").find("tbody");
+                var totaRow = $('#Table tbody tr').length;
+                if (totaRow == 0)
+                {
+                    //var newValue = parseInt($ trLast.find("#SlNO").val()) + 1;
+                    $('#SlNO').html(0);
+                }
+                //$trLast = $tableBody.find("tr:last"),
+                //$trNew = $trLast.clone();
+                //$trNew.find("#OperationalInstructiontxt").val("");
+                //var newValue = parseInt($trLast.find("#SlNO").val()) + 1;
+                //$trNew.find("#SlNO").val(newValue);
+                //var id = $trNew;
+                //$('#SlNO').html(id);
+                //$trLast.after($trNew);
+
+        };
+        </script>*@
+
+    @*<script>
+                   var $tableBody = $("#myTable").find("tbody"),
+                   $trLast = $tableBody.find("tr:last"),
+                   $trNew = $trLast.clone();
+                   $trNew.find("#OperationalInstructiontxt").val("");
+                    var newValue = parseInt($trLast.find("#SlNO").val()) + 1;
+                   $trNew.find("#SlNO").val(newValue);
+        </script>*@
+
+    <script>
+        $(document).ready(function () {
+            $("#submitBtn").click(function () {
+                var rowNO = $('#Table tbody tr').length;
+
+                var List = [];
+
+                if (rowNO >= 1) {
+                    $('#Table tbody tr').each(function () {
+                        $this = $(this);
+
+                        var PurchaseItems = {
+
+                            CompanyID: $("#CompanyID").val(),
+                            SupplierID: $("#SupplierIDForPurchase").val(),
+
+                            PurchaseDate: $('#PurchaseDate').val(),
+                            PurchaseNo: $('#PurchaseNo').val(),
+                            PurchaseSupplierInvoiceNo: $('#PurchaseSupplierInvoiceNo').val(),
+                            PurchaseProductID: $this.find("td.totalProduct").text(),
+                            PurchaseQuantity: $this.find("td.totalQuantity").text(),
+                            PurchaseProductPrice: $this.find("td.PurchaseProductPrice").text(),
+                            PurchaseTotal: $this.find("td.PurchaseTotal").text(),
+                            TotalAmount: $('#TotalAmount').val(),
+
+                        };
+                        List.push(PurchaseItems);
+                    });
+
+                    $.ajax({
+                        type: 'post',
+
+                        url: "/Purchase/save",
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(List),
+                        contentType: 'application/json',
+                        success: function (data) {
+                            alert(data);
+                            window.location.href = "/Purchase/PurchaseAdd";
+                        },
+                    });
+                }
+                else {
+
+                    alert("Please Add Minimum One Item");
+                };
+
+            });
+        })
+    </script>
+}

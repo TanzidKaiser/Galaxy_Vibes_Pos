@@ -1,0 +1,92 @@
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\GalaxyVibesPos.dll.config
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\GalaxyVibesPos.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\GalaxyVibesPos.pdb
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\Antlr3.Runtime.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\Microsoft.Web.Infrastructure.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\Newtonsoft.Json.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Helpers.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Mvc.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Optimization.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Razor.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.Deployment.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.Razor.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\WebGrease.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Helpers.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Mvc.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Optimization.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Razor.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.Deployment.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.Razor.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\Newtonsoft.Json.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\Antlr3.Runtime.pdb
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.pdb
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\EntityFramework.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\EntityFramework.SqlServer.dll
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\EntityFramework.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\bin\EntityFramework.SqlServer.xml
+G:\MVC Practics\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\GalaxyVibesPos.dll.config
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\GalaxyVibesPos.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\GalaxyVibesPos.pdb
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\Antlr3.Runtime.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\EntityFramework.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\EntityFramework.SqlServer.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\Microsoft.Web.Infrastructure.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\Newtonsoft.Json.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Helpers.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Mvc.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Optimization.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Razor.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.Deployment.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.Razor.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\WebGrease.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\EntityFramework.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\EntityFramework.SqlServer.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Helpers.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Mvc.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Optimization.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.Razor.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.Deployment.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\System.Web.WebPages.Razor.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\Newtonsoft.Json.xml
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\Antlr3.Runtime.pdb
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.MainCategoryCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.MainCategoryUpdate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.CategoryCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.SubCategoryCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.productDetailsCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.GroupCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.CompanyCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.TarminalInformationCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.CustomerCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.CustomerLedgerCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.SaleCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.SupplierGroupAndCompanyCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.SupplierCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.SupplierLedgerCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.PurchaseCreate.resources
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csproj.GenerateResource.Cache
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.pdb
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.CrystalReports.Engine.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportSource.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.Shared.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\stdole.dll

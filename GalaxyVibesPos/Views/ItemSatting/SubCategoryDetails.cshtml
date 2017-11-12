@@ -1,0 +1,75 @@
+﻿@model GalaxyVibesPos.Models.CategorySub
+
+@{
+    ViewBag.Title = "SubCategoryDetails";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <hr />
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Details</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+                        <dl class="dl-horizontal">
+                            <dt>
+
+                                <label class="control-label">Main Category :</label>
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CategoryMain.MaincategoryName)
+                            </dd>
+                            <dt>
+                                <br />
+                            </dt>
+                            <dd>
+                                <br />
+                            </dd>
+                            <dt>
+                                <label class="control-label">Category :</label>
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Category.CategoryName)
+                            </dd>
+
+                            <dt>
+                                <br />
+                            </dt>
+                            <dd>
+                                <br />
+                            </dd>
+                            <dt>
+                                <label class="control-label">Sub Category :</label>
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.SubCategoryName)
+                            </dd>
+
+
+                        </dl>
+                        <p>
+                            <div style="margin-left:5px;font-size:.90em; color:blue">
+                                @Html.ActionLink("Back to List", "SubCategoryIndex")
+                            </div>
+                            <div style="margin-left:5px;font-size:.90em; color:blue">
+                                @Html.ActionLink("Edit", "SubCategoryEdit", new { id = Model.SubCategoryID })
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

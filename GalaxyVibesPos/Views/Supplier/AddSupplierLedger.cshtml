@@ -1,0 +1,248 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.SupplierLedger>
+@{
+    ViewBag.Title = "AddSupplierLedger";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span5">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Supplier Ledger</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="CustomerLedgerSubmitForm">
+                                    <input data-val="true" id="SupplierLedgerID" name="ID" type="hidden">
+                                    <div class="control-group">
+                                        <label class="control-label">Supplier Name</label>
+                                        <div class="controls">
+                                            <select id="SupplierID" name="SupplierID" onchange="GetDue(this.value)">
+
+                                                <option value="0">Select Supplier Name</option>
+                                                @foreach (var m in ViewBag.supplierList)
+                                                {
+                                                    <option value="@m.SupplierID">@m.SupplierName</option>
+                                                }
+
+                                            </select>
+
+                                            @*@Html.DropDownList("CustomerID", ViewBag.CustomerList as List<SelectListItem>, new { @onchange = "GetDue(this.value)"})*@
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Date</label>
+                                        <div class="controls">
+                                            <input type="date" name="ReceiveDate" id="ReceiveDate" class="span5" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Previous Due</label>
+                                        <div class="controls">
+                                            <input type="text" name="PreviouaDue" id="PreviouaDue" class="span11" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Payable Amount</label>
+                                        <div class="controls">
+                                            <input type="text" name="Debit" id="Debit" class="span11" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Remarks</label>
+                                        <div class="controls">
+                                            <textarea class="span11" id="Remarks" name="Remarks"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
+                                        <button type="submit" id="SupplierUpdateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (@ViewBag.Message == 1)
+                    {
+                        <div class="alert alert-success alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Success!</h4>
+                            <h5>Save Successfully</h5>
+                        </div>
+                    }
+                    @if (@ViewBag.Message == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Warn!</h4>
+                            <h5> Null Value Not Accecpted ! </h5>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="span7">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Custome List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">Customers</td>
+                                    <td style="font-size:medium">Date</td>
+                                    <td style="font-size:medium">InvoiceNo</td>
+                                    <td style="font-size:medium">Debit</td>
+                                    <td style="font-size:medium">Credit</td>
+                                    <td style="font-size:medium">Remarks</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr class="odd gradeX">
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => item.ReceiveDate)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => item.InvoiceNo)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.Debit)
+
+                                        </td>
+
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.Credit)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.Remarks)
+
+                                        </td>
+
+
+                                        <td>
+                                            <button type="button" id="EditCustomerLedger" class="btn" onclick="EditSupplierLedger(@item.ID,this)">Edit</button> |
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            var now = new Date();
+            var month = (now.getMonth() + 1);
+            var day = now.getDate();
+            if (month < 10)
+                month = "0" + month;
+            if (day < 10)
+                day = "0" + day;
+            var today = now.getFullYear() + '-' + month + '-' + day;
+            $('#ReceiveDate').val(today);
+        });
+
+        function GetDue(id) {
+
+            $.ajax({
+
+                url: '/Supplier/GetPreviousDueBySupplierID',
+                data: { Id: id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    if (response != null) {
+                        $("#PreviouaDue").val(response.SupplierPreviousDue);
+                    }
+                    else {
+
+                        $("#PreviouaDue").val("0");
+
+                    }
+
+                },
+
+            });
+
+        }
+
+        function EditSupplierLedger(id, num) {
+
+            $.ajax({
+
+                url: '/Supplier/EditSupplierLedger',
+                data: { Id: id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#SupplierLedgerID").val(response.ID);
+                    $("#CustomerID").val(response.SupplierID);
+                    $("#ReceiveDate").val(response.ReceiveDate);
+                    $("#PreviouaDue").val(response.PreviouaDue);
+                    $("#Debit").val(response.Debit);
+                    $("#Remarks").val(response.Remarks);
+
+                    $("#addBtn").hide();
+                    $("#SupplierUpdateBtn").show();
+
+                },
+
+
+            });
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#SupplierUpdateBtn").hide();
+        });
+    </script>
+}
