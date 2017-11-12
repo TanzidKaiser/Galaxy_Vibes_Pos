@@ -15,7 +15,7 @@
     <link href="@Url.Content("~/Content/mytemplate/")font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="@Url.Content("~/Content/mytemplate/")css/jquery.gritter.css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
-    
+
 
     <script src="@Url.Content("~/Content/mytemplate/")js/excanvas.min.js"></script>
     <script src="@Url.Content("~/Content/mytemplate/")js/jquery.min.js"></script>
@@ -90,7 +90,8 @@
     <div id="sidebar">
         <a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
         <ul>
-            <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+
+            <li>@Html.ActionLink("Dashboard", "Index", "Home")</li>
             <li class="submenu">
                 <a href="#"><i class="icon icon-th-list"></i> <span>Item</span> <span class="label label-important">6</span></a>
                 <ul>
@@ -101,8 +102,7 @@
                     <li>@Html.ActionLink("Category Edit", "CategoryIndex", "ItemSatting")</li>
                     <li>@Html.ActionLink("Sub Category Edit", "SubCategoryIndex", "ItemSatting")</li>
                     <li>@Html.ActionLink("Product Details Edit", "ProductIndex", "ItemSatting")</li>
-                    <li class="divider"></li>
-                    <li><a href="form-validation.html">View Product Code</a></li>
+
 
                 </ul>
             </li>
@@ -110,7 +110,7 @@
                 <a href="#"><i class="icon icon-th-list"></i> <span>Sale</span> <span class="label label-important">1</span></a>
                 <ul>
                     <li>@Html.ActionLink("Add Sale", "AddSales", "Sales")</li>
-                    
+
                 </ul>
             </li>
             <li class="submenu">
@@ -120,13 +120,13 @@
 
                 </ul>
             </li>
-           
+
             <li class="submenu">
                 <a href="#"><i class="icon icon-th-list"></i> <span>Customer</span> <span class="label label-important">4</span></a>
                 <ul>
                     <li>@Html.ActionLink("Add Customer", "AddCustomer", "Customer")</li>
                     <li>@Html.ActionLink("Customer Ledger", "AddCustomerLedger", "Customer")</li>
-                    <li><a href="form-wizard.html">Ledger Report</a></li>
+
                     <li>@Html.ActionLink("Customer Group Setting", "GroupSettings", "CustomerGroupSettings")</li>
                 </ul>
             </li>
@@ -139,10 +139,10 @@
                     <li>@Html.ActionLink("Supplier Group Setting", "GroupSettings", "SupplierGroupSettings")</li>
                 </ul>
             </li>
-            
-            
-           
-           
+
+
+
+
         </ul>
     </div>
     <!--sidebar-menu-->
