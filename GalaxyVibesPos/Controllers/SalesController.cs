@@ -140,14 +140,14 @@ namespace GalaxyVibesPos.Controllers
 
       
 
-        private void ExportSaleInvoice(List<Sale> list)
+        private void  ExportSaleInvoice(List<Sale> list)
         {
             ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Report/CristalReportSalesInvoiceReport.rpt")));
-            List<Sale> SaleList = new List<Sale>();
+            List<SaleTemp> SaleList = new List<SaleTemp>();
             foreach(var name in list)
             {
-                Sale aSale = new Sale();
+                SaleTemp aSale = new SaleTemp();
                 aSale.SalesDate = name.SalesDate;
                 aSale.SalesTime = name.SalesTime;
                 aSale.SalesNo = name.SalesNo;
@@ -156,25 +156,25 @@ namespace GalaxyVibesPos.Controllers
                 var ProductName = db.productDetails.Where(x => x.ProductDetailsID == name.SalesProductID).Select(x => x.ProductName).FirstOrDefault();
                 aSale.ProductName = ProductName;
 
-                aSale.SalesQuantity = name.SalesQuantity;
-                aSale.SalesSalePrice = name.SalesSalePrice; 
+                aSale.SalesQuantity = Convert.ToInt32(name.SalesQuantity);
+                aSale.SalesSalePrice = Convert.ToInt32(name.SalesSalePrice); 
                                 
                 var total = name.SalesQuantity * name.SalesSalePrice;
-                aSale.Total = total == null ? 0.00 : total;
+                aSale.Total = Convert.ToInt32(total);
 
                 aSale.SubTotal = name.SubTotal;
                 aSale.TotalDiscount = name.TotalDiscount;
                 aSale.TotalAmount = name.TotalAmount;
                 aSale.SalesVat = name.SalesVat;
                 aSale.NetPayable = name.NetPayable;
-                aSale.SalesReceivedAmount = name.SalesReceivedAmount;
+                aSale.SalesReceivedAmount = Convert.ToInt32(name.SalesReceivedAmount);
                 aSale.ReturnAmount = name.ReturnAmount;
                 aSale.SalesRemarks = name.SalesRemarks;
                 aSale.SalesSoldBy = name.SalesSoldBy;
 
                 SaleList.Add(aSale);
 
-            }
+            }            
             rd.SetDataSource(SaleList);
             Response.Buffer = false;
             Response.ClearContent();

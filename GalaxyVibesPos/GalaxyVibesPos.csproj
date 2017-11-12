@@ -206,6 +206,7 @@
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Sale.cs" />
+    <Compile Include="Models\SaleTemp.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupplierCompany.cs" />
     <Compile Include="Models\SupplierGroup.cs" />
