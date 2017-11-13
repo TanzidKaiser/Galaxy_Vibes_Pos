@@ -57,6 +57,7 @@ namespace GalaxyVibesPos.Controllers
         {
             CustomerLedger aCustomerLedger = new CustomerLedger();
             aCustomerLedger.Debit = 0;
+            
             foreach (var item in List)
             {
                 Sale aSale = new Sale();
@@ -134,13 +135,13 @@ namespace GalaxyVibesPos.Controllers
             }
 
             CustomerLedgerCreate(aCustomerLedger);
-            ExportSaleInvoice(List);
-            return Json("Save Successfully", JsonRequestBehavior.AllowGet);
+            //ExportSaleInvoice(List);
+            return Json(List, JsonRequestBehavior.AllowGet);
         }
 
       
 
-        private void  ExportSaleInvoice(List<Sale> list)
+        public virtual ActionResult ExportSaleInvoice(List<Sale> list)
         {
             ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Report/CristalReportSalesInvoiceReport.rpt")));
@@ -182,7 +183,7 @@ namespace GalaxyVibesPos.Controllers
 
             Stream str = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             str.Seek(0, SeekOrigin.Begin);
-            File(str, "application/pdf", "report.pdf");
+            return File(str, "application/pdf", "report.pdf");
                     
         }
 

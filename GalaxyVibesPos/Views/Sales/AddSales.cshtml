@@ -885,9 +885,11 @@
                             contentType: "application/json; charset=utf-8",
                             data: JSON.stringify(List),
                             contentType: 'application/json',
-                            success: function (data) {
-                                alert(data);
-                                window.location.href = "/Sales/AddSales";
+                            success: function (list) {
+                              //  alert("Save");
+
+                                window.location = '/Sales/ExportSaleInvoice?list=' + list;
+                                //window.location.href = "/Sales/AddSales";
                             },
                         });
 
