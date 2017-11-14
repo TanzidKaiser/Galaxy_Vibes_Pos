@@ -55,6 +55,7 @@ namespace GalaxyVibesPos.Controllers
         }
         public JsonResult Save(List<Sale> List)
         {
+            var flag = 0;
             CustomerLedger aCustomerLedger = new CustomerLedger();
             aCustomerLedger.Debit = 0;
             
@@ -130,13 +131,18 @@ namespace GalaxyVibesPos.Controllers
                 aCustomerLedger.ReceiveDate = item.SalesDate;
                 
                 db.Sale.Add(aSale);
-                db.SaveChanges();
+                 int i = db.SaveChanges();
+                if(i>0)
+                {
+                    flag = 1;
+                }
+
 
             }
 
             CustomerLedgerCreate(aCustomerLedger);
             //ExportSaleInvoice(List);
-            return Json(List, JsonRequestBehavior.AllowGet);
+            return Json(flag, JsonRequestBehavior.AllowGet);
         }
 
       

@@ -174,7 +174,7 @@
                                         <label class="control-label span6" id="levelWidth">Discount</label>
                                         <div class="controls" id="inputMargin">
                                             <label class="span6"><input type="radio" name="SalesProductDiscount" checked="checked" id="forParcent" style="margin: 0px 4px 7px" /><input type="text" id="parcentValue" style="width:50px" /> % </label>
-                                            <label class="span6"><input type="radio" name="SalesProductDiscount" id="forTaka" style=" margin: 0px 4px 7px" /><input type="text" id="tkValue" style="width:50px" /> Tk </label>
+                                            <label class="span6"><input type="radio" name="SalesProductDiscount" id="forTaka" style=" margin 0px 4px 7px" /><input type="text" id="tkValue" style="width:50px" /> Tk </label>
                                         </div>
                                     </div>
 
@@ -466,7 +466,7 @@
                                     </div>
                                     <div class="control-group">
 
-                                        <div class="controls" id="inputMargin" style=" margin: 15px 18px 0px -7px;">
+                                        <div class="controls" id="inputMargin" style=" margin 15px 18px 0px -7px;">
                                             <label id="ColorForCheckboxLebel"><input type="checkbox" id="TotalAmount" />Sales Without Print</label>
 
                                         </div>
@@ -476,8 +476,8 @@
 
                                         <div class="controls" id="inputMargin" style="margin: 0px 0px 0px 0px">
                                             <label class="span4"><input type="radio" id="Cash" name="radio1" value="Cash" checked style="margin: 0px 4px 7px" />Cash </label>
-                                            <label class="span4"><input type="radio" id="Due" name="radio1" value="Due" style=" margin: 0px 4px 7px" />Due </label>
-                                            <label class="span4"><input type="radio" id="Cheque" name="radio1" value="Cheque" style=" margin: 0px 4px 7px" />Cheque </label>
+                                            <label class="span4"><input type="radio" id="Due" name="radio1" value="Due" style=" margin 0px 4px 7px" />Due </label>
+                                            <label class="span4"><input type="radio" id="Cheque" name="radio1" value="Cheque" style=" margin 0px 4px 7px" />Cheque </label>
                                         </div>
                                     </div>
                                 </div>
@@ -680,8 +680,7 @@
                 return totalVat;
             }
 
-            function TotalMinusDiscount()
-            {
+            function TotalMinusDiscount() {
                 return TotalAmount() - TotalDiscount();
             }
 
@@ -758,14 +757,13 @@
                     alert("Required Quantity");
                     return false;
                 };
-                if ($("#Stoke").val() < 1)
-                {
+                if ($("#Stoke").val() < 1) {
                     alert("Selected Product are Not Available");
                     FieldValueNUll();
                     return false;
 
                 };
-                
+
                 return true;
             }
 
@@ -825,11 +823,6 @@
             $(document).ready(function () {
 
                 $("#SaleBtn").click(function () {
-                    
-                    //if (document.getElementById("Cash").checked)
-                    //{
-                    //    var cash = document.getElementById("Cash").value();
-                    //}
 
                     var rowNo = $('#Table tbody tr').length;
                     var List = [];
@@ -848,7 +841,6 @@
                                 SalesRemarks: $("#SalesRemarks").val(),
                                 Reference: $("#Reference").val(),
                                 SalesTime: $("#SalesTime").val(),
-
                                 SalesProductID: $this.find("td.ProductID").text(),
                                 SalesSalePrice: $this.find('td.PurchaseProductPrice').text(),
                                 SalesQuantity: $this.find('td.totalQuantity').text(),
@@ -862,7 +854,6 @@
                                 SalesPuechaseBy: $("#SalesPuechaseBy").val(),
                                 SalesPurchaseByContact: $("#SalesPurchaseByContact").val(),
 
-
                                 DueAmount: parseFloat($("#DueAmount").val()),
 
                                 //......For Sale report
@@ -873,7 +864,7 @@
                                 TotalAmount: ($("#TotalMinusDiscount").val()),
                                 NetPayable: ($("#NetTotal").val()),
                                 ReturnAmount: ($("#ReturnAmount").val()),
-                                                              
+
                             };
 
                             List.push(saleItem);
@@ -886,26 +877,41 @@
                             data: JSON.stringify(List),
                             contentType: 'application/json',
                             success: function (list) {
-                              //  alert("Save");
+                                if (list == 1) {
+                                    alert("Save");
+                                }
+                                else
+                                {
 
-                                window.location = '/Sales/ExportSaleInvoice?list=' + list;
+                                }
+                                // window.location = '/Sales/ExportSaleInvoice?list=' + list;
                                 //window.location.href = "/Sales/AddSales";
                             },
                         });
+                        $.ajax({
+                            type: 'post',
+                            url: "/Sales/ExportSaleInvoice",
+                            dataType: 'json',
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(List),
+                            contentType: 'application/json',
+                            success: function () {
 
+                            },
+                        });
                     }
                     else {
                         alert("Please Add Minimum One Item");
                     };
-                
+
 
 
                 });
 
             })
-            
+
         </script>
 
-        
+
     }
 
