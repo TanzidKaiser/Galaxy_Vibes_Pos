@@ -283,7 +283,6 @@
                                         </div>
                                     </div>
                                     <div class="span3">
-
                                         <div class="control-group">
 
                                             <label class="control-label span6" id="levelWidth">Total Amount</label>
@@ -291,11 +290,9 @@
                                                 <input type="text" id="TotalAmount" class="span12" />
 
                                             </div>
-
-
-
                                         </div>
                                     </div>
+                                                                        
                                     <div class="span6">
 
                                         <div class="form-control">
@@ -697,8 +694,25 @@
                         data: JSON.stringify(List),
                         contentType: 'application/json',
                         success: function (data) {
-                            alert(data);
-                            window.location.href = "/Purchase/PurchaseAdd";
+                            if (data == 1) {
+                                alert("Save Successfully");
+                                $.ajax({
+                                    type: 'post',
+                                    url: "/Purchase/ExportPurchaseInvoice",
+                                    dataType: 'json',
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify(List),
+                                    contentType: 'application/json',
+                                    success: function () {
+                                        window.location.href = "/Purchase/PurchaseAdd";
+                                    },
+                                });
+                            }
+                            else {
+                                alert("Some Exception here, Please try Again !")
+                            }
+                            
+                            
                         },
                     });
                 }

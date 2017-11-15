@@ -206,7 +206,8 @@
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Sale.cs" />
-    <Compile Include="Models\SaleTemp.cs" />
+    <Compile Include="Models\Temp Class\PurchaseTemp.cs" />
+    <Compile Include="Models\Temp Class\SaleTemp.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupplierCompany.cs" />
     <Compile Include="Models\SupplierGroup.cs" />
@@ -222,6 +223,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CristalReportSalesInvoiceReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Expense Report\PurchaseCrystalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseCrystalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Expense Report\PurchaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Report\SalesDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -663,6 +675,17 @@
     <Content Include="Report\SalesDataSet.xsc">
       <DependentUpon>SalesDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Report\Expense Report\PurchaseDataSet.xsc">
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\Expense Report\PurchaseDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PurchaseDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\Expense Report\PurchaseDataSet.xss">
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Report\SalesDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -771,6 +794,10 @@
     <EmbeddedResource Include="Report\CristalReportSalesInvoiceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CristalReportSalesInvoiceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Expense Report\PurchaseCrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseCrystalReport.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

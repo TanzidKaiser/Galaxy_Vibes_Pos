@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GalaxyVibesPos.Models;
+using GalaxyVibesPos.Models.Temp_Class;
+
 namespace GalaxyVibesPos.Controllers
 {
     public class PurchaseController : Controller
@@ -34,7 +36,8 @@ namespace GalaxyVibesPos.Controllers
         public JsonResult save(List<Purchase> List)
         {
 
-            
+            var flag = 0;
+
             Purchase aPurchaserForLedger = new Purchase();
            
             foreach (var item in List)
@@ -63,7 +66,12 @@ namespace GalaxyVibesPos.Controllers
 
                 StockIncrement(item.PurchaseProductID, item.PurchaseQuantity);
                 
-                db.SaveChanges();
+                flag =  db.SaveChanges();
+
+                if (flag>0)
+                {
+                    flag = 1;
+                }
 
             }
             
@@ -71,7 +79,47 @@ namespace GalaxyVibesPos.Controllers
        
             SupplierLedgerCreate(aPurchaserForLedger.PurchaseSupplierInvoiceNo, aPurchaserForLedger.TotalAmount, aPurchaserForLedger.SupplierID, aPurchaserForLedger.PurchaseDate);
 
-            return Json("Save Successfully", JsonRequestBehavior.AllowGet);
+            return Json(flag, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult ExportPurchaseInvoice(List<Purchase> purchaseList)
+        {
+            List<PurchaseTemp> purchaseTempList = new List<PurchaseTemp>();
+            Purchase aPurchase = new Purchase();
+           
+
+            foreach(var supplier in purchaseList)
+            {
+                aPurchase.SupplierID = supplier.SupplierID;
+                aPurchase.PurchaseProductID = supplier.PurchaseProductID;
+            }
+            
+            var supplierinfo = db.Supplier.Where(s => s.SupplierID == aPurchase.SupplierID).FirstOrDefault();
+
+            //var productInfo = from cs in db.CategorySub
+            //                  join pd in db.productDetails on cs.SubCategoryID equals pd.SubCategoryID
+            //                  join pi in aPurchase on pd.pro
+
+            //var productInfo = db.productDetails.Where(p => p.ProductDetailsID == aPurchase.PurchaseProductID).Select(db.CategorySub.Whe));
+            //from a in tableA
+            //from b in tableB.Where(x => x.A == a.A || x.B == a.B)
+            //select new { a, b };
+
+            //var productinfo = from a in db.productDetails.Where(x => x.ProductDetailsID == aPurchase.PurchaseProductID)
+            //                  from b in db.CategorySub.Where(m => m.SubCategoryID == a.SubCategoryID)
+            //                  select new{ ProductCode = a.Code,name = b.SubCategoryName };
+                              
+
+
+            foreach (var model in purchaseList)
+            {
+                PurchaseTemp aPurchaseTemp = new PurchaseTemp();
+                aPurchaseTemp.Name = supplierinfo.SupplierName;
+                aPurchaseTemp.Address = supplierinfo.SupplierAddress+"\n"+ 
+
+            }
+            return View();
         }
 
         private void StockIncrement(int? productID, double? quantity)

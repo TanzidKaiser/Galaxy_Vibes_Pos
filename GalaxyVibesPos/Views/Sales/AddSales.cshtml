@@ -878,36 +878,39 @@
                             contentType: 'application/json',
                             success: function (list) {
                                 if (list == 1) {
-                                    alert("Save");
+                                    alert("Save Successful");
+                                    $.ajax({
+                                        type: 'post',
+                                        url: "/Sales/ExportSaleInvoice",
+                                        dataType: 'json',
+                                        contentType: "application/json; charset=utf-8",
+                                        data: JSON.stringify(List),
+                                        contentType: 'application/json',
+                                        success: function () {
+                                            window.location.href = "/Sales/AddSales";
+                                        },
+                                    });
+                                   
                                 }
                                 else
                                 {
-
+                                    alert("Some Exception here, Please try Again !")
                                 }
                                 // window.location = '/Sales/ExportSaleInvoice?list=' + list;
-                                //window.location.href = "/Sales/AddSales";
+                                
                             },
                         });
-                        $.ajax({
-                            type: 'post',
-                            url: "/Sales/ExportSaleInvoice",
-                            dataType: 'json',
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify(List),
-                            contentType: 'application/json',
-                            success: function () {
-
-                            },
-                        });
+                        
                     }
                     else {
                         alert("Please Add Minimum One Item");
                     };
 
-
+                    
 
                 });
-
+               
+               
             })
 
         </script>

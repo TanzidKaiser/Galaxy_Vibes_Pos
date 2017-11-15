@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using GalaxyVibesPos.Models;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
-
+using GalaxyVibesPos.Models.Temp_Class;
 namespace GalaxyVibesPos.Controllers
 {
     public class SalesController : Controller
