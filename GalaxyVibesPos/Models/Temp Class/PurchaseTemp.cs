@@ -25,6 +25,8 @@ namespace GalaxyVibesPos.Models.Temp_Class
         public double SubTotal { get; set; }
         public double PayAmount { get; set; }
         public double DueAmount { get; set; }
-        
+        public int SerialNO { get; set; }
+        public string Date { get; set; }
+
     }
 }

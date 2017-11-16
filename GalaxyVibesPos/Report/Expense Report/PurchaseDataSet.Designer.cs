@@ -281,7 +281,7 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             
             private global::System.Data.DataColumn columnName;
             
-            private global::System.Data.DataColumn columnSerial_No;
+            private global::System.Data.DataColumn columnSerialNO;
             
             private global::System.Data.DataColumn columnPhone;
             
@@ -314,6 +314,8 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             private global::System.Data.DataColumn columnProductCode;
             
             private global::System.Data.DataColumn columnAddress;
+            
+            private global::System.Data.DataColumn columnDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -358,9 +360,9 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Serial_NoColumn {
+            public global::System.Data.DataColumn SerialNOColumn {
                 get {
-                    return this.columnSerial_No;
+                    return this.columnSerialNO;
                 }
             }
             
@@ -494,6 +496,14 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -531,7 +541,7 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PurchaseRow AddPurchaseRow(
                         string Name, 
-                        string Serial_No, 
+                        string SerialNO, 
                         string Phone, 
                         string Mobile, 
                         string Email, 
@@ -547,11 +557,12 @@ namespace GalaxyVibesPos.Report.Expense_Report {
                         string PayAmount, 
                         string DueAmount, 
                         string ProductCode, 
-                        string Address) {
+                        string Address, 
+                        string Date) {
                 PurchaseRow rowPurchaseRow = ((PurchaseRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Name,
-                        Serial_No,
+                        SerialNO,
                         Phone,
                         Mobile,
                         Email,
@@ -567,7 +578,8 @@ namespace GalaxyVibesPos.Report.Expense_Report {
                         PayAmount,
                         DueAmount,
                         ProductCode,
-                        Address};
+                        Address,
+                        Date};
                 rowPurchaseRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPurchaseRow);
                 return rowPurchaseRow;
@@ -591,7 +603,7 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnName = base.Columns["Name"];
-                this.columnSerial_No = base.Columns["Serial No"];
+                this.columnSerialNO = base.Columns["SerialNO"];
                 this.columnPhone = base.Columns["Phone"];
                 this.columnMobile = base.Columns["Mobile"];
                 this.columnEmail = base.Columns["Email"];
@@ -608,6 +620,7 @@ namespace GalaxyVibesPos.Report.Expense_Report {
                 this.columnDueAmount = base.Columns["DueAmount"];
                 this.columnProductCode = base.Columns["ProductCode"];
                 this.columnAddress = base.Columns["Address"];
+                this.columnDate = base.Columns["Date"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -615,8 +628,8 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             private void InitClass() {
                 this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnName);
-                this.columnSerial_No = new global::System.Data.DataColumn("Serial No", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSerial_No);
+                this.columnSerialNO = new global::System.Data.DataColumn("SerialNO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSerialNO);
                 this.columnPhone = new global::System.Data.DataColumn("Phone", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPhone);
                 this.columnMobile = new global::System.Data.DataColumn("Mobile", typeof(string), null, global::System.Data.MappingType.Element);
@@ -649,6 +662,8 @@ namespace GalaxyVibesPos.Report.Expense_Report {
                 base.Columns.Add(this.columnProductCode);
                 this.columnAddress = new global::System.Data.DataColumn("Address", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAddress);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -807,17 +822,17 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Serial_No {
+            public string SerialNO {
                 get {
                     try {
-                        return ((string)(this[this.tablePurchase.Serial_NoColumn]));
+                        return ((string)(this[this.tablePurchase.SerialNOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Serial No\' in table \'Purchase\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SerialNO\' in table \'Purchase\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePurchase.Serial_NoColumn] = value;
+                    this[this.tablePurchase.SerialNOColumn] = value;
                 }
             }
             
@@ -1079,6 +1094,22 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Date {
+                get {
+                    try {
+                        return ((string)(this[this.tablePurchase.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'Purchase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePurchase.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNameNull() {
                 return this.IsNull(this.tablePurchase.NameColumn);
             }
@@ -1091,14 +1122,14 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSerial_NoNull() {
-                return this.IsNull(this.tablePurchase.Serial_NoColumn);
+            public bool IsSerialNONull() {
+                return this.IsNull(this.tablePurchase.SerialNOColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSerial_NoNull() {
-                this[this.tablePurchase.Serial_NoColumn] = global::System.Convert.DBNull;
+            public void SetSerialNONull() {
+                this[this.tablePurchase.SerialNOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1291,6 +1322,18 @@ namespace GalaxyVibesPos.Report.Expense_Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAddressNull() {
                 this[this.tablePurchase.AddressColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDateNull() {
+                return this.IsNull(this.tablePurchase.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDateNull() {
+                this[this.tablePurchase.DateColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -680,6 +680,7 @@
                             PurchaseProductPrice: $this.find("td.PurchaseProductPrice").text(),
                             PurchaseTotal: $this.find("td.PurchaseTotal").text(),
                             TotalAmount: $('#TotalAmount').val(),
+                            Tquantity: $("#ProductTotal").val(),
 
                         };
                         List.push(PurchaseItems);
@@ -688,31 +689,24 @@
                     $.ajax({
                         type: 'post',
 
-                        url: "/Purchase/save",
+                        url: "/Purchase/Save",
                         dataType: 'json',
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(List),
                         contentType: 'application/json',
                         success: function (data) {
-                            if (data == 1) {
-                                alert("Save Successfully");
-                                $.ajax({
-                                    type: 'post',
-                                    url: "/Purchase/ExportPurchaseInvoice",
-                                    dataType: 'json',
-                                    contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify(List),
-                                    contentType: 'application/json',
-                                    success: function () {
-                                        window.location.href = "/Purchase/PurchaseAdd";
-                                    },
-                                });
-                            }
-                            else {
-                                alert("Some Exception here, Please try Again !")
-                            }
-                            
-                            
+                            alert(data);
+                            $.ajax({
+                                type: 'post',
+                                url: "/Purchase/ExportPurchaseInvoice",
+                                dataType: 'json',
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(List),
+                                contentType: 'application/json',
+                                success: function () {
+                                    window.location.href = "/Purchase/PurchaseAdd";
+                                },
+                            });
                         },
                     });
                 }

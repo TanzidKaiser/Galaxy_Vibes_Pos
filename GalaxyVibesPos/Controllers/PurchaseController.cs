@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using GalaxyVibesPos.Models;
 using GalaxyVibesPos.Models.Temp_Class;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
 
 namespace GalaxyVibesPos.Controllers
 {
@@ -33,10 +35,9 @@ namespace GalaxyVibesPos.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult save(List<Purchase> List)
+        public JsonResult Save(List<Purchase> List)
         {
-
-            var flag = 0;
+            
 
             Purchase aPurchaserForLedger = new Purchase();
            
@@ -66,60 +67,75 @@ namespace GalaxyVibesPos.Controllers
 
                 StockIncrement(item.PurchaseProductID, item.PurchaseQuantity);
                 
-                flag =  db.SaveChanges();
+                 db.SaveChanges();
 
-                if (flag>0)
-                {
-                    flag = 1;
-                }
-
+                                             
             }
             
             // Supplier ledger create function
        
             SupplierLedgerCreate(aPurchaserForLedger.PurchaseSupplierInvoiceNo, aPurchaserForLedger.TotalAmount, aPurchaserForLedger.SupplierID, aPurchaserForLedger.PurchaseDate);
 
-            return Json(flag, JsonRequestBehavior.AllowGet);
+            return Json("Save Successfull", JsonRequestBehavior.AllowGet);
         }
 
 
         public ActionResult ExportPurchaseInvoice(List<Purchase> purchaseList)
         {
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Report/Expense Report/PurchaseCrystalReport.rpt")));
+            
+            int serialNo = 0;
             List<PurchaseTemp> purchaseTempList = new List<PurchaseTemp>();
             Purchase aPurchase = new Purchase();
-           
-
-            foreach(var supplier in purchaseList)
-            {
-                aPurchase.SupplierID = supplier.SupplierID;
-                aPurchase.PurchaseProductID = supplier.PurchaseProductID;
-            }
             
-            var supplierinfo = db.Supplier.Where(s => s.SupplierID == aPurchase.SupplierID).FirstOrDefault();
-
-            //var productInfo = from cs in db.CategorySub
-            //                  join pd in db.productDetails on cs.SubCategoryID equals pd.SubCategoryID
-            //                  join pi in aPurchase on pd.pro
-
-            //var productInfo = db.productDetails.Where(p => p.ProductDetailsID == aPurchase.PurchaseProductID).Select(db.CategorySub.Whe));
-            //from a in tableA
-            //from b in tableB.Where(x => x.A == a.A || x.B == a.B)
-            //select new { a, b };
-
-            //var productinfo = from a in db.productDetails.Where(x => x.ProductDetailsID == aPurchase.PurchaseProductID)
-            //                  from b in db.CategorySub.Where(m => m.SubCategoryID == a.SubCategoryID)
-            //                  select new{ ProductCode = a.Code,name = b.SubCategoryName };
-                              
-
-
-            foreach (var model in purchaseList)
+            foreach(var id in purchaseList)
             {
-                PurchaseTemp aPurchaseTemp = new PurchaseTemp();
-                aPurchaseTemp.Name = supplierinfo.SupplierName;
-                aPurchaseTemp.Address = supplierinfo.SupplierAddress+"\n"+ 
-
+                aPurchase.SupplierID = id.SupplierID;
+               
             }
-            return View();
+
+            var supplier = db.Supplier.Where(s => s.SupplierID == aPurchase.SupplierID).FirstOrDefault();
+            
+            foreach(var purchase in purchaseList)
+            {
+                PurchaseTemp pt = new PurchaseTemp();
+                var productInfo = from pd in db.productDetails.Where(x => x.ProductDetailsID == purchase.PurchaseProductID)
+                                  join sc in db.CategorySub on pd.SubCategoryID equals sc.SubCategoryID
+                                  select new { Code = pd.Code, ProductName = pd.ProductName, SubcategoryName = sc.SubCategoryName };
+                foreach(var product in productInfo)
+                {
+                    pt.ProductCode = product.Code;
+                    pt.SubCategoryName = product.SubcategoryName;
+                    pt.ProductName = product.ProductName;
+                }
+                serialNo++;
+                pt.SerialNO = serialNo;
+                pt.PurchaseNo = purchase.PurchaseNo;
+                pt.SupplierInvoiceNo = purchase.PurchaseSupplierInvoiceNo;
+                pt.PurchasePrice = Convert.ToString(purchase.PurchaseProductPrice);
+                pt.ProductQuantity =Convert.ToInt32(purchase.PurchaseQuantity);
+                pt.Total = Convert.ToInt32(purchase.PurchaseTotal);
+                pt.TQuantity = purchase.Tquantity;
+                pt.SubTotal = Convert.ToInt32(purchase.TotalAmount);
+                pt.Date = purchase.PurchaseDate;
+
+                pt.Name = supplier.SupplierName;
+                pt.Phone = supplier.SupplierPhone;
+                pt.Email = supplier.SupplierEmail;
+                pt.Address = supplier.SupplierAddress+ "," + supplier.supplierGroup.GroupName + "," + supplier.supplierCompany.CompanyName;
+
+                purchaseTempList.Add(pt);
+            }
+            rd.SetDataSource(purchaseTempList);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream str = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            str.Seek(0, SeekOrigin.Begin);
+            return File(str, "application/pdf", "Expense Report.pdf");
         }
 
         private void StockIncrement(int? productID, double? quantity)

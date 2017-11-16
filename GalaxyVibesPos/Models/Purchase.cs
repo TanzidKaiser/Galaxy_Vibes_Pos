@@ -33,5 +33,9 @@ namespace GalaxyVibesPos.Models
         [ForeignKey("PurchaseProductID")]
         public virtual ProductDetails Product { get; set; }
 
+        // for invoive 
+        [NotMapped]
+        public int Tquantity { get; set; }
+
     }
 }
