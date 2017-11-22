@@ -1,0 +1,266 @@
+﻿
+@{
+    ViewBag.Title = "PUrchaseReturn";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+    //var list = ViewBag.purchaseList;
+}
+
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #ProductSearch {
+        width: 170px;
+        font-size: 15px;
+        height: 40px;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    input[type="checkbox"] {
+        margin: 0px 3px 0px;
+        /*margin-top: 1px \9;
+            line-height: normal;*/
+    }
+
+    #ColorForCheckboxLebel {
+        color: #08c;
+        font-weight: bold;
+        font-size: 11px;
+    }
+</style>
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span7">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Product Sale</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+                        <input data-val="true" id="PurchaseProductID" name="PurchaseProductID" type="hidden">
+
+                        @using (Html.BeginForm())
+                        {
+
+                            <fieldset id="CustomerSubmitForm">
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <table class="table table-bordered table-invoice-full" id="Table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="head0">Code</th>
+                                                    <th class="head1">ID</th>
+                                                    <th class="head0 right">Name</th>
+                                                    <th class="head1 right">Price</th>
+                                                    <th class="head0 right">Quantity</th>
+                                                    <th class="head0 right">Total</th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (ViewData["purchaseList"] != null)
+                                                {
+                                                    foreach (var item in (dynamic) ViewData["purchaseList"])
+                                                    {
+
+                                                        <tr>
+                                                            <td>@item.Code</td>
+                                                            <td>@item.Id</td>
+                                                            <td>@item.Name</td>
+                                                            <td>@item.Price</td>
+                                                            <td>@item.Quantity</td>
+                                                            <td>@item.Total</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <hr />
+                            <div class="row-fluid">
+                                <div class="span4">
+
+
+
+
+                                </div>
+                            </div>
+
+                        }
+
+
+                    </div>
+
+                </div>
+
+                @*kjljl*@
+
+            </div>
+            <div class="span4">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Sales Invoice</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+                        <div class="widget-content">
+
+                            <div class="row-fluid">
+                                <div class="col-lg-4 col-md-4">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Code</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="Code" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Name</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductName" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Price</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductPrice" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Return Quantity</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductQty" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-control">
+                                    <button type="button" id="ReturnBtn" class="btn btn-success" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Return</button>
+                                </div>
+
+                                <hr />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span11">
+                <div class="widget-box">
+                    <div class="widget-content nopadding">
+
+                        <div class="widget-content">
+
+                            <div class="row-fluid">
+                                <div class="span7">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Invoice No :</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span6" id="InvoiceNo" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-control">
+                                        <button type="button" id="SearchBtn" class="btn btn-success span4" style="margin-left:0px; margin-top:7px; width:120px; height:35px;font-size:25px; font-weight:bold;">Search</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        <script type="text/javascript">
+
+            $("#SearchBtn").click(function () {
+
+                var invoice = $("#InvoiceNo").val();
+                $.ajax({
+                    type: "Post",
+                    url: "/Purchase/PUrchaseReturn",
+                    dataType: 'json',
+                    data: { Data: invoice },
+
+                    success: function () {
+
+
+                    },
+
+
+                });
+            });
+
+        </script>
+
+    }

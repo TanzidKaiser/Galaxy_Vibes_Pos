@@ -744,6 +744,7 @@
     <Content Include="Views\Supplier\AddSupplierLedger.cshtml" />
     <Content Include="Views\Purchase\PurchaseAdd.cshtml" />
     <Content Include="Views\Sales\AddSales.cshtml" />
+    <Content Include="Views\Purchase\PUrchaseReturn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709110737238_MainCategoryCreate.resx">

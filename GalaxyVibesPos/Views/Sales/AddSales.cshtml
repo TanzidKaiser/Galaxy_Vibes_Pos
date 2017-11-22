@@ -350,8 +350,7 @@
                     <div class="widget-content nopadding">
 
 
-                        @*<div class="form-horizontal">
-                        *@
+                       
 
 
                         <div class="widget-content">
@@ -498,423 +497,423 @@
             </div>
         </div>
     </div>
-    @section scripts{
-        <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-        <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
-        <script src="~/Scripts/jquery-ui.js"></script>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var now = new Date();
-                var month = (now.getMonth() + 1);
-                var day = now.getDate();
-                if (month < 10)
-                    month = "0" + month;
-                if (day < 10)
-                    day = "0" + day;
-                var today = now.getFullYear() + '-' + month + '-' + day;
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var now = new Date();
+            var month = (now.getMonth() + 1);
+            var day = now.getDate();
+            if (month < 10)
+                month = "0" + month;
+            if (day < 10)
+                day = "0" + day;
+            var today = now.getFullYear() + '-' + month + '-' + day;
 
-                $('#SaleDate').val(today);
-                $('#PaymentDate').val(today);
+            $('#SaleDate').val(today);
+            $('#PaymentDate').val(today);
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#SalesCustomerName").autocomplete({
+
+                source: function (request, response) {
+
+                    $("#GroupName").val('');
+                    $("#CompanyName").val('');
+                    $("#PreviousDue").val('');
+                    $("#Address").val('');
+                    $.ajax({
+                        url: "/Sales/GetCustomerBySearch",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                $("#GroupName").val(item.GroupName);
+                                $("#CompanyName").val(item.CompanyName);
+                                $("#PreviousDue").val(item.PreviousDue);
+                                $("#Address").val(item.Address);
+                                return { label: item.CustomerName, value: item.CustomerName };
+
+                            }))
+                        }
+                    })
+                },
+                minLength: 2,
+
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#ProductSearch").autocomplete({
+
+                source: function (request, response) {
+
+                    $.ajax({
+                        url: "/Purchase/GetProductBySearch",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+
+                                $("#Stoke").val(item.Stoke);
+                                $("#SalesProductID").val(item.ProductDetailsID);
+                                $("#ProductName").val(item.ProductName);
+                                $("#UnitType").val(item.UnitID);
+                                $("#ProductPrice").val(item.SalePrice);
+                                $("#PurchaseProductID").val(item.ProductDetailsID);
+                                $("#SubCategoryName").val(item.SubCategoryName);
+                                return { label: item.Code, value: item.Code };
+
+
+
+
+                            }))
+
+                        }
+                    })
+                },
+                minLength: 4,
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#addBtn").click(function () {
+
+
+                var isValidate = CheckValidateForAdd();
+                var productID = $("#SalesProductID").val();
+                var productName = $("#ProductName").val();
+                var price = $("#ProductPrice").val();
+                var quantity = $("#SalesQuantity").val();
+                var total = price * quantity;
+                var discount = getDiscount(total);
+                if (discount == '') {
+                    discount = 0;
+                }
+                var totalAfterDiscount = total - discount;
+                if (isValidate) {
+
+                    var markup = "<tr><td class=ProductID>" + productID + "</td><td>" + productName + "</td><td class=PurchaseProductPrice>" + price + "</td><td class=totalQuantity>" + quantity + "</td><td class=totalDiscount>" + discount + "</td><td class = SalesTotal>" + totalAfterDiscount + "</td><td>" + ' <button type="button" id="removeBtn" class="btn btn-info btn-lg"><i class="icon-remove-circle"></i></button>' + "</td></tr>";
+
+                    $("#Table tbody").append(markup);
+
+                    ProductQuantitysum();
+                    $("#TotalAmount").val(TotalAmount());
+
+                    $("#TotalVat").val((GetVat(TotalMinusDiscount())));
+
+                    $("#TotalMinusDiscount").val(TotalMinusDiscount());
+
+                    $("#TotalDiscount").val(TotalDiscount());
+                    $("#NetTotal").val(TotalNetAmount());
+
+                    var totalItem = $('#Table tbody tr').length;
+                    $("#TotalItem").val(totalItem);
+
+                    FieldValueNUll();
+
+                }
+
+
 
             });
-        </script>
-
-        <script>
-            $(document).ready(function () {
-
-                $("#SalesCustomerName").autocomplete({
-
-                    source: function (request, response) {
-
-                        $("#GroupName").val('');
-                        $("#CompanyName").val('');
-                        $("#PreviousDue").val('');
-                        $("#Address").val('');
-                        $.ajax({
-                            url: "/Sales/GetCustomerBySearch",
-                            type: "POST",
-                            dataType: "json",
-                            data: { Prefix: request.term },
-
-                            success: function (data) {
-                                response($.map(data, function (item) {
-                                    $("#GroupName").val(item.GroupName);
-                                    $("#CompanyName").val(item.CompanyName);
-                                    $("#PreviousDue").val(item.PreviousDue);
-                                    $("#Address").val(item.Address);
-                                    return { label: item.CustomerName, value: item.CustomerName };
-
-                                }))
-                            }
-                        })
-                    },
-                    minLength: 2,
-
-                    messages: {
-                        noResults: "", results: ""
-                    }
-                });
-            })
-        </script>
-
-        <script>
-            $(document).ready(function () {
-                $("#ProductSearch").autocomplete({
-
-                    source: function (request, response) {
-
-                        $.ajax({
-                            url: "/Purchase/GetProductBySearch",
-                            type: "POST",
-                            dataType: "json",
-                            data: { Prefix: request.term },
-                            success: function (data) {
-                                response($.map(data, function (item) {
-
-                                    $("#Stoke").val(item.Stoke);
-                                    $("#SalesProductID").val(item.ProductDetailsID);
-                                    $("#ProductName").val(item.ProductName);
-                                    $("#UnitType").val(item.UnitID);
-                                    $("#ProductPrice").val(item.SalePrice);
-                                    $("#PurchaseProductID").val(item.ProductDetailsID);
-                                    $("#SubCategoryName").val(item.SubCategoryName);
-                                    return { label: item.Code, value: item.Code };
+        });
 
 
 
+        function ProductQuantitysum() {
+            var sum = 0;
+            $('.totalQuantity').each(function () {
+                var value = $(this).text();
+                //add only if the value is number
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
 
-                                }))
-
-                            }
-                        })
-                    },
-                    minLength: 4,
-                    messages: {
-                        noResults: "", results: ""
-                    }
-                });
-            })
-        </script>
-        <script>
-            $(document).ready(function () {
-                $("#addBtn").click(function () {
-
-
-                    var isValidate = CheckValidateForAdd();
-                    var productID = $("#SalesProductID").val();
-                    var productName = $("#ProductName").val();
-                    var price = $("#ProductPrice").val();
-                    var quantity = $("#SalesQuantity").val();
-                    var total = price * quantity;
-                    var discount = getDiscount(total);
-                    if (discount == '') {
-                        discount = 0;
-                    }
-                    var totalAfterDiscount = total - discount;
-                    if (isValidate) {
-
-                        var markup = "<tr><td class=ProductID>" + productID + "</td><td>" + productName + "</td><td class=PurchaseProductPrice>" + price + "</td><td class=totalQuantity>" + quantity + "</td><td class=totalDiscount>" + discount + "</td><td class = SalesTotal>" + totalAfterDiscount + "</td><td>" + ' <button type="button" id="removeBtn" class="btn btn-info btn-lg"><i class="icon-remove-circle"></i></button>' + "</td></tr>";
-
-                        $("#Table tbody").append(markup);
-
-                        ProductQuantitysum();
-                        $("#TotalAmount").val(TotalAmount());
-
-                        $("#TotalVat").val((GetVat(TotalMinusDiscount())));
-
-                        $("#TotalMinusDiscount").val(TotalMinusDiscount());
-
-                        $("#TotalDiscount").val(TotalDiscount());
-                        $("#NetTotal").val(TotalNetAmount());
-
-                        var totalItem = $('#Table tbody tr').length;
-                        $("#TotalItem").val(totalItem);
-
-                        FieldValueNUll();
-
-                    }
-
-
-
-                });
             });
+            $('#ProductTotal').val(sum);
+        };
+
+        function TotalAmount() {
+            var sum = 0;
+            $('#Table tbody tr').each(function () {
+
+                $this = $(this);
+
+                var price = $this.find("td.PurchaseProductPrice").text();
+                var quantity = $this.find("td.totalQuantity").text();
+
+                if ((!isNaN(price) && price.length != 0) && (!isNaN(quantity) && quantity.length != 0)) {
+                    sum += (parseFloat(price) * parseFloat(quantity));
+
+                }
+            });
+            return sum;
+
+        }
+
+
+        function GetVat(totalAfterDiscount) {
+            var totalVat = ((5 * totalAfterDiscount) / 100);
+
+            return totalVat;
+        }
+
+        function TotalMinusDiscount() {
+            return TotalAmount() - TotalDiscount();
+        }
+
+        function TotalDiscount() {
+            var sum = 0;
+            $('.totalDiscount').each(function () {
+
+                var value = $(this).text();
+
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            return sum;
+
+        }
+
+        function TotalNetAmount() {
+            return TotalMinusDiscount() + parseFloat($("#TotalVat").val());
+        }
+
+        function getDiscount(total) {
+            var discount;
+
+            if (document.getElementById('forParcent').checked) {
+                return discount = (((document.getElementById('parcentValue').value) * total) / 100);
+            }
+            else if (document.getElementById('forTaka').checked) {
+                return discount = (document.getElementById('tkValue').value);
+            }
+
+        }
+
+        function FieldValueNUll() {
+
+            document.getElementById("ProductSearch").value = "";
+            document.getElementById("SalesQuantity").value = "";
+            document.getElementById("parcentValue").value = "";
+            document.getElementById("tkValue").value = "";
+            document.getElementById("SalesProductID").value = "";
+            document.getElementById("ProductName").value = "";
+            document.getElementById("ProductPrice").value = "";
+            document.getElementById("UnitType").value = "";
+            document.getElementById("Stoke").value = "";
+            document.getElementById("SubCategoryName").value = "";
+        }
+        function InvoiceFieldValueNUll() {
+            $("#TotalAmount").val('');
+            $("#TotalVat").val('');
+            $("#TotalWithVat").val('');
+            $("#TotalDiscount").val('');
+            $("#NetTotal").val('');
+            $("#TotalItem").val('');
+            $("#ProductTotal").val('');
+            $("#ReturnAmount").val('');
+            $("#DueAmount").val('');
+            $("#ReceiveAmount").val('');
+        }
+
+        function CheckValidateForAdd() {
 
 
 
-            function ProductQuantitysum() {
-                var sum = 0;
-                $('.totalQuantity').each(function () {
-                    var value = $(this).text();
-                    //add only if the value is number
-                    if (!isNaN(value) && value.length != 0) {
-                        sum += parseFloat(value);
-                    }
+            var productSearch = $("#ProductSearch").val();
+            var quantity = $('#SalesQuantity').val();
 
-                });
-                $('#ProductTotal').val(sum);
+            if (productSearch == "") {
+
+                alert("Required Product Name ");
+                return false;
+            };
+            if (quantity == "") {
+
+                alert("Required Quantity");
+                return false;
+            };
+            if ($("#Stoke").val() < 1) {
+                alert("Selected Product are Not Available");
+                FieldValueNUll();
+                return false;
+
             };
 
-            function TotalAmount() {
-                var sum = 0;
-                $('#Table tbody tr').each(function () {
+            return true;
+        }
 
-                    $this = $(this);
+    </script>
+    @*For Remove Btn*@
 
-                    var price = $this.find("td.PurchaseProductPrice").text();
-                    var quantity = $this.find("td.totalQuantity").text();
+    <script>
 
-                    if ((!isNaN(price) && price.length != 0) && (!isNaN(quantity) && quantity.length != 0)) {
-                        sum += (parseFloat(price) * parseFloat(quantity));
+        $('#Table').on('click', '#removeBtn', function () {
+            $(this).parents('tr').remove();
 
-                    }
-                });
-                return sum;
+            var totalItem = ($('#Table tbody tr').length + 1) - 1;
+            $("#TotalItem").val(totalItem);
+            ProductQuantitysum();
+            $("#TotalAmount").val(TotalAmount());
+            $("#TotalVat").val((GetVat(TotalMinusDiscount())));
+            //$("#TotalVat").val((GetVat() * 5) / 100);
+            $("#TotalMinusDiscount").val(TotalMinusDiscount());
+            $("#TotalDiscount").val(TotalDiscount());
+            $("#NetTotal").val(TotalNetAmount());
+            if (totalItem == 0) {
+                InvoiceFieldValueNUll();
+            };
 
-            }
+        });
+    </script>
 
 
-            function GetVat(totalAfterDiscount) {
-                var totalVat = ((5 * totalAfterDiscount) / 100);
-
-                return totalVat;
-            }
-
-            function TotalMinusDiscount() {
-                return TotalAmount() - TotalDiscount();
-            }
-
-            function TotalDiscount() {
-                var sum = 0;
-                $('.totalDiscount').each(function () {
-
-                    var value = $(this).text();
-
-                    if (!isNaN(value) && value.length != 0) {
-                        sum += parseFloat(value);
-                    }
-                });
-                return sum;
-
-            }
-
-            function TotalNetAmount() {
-                return TotalMinusDiscount() + parseFloat($("#TotalVat").val());
-            }
-
-            function getDiscount(total) {
-                var discount;
-
-                if (document.getElementById('forParcent').checked) {
-                    return discount = (((document.getElementById('parcentValue').value) * total) / 100);
-                }
-                else if (document.getElementById('forTaka').checked) {
-                    return discount = (document.getElementById('tkValue').value);
-                }
-
-            }
-
-            function FieldValueNUll() {
-
-                document.getElementById("ProductSearch").value = "";
-                document.getElementById("SalesQuantity").value = "";
-                document.getElementById("parcentValue").value = "";
-                document.getElementById("tkValue").value = "";
-                document.getElementById("SalesProductID").value = "";
-                document.getElementById("ProductName").value = "";
-                document.getElementById("ProductPrice").value = "";
-                document.getElementById("UnitType").value = "";
-                document.getElementById("Stoke").value = "";
-                document.getElementById("SubCategoryName").value = "";
-            }
-            function InvoiceFieldValueNUll() {
-                $("#TotalAmount").val('');
-                $("#TotalVat").val('');
-                $("#TotalWithVat").val('');
-                $("#TotalDiscount").val('');
-                $("#NetTotal").val('');
-                $("#TotalItem").val('');
-                $("#ProductTotal").val('');
-                $("#ReturnAmount").val('');
+    <script>
+        $("#ReceiveAmount").bind('keyup keypress blur', function () {
+            var netAmount = TotalNetAmount();
+            var receiveAmount = $(this).val();
+            if (receiveAmount >= netAmount) {
+                $("#ReturnAmount").val(receiveAmount - netAmount);
                 $("#DueAmount").val('');
-                $("#ReceiveAmount").val('');
             }
-
-            function CheckValidateForAdd() {
-
-
-
-                var productSearch = $("#ProductSearch").val();
-                var quantity = $('#SalesQuantity').val();
-
-                if (productSearch == "") {
-
-                    alert("Required Product Name ");
-                    return false;
-                };
-                if (quantity == "") {
-
-                    alert("Required Quantity");
-                    return false;
-                };
-                if ($("#Stoke").val() < 1) {
-                    alert("Selected Product are Not Available");
-                    FieldValueNUll();
-                    return false;
-
-                };
-
-                return true;
+            else {
+                $("#DueAmount").val(netAmount - receiveAmount);
+                $("#ReturnAmount").val('');
             }
+        });
+    </script>
+    @*For Sale*@
 
-        </script>
-        @*For Remove Btn*@
+    <script>
+        $(document).ready(function () {
+            $("#SaleBtn").click(function () {
 
-        <script>
-
-            $('#Table').on('click', '#removeBtn', function () {
-                $(this).parents('tr').remove();
-
-                var totalItem = ($('#Table tbody tr').length + 1) - 1;
-                $("#TotalItem").val(totalItem);
-                ProductQuantitysum();
-                $("#TotalAmount").val(TotalAmount());
-                $("#TotalVat").val((GetVat(TotalMinusDiscount())));
-                //$("#TotalVat").val((GetVat() * 5) / 100);
-                $("#TotalMinusDiscount").val(TotalMinusDiscount());
-                $("#TotalDiscount").val(TotalDiscount());
-                $("#NetTotal").val(TotalNetAmount());
-                if (totalItem == 0) {
-                    InvoiceFieldValueNUll();
-                };
-
+                var totalRow = $('#Table tbody tr').length;
+                if (totalRow == 0) {
+                    alert("Please Add Minimum One Item");
+                }
             });
-        </script>
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $("#SaleBtn").click(function () {
+
+                var rowNo = $('#Table tbody tr').length;
+                var List = [];
+                if (rowNo >= 1) {
+                    $('#Table tbody tr').each(function () {
+
+                        $this = $(this);
+                        var saleItem = {
 
 
-        <script>
-            $("#ReceiveAmount").bind('keyup keypress blur', function () {
-                var netAmount = TotalNetAmount();
-                var receiveAmount = $(this).val();
-                if (receiveAmount >= netAmount) {
-                    $("#ReturnAmount").val(receiveAmount - netAmount);
-                    $("#DueAmount").val('');
+                            CompanyName: $("#CompanyName").val(),
+                            SalesCustomerName: $("#SalesCustomerName").val(),
+
+                            SalesNo: $("#SalesNo").val(),
+                            SalesDate: $("#SaleDate").val(),
+                            SalesRemarks: $("#SalesRemarks").val(),
+                            Reference: $("#Reference").val(),
+                            SalesTime: $("#SalesTime").val(),
+                            SalesProductID: $this.find("td.ProductID").text(),
+                            SalesSalePrice: $this.find('td.PurchaseProductPrice').text(),
+                            SalesQuantity: $this.find('td.totalQuantity').text(),
+                            SalesProductDiscount: $this.find('td.totalDiscount').text(),
+                            SalesTotal: $this.find('td.SalesTotal').text(),
+
+                            SalesReceivedAmount: $("#ReceiveAmount").val(),
+
+
+                            SalesChangeAmount: $("#ReturnAmount").val(),
+                            SalesPuechaseBy: $("#SalesPuechaseBy").val(),
+                            SalesPurchaseByContact: $("#SalesPurchaseByContact").val(),
+
+                            DueAmount: parseFloat($("#DueAmount").val()),
+
+                            //......For Sale report
+
+                            SubTotal: ($("#TotalAmount").val()),
+                            TotalDiscount: ($("#TotalDiscount").val()),
+                            SalesVat: ($("#TotalVat").val()),
+                            TotalAmount: ($("#TotalMinusDiscount").val()),
+                            NetPayable: ($("#NetTotal").val()),
+                            ReturnAmount: ($("#ReturnAmount").val()),
+
+                        };
+
+                        List.push(saleItem);
+                    });
+                    $.ajax({
+                        type: 'post',
+                        url: "/Sales/Save",
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(List),
+                        contentType: 'application/json',
+                        success: function (list) {
+                            if (list == 1) {
+                                alert("Save Successful");
+                                $.ajax({
+                                    type: 'post',
+                                    url: "/Sales/ExportSaleInvoice",
+                                    dataType: 'json',
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify(List),
+                                    contentType: 'application/json',
+                                    success: function () {
+                                        window.location.href = "/Sales/AddSales";
+                                    },
+                                });
+
+                            }
+                            else {
+                                alert("Some Exception here, Please try Again !")
+                            }
+                            // window.location = '/Sales/ExportSaleInvoice?list=' + list;
+
+                        },
+                    });
+
                 }
                 else {
-                    $("#DueAmount").val(netAmount - receiveAmount);
-                    $("#ReturnAmount").val('');
-                }
+                    alert("Please Add Minimum One Item");
+                };
+
+
+
             });
-        </script>
-        @*For Sale*@
-
-        <script>
-            $(document).ready(function () {
-                $("#SaleBtn").click(function () {
-
-                    var totalRow = $('#Table tbody tr').length;
-                    if (totalRow == 0) {
-                        alert("Please Add Minimum One Item");
-                    }
-                });
-            });
-        </script>
-        <script>
-            $(document).ready(function () {
-
-                $("#SaleBtn").click(function () {
-
-                    var rowNo = $('#Table tbody tr').length;
-                    var List = [];
-                    if (rowNo >= 1) {
-                        $('#Table tbody tr').each(function () {
-
-                            $this = $(this);
-                            var saleItem = {
 
 
-                                CompanyName: $("#CompanyName").val(),
-                                SalesCustomerName: $("#SalesCustomerName").val(),
+        })
 
-                                SalesNo: $("#SalesNo").val(),
-                                SalesDate: $("#SaleDate").val(),
-                                SalesRemarks: $("#SalesRemarks").val(),
-                                Reference: $("#Reference").val(),
-                                SalesTime: $("#SalesTime").val(),
-                                SalesProductID: $this.find("td.ProductID").text(),
-                                SalesSalePrice: $this.find('td.PurchaseProductPrice').text(),
-                                SalesQuantity: $this.find('td.totalQuantity').text(),
-                                SalesProductDiscount: $this.find('td.totalDiscount').text(),
-                                SalesTotal: $this.find('td.SalesTotal').text(),
-
-                                SalesReceivedAmount: $("#ReceiveAmount").val(),
+    </script>
 
 
-                                SalesChangeAmount: $("#ReturnAmount").val(),
-                                SalesPuechaseBy: $("#SalesPuechaseBy").val(),
-                                SalesPurchaseByContact: $("#SalesPurchaseByContact").val(),
-
-                                DueAmount: parseFloat($("#DueAmount").val()),
-
-                                //......For Sale report
-
-                                SubTotal: ($("#TotalAmount").val()),
-                                TotalDiscount: ($("#TotalDiscount").val()),
-                                SalesVat: ($("#TotalVat").val()),
-                                TotalAmount: ($("#TotalMinusDiscount").val()),
-                                NetPayable: ($("#NetTotal").val()),
-                                ReturnAmount: ($("#ReturnAmount").val()),
-
-                            };
-
-                            List.push(saleItem);
-                        });
-                        $.ajax({
-                            type: 'post',
-                            url: "/Sales/Save",
-                            dataType: 'json',
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify(List),
-                            contentType: 'application/json',
-                            success: function (list) {
-                                if (list == 1) {
-                                    alert("Save Successful");
-                                    $.ajax({
-                                        type: 'post',
-                                        url: "/Sales/ExportSaleInvoice",
-                                        dataType: 'json',
-                                        contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify(List),
-                                        contentType: 'application/json',
-                                        success: function () {
-                                            window.location.href = "/Sales/AddSales";
-                                        },
-                                    });
-                                   
-                                }
-                                else
-                                {
-                                    alert("Some Exception here, Please try Again !")
-                                }
-                                // window.location = '/Sales/ExportSaleInvoice?list=' + list;
-                                
-                            },
-                        });
-                        
-                    }
-                    else {
-                        alert("Please Add Minimum One Item");
-                    };
-
-                    
-
-                });
-               
-               
-            })
-
-        </script>
-
-
-    }
+}
 
