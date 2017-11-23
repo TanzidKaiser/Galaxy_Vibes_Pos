@@ -242,31 +242,34 @@ namespace GalaxyVibesPos.Controllers
         {
             return View();
         }
-        public class PurchaseViewbag
-        {
-            public int Code { get; set; }
-            public int? Id { get; set; }
-            public string Name { get; set; }
-            public double? Price { get; set; }
-            public double? Quantity { get; set; }
-            public double? Total { get; set; }
-        }
+       
         [HttpPost]
-        public ActionResult PUrchaseReturn(string Data)
+        public ActionResult GetPurchaseListbyInvoiceNo(string Data)
         {
 
             var purchaseList = db.Purchase.Where(p => p.PurchaseNo == Data).ToList();
 
-            List<PurchaseViewbag> list = new List<PurchaseViewbag>();
-             
+            var _List = new[]
+            {
+                new
+                {
+                    Code =(int)0,
+                    ID = (int?)0,
+                    Name = string.Empty,
+                    Price = (double?)0,
+                    Quantity = (double?)0,
+                    Total = (double?)0
+                }
+            }.Where(e => false).ToList();
+                         
             foreach (var item in purchaseList)
             {
                 var productName = db.productDetails.First(p => p.ProductDetailsID == item.PurchaseProductID).ProductName;
 
-                var aPurchase = new PurchaseViewbag
+                var aPurchase = new 
                 {
                     Code = item.PurchaseID,
-                    Id = item.PurchaseProductID,
+                    ID = item.PurchaseProductID,
                     Name = productName,
                     Price = item.PurchaseProductPrice,
                     Quantity = item.PurchaseQuantity,
@@ -274,11 +277,10 @@ namespace GalaxyVibesPos.Controllers
                 };
 
                 //var List = new[] { aPurchase };
-                list.Add(aPurchase);
+                _List.Add(aPurchase);
             }
-            ViewData["purchaseList"] = list;
-            return View();
-            //return Json(list, JsonRequestBehavior.AllowGet);
+            
+            return Json(_List, JsonRequestBehavior.AllowGet);
         }
 
 

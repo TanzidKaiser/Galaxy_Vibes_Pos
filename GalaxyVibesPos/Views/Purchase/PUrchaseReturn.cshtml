@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<GalaxyVibesPos.Models.Purchase>
 @{
     ViewBag.Title = "PUrchaseReturn";
     Layout = "~/Views/Shared/_mytemplate.cshtml";
@@ -79,53 +79,43 @@
                         @using (Html.BeginForm())
                         {
 
-                            <fieldset id="CustomerSubmitForm">
-                                <div class="row-fluid">
-                                    <div class="span12">
-                                        <table class="table table-bordered table-invoice-full" id="Table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="head0">Code</th>
-                                                    <th class="head1">ID</th>
-                                                    <th class="head0 right">Name</th>
-                                                    <th class="head1 right">Price</th>
-                                                    <th class="head0 right">Quantity</th>
-                                                    <th class="head0 right">Total</th>
-                                                    <th></th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if (ViewData["purchaseList"] != null)
-                                                {
-                                                    foreach (var item in (dynamic) ViewData["purchaseList"])
-                                                    {
-
-                                                        <tr>
-                                                            <td>@item.Code</td>
-                                                            <td>@item.Id</td>
-                                                            <td>@item.Name</td>
-                                                            <td>@item.Price</td>
-                                                            <td>@item.Quantity</td>
-                                                            <td>@item.Total</td>
-                                                        </tr>
-                                                    }
-                                                }
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <hr />
+                            @*<fieldset id="CustomerSubmitForm">*@
                             <div class="row-fluid">
-                                <div class="span4">
+                                <div class="span12">
+                                    <table class="table table-bordered table-invoice-full" id="Table">
+                                        <thead>
+                                            <tr>
+                                                <th class="head0">Code</th>
+                                                <th class="head1">ID</th>
+                                                <th class="head0 right">Name</th>
+                                                <th class="head1 right">Price</th>
+                                                <th class="head0 right">Quantity</th>
+                                                <th class="head0 right">Total</th>
 
 
-
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
 
                                 </div>
                             </div>
+                                @*</fieldset>*@
+                                <hr />
+                                <div class="row-fluid">
+                                    <div class="span4">
+
+
+
+
+                                    </div>
+                                </div>
 
                         }
 
@@ -244,16 +234,33 @@
         <script type="text/javascript">
 
             $("#SearchBtn").click(function () {
-
+                var tr;
+                var select = $("table tbody tr");
+                select.empty();
                 var invoice = $("#InvoiceNo").val();
                 $.ajax({
                     type: "Post",
-                    url: "/Purchase/PUrchaseReturn",
+                    url: "/Purchase/GetPurchaseListbyInvoiceNo",
                     dataType: 'json',
                     data: { Data: invoice },
 
-                    success: function () {
+                    success: function (result) {
 
+                       
+                        for(i=0;i<result.length;i++)
+                        {
+                            tr = tr + "<tr>";
+                            tr = tr + "<td>" + result[i].Code + "</td>";
+                            tr = tr + "<td>" + result[i].ID + "</td>";
+                            tr = tr + "<td>" + result[i].Name + "</td>";
+                            tr = tr + "<td>" + result[i].Price + "</td>";
+                            tr = tr + "<td>" + result[i].Quantity + "</td>";
+                            tr = tr + "<td>" + result[i].Total + "</td>";
+                            tr = tr + "</tr>";
+                            
+                        }
+
+                        $(".table").append(tr);
 
                     },
 
