@@ -134,65 +134,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709110737238_MainCategoryCreate.cs" />
-    <Compile Include="Migrations\201709110737238_MainCategoryCreate.Designer.cs">
-      <DependentUpon>201709110737238_MainCategoryCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709120532310_MainCategoryUpdate.cs" />
-    <Compile Include="Migrations\201709120532310_MainCategoryUpdate.Designer.cs">
-      <DependentUpon>201709120532310_MainCategoryUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709131029392_CategoryCreate.cs" />
-    <Compile Include="Migrations\201709131029392_CategoryCreate.Designer.cs">
-      <DependentUpon>201709131029392_CategoryCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709131042449_SubCategoryCreate.cs" />
-    <Compile Include="Migrations\201709131042449_SubCategoryCreate.Designer.cs">
-      <DependentUpon>201709131042449_SubCategoryCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709240623003_productDetailsCreate.cs" />
-    <Compile Include="Migrations\201709240623003_productDetailsCreate.Designer.cs">
-      <DependentUpon>201709240623003_productDetailsCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709280647590_GroupCreate.cs" />
-    <Compile Include="Migrations\201709280647590_GroupCreate.Designer.cs">
-      <DependentUpon>201709280647590_GroupCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709280702214_CompanyCreate.cs" />
-    <Compile Include="Migrations\201709280702214_CompanyCreate.Designer.cs">
-      <DependentUpon>201709280702214_CompanyCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710020446162_TarminalInformationCreate.cs" />
-    <Compile Include="Migrations\201710020446162_TarminalInformationCreate.Designer.cs">
-      <DependentUpon>201710020446162_TarminalInformationCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710080639555_CustomerCreate.cs" />
-    <Compile Include="Migrations\201710080639555_CustomerCreate.Designer.cs">
-      <DependentUpon>201710080639555_CustomerCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710080643579_CustomerLedgerCreate.cs" />
-    <Compile Include="Migrations\201710080643579_CustomerLedgerCreate.Designer.cs">
-      <DependentUpon>201710080643579_CustomerLedgerCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710080645506_SaleCreate.cs" />
-    <Compile Include="Migrations\201710080645506_SaleCreate.Designer.cs">
-      <DependentUpon>201710080645506_SaleCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710160945361_SupplierGroupAndCompanyCreate.cs" />
-    <Compile Include="Migrations\201710160945361_SupplierGroupAndCompanyCreate.Designer.cs">
-      <DependentUpon>201710160945361_SupplierGroupAndCompanyCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710170502053_SupplierCreate.cs" />
-    <Compile Include="Migrations\201710170502053_SupplierCreate.Designer.cs">
-      <DependentUpon>201710170502053_SupplierCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710170527281_SupplierLedgerCreate.cs" />
-    <Compile Include="Migrations\201710170527281_SupplierLedgerCreate.Designer.cs">
-      <DependentUpon>201710170527281_SupplierLedgerCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710190709031_PurchaseCreate.cs" />
-    <Compile Include="Migrations\201710190709031_PurchaseCreate.Designer.cs">
-      <DependentUpon>201710190709031_PurchaseCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.cs" />
+    <Compile Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.Designer.cs">
+      <DependentUpon>201711260717117_addCategoryMainToPurchaseTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -747,50 +691,8 @@
     <Content Include="Views\Purchase\PUrchaseReturn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709110737238_MainCategoryCreate.resx">
-      <DependentUpon>201709110737238_MainCategoryCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709120532310_MainCategoryUpdate.resx">
-      <DependentUpon>201709120532310_MainCategoryUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709131029392_CategoryCreate.resx">
-      <DependentUpon>201709131029392_CategoryCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709131042449_SubCategoryCreate.resx">
-      <DependentUpon>201709131042449_SubCategoryCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709240623003_productDetailsCreate.resx">
-      <DependentUpon>201709240623003_productDetailsCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709280647590_GroupCreate.resx">
-      <DependentUpon>201709280647590_GroupCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709280702214_CompanyCreate.resx">
-      <DependentUpon>201709280702214_CompanyCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710020446162_TarminalInformationCreate.resx">
-      <DependentUpon>201710020446162_TarminalInformationCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710080639555_CustomerCreate.resx">
-      <DependentUpon>201710080639555_CustomerCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710080643579_CustomerLedgerCreate.resx">
-      <DependentUpon>201710080643579_CustomerLedgerCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710080645506_SaleCreate.resx">
-      <DependentUpon>201710080645506_SaleCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710160945361_SupplierGroupAndCompanyCreate.resx">
-      <DependentUpon>201710160945361_SupplierGroupAndCompanyCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710170502053_SupplierCreate.resx">
-      <DependentUpon>201710170502053_SupplierCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710170527281_SupplierLedgerCreate.resx">
-      <DependentUpon>201710170527281_SupplierLedgerCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710190709031_PurchaseCreate.resx">
-      <DependentUpon>201710190709031_PurchaseCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
+      <DependentUpon>201711260717117_addCategoryMainToPurchaseTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\CristalReportSalesInvoiceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

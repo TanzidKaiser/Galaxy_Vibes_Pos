@@ -27,7 +27,7 @@ namespace GalaxyVibesPos.Models
         public Nullable<double> TotalAmount { get; set; }
         
         [ForeignKey("CompanyID")]
-        public virtual Company Company { get; set; }
+        public virtual SupplierCompany Company { get; set; }
         [ForeignKey("SupplierID")]
         public virtual Supplier Supplier { get; set; }
         [ForeignKey("PurchaseProductID")]

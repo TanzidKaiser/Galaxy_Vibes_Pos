@@ -704,7 +704,7 @@
                                 data: JSON.stringify(List),
                                 contentType: 'application/json',
                                 success: function () {
-                                    window.location.href = "/Purchase/PurchaseAdd";
+                                    //window.location.href = "/Purchase/PurchaseAdd";
                                 },
                             });
                         },
@@ -714,7 +714,7 @@
 
                     alert("Please Add Minimum One Item");
                 };
-
+                window.location.href = "/Purchase/PurchaseAdd";
             });
         })
     </script>

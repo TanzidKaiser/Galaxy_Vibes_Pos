@@ -16,6 +16,7 @@ namespace GalaxyVibesPos.Models
         public string CompanyName { get; set; }
         [ForeignKey("GroupID")]
         public virtual SupplierGroup SupplierGroup { get; set; }
+        public virtual List<Purchase> PurchaseList { get; set; }
         //public virtual List<Sale> SaleList { get; set; }
         //public virtual List<Customer> CustomerList { get; set; }
     }

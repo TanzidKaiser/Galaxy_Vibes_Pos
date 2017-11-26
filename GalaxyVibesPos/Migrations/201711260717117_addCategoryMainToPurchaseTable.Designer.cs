@@ -7,13 +7,13 @@ namespace GalaxyVibesPos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class TarminalInformationCreate : IMigrationMetadata
+    public sealed partial class addCategoryMainToPurchaseTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TarminalInformationCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addCategoryMainToPurchaseTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710020446162_TarminalInformationCreate"; }
+            get { return "201711260717117_addCategoryMainToPurchaseTable"; }
         }
         
         string IMigrationMetadata.Source

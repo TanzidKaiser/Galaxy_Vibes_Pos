@@ -8,6 +8,7 @@ using GalaxyVibesPos.Models.Temp_Class;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace GalaxyVibesPos.Controllers
 {
@@ -40,6 +41,8 @@ namespace GalaxyVibesPos.Controllers
         {
 
 
+
+
             Purchase aPurchaserForLedger = new Purchase();
 
             foreach (var item in List)
@@ -65,13 +68,18 @@ namespace GalaxyVibesPos.Controllers
                 aPurchaserForLedger.PurchaseDate = item.PurchaseDate;
 
                 //Stoke increment function
+                db.SaveChanges();
 
                 StockIncrement(item.PurchaseProductID, item.PurchaseQuantity);
 
-                db.SaveChanges();
+
+
 
 
             }
+
+
+
 
             // Supplier ledger create function
 
@@ -176,10 +184,10 @@ namespace GalaxyVibesPos.Controllers
 
 
             var totalDebit = db.SupplierLedger.Where(c => c.SupplierID == supplierID)
-                .GroupBy(c => c.SupplierID).Select(g => new { dabit = g.Sum(c => c.Debit) }).First();
+                .GroupBy(c => c.SupplierID).Select(g => new { dabit = g.Sum(c => c.Debit) }).FirstOrDefault();
 
             var totalCredit = db.SupplierLedger.Where(c => c.SupplierID == supplierID)
-                .GroupBy(c => c.SupplierID).Select(g => new { credit = g.Sum(c => c.Credit) }).First();
+                .GroupBy(c => c.SupplierID).Select(g => new { credit = g.Sum(c => c.Credit) }).FirstOrDefault();
 
             double? previousDue = (totalCredit.credit + totalAmountPurchase) - totalDebit.dabit;
 
@@ -242,7 +250,7 @@ namespace GalaxyVibesPos.Controllers
         {
             return View();
         }
-       
+
         [HttpPost]
         public ActionResult GetPurchaseListbyInvoiceNo(string Data)
         {
@@ -261,12 +269,12 @@ namespace GalaxyVibesPos.Controllers
                     Total = (double?)0
                 }
             }.Where(e => false).ToList();
-                         
+
             foreach (var item in purchaseList)
             {
                 var productName = db.productDetails.First(p => p.ProductDetailsID == item.PurchaseProductID).ProductName;
 
-                var aPurchase = new 
+                var aPurchase = new
                 {
                     Code = item.PurchaseID,
                     ID = item.PurchaseProductID,
@@ -279,8 +287,24 @@ namespace GalaxyVibesPos.Controllers
                 //var List = new[] { aPurchase };
                 _List.Add(aPurchase);
             }
-            
+
             return Json(_List, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDataForPurchaseReturn(int PurchaseId)
+        {
+            var aPurchase = db.Purchase.Where(p => p.PurchaseID == PurchaseId).FirstOrDefault();
+            string productName = db.productDetails.Where(x => x.ProductDetailsID == aPurchase.PurchaseProductID).Select(p => p.ProductName).FirstOrDefault();
+
+            var aPurchaseReturn = new
+            {
+                purchaseNo = aPurchase.PurchaseNo,
+                productName = productName,
+                productPrice = aPurchase.PurchaseProductPrice,
+                productQty = aPurchase.PurchaseQuantity
+            };
+
+            return Json(aPurchaseReturn, JsonRequestBehavior.AllowGet);
         }
 
 

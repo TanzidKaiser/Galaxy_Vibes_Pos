@@ -91,6 +91,7 @@
                                                 <th class="head1 right">Price</th>
                                                 <th class="head0 right">Quantity</th>
                                                 <th class="head0 right">Total</th>
+                                                <th></th>
 
 
                                             </tr>
@@ -246,7 +247,7 @@
 
                     success: function (result) {
 
-                       
+
                         for(i=0;i<result.length;i++)
                         {
                             tr = tr + "<tr>";
@@ -256,8 +257,10 @@
                             tr = tr + "<td>" + result[i].Price + "</td>";
                             tr = tr + "<td>" + result[i].Quantity + "</td>";
                             tr = tr + "<td>" + result[i].Total + "</td>";
+       
+                            tr = tr + "<td><button type=button class='btn btn-success' onclick=edit("+result[i].Code,this+")>Edit</button></td>";
                             tr = tr + "</tr>";
-                            
+
                         }
 
                         $(".table").append(tr);
@@ -267,7 +270,29 @@
 
                 });
             });
-
+            
         </script>
 
     }
+    <script type="text/javascript">
+        function edit(Code, num) {
+
+            $.ajax({
+
+                url: '/Purchase/GetDataForPurchaseReturn',
+                data: { PurchaseId: Code },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#Code").val(response.purchaseNo);
+                    $("#ProductName").val(response.productName);
+                    $("#ProductPrice").val(response.productPrice);
+                    $("#ProductQty").val(response.productQty);
+                                      
+                },
+
+            });
+
+        }
+    </script>

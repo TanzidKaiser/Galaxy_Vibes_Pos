@@ -75,7 +75,7 @@ namespace GalaxyVibesPos.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(category);
         }
 
@@ -173,12 +173,12 @@ namespace GalaxyVibesPos.Controllers
             }
             return View(productDetails);
         }
-       
+
         //For Item Setting
 
         public ActionResult ItemSettings()
         {
-            
+
             var mainCategories = db.CategoryMain.ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem { Text = "Select Main Category", Value = "0" });
@@ -189,7 +189,7 @@ namespace GalaxyVibesPos.Controllers
             }
 
             ViewBag.MainCategoryList = list;
-          
+
             ViewBag.ProductUnit = GetUnit();
 
             return View();
@@ -372,12 +372,23 @@ namespace GalaxyVibesPos.Controllers
 
         public string getProductCode()
         {
+            string code = null;
+            var maxID = db.productDetails.OrderByDescending(x => x.ProductDetailsID).FirstOrDefault();
 
-            ProductDetails getLastProduct = db.productDetails.SqlQuery("SELECT TOP 1 * FROM ProductDetails ORDER BY ProductDetailsID DESC").First();
+            if(maxID != null)
+            {
+                
+                code = "P00" + Convert.ToString(maxID.ProductDetailsID + 1); 
+            }
+            else
+            {
 
-            string code = "P00" + Convert.ToString(getLastProduct.ProductDetailsID + 1);
+                code = "P001";
 
+            }
+          
             return code;
+
         }
 
         // Save Product Details
@@ -386,32 +397,32 @@ namespace GalaxyVibesPos.Controllers
         {
             ProductDetails productDetail = new ProductDetails();
             string Msg = null;
-           
+
             var product = db.productDetails.Where(c => c.SubCategoryID == model.SubCategoryID && c.CategoryID == model.CategoryID && c.ProductDetailsID == model.ProductDetailsID).First();
 
-           
 
-                if (product != null)
-                {
-                    productDetail = db.productDetails.SingleOrDefault(x => x.ProductDetailsID == product.ProductDetailsID);
-                    productDetail.MainCategoryID = model.MainCategoryID;
-                    productDetail.CategoryID = model.CategoryID;
-                    productDetail.SubCategoryID = model.SubCategoryID;
 
-                    productDetail.Stoke = 0;
-                     
-                    productDetail.PurchasePrice = model.PurchasePrice;
-                    productDetail.SalePrice = model.SalePrice;
-                   
-                    productDetail.Description = model.Description;
-                    productDetail.UnitID = model.UnitID;
-                    productDetail.MinimumProductQuantity = model.MinimumProductQuantity;
-                    
-                    db.SaveChanges();
-                    Msg = "Product Details update Successfully";
+            if (product != null)
+            {
+                productDetail = db.productDetails.SingleOrDefault(x => x.ProductDetailsID == product.ProductDetailsID);
+                productDetail.MainCategoryID = model.MainCategoryID;
+                productDetail.CategoryID = model.CategoryID;
+                productDetail.SubCategoryID = model.SubCategoryID;
 
-                }
-            
+                productDetail.Stoke = 0;
+
+                productDetail.PurchasePrice = model.PurchasePrice;
+                productDetail.SalePrice = model.SalePrice;
+
+                productDetail.Description = model.Description;
+                productDetail.UnitID = model.UnitID;
+                productDetail.MinimumProductQuantity = model.MinimumProductQuantity;
+
+                db.SaveChanges();
+                Msg = "Product Details update Successfully";
+
+            }
+
 
             return Json(Msg, JsonRequestBehavior.AllowGet);
 
@@ -423,7 +434,7 @@ namespace GalaxyVibesPos.Controllers
         {
             ProductDetails productDetail = new ProductDetails();
             string Msg = null;
-            
+
             if (ModelState.IsValid)
             {
 
@@ -437,7 +448,7 @@ namespace GalaxyVibesPos.Controllers
                 productDetail.SalePrice = model.SalePrice;
                 //productDetail.Stoke = model.Stoke;
                 productDetail.Description = model.Description;
-               // productDetail.UnitID = model.UnitID;
+                // productDetail.UnitID = model.UnitID;
                 productDetail.MinimumProductQuantity = model.MinimumProductQuantity;
                 //productDetail.WarehouseID = model.WarehouseID;
                 //productDetail.RackID = model.RackID;
@@ -454,7 +465,7 @@ namespace GalaxyVibesPos.Controllers
 
         }
 
-      
+
         public JsonResult GetCategoryByMainCategory(int MainCategoryID)
         {
             var categories = db.Category.Where(m => m.MainCategoryID == MainCategoryID).ToList();
@@ -504,7 +515,7 @@ namespace GalaxyVibesPos.Controllers
                 new ProductUnit{UnitID = 5, UnitSize = "Carton(48)"},
                 new ProductUnit{UnitID = 6, UnitSize = "Carton(601)"},
                 new ProductUnit{UnitID = 7, UnitSize = "Carton(72)"}
-                
+
             };
             return productUnit;
         }
@@ -545,6 +556,6 @@ namespace GalaxyVibesPos.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
-        
+
     }
 }

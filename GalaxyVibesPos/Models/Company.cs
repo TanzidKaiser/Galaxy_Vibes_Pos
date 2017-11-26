@@ -18,6 +18,6 @@ namespace GalaxyVibesPos.Models
         public virtual Group Group { get; set; }
         public virtual List<Sale> SaleList { get; set; }
         public virtual List<Customer> CustomerList { get; set; }
-        public virtual List<Purchase> PurchaseList { get; set; }
+       
     }
 }
