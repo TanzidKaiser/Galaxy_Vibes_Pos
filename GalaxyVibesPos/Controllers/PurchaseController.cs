@@ -290,23 +290,82 @@ namespace GalaxyVibesPos.Controllers
 
             return Json(_List, JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult GetDataForPurchaseReturn(int PurchaseId)
+        [HttpPost]
+        public ActionResult PUrchaseReturn(Purchase purchase)
         {
-            var aPurchase = db.Purchase.Where(p => p.PurchaseID == PurchaseId).FirstOrDefault();
-            string productName = db.productDetails.Where(x => x.ProductDetailsID == aPurchase.PurchaseProductID).Select(p => p.ProductName).FirstOrDefault();
+            // ---  Product Return on Same inventory ------
 
-            var aPurchaseReturn = new
-            {
-                purchaseNo = aPurchase.PurchaseNo,
-                productName = productName,
-                productPrice = aPurchase.PurchaseProductPrice,
-                productQty = aPurchase.PurchaseQuantity
-            };
+            productReturn(purchase);
 
-            return Json(aPurchaseReturn, JsonRequestBehavior.AllowGet);
+            //-- Stoke Update on Return Purchase Qty
+
+            StokeUpdate(purchase);
+
+            LedgerUpdate(purchase);
+
+            return View();
         }
 
+        private void LedgerUpdate(Purchase purchase)
+        {
+            var aPurchase = db.Purchase.Where(p => p.PurchaseID == purchase.PurchaseProductID).FirstOrDefault();
 
+            var aSupplierLedger = db.SupplierLedger.SingleOrDefault(p => p.InvoiceNo == aPurchase.PurchaseSupplierInvoiceNo);
+
+            aSupplierLedger.Credit = aPurchase.PurchaseTotal;
+
+            db.SaveChanges();
+
+            //------ Supplier update due Calculate
+
+            var totalDebit = db.SupplierLedger.Where(c => c.SupplierID == aSupplierLedger.SupplierID)
+               .GroupBy(c => c.SupplierID).Select(g => new { dabit = g.Sum(c => c.Debit) }).FirstOrDefault();
+
+            var totalCredit = db.SupplierLedger.Where(c => c.SupplierID == aSupplierLedger.SupplierID)
+                .GroupBy(c => c.SupplierID).Select(g => new { credit = g.Sum(c => c.Credit) }).FirstOrDefault();
+
+            double? previousDue = totalCredit.credit - totalDebit.dabit;
+
+            var aSupplier = db.Supplier.SingleOrDefault(p => p.SupplierID == aSupplierLedger.SupplierID);
+
+            aSupplier.SupplierPreviousDue = previousDue;
+
+            if (previousDue !=0 )
+            {
+                aSupplierLedger.IsPreviousDue = 1;
+            }
+            else
+            {
+                aSupplierLedger.IsPreviousDue = 0;
+            }
+
+            
+            db.SaveChanges();
+
+
+
+        }
+      
+        private void StokeUpdate(Purchase purchase)
+        {
+            var aProduct = db.productDetails.SingleOrDefault(p => p.ProductDetailsID == purchase.PurchaseProductID);
+            aProduct.Stoke = aProduct.Stoke - purchase.PurchaseReturnQty;
+            db.SaveChanges();
+        }
+
+        private void productReturn(Purchase purchase)
+        {
+
+            var aPurchase = db.Purchase.SingleOrDefault(p => p.PurchaseID == purchase.PurchaseProductID);
+
+            double? _CurrentQty = aPurchase.PurchaseQuantity - purchase.PurchaseReturnQty;
+            double? _CurrentPurchaseTotal = purchase.PurchaseProductPrice * _CurrentQty;
+
+            aPurchase.PurchaseQuantity = _CurrentQty;
+            aPurchase.PurchaseTotal = _CurrentPurchaseTotal;
+
+            db.SaveChanges();
+
+        }
     }
 }

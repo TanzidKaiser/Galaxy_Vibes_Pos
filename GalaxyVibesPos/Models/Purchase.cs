@@ -36,6 +36,9 @@ namespace GalaxyVibesPos.Models
         // for invoive 
         [NotMapped]
         public int Tquantity { get; set; }
-
+        [NotMapped]
+        public string PurchaseName { get; set; }
+        [NotMapped]
+        public int PurchaseReturnQty { get; set; }
     }
 }
