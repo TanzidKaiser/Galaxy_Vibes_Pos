@@ -74,48 +74,47 @@
                     </div>
                     <div class="widget-content nopadding">
 
-                        <input data-val="true" id="PurchaseProductID" name="PurchaseProductID" type="hidden">
-
-                        @using (Html.BeginForm())
-                        {
-
-                            @*<fieldset id="CustomerSubmitForm">*@
-                            <div class="row-fluid">
-                                <div class="span12">
-                                    <table class="table table-bordered table-invoice-full" id="Table">
-                                        <thead>
-                                            <tr>
-                                                <th class="head0">Code</th>
-                                                <th class="head1">ID</th>
-                                                <th class="head0 right">Name</th>
-                                                <th class="head1 right">Price</th>
-                                                <th class="head0 right">Quantity</th>
-                                                <th class="head0 right">Total</th>
-                                                <th></th>
+                        
 
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr></tr>
-                                        </tbody>
-                                    </table>
+
+                        @*<fieldset id="CustomerSubmitForm">*@
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <table class="table table-bordered table-invoice-full" id="Table">
+                                    <thead>
+                                        <tr>
+                                            <th class="head0">Code</th>
+                                            <th class="head1">ID</th>
+                                            <th class="head0 right">Name</th>
+                                            <th class="head1 right">Price</th>
+                                            <th class="head0 right">Quantity</th>
+                                            <th class="head0 right">Total</th>
+                                            <th></th>
 
 
-                                </div>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                    </tbody>
+                                </table>
+
+
                             </div>
-                            @*</fieldset>*@
-                            <hr />
-                            <div class="row-fluid">
-                                <div class="span4">
+                        </div>
+                        @*</fieldset>*@
+                        <hr />
+                        <div class="row-fluid">
+                            <div class="span4">
 
 
 
 
-                                </div>
                             </div>
+                        </div>
 
-                        }
+
 
 
                     </div>
@@ -136,16 +135,16 @@
                         @using (Html.BeginForm())
                         {
 
-                            <div class="widget-content">
+                            <div class="form-horizontal">
 
-                                <div class="row-fluid">
+                                <fieldset id="form">
                                     <div class="col-lg-4 col-md-4">
-
+                                        <input data-val="true" id="PurchaseProductID" name="PurchaseProductID" type="hidden">
                                         <div class="control-group">
 
                                             <label class="control-label span12" id="levelWidth">Code</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="Code" name="PurchaseProductID"  class="span12" disabled />
+                                                <input type="text" id="Code" name="PurchaseID" class="span12" />
 
                                             </div>
 
@@ -154,7 +153,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Name</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductName" name="PurchaseName" class="span12" disabled />
+                                                <input type="text" id="ProductName" name="PurchaseName" class="span12" />
 
                                             </div>
 
@@ -164,7 +163,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Price</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductPrice" name="PurchaseProductPrice" class="span12" disabled />
+                                                <input type="text" id="ProductPrice" name="PurchaseProductPrice" class="span12" />
 
                                             </div>
 
@@ -182,20 +181,35 @@
                                     </div>
 
                                     <div class="form-control">
-                                        <button type="submit" value="Return" id="ReturnBtn" class="btn btn-success" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Return</button>
+                                        <button type="submit" id="ReturnBtn" class="btn btn-success" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Return</button>
                                     </div>
 
                                     <hr />
-
-                                </div>
-
+                                </fieldset>
                             </div>
                         }
                     </div>
+                    @if (ViewBag.Msg == 1)
+                    {
+                        <div class="alert alert-success alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Success!</h4>
+                            <h5>Save Success</h5>
+                        </div>
+                    }
+                    @if (ViewBag.Msg == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Success!</h4>
+                            <h5> Some Exception Here, Please try again ! </h5>
+                        </div>
+                    }
 
                 </div>
 
             </div>
+
         </div>
     </div>
     <div class="container-fluid">
@@ -289,6 +303,10 @@
                         if (i == 0) {
                             $("#Code").val(List[i]);
                         }
+                        if (i == 1)
+                        {
+                            $("#PurchaseProductID").val(List[i]);
+                        }
                         if (i == 2) {
                             $("#ProductName").val(List[i]);
                         }
@@ -300,11 +318,17 @@
 
             })
         </script>
-        <script>
+        <script type="text/javascript">
+
             $(document).ready(function () {
 
-                $("#")
-            })
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                        $(this).remove();
+                    });
+                }, 3000);
+
+            });
         </script>
 
     }

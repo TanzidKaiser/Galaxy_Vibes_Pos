@@ -294,69 +294,79 @@ namespace GalaxyVibesPos.Controllers
         public ActionResult PUrchaseReturn(Purchase purchase)
         {
             // ---  Product Return on Same inventory ------
-
+            int i = 0;
             productReturn(purchase);
-
-            //-- Stoke Update on Return Purchase Qty
 
             StokeUpdate(purchase);
 
-            LedgerUpdate(purchase);
+            i = LedgerUpdate(purchase);
+            if (i == 1)
+            {
+                ViewBag.Msg = i;
+            }
+
+            ViewBag.Msg = i;
+            //-- Stoke Update on Return Purchase Qty
 
             return View();
         }
 
-        private void LedgerUpdate(Purchase purchase)
+        private int LedgerUpdate(Purchase purchase)
         {
-            var aPurchase = db.Purchase.Where(p => p.PurchaseID == purchase.PurchaseProductID).FirstOrDefault();
+            int i = 0;
+            var aPurchase = db.Purchase.Where(p => p.PurchaseID == purchase.PurchaseID).FirstOrDefault();
 
             var aSupplierLedger = db.SupplierLedger.SingleOrDefault(p => p.InvoiceNo == aPurchase.PurchaseSupplierInvoiceNo);
 
             aSupplierLedger.Credit = aPurchase.PurchaseTotal;
 
-            db.SaveChanges();
+            i = db.SaveChanges();
 
-            //------ Supplier update due Calculate
-
-            var totalDebit = db.SupplierLedger.Where(c => c.SupplierID == aSupplierLedger.SupplierID)
-               .GroupBy(c => c.SupplierID).Select(g => new { dabit = g.Sum(c => c.Debit) }).FirstOrDefault();
-
-            var totalCredit = db.SupplierLedger.Where(c => c.SupplierID == aSupplierLedger.SupplierID)
-                .GroupBy(c => c.SupplierID).Select(g => new { credit = g.Sum(c => c.Credit) }).FirstOrDefault();
-
-            double? previousDue = totalCredit.credit - totalDebit.dabit;
-
-            var aSupplier = db.Supplier.SingleOrDefault(p => p.SupplierID == aSupplierLedger.SupplierID);
-
-            aSupplier.SupplierPreviousDue = previousDue;
-
-            if (previousDue !=0 )
+            if (i != 0)
             {
-                aSupplierLedger.IsPreviousDue = 1;
-            }
-            else
-            {
-                aSupplierLedger.IsPreviousDue = 0;
-            }
 
+                //------ Supplier update due Calculate
+
+                var totalDebit = db.SupplierLedger.Where(c => c.SupplierID == aSupplierLedger.SupplierID)
+                   .GroupBy(c => c.SupplierID).Select(g => new { dabit = g.Sum(c => c.Debit) }).FirstOrDefault();
+
+                var totalCredit = db.SupplierLedger.Where(c => c.SupplierID == aSupplierLedger.SupplierID)
+                    .GroupBy(c => c.SupplierID).Select(g => new { credit = g.Sum(c => c.Credit) }).FirstOrDefault();
+
+                double? previousDue = totalCredit.credit - totalDebit.dabit;
+
+                var aSupplier = db.Supplier.SingleOrDefault(p => p.SupplierID == aSupplierLedger.SupplierID);
+
+                aSupplier.SupplierPreviousDue = previousDue;
+
+                if (previousDue != 0)
+                {
+                    aSupplierLedger.IsPreviousDue = 1;
+                }
+                else
+                {
+                    aSupplierLedger.IsPreviousDue = 0;
+                }
+
+
+                i = db.SaveChanges();
+            }
             
-            db.SaveChanges();
-
-
+            return i;
 
         }
-      
+
         private void StokeUpdate(Purchase purchase)
         {
             var aProduct = db.productDetails.SingleOrDefault(p => p.ProductDetailsID == purchase.PurchaseProductID);
             aProduct.Stoke = aProduct.Stoke - purchase.PurchaseReturnQty;
-            db.SaveChanges();
+
         }
 
         private void productReturn(Purchase purchase)
         {
 
-            var aPurchase = db.Purchase.SingleOrDefault(p => p.PurchaseID == purchase.PurchaseProductID);
+            var aPurchase = db.Purchase.SingleOrDefault(p => p.PurchaseID == purchase.PurchaseID);
 
             double? _CurrentQty = aPurchase.PurchaseQuantity - purchase.PurchaseReturnQty;
             double? _CurrentPurchaseTotal = purchase.PurchaseProductPrice * _CurrentQty;
@@ -364,7 +374,7 @@ namespace GalaxyVibesPos.Controllers
             aPurchase.PurchaseQuantity = _CurrentQty;
             aPurchase.PurchaseTotal = _CurrentPurchaseTotal;
 
-            db.SaveChanges();
+
 
         }
     }
