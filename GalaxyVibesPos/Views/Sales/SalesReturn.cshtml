@@ -1,8 +1,7 @@
-﻿@model IEnumerable<GalaxyVibesPos.Models.Purchase>
+﻿
 @{
-    ViewBag.Title = "PUrchaseReturn";
+    ViewBag.Title = "SalesReturn";
     Layout = "~/Views/Shared/_mytemplate.cshtml";
-    //var list = ViewBag.purchaseList;
 }
 
 <style>
@@ -84,12 +83,12 @@
                                 <table class="table table-bordered table-invoice-full" id="Table">
                                     <thead>
                                         <tr>
-                                            <th class="head0">Code</th>
-                                            <th class="head1">ID</th>
+                                            <th class="head0">Sales ID</th>
+                                            <th class="head1">Product ID</th>
                                             <th class="head0 right">Name</th>
                                             <th class="head1 right">Price</th>
                                             <th class="head0 right">Quantity</th>
-                                            <th class="head0 right">Total</th>
+                                            <th class="head0 right">Discount</th>
                                             <th></th>
 
 
@@ -142,9 +141,9 @@
                                         <input data-val="true" id="PurchaseProductID" name="PurchaseProductID" type="hidden">
                                         <div class="control-group">
 
-                                            <label class="control-label span12" id="levelWidth">Code</label>
+                                            <label class="control-label span12" id="levelWidth">Product ID</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="Code" name="PurchaseID" class="span12" />
+                                                <input type="text" id="Code" name="PurchaseID" class="span10" />
 
                                             </div>
 
@@ -153,7 +152,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Name</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductName" name="PurchaseName" class="span12" />
+                                                <input type="text" id="ProductName" name="PurchaseName" class="span10" />
 
                                             </div>
 
@@ -163,7 +162,25 @@
 
                                             <label class="control-label span12" id="levelWidth">Price</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductPrice" name="PurchaseProductPrice" class="span12" />
+                                                <input type="text" id="ProductPrice" name="PurchaseProductPrice" class="span10" />
+
+                                            </div>
+
+                                        </div>
+                                        <div class="control-group">
+
+                                            <label class="control-label span12" id="levelWidth">Sold Quantity</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
+
+                                            </div>
+
+                                        </div>
+                                        <div class="control-group">
+
+                                            <label class="control-label span12" id="levelWidth">Discount</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
 
                                             </div>
 
@@ -172,7 +189,25 @@
 
                                             <label class="control-label span12" id="levelWidth">Return Quantity</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span12" />
+                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
+
+                                            </div>
+
+                                        </div>
+                                        <div class="control-group">
+
+                                            <label class="control-label span12" id="levelWidth">Adjusment</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
+
+                                            </div>
+
+                                        </div>
+                                        <div class="control-group">
+
+                                            <label class="control-label span12" id="levelWidth">Net Return</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
 
                                             </div>
 
@@ -181,7 +216,10 @@
                                     </div>
 
                                     <div class="form-control">
-                                        <button type="submit" id="ReturnBtn" class="btn btn-success" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Return</button>
+                                        <button type="submit" id="ReturnBtn" class="btn btn-info span3" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Return</button>
+                                    </div>
+                                    <div class="form-control">
+                                        <button type="button" id="Clear" class="btn" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Clear</button>
                                     </div>
 
                                     <hr />
@@ -221,11 +259,11 @@
                         <div class="widget-content">
 
                             <div class="row-fluid">
-                                <div class="span7">
+                                <div class="span6">
 
                                     <div class="control-group">
 
-                                        <label class="control-label span6" id="levelWidth">Invoice No :</label>
+                                        <label class="control-label span12" id="levelWidth">Invoice No :</label>
                                         <div class="controls" id="inputMargin">
                                             <input type="text" class="span6" id="InvoiceNo" />
 
@@ -234,6 +272,37 @@
                                     </div>
                                     <div class="form-control">
                                         <button type="button" id="SearchBtn" class="btn btn-success span4" style="margin-left:0px; margin-top:7px; width:120px; height:35px;font-size:25px; font-weight:bold;">Search</button>
+                                    </div>
+
+                                </div>
+                                <div class="span6">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Customer Name:</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="InvoiceNo" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Group Name:</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="InvoiceNo" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span12" id="levelWidth">Address:</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="InvoiceNo" />
+
+                                        </div>
+
                                     </div>
 
                                 </div>
@@ -258,7 +327,7 @@
             var invoice = $("#InvoiceNo").val();
             $.ajax({
                 type: "Post",
-                url: "/Purchase/GetPurchaseListbyInvoiceNo",
+                url: "/Sale/GetSaleListbyInvoiceNo",
                 dataType: 'json',
                 data: { Data: invoice },
 
@@ -288,47 +357,4 @@
         });
 
     </script>
-
-    <script>
-        $(document).ready(function () {
-
-            var List = [];
-            $(document).on('click', '#editBtn', function (e) {
-                List = [];
-                $(this).parent().siblings('td').each(function () {
-
-                    List.push($(this).text());
-                })
-
-                for (i = 0; i < List.length; i++) {
-                    if (i == 0) {
-                        $("#Code").val(List[i]);
-                    }
-                    if (i == 1) {
-                        $("#PurchaseProductID").val(List[i]);
-                    }
-                    if (i == 2) {
-                        $("#ProductName").val(List[i]);
-                    }
-                    if (i == 3) {
-                        $("#ProductPrice").val(List[i]);
-                    }
-                };
-            });
-
-        })
-    </script>
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            window.setTimeout(function () {
-                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
-                    $(this).remove();
-                });
-            }, 3000);
-
-        });
-    </script>
-
 }

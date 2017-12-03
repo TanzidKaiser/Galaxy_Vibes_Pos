@@ -291,6 +291,37 @@ namespace GalaxyVibesPos.Controllers
 
         }
 
+        // Sales Return 
+
+        public ActionResult SalesReturn()
+        {
+            return View();
+        }
+        public JsonResult GetSaleListbyInvoiceNo(string Data)
+        {
+            var SaleList = db.Sale.Where(p => p.SalesNo == Data).ToList();
+            var List = new[]
+            {
+                new
+                {
+                    SalesID = (int)0,
+                    ProductID =(int)0,
+                    Name = string.Empty,
+                    Price = (double?)0,
+                    Quantity = (double?)0,
+                    Discount = (double?)0
+
+                }
+
+            }.Where(e => false).ToList();
+
+            foreach(var item in SaleList)
+            {
+                var 
+            }
+            return null;
+        }
+
 
 
 

@@ -689,6 +689,7 @@
     <Content Include="Views\Purchase\PurchaseAdd.cshtml" />
     <Content Include="Views\Sales\AddSales.cshtml" />
     <Content Include="Views\Purchase\PUrchaseReturn.cshtml" />
+    <Content Include="Views\Sales\SalesReturn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
