@@ -143,7 +143,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Product ID</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="Code" name="PurchaseID" class="span10" />
+                                                <input type="text" id="SalesProductID" name="SalesProductID" class="span10" />
 
                                             </div>
 
@@ -162,7 +162,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Price</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductPrice" name="PurchaseProductPrice" class="span10" />
+                                                <input type="text" id="SalesPurchasePrice" name="SalesPurchasePrice" class="span10" />
 
                                             </div>
 
@@ -171,7 +171,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Sold Quantity</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
+                                                <input type="text" id="SalesQuantity" name="SalesQuantity" class="span10" />
 
                                             </div>
 
@@ -180,7 +180,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Discount</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
+                                                <input type="text" id="SalesProductDiscount" name="SalesProductDiscount" class="span10" />
 
                                             </div>
 
@@ -219,7 +219,7 @@
                                         <button type="submit" id="ReturnBtn" class="btn btn-info span3" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Return</button>
                                     </div>
                                     <div class="form-control">
-                                        <button type="button" id="Clear" class="btn" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Clear</button>
+                                        <button type="button" id="Clear" class="btn" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold; color:olive">Clear</button>
                                     </div>
 
                                     <hr />
@@ -281,7 +281,7 @@
 
                                         <label class="control-label span12" id="levelWidth">Customer Name:</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="text" id="InvoiceNo" />
+                                            <input type="text" id="CustomerName" />
 
                                         </div>
 
@@ -290,7 +290,7 @@
 
                                         <label class="control-label span12" id="levelWidth">Group Name:</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="text" id="InvoiceNo" />
+                                            <input type="text" id="GroupName" />
 
                                         </div>
 
@@ -299,7 +299,7 @@
 
                                         <label class="control-label span12" id="levelWidth">Address:</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="text" id="InvoiceNo" />
+                                            <input type="text" id="Address" />
 
                                         </div>
 
@@ -315,11 +315,10 @@
     </div>
 </div>
 @section scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-
+    @*@Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    @*<script src="~/Scripts/jquery-3.2.1.min.js"></script>*@
     <script type="text/javascript">
-
         $("#SearchBtn").click(function () {
             var tr;
             var select = $("table tbody tr");
@@ -327,7 +326,7 @@
             var invoice = $("#InvoiceNo").val();
             $.ajax({
                 type: "Post",
-                url: "/Sale/GetSaleListbyInvoiceNo",
+                url: "/Sales/GetSaleListbyInvoiceNo",
                 dataType: 'json',
                 data: { Data: invoice },
 
@@ -336,12 +335,12 @@
 
                     for (i = 0; i < result.length; i++) {
                         tr = tr + "<tr>";
-                        tr = tr + "<td>" + result[i].Code + "</td>";
-                        tr = tr + "<td>" + result[i].ID + "</td>";
+                        tr = tr + "<td>" + result[i].SalesID + "</td>";
+                        tr = tr + "<td>" + result[i].ProductID + "</td>";
                         tr = tr + "<td>" + result[i].Name + "</td>";
                         tr = tr + "<td>" + result[i].Price + "</td>";
                         tr = tr + "<td>" + result[i].Quantity + "</td>";
-                        tr = tr + "<td>" + result[i].Total + "</td>";
+                        tr = tr + "<td>" + result[i].Discount + "</td>";
 
                         tr = tr + "<td>" + '<button type=button id=editBtn class=btn btn-info btn-lg ><i class="icon-edit"></i></button>' + "</td>";
                         tr = tr + "</tr>";
@@ -357,4 +356,66 @@
         });
 
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var List = [];
+            $(document).on('click', '#editBtn', function (e) {
+                $(this).parent().siblings('td').each(function () {
+                    List.push($(this).text());
+                })
+                for (i = 0; i < List.length; i++) {
+                    if (i == 0) {
+                        var saleID = List[i];
+                        $.ajax({
+
+                            type: "post",
+                            url: "/Sales/GetSalesCustomerInfo",
+                            dataType: 'json',
+                            data: { Data: saleID },
+                            success: function (result) {
+
+                                $("#CustomerName").val(result.CustomerName);
+                                $("#GroupName").val(result.GroupName);
+                                $("#Address").val(result.Address);
+                            },
+                        });
+                    }
+                    if (i == 1) {
+                        $("#SalesProductID").val(List[i]);
+                    }
+                    if (i == 2) {
+                        $("#ProductName").val(List[i]);
+                    }
+                    if (i == 3) {
+                        $("#SalesPurchasePrice").val(List[i]);
+                    }
+                    if (i == 4) {
+                        $("#SalesProductDiscount").val(List[i]);
+                    }
+                    if (i == 5) {
+                        $("#SalesQuantity").val(List[i]);
+                    }
+
+                };
+
+            });
+
+        })
+    </script>
+    <script>
+        $("#ReceiveAmount").bind('keyup keypress blur', function () {
+            var netAmount = TotalNetAmount();
+            var receiveAmount = $(this).val();
+            if (receiveAmount >= netAmount) {
+                $("#ReturnAmount").val(receiveAmount - netAmount);
+                $("#DueAmount").val('');
+            }
+            else {
+                $("#DueAmount").val(netAmount - receiveAmount);
+                $("#ReturnAmount").val('');
+            }
+        });
+    </script>
+}
 }

@@ -297,6 +297,7 @@ namespace GalaxyVibesPos.Controllers
         {
             return View();
         }
+        [HttpPost]
         public JsonResult GetSaleListbyInvoiceNo(string Data)
         {
             var SaleList = db.Sale.Where(p => p.SalesNo == Data).ToList();
@@ -305,7 +306,7 @@ namespace GalaxyVibesPos.Controllers
                 new
                 {
                     SalesID = (int)0,
-                    ProductID =(int)0,
+                    ProductID =(int?)0,
                     Name = string.Empty,
                     Price = (double?)0,
                     Quantity = (double?)0,
@@ -315,14 +316,37 @@ namespace GalaxyVibesPos.Controllers
 
             }.Where(e => false).ToList();
 
-            foreach(var item in SaleList)
+            foreach (var item in SaleList)
             {
-                var 
+                var productName = db.productDetails.First(p => p.ProductDetailsID == item.SalesProductID).ProductName;
+
+                var aSale = new
+                {
+                    SalesID = item.SalesID,
+                    ProductID = item.SalesProductID,
+                    Name = productName,
+                    Price = item.SalesVatTotal,
+                    Quantity = item.SalesQuantity,
+                    Discount = item.SalesQuantity
+                };
+
+                List.Add(aSale);
             }
-            return null;
+            return Json(List, JsonRequestBehavior.AllowGet);
         }
 
-
+        public JsonResult GetSalesCustomerInfo(string Data)
+        {
+            var id = Convert.ToInt32(Data);
+            var customerInfo = db.Customer.Where(p => p.CustomerID == id).FirstOrDefault();
+            var aCustomer = new
+            {
+                CustomerName = customerInfo.CustomerName,
+                GroupName = customerInfo.GroupName,
+                Address = customerInfo.Address
+            };
+            return Json(aCustomer, JsonRequestBehavior.AllowGet);
+        }
 
 
 

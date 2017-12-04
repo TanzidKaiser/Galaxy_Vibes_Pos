@@ -135,6 +135,6 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Newtonsoft.Json.xml
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Antlr3.Runtime.pdb
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.pdb
-E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.addCategoryMainToPurchaseTable.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csproj.GenerateResource.Cache
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache
