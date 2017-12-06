@@ -57,82 +57,83 @@
     }
 </style>
 <div id="content">
-    <div id="content-header">
-        <div id="breadcrumb">
-            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+    @using (Html.BeginForm())
+    {
+        <div id="content-header">
+            <div id="breadcrumb">
+                <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+            </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span7">
-                <div class="widget-box">
-                    <div class="widget-title">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span7">
+                    <div class="widget-box">
+                        <div class="widget-title">
 
-                        <span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>Product Sale</h5>
-                    </div>
-                    <div class="widget-content nopadding">
-
-
-
-
-
-                        @*<fieldset id="CustomerSubmitForm">*@
-                        <div class="row-fluid">
-                            <div class="span12">
-                                <table class="table table-bordered table-invoice-full" id="Table">
-                                    <thead>
-                                        <tr>
-                                            <th class="head0">Sales ID</th>
-                                            <th class="head1">Product ID</th>
-                                            <th class="head0 right">Name</th>
-                                            <th class="head1 right">Price</th>
-                                            <th class="head0 right">Quantity</th>
-                                            <th class="head0 right">Discount</th>
-                                            <th></th>
-
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr></tr>
-                                    </tbody>
-                                </table>
-
-
-                            </div>
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Product Sale</h5>
                         </div>
-                        @*</fieldset>*@
-                        <hr />
-                        <div class="row-fluid">
-                            <div class="span4">
+                        <div class="widget-content nopadding">
 
 
 
 
+
+                            @*<fieldset id="CustomerSubmitForm">*@
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-bordered table-invoice-full" id="Table">
+                                        <thead>
+                                            <tr>
+                                                <th class="head0">Sales ID</th>
+                                                <th class="head1">Product ID</th>
+                                                <th class="head0 right">Name</th>
+                                                <th class="head1 right">Price</th>
+                                                <th class="head0 right">Quantity</th>
+                                                <th class="head0 right">Discount</th>
+                                                <th></th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr></tr>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
                             </div>
+                            @*</fieldset>*@
+                            <hr />
+                            <div class="row-fluid">
+                                <div class="span4">
+
+
+
+
+                                </div>
+                            </div>
+
+
+
+
                         </div>
 
-
-
-
                     </div>
+
+                    @*kjljl*@
 
                 </div>
+                <div class="span4">
+                    <div class="widget-box">
+                        <div class="widget-title">
 
-                @*kjljl*@
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Sales Invoice</h5>
+                        </div>
+                        <div class="widget-content nopadding">
 
-            </div>
-            <div class="span4">
-                <div class="widget-box">
-                    <div class="widget-title">
-
-                        <span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>Sales Invoice</h5>
-                    </div>
-                    <div class="widget-content nopadding">
-                        @using (Html.BeginForm())
-                        {
 
                             <div class="form-horizontal">
 
@@ -152,7 +153,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Name</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductName" name="PurchaseName" class="span10" />
+                                                <input type="text" id="ProductName" class="span10" />
 
                                             </div>
 
@@ -178,18 +179,25 @@
                                         </div>
                                         <div class="control-group">
 
-                                            <label class="control-label span12" id="levelWidth">Discount</label>
+                                            <label class="control-label span3" id="levelWidth">Discount</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="SalesProductDiscount" name="SalesProductDiscount" class="span10" />
+                                                <input type="text" id="SalesProductDiscount" name="SalesProductDiscount" class="span5" />
 
                                             </div>
+                                        </div>
+                                        <div class="control-group">
 
+                                            <label class="control-label span3" id="levelWidth">Avg</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="AvgDiscount" name="AvgDiscount" class="span5" />
+
+                                            </div>
                                         </div>
                                         <div class="control-group">
 
                                             <label class="control-label span12" id="levelWidth">Return Quantity</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
+                                                <input type="text" id="PurchaseReturnQty" name="PurchaseReturnQty" class="span10" />
 
                                             </div>
 
@@ -198,7 +206,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Adjusment</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
+                                                <input type="text" id="Adjusment" class="span10" />
 
                                             </div>
 
@@ -207,7 +215,7 @@
 
                                             <label class="control-label span12" id="levelWidth">Net Return</label>
                                             <div class="controls" id="inputMargin">
-                                                <input type="text" id="ProductQty" name="PurchaseReturnQty" class="span10" />
+                                                <input type="text" id="ProductNetReturn" name="NetReturnPrice" class="span10" />
 
                                             </div>
 
@@ -219,105 +227,107 @@
                                         <button type="submit" id="ReturnBtn" class="btn btn-info span3" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold;">Return</button>
                                     </div>
                                     <div class="form-control">
-                                        <button type="button" id="Clear" class="btn" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold; color:olive">Clear</button>
+                                        <button type="button" id="ClearBtn" class="btn" style="margin:13px; width:120px; height:35px;font-size:25px; font-weight:bold; color:olive">Clear</button>
                                     </div>
 
                                     <hr />
                                 </fieldset>
                             </div>
+
+                        </div>
+                        @if (ViewBag.Msg == 1)
+                        {
+                            <div class="alert alert-success alert-block">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <h4 class="alert-heading">Success!</h4>
+                                <h5>Save Success</h5>
+                            </div>
                         }
+                        @if (ViewBag.Msg == 0)
+                        {
+                            <div class="alert alert-error alert-block">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <h4 class="alert-heading">Success!</h4>
+                                <h5> Some Exception Here, Please try again ! </h5>
+                            </div>
+                        }
+
                     </div>
-                    @if (ViewBag.Msg == 1)
-                    {
-                        <div class="alert alert-success alert-block">
-                            <a class="close" data-dismiss="alert" href="#">×</a>
-                            <h4 class="alert-heading">Success!</h4>
-                            <h5>Save Success</h5>
-                        </div>
-                    }
-                    @if (ViewBag.Msg == 0)
-                    {
-                        <div class="alert alert-error alert-block">
-                            <a class="close" data-dismiss="alert" href="#">×</a>
-                            <h4 class="alert-heading">Success!</h4>
-                            <h5> Some Exception Here, Please try again ! </h5>
-                        </div>
-                    }
 
                 </div>
 
             </div>
-
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span11">
-                <div class="widget-box">
-                    <div class="widget-content nopadding">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span11">
+                    <div class="widget-box">
+                        <div class="widget-content nopadding">
 
-                        <div class="widget-content">
+                            <div class="widget-content">
 
-                            <div class="row-fluid">
-                                <div class="span6">
+                                <div class="row-fluid">
+                                    <div class="span6">
 
-                                    <div class="control-group">
+                                        <div class="control-group">
 
-                                        <label class="control-label span12" id="levelWidth">Invoice No :</label>
-                                        <div class="controls" id="inputMargin">
-                                            <input type="text" class="span6" id="InvoiceNo" />
+                                            <label class="control-label span12" id="levelWidth">Invoice No :</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" class="span6" id="InvoiceNo" name="InvoiceNo" />
+
+                                            </div>
+
+                                        </div>
+                                        <div class="form-control">
+                                            <button type="button" id="SearchBtn" class="btn btn-success span4" style="margin-left:0px; margin-top:7px; width:120px; height:35px;font-size:25px; font-weight:bold;">Search</button>
+                                        </div>
+
+                                    </div>
+                                    <div class="span6">
+
+                                        <div class="control-group">
+
+                                            <label class="control-label span12" id="levelWidth">Customer Name:</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="CustomerName" />
+
+                                            </div>
+
+                                        </div>
+                                        <div class="control-group">
+
+                                            <label class="control-label span12" id="levelWidth">Group Name:</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="GroupName" />
+
+                                            </div>
+
+                                        </div>
+                                        <div class="control-group">
+
+                                            <label class="control-label span12" id="levelWidth">Address:</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="Address" />
+
+                                            </div>
 
                                         </div>
 
                                     </div>
-                                    <div class="form-control">
-                                        <button type="button" id="SearchBtn" class="btn btn-success span4" style="margin-left:0px; margin-top:7px; width:120px; height:35px;font-size:25px; font-weight:bold;">Search</button>
-                                    </div>
-
-                                </div>
-                                <div class="span6">
-
-                                    <div class="control-group">
-
-                                        <label class="control-label span12" id="levelWidth">Customer Name:</label>
-                                        <div class="controls" id="inputMargin">
-                                            <input type="text" id="CustomerName" />
-
-                                        </div>
-
-                                    </div>
-                                    <div class="control-group">
-
-                                        <label class="control-label span12" id="levelWidth">Group Name:</label>
-                                        <div class="controls" id="inputMargin">
-                                            <input type="text" id="GroupName" />
-
-                                        </div>
-
-                                    </div>
-                                    <div class="control-group">
-
-                                        <label class="control-label span12" id="levelWidth">Address:</label>
-                                        <div class="controls" id="inputMargin">
-                                            <input type="text" id="Address" />
-
-                                        </div>
-
-                                    </div>
-
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>
 @section scripts{
-    @*@Scripts.Render("~/bundles/jqueryval")
-        <script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
-    @*<script src="~/Scripts/jquery-3.2.1.min.js"></script>*@
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         $("#SearchBtn").click(function () {
             var tr;
@@ -392,30 +402,76 @@
                     }
                     if (i == 4) {
                         $("#SalesProductDiscount").val(List[i]);
+
                     }
                     if (i == 5) {
                         $("#SalesQuantity").val(List[i]);
                     }
 
                 };
-
+                var quentity = $("#SalesQuantity").val();
+                var discount = $("#SalesProductDiscount").val();
+                var avg = discount / quentity;
+                $("#AvgDiscount").val(avg);
             });
 
         })
     </script>
-    <script>
-        $("#ReceiveAmount").bind('keyup keypress blur', function () {
-            var netAmount = TotalNetAmount();
-            var receiveAmount = $(this).val();
-            if (receiveAmount >= netAmount) {
-                $("#ReturnAmount").val(receiveAmount - netAmount);
-                $("#DueAmount").val('');
-            }
-            else {
-                $("#DueAmount").val(netAmount - receiveAmount);
-                $("#ReturnAmount").val('');
-            }
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(document).on('click', '#ClearBtn', function (e) {
+
+                $("#SalesProductID").val('');
+                $("#ProductName").val('');
+                $("#SalesPurchasePrice").val('');
+                $("#SalesQuantity").val('');
+                $("#SalesProductDiscount").val('');
+                $("#AvgDiscount").val('');
+                $("#PurchaseReturnQty").val('');
+                $("#Adjusment").val('');
+                $("#ProductNetReturn").val('');
+
+            })
         });
     </script>
-}
+    <script>
+        $("#PurchaseReturnQty").bind('keyup keypress blur', function () {
+            var Price = $("#SalesPurchasePrice").val();
+            var quentity = $("#SalesQuantity").val();
+            var returnQuentity = $("#PurchaseReturnQty").val();
+            if (returnQuentity >= 0 && returnQuentity <= quentity) {
+
+                var netReturn = Price * returnQuentity;
+
+                $("#ProductNetReturn").val(netReturn);
+
+            }
+            else {
+                $("#ProductNetReturn").val('');
+            }
+        });
+
+    </script>
+    <script>
+        $("#Adjusment").bind('keyup keypress blur', function () {
+
+            var netPrice = $("#ProductNetReturn").val();
+            var adjustment = $("#Adjusment").val();
+
+            if (adjustment.length > 0) {
+
+                var netReturn = netPrice - adjustment;
+                $("#ProductNetReturn").val(netReturn);
+            }
+            else {
+                var Price = $("#SalesPurchasePrice").val();
+                var returnQuentity = $("#PurchaseReturnQty").val();
+                var Return = Price * returnQuentity;
+                $("#ProductNetReturn").val(Return);
+            }
+
+        });
+
+    </script>
 }

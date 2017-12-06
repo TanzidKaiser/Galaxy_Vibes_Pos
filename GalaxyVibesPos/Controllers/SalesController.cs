@@ -19,12 +19,12 @@ namespace GalaxyVibesPos.Controllers
 
 
             int? MaxId = db.Sale.Max(x => (int?)x.SalesID);
-            
+
             if (MaxId == null)
             {
-                
+
                 ViewBag.SalesNo = "010000" + "" + 1;
-            }           
+            }
             else
             {
                 var saleNoSelect = db.Sale.Where(x => x.SalesID == MaxId).Select(x => x.SalesNo).First();
@@ -58,7 +58,7 @@ namespace GalaxyVibesPos.Controllers
             var flag = 0;
             CustomerLedger aCustomerLedger = new CustomerLedger();
             aCustomerLedger.Debit = 0;
-            
+
             foreach (var item in List)
             {
                 Sale aSale = new Sale();
@@ -129,10 +129,10 @@ namespace GalaxyVibesPos.Controllers
                 }
                 aCustomerLedger.CustomerID = Convert.ToInt32(aSale.SalesCustomerID);
                 aCustomerLedger.ReceiveDate = item.SalesDate;
-                
+
                 db.Sale.Add(aSale);
-                 int i = db.SaveChanges();
-                if(i>0)
+                int i = db.SaveChanges();
+                if (i > 0)
                 {
                     flag = 1;
                 }
@@ -145,14 +145,14 @@ namespace GalaxyVibesPos.Controllers
             return Json(flag, JsonRequestBehavior.AllowGet);
         }
 
-      
+
 
         public virtual ActionResult ExportSaleInvoice(List<Sale> list)
         {
             ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Report/CristalReportSalesInvoiceReport.rpt")));
             List<SaleTemp> SaleList = new List<SaleTemp>();
-            foreach(var name in list)
+            foreach (var name in list)
             {
                 SaleTemp aSale = new SaleTemp();
                 aSale.SalesDate = name.SalesDate;
@@ -164,8 +164,8 @@ namespace GalaxyVibesPos.Controllers
                 aSale.ProductName = ProductName;
 
                 aSale.SalesQuantity = Convert.ToInt32(name.SalesQuantity);
-                aSale.SalesSalePrice = Convert.ToInt32(name.SalesSalePrice); 
-                                
+                aSale.SalesSalePrice = Convert.ToInt32(name.SalesSalePrice);
+
                 var total = name.SalesQuantity * name.SalesSalePrice;
                 aSale.Total = Convert.ToInt32(total);
 
@@ -181,7 +181,7 @@ namespace GalaxyVibesPos.Controllers
 
                 SaleList.Add(aSale);
 
-            }            
+            }
             rd.SetDataSource(SaleList);
             Response.Buffer = false;
             Response.ClearContent();
@@ -190,7 +190,7 @@ namespace GalaxyVibesPos.Controllers
             Stream str = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             str.Seek(0, SeekOrigin.Begin);
             return File(str, "application/pdf", "report.pdf");
-                    
+
         }
 
         private void CustomerLedgerCreate(CustomerLedger aCustomerLedger)
@@ -298,6 +298,62 @@ namespace GalaxyVibesPos.Controllers
             return View();
         }
         [HttpPost]
+        public ActionResult SalesReturn(string SalesProductID, string InvoiceNo, string PurchaseReturnQty, string NetReturnPrice, string AvgDiscount)
+        {
+            int? productID = Convert.ToInt32(SalesProductID);
+            double? returnQty = Convert.ToInt32(PurchaseReturnQty);
+            double? avgDiscount = Convert.ToInt32(AvgDiscount);
+            double? returnPrice = Convert.ToInt32(NetReturnPrice);
+
+            SaleUpdate(InvoiceNo, returnQty, returnPrice, avgDiscount);
+            StokeUpdate(productID, returnQty);
+            CustomerLedgerUpdate(InvoiceNo);
+            return View();
+        }
+
+        private void CustomerLedgerUpdate(string invoiceNo)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void StokeUpdate(int? productID, double? returnQty)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SaleUpdate(string invoiceNo, double? returnQty, double? returnPrice, double? avgDiscount)
+        {
+            var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo).FirstOrDefault();
+            if (aSale != null)
+            {
+                var sales = db.Sale.SingleOrDefault(p => p.SalesNo == invoiceNo);
+
+                var salesQty = aSale.SalesQuantity - returnQty;                
+                var SalesProductDiscount = aSale.SalesProductDiscount - (avgDiscount * returnQty);
+                var SalesTotal = (aSale.SalesSalePrice * salesQty)-SalesProductDiscount;
+                var SalesVatRate = ((5*SalesTotal)/100);
+                var SalesVatTotal = SalesVatRate + SalesTotal;
+
+                sales.SalesQuantity = salesQty;
+                sales.SalesProductDiscount = SalesProductDiscount;
+                sales.SalesTotal = SalesTotal;
+                sales.SalesVatRate = SalesVatRate;
+                sales.SalesVatTotal = SalesVatTotal;
+
+            }
+        }
+
+        //private void SaleUpdate(string invoiceNo, string purchaseReturnQty, string netReturnPrice, string AvgDiscount)
+        //{
+        //    var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo).FirstOrDefault();
+        //    if(aSale != null)
+        //    {
+        //        var salesQty = aSale.SalesQuantity -  Convert.ToInt32(purchaseReturnQty);
+        //        var discountTotal = AvgDiscount * purchaseReturnQty;
+        //    }
+        //}
+
+        [HttpPost]
         public JsonResult GetSaleListbyInvoiceNo(string Data)
         {
             var SaleList = db.Sale.Where(p => p.SalesNo == Data).ToList();
@@ -325,9 +381,9 @@ namespace GalaxyVibesPos.Controllers
                     SalesID = item.SalesID,
                     ProductID = item.SalesProductID,
                     Name = productName,
-                    Price = item.SalesVatTotal,
+                    Price = item.SalesSalePrice,
                     Quantity = item.SalesQuantity,
-                    Discount = item.SalesQuantity
+                    Discount = item.SalesProductDiscount
                 };
 
                 List.Add(aSale);
