@@ -235,19 +235,19 @@
                             </div>
 
                         </div>
-                        @if (ViewBag.Msg == 1)
+                        @if (ViewBag.Msg != 0 )
                         {
                             <div class="alert alert-success alert-block">
                                 <a class="close" data-dismiss="alert" href="#">×</a>
                                 <h4 class="alert-heading">Success!</h4>
-                                <h5>Save Success</h5>
+                                <h5>Success</h5>
                             </div>
                         }
                         @if (ViewBag.Msg == 0)
                         {
                             <div class="alert alert-error alert-block">
                                 <a class="close" data-dismiss="alert" href="#">×</a>
-                                <h4 class="alert-heading">Success!</h4>
+                                <h4 class="alert-heading">Error!</h4>
                                 <h5> Some Exception Here, Please try again ! </h5>
                             </div>
                         }
@@ -456,12 +456,16 @@
     <script>
         $("#Adjusment").bind('keyup keypress blur', function () {
 
-            var netPrice = $("#ProductNetReturn").val();
+           
             var adjustment = $("#Adjusment").val();
 
-            if (adjustment.length > 0) {
+            if (adjustment>0) {
+                //var netPrice = $("#ProductNetReturn").val();
+                var Price = $("#SalesPurchasePrice").val();
+                var returnQuentity = $("#PurchaseReturnQty").val();
+                var Return = Price * returnQuentity;
 
-                var netReturn = netPrice - adjustment;
+                var netReturn = Return - adjustment;
                 $("#ProductNetReturn").val(netReturn);
             }
             else {

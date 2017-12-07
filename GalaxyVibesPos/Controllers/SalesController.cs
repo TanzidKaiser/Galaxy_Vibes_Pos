@@ -300,25 +300,60 @@ namespace GalaxyVibesPos.Controllers
         [HttpPost]
         public ActionResult SalesReturn(string SalesProductID, string InvoiceNo, string PurchaseReturnQty, string NetReturnPrice, string AvgDiscount)
         {
+
             int? productID = Convert.ToInt32(SalesProductID);
             double? returnQty = Convert.ToInt32(PurchaseReturnQty);
             double? avgDiscount = Convert.ToInt32(AvgDiscount);
             double? returnPrice = Convert.ToInt32(NetReturnPrice);
 
             SaleUpdate(InvoiceNo, returnQty, returnPrice, avgDiscount);
-            StokeUpdate(productID, returnQty);
             CustomerLedgerUpdate(InvoiceNo);
+            int i = StokeUpdate(productID, returnQty);
+            ViewBag.Msg = i;
             return View();
         }
 
         private void CustomerLedgerUpdate(string invoiceNo)
         {
-            throw new NotImplementedException();
+            double? debit = 0;
+            double? credit = 0;
+
+            var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo).FirstOrDefault();
+
+            var customerInfo = db.CustomerLedger.Where(p => p.InvoiceNo == invoiceNo).Select(x => new { CustomerID = x.CustomerID, ID = x.ID, NetAmount = x.Credit }).FirstOrDefault();
+            var LedgerList = db.CustomerLedger.Where(p => p.CustomerID == customerInfo.CustomerID).ToList();
+
+
+
+            foreach (var a in LedgerList)
+            {
+
+
+                debit += a.Debit;
+                credit += a.Credit;
+
+            }
+
+            //debit = debit + aSale.SalesVatTotal;
+            //credit = credit + aSale.SalesReceivedAmount;
+
+            var previousDue = debit - credit;
+
+            var aLedger = db.CustomerLedger.SingleOrDefault(p => p.InvoiceNo == invoiceNo);
+            aLedger.Debit = aSale.SalesVatTotal;
+            aLedger.Credit = aSale.SalesReceivedAmount;
+
+            var aCustomer = db.Customer.SingleOrDefault(p => p.CustomerID == customerInfo.CustomerID);
+            aCustomer.PreviousDue = previousDue;
+
         }
 
-        private void StokeUpdate(int? productID, double? returnQty)
+        private int StokeUpdate(int? productID, double? returnQty)
         {
-            throw new NotImplementedException();
+            var aProduct = db.productDetails.SingleOrDefault(p => p.ProductDetailsID == productID);
+            aProduct.Stoke = aProduct.Stoke + returnQty;
+            int i = db.SaveChanges();
+            return i;
         }
 
         private void SaleUpdate(string invoiceNo, double? returnQty, double? returnPrice, double? avgDiscount)
@@ -326,32 +361,26 @@ namespace GalaxyVibesPos.Controllers
             var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo).FirstOrDefault();
             if (aSale != null)
             {
-                var sales = db.Sale.SingleOrDefault(p => p.SalesNo == invoiceNo);
 
-                var salesQty = aSale.SalesQuantity - returnQty;                
+                var SalesQty = aSale.SalesQuantity - returnQty;
                 var SalesProductDiscount = aSale.SalesProductDiscount - (avgDiscount * returnQty);
-                var SalesTotal = (aSale.SalesSalePrice * salesQty)-SalesProductDiscount;
-                var SalesVatRate = ((5*SalesTotal)/100);
+                var SalesTotal = (aSale.SalesSalePrice * SalesQty) - (avgDiscount * returnQty);
+                var SalesVatRate = ((5 * SalesTotal) / 100);
                 var SalesVatTotal = SalesVatRate + SalesTotal;
 
-                sales.SalesQuantity = salesQty;
+                var sales = db.Sale.SingleOrDefault(p => p.SalesNo == invoiceNo);
+
+                sales.SalesQuantity = SalesQty;
                 sales.SalesProductDiscount = SalesProductDiscount;
                 sales.SalesTotal = SalesTotal;
                 sales.SalesVatRate = SalesVatRate;
                 sales.SalesVatTotal = SalesVatTotal;
 
+                aSale.SalesReceivedAmount = aSale.SalesReceivedAmount - returnPrice;
+
             }
         }
 
-        //private void SaleUpdate(string invoiceNo, string purchaseReturnQty, string netReturnPrice, string AvgDiscount)
-        //{
-        //    var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo).FirstOrDefault();
-        //    if(aSale != null)
-        //    {
-        //        var salesQty = aSale.SalesQuantity -  Convert.ToInt32(purchaseReturnQty);
-        //        var discountTotal = AvgDiscount * purchaseReturnQty;
-        //    }
-        //}
 
         [HttpPost]
         public JsonResult GetSaleListbyInvoiceNo(string Data)
