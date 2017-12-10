@@ -213,14 +213,32 @@
                                         </div>
                                         <div class="control-group">
 
-                                            <label class="control-label span12" id="levelWidth">Net Return</label>
+                                            <label class="control-label span12" id="levelWidth">Total</label>
                                             <div class="controls" id="inputMargin">
                                                 <input type="text" id="ProductNetReturn" name="NetReturnPrice" class="span10" />
 
                                             </div>
 
                                         </div>
+                                        <div class="control-group">
 
+                                            <label class="control-label span12" id="levelWidth">Vat-Retun</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="ProductVatReturn" class="span10" />
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="control-group">
+
+                                            <label class="control-label span12" id="levelWidth">Net Return</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="ProductNetTotal" class="span10" />
+
+                                            </div>
+
+                                        </div>
                                     </div>
 
                                     <div class="form-control">
@@ -235,7 +253,7 @@
                             </div>
 
                         </div>
-                        @if (ViewBag.Msg != 0 )
+                        @if (ViewBag.Msg != 0)
                         {
                             <div class="alert alert-success alert-block">
                                 <a class="close" data-dismiss="alert" href="#">×</a>
@@ -326,10 +344,11 @@
 </div>
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
-    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+
     <script type="text/javascript">
         $("#SearchBtn").click(function () {
+            ClearallField();
             var tr;
             var select = $("table tbody tr");
             select.empty();
@@ -364,7 +383,19 @@
 
             });
         });
-
+        function ClearallField() {
+            $("#SalesProductID").val('');
+            $("#ProductName").val('');
+            $("#SalesPurchasePrice").val('');
+            $("#SalesQuantity").val('');
+            $("#SalesProductDiscount").val('');
+            $("#AvgDiscount").val('');
+            $("#PurchaseReturnQty").val('');
+            $("#Adjusment").val('');
+            $("#ProductNetReturn").val('');
+            $("#ProductVatReturn").val('');
+            $("#ProductNetTotal").val('');
+        }
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -401,11 +432,11 @@
                         $("#SalesPurchasePrice").val(List[i]);
                     }
                     if (i == 4) {
-                        $("#SalesProductDiscount").val(List[i]);
+                        $("#SalesQuantity").val(List[i]);
 
                     }
                     if (i == 5) {
-                        $("#SalesQuantity").val(List[i]);
+                        $("#SalesProductDiscount").val(List[i]);
                     }
 
                 };
@@ -416,6 +447,7 @@
             });
 
         })
+       
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -431,6 +463,8 @@
                 $("#PurchaseReturnQty").val('');
                 $("#Adjusment").val('');
                 $("#ProductNetReturn").val('');
+                $("#ProductVatReturn").val('');
+                $("#ProductNetTotal").val('');
 
             })
         });
@@ -456,23 +490,30 @@
     <script>
         $("#Adjusment").bind('keyup keypress blur', function () {
 
-           
+
             var adjustment = $("#Adjusment").val();
 
-            if (adjustment>0) {
+            if (adjustment > 0) {
                 //var netPrice = $("#ProductNetReturn").val();
                 var Price = $("#SalesPurchasePrice").val();
                 var returnQuentity = $("#PurchaseReturnQty").val();
                 var Return = Price * returnQuentity;
-
+               
                 var netReturn = Return - adjustment;
+                var vatReturn = 5 * netReturn / 100;
+                var netTotal = netReturn - vatReturn;
+
                 $("#ProductNetReturn").val(netReturn);
+                $("#ProductVatReturn").val(vatReturn);
+                $("#ProductNetTotal").val(netTotal);
             }
             else {
                 var Price = $("#SalesPurchasePrice").val();
                 var returnQuentity = $("#PurchaseReturnQty").val();
                 var Return = Price * returnQuentity;
                 $("#ProductNetReturn").val(Return);
+                $("#ProductVatReturn").val('');
+                $("#ProductNetTotal").val('');
             }
 
         });

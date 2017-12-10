@@ -120,8 +120,14 @@ namespace GalaxyVibesPos.Controllers
 
                 if (item.SalesReceivedAmount != null)
                 {
-                    aCustomerLedger.Credit = item.SalesReceivedAmount;
-
+                    if (item.SalesReceivedAmount < vatTotal)
+                    {
+                        aCustomerLedger.Credit = item.SalesReceivedAmount;
+                    }
+                    else
+                    {
+                        aCustomerLedger.Credit = vatTotal;
+                    }
                 }
                 else
                 {
@@ -303,8 +309,8 @@ namespace GalaxyVibesPos.Controllers
 
             int? productID = Convert.ToInt32(SalesProductID);
             double? returnQty = Convert.ToInt32(PurchaseReturnQty);
-            double? avgDiscount = Convert.ToInt32(AvgDiscount);
-            double? returnPrice = Convert.ToInt32(NetReturnPrice);
+            double? avgDiscount = Convert.ToDouble(AvgDiscount);
+            double? returnPrice = Convert.ToDouble(NetReturnPrice);
 
             SaleUpdate(InvoiceNo, returnQty, returnPrice, avgDiscount);
             CustomerLedgerUpdate(InvoiceNo);
