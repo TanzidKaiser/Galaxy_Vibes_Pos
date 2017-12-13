@@ -89,63 +89,7 @@ namespace GalaxyVibesPos.Controllers
         }
 
 
-        public ActionResult ExportPurchaseInvoice(List<Purchase> purchaseList)
-        {
-
-            ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Report/Expense Report/PurchaseCrystalReport.rpt")));
-
-            int serialNo = 0;
-            List<PurchaseTemp> purchaseTempList = new List<PurchaseTemp>();
-            Purchase aPurchase = new Purchase();
-
-            foreach (var id in purchaseList)
-            {
-                aPurchase.SupplierID = id.SupplierID;
-
-            }
-
-            var supplier = db.Supplier.Where(s => s.SupplierID == aPurchase.SupplierID).FirstOrDefault();
-
-            foreach (var purchase in purchaseList)
-            {
-                PurchaseTemp pt = new PurchaseTemp();
-                var productInfo = from pd in db.productDetails.Where(x => x.ProductDetailsID == purchase.PurchaseProductID)
-                                  join sc in db.CategorySub on pd.SubCategoryID equals sc.SubCategoryID
-                                  select new { Code = pd.Code, ProductName = pd.ProductName, SubcategoryName = sc.SubCategoryName };
-                foreach (var product in productInfo)
-                {
-                    pt.ProductCode = product.Code;
-                    pt.SubCategoryName = product.SubcategoryName;
-                    pt.ProductName = product.ProductName;
-                }
-                serialNo++;
-                pt.SerialNO = serialNo;
-                pt.PurchaseNo = purchase.PurchaseNo;
-                pt.SupplierInvoiceNo = purchase.PurchaseSupplierInvoiceNo;
-                pt.PurchasePrice = Convert.ToString(purchase.PurchaseProductPrice);
-                pt.ProductQuantity = Convert.ToInt32(purchase.PurchaseQuantity);
-                pt.Total = Convert.ToInt32(purchase.PurchaseTotal);
-                pt.TQuantity = purchase.Tquantity;
-                pt.SubTotal = Convert.ToInt32(purchase.TotalAmount);
-                pt.Date = purchase.PurchaseDate;
-
-                pt.Name = supplier.SupplierName;
-                pt.Phone = supplier.SupplierPhone;
-                pt.Email = supplier.SupplierEmail;
-                pt.Address = supplier.SupplierAddress + "," + supplier.supplierGroup.GroupName + "," + supplier.supplierCompany.CompanyName;
-
-                purchaseTempList.Add(pt);
-            }
-            rd.SetDataSource(purchaseTempList);
-            Response.Buffer = false;
-            Response.ClearContent();
-            Response.ClearHeaders();
-
-            Stream str = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            str.Seek(0, SeekOrigin.Begin);
-            return File(str, "application/pdf", "Expense Report.pdf");
-        }
+     
 
         private void StockIncrement(int? productID, double? quantity)
         {

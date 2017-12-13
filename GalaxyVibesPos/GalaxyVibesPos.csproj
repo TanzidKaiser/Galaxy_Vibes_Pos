@@ -50,6 +50,22 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -162,27 +178,10 @@
     <Compile Include="Models\ProductAdd.cs" />
     <Compile Include="Models\ViewBag\ProductUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report\CristalReportSalesInvoiceReport.cs">
+    <Compile Include="Report\Sale\SaleDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CristalReportSalesInvoiceReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\Expense Report\PurchaseCrystalReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PurchaseCrystalReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\Expense Report\PurchaseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Report\SalesDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SalesDataSet.xsd</DependentUpon>
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -616,27 +615,16 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
-    <Content Include="Report\SalesDataSet.xsc">
-      <DependentUpon>SalesDataSet.xsd</DependentUpon>
+    <Content Include="Report\Sale\SaleDataSet.xsc">
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
     </Content>
-    <Content Include="Report\Expense Report\PurchaseDataSet.xsc">
-      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="Report\Expense Report\PurchaseDataSet.xsd">
+    <None Include="Report\Sale\SaleDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PurchaseDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>SaleDataSet.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Report\Expense Report\PurchaseDataSet.xss">
-      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="Report\SalesDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SalesDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Report\SalesDataSet.xss">
-      <DependentUpon>SalesDataSet.xsd</DependentUpon>
+    <Content Include="Report\Sale\SaleDataSet.xss">
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -698,14 +686,7 @@
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
       <DependentUpon>201711260717117_addCategoryMainToPurchaseTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\CristalReportSalesInvoiceReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CristalReportSalesInvoiceReport.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\Expense Report\PurchaseCrystalReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PurchaseCrystalReport.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Sale\SaleReport.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

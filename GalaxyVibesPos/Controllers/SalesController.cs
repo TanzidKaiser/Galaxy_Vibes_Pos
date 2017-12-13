@@ -7,6 +7,8 @@ using GalaxyVibesPos.Models;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
 using GalaxyVibesPos.Models.Temp_Class;
+using Microsoft.Reporting.WebForms;
+
 namespace GalaxyVibesPos.Controllers
 {
     public class SalesController : Controller
@@ -147,56 +149,78 @@ namespace GalaxyVibesPos.Controllers
             }
 
             CustomerLedgerCreate(aCustomerLedger);
-            //ExportSaleInvoice(List);
+            ExportSaleInvoice(List);
             return Json(flag, JsonRequestBehavior.AllowGet);
         }
 
-
-
-        public virtual ActionResult ExportSaleInvoice(List<Sale> list)
+        private void ExportSaleInvoice(List<Sale> list)
         {
-            ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Report/CristalReportSalesInvoiceReport.rpt")));
-            List<SaleTemp> SaleList = new List<SaleTemp>();
-            foreach (var name in list)
+            var SaleReport = new[]
             {
-                SaleTemp aSale = new SaleTemp();
-                aSale.SalesDate = name.SalesDate;
-                aSale.SalesTime = name.SalesTime;
-                aSale.SalesNo = name.SalesNo;
-                aSale.SalesCustomerName = name.SalesCustomerName;
-
-                var ProductName = db.productDetails.Where(x => x.ProductDetailsID == name.SalesProductID).Select(x => x.ProductName).FirstOrDefault();
-                aSale.ProductName = ProductName;
-
-                aSale.SalesQuantity = Convert.ToInt32(name.SalesQuantity);
-                aSale.SalesSalePrice = Convert.ToInt32(name.SalesSalePrice);
-
-                var total = name.SalesQuantity * name.SalesSalePrice;
-                aSale.Total = Convert.ToInt32(total);
-
-                aSale.SubTotal = name.SubTotal;
-                aSale.TotalDiscount = name.TotalDiscount;
-                aSale.TotalAmount = name.TotalAmount;
-                aSale.SalesVat = name.SalesVat;
-                aSale.NetPayable = name.NetPayable;
-                aSale.SalesReceivedAmount = Convert.ToInt32(name.SalesReceivedAmount);
-                aSale.ReturnAmount = name.ReturnAmount;
-                aSale.SalesRemarks = name.SalesRemarks;
-                aSale.SalesSoldBy = name.SalesSoldBy;
-
-                SaleList.Add(aSale);
-
+               new {
+                   SalesNo = string.Empty,
+                   SalesDate = string.Empty,
+                   SalesTime = string.Empty,
+                   SalesRemarks = string.Empty,
+                   SalePrice = (double?)0,
+                   Quantity = (double?)0,
+                   NetPayable = string.Empty,
+                   CustomerName = string.Empty,
+                   SoldBy = string.Empty,
+                   ReceivedAmount = (double?)0,
+                   ReturnAmount = string.Empty,
+                   Vat = string.Empty,
+                   ProductName = string.Empty,
+                   Discount = string.Empty,
+                   SubTotal = string.Empty,
+                   TotalAmount = string.Empty,
+                   Total = (double?)0
+               }
+            }.ToList();
+            SaleReport.Clear();
+            foreach (var item in list)
+            {
+                var aItem = new { SalesNo = item.SalesNo, SalesDate = item.SalesDate,
+                    SalesTime = item.SalesTime,
+                    SalesRemarks = item.SalesRemarks,
+                    SalePrice = item.SalesSalePrice,
+                    Quantity = item.SalesQuantity,
+                    NetPayable = item.NetPayable,
+                    CustomerName = item.SalesCustomerName,
+                    SoldBy = item.SalesSoldBy,
+                    ReceivedAmount = item.SalesReceivedAmount,
+                    ReturnAmount = item.ReturnAmount,
+                    Vat = item.SalesVat,
+                    ProductName = item.ProductName,
+                    Discount = item.TotalDiscount,
+                    SubTotal = item.SubTotal,
+                    TotalAmount = item.TotalAmount,
+                    Total = item.Total
+                };
+                SaleReport.Add(aItem);
             }
-            rd.SetDataSource(SaleList);
-            Response.Buffer = false;
-            Response.ClearContent();
-            Response.ClearHeaders();
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "SaleDataSet";
+            reportDataSource.Value = SaleReport;
 
-            Stream str = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            str.Seek(0, SeekOrigin.Begin);
-            return File(str, "application/pdf", "report.pdf");
+            string mimeType = string.Empty;
+            string encodeing = string.Empty;
+            string fileNameExtension = "pdf";
+            Warning[] warnings;
+            string[] streams;
 
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Report/Sale/SaleReport.rdlc");
+            localReport.DataSources.Add(reportDataSource);
+
+            byte[] bytes = localReport.Render("PDF", null, out mimeType, out encodeing, out fileNameExtension, out streams, out warnings);
+
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment;filename=file." + fileNameExtension);
+            Response.BinaryWrite(bytes);
+            Response.Flush();
         }
 
         private void CustomerLedgerCreate(CustomerLedger aCustomerLedger)

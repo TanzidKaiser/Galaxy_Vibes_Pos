@@ -695,18 +695,7 @@
                         data: JSON.stringify(List),
                         contentType: 'application/json',
                         success: function (data) {
-                            alert(data);
-                            $.ajax({
-                                type: 'post',
-                                url: "/Purchase/ExportPurchaseInvoice",
-                                dataType: 'json',
-                                contentType: "application/json; charset=utf-8",
-                                data: JSON.stringify(List),
-                                contentType: 'application/json',
-                                success: function () {
-                                    //window.location.href = "/Purchase/PurchaseAdd";
-                                },
-                            });
+                            alert(data);                            
                         },
                     });
                 }
