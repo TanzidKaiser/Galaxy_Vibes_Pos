@@ -20,9 +20,9 @@ namespace GalaxyVibesPos.Report.Sale {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("SaleDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("SalesDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class SaleDataSet : global::System.Data.DataSet {
+    public partial class SalesDataSet : global::System.Data.DataSet {
         
         private SalesDataTable tableSales;
         
@@ -30,7 +30,7 @@ namespace GalaxyVibesPos.Report.Sale {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SaleDataSet() {
+        public SalesDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace GalaxyVibesPos.Report.Sale {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected SaleDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected SalesDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace GalaxyVibesPos.Report.Sale {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            SaleDataSet cln = ((SaleDataSet)(base.Clone()));
+            SalesDataSet cln = ((SalesDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace GalaxyVibesPos.Report.Sale {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "SaleDataSet";
+            this.DataSetName = "SalesDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/SaleDataSet.xsd";
+            this.Namespace = "http://tempuri.org/SalesDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableSales = new SalesDataTable();
@@ -225,7 +225,7 @@ namespace GalaxyVibesPos.Report.Sale {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            SaleDataSet ds = new SaleDataSet();
+            SalesDataSet ds = new SalesDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -287,27 +287,27 @@ namespace GalaxyVibesPos.Report.Sale {
             
             private global::System.Data.DataColumn columnSalesRemarks;
             
-            private global::System.Data.DataColumn columnSalePrice;
+            private global::System.Data.DataColumn columnSalesSalePrice;
             
-            private global::System.Data.DataColumn columnQuantity;
+            private global::System.Data.DataColumn columnSalesQuantity;
             
             private global::System.Data.DataColumn columnNetPayable;
             
             private global::System.Data.DataColumn columnSalesCustomerName;
             
-            private global::System.Data.DataColumn columnSoldBy;
+            private global::System.Data.DataColumn columnSalesSoldBy;
             
-            private global::System.Data.DataColumn columnReceivedAmount;
+            private global::System.Data.DataColumn columnSalesReceivedAmount;
             
             private global::System.Data.DataColumn columnReturnAmount;
             
             private global::System.Data.DataColumn columnCustomerName;
             
-            private global::System.Data.DataColumn columnVat;
+            private global::System.Data.DataColumn columnSalesVat;
             
             private global::System.Data.DataColumn columnProductName;
             
-            private global::System.Data.DataColumn columnDiscount;
+            private global::System.Data.DataColumn columnTotalDiscount;
             
             private global::System.Data.DataColumn columnSubTotal;
             
@@ -382,17 +382,17 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SalePriceColumn {
+            public global::System.Data.DataColumn SalesSalePriceColumn {
                 get {
-                    return this.columnSalePrice;
+                    return this.columnSalesSalePrice;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn QuantityColumn {
+            public global::System.Data.DataColumn SalesQuantityColumn {
                 get {
-                    return this.columnQuantity;
+                    return this.columnSalesQuantity;
                 }
             }
             
@@ -414,17 +414,17 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SoldByColumn {
+            public global::System.Data.DataColumn SalesSoldByColumn {
                 get {
-                    return this.columnSoldBy;
+                    return this.columnSalesSoldBy;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ReceivedAmountColumn {
+            public global::System.Data.DataColumn SalesReceivedAmountColumn {
                 get {
-                    return this.columnReceivedAmount;
+                    return this.columnSalesReceivedAmount;
                 }
             }
             
@@ -446,9 +446,9 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VatColumn {
+            public global::System.Data.DataColumn SalesVatColumn {
                 get {
-                    return this.columnVat;
+                    return this.columnSalesVat;
                 }
             }
             
@@ -462,9 +462,9 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DiscountColumn {
+            public global::System.Data.DataColumn TotalDiscountColumn {
                 get {
-                    return this.columnDiscount;
+                    return this.columnTotalDiscount;
                 }
             }
             
@@ -534,17 +534,17 @@ namespace GalaxyVibesPos.Report.Sale {
                         string SalesDate, 
                         string SalesTime, 
                         string SalesRemarks, 
-                        string SalePrice, 
-                        string Quantity, 
+                        string SalesSalePrice, 
+                        string SalesQuantity, 
                         string NetPayable, 
                         string SalesCustomerName, 
-                        string SoldBy, 
-                        string ReceivedAmount, 
+                        string SalesSoldBy, 
+                        string SalesReceivedAmount, 
                         string ReturnAmount, 
                         string CustomerName, 
-                        string Vat, 
+                        string SalesVat, 
                         string ProductName, 
-                        string Discount, 
+                        string TotalDiscount, 
                         string SubTotal, 
                         string TotalAmount, 
                         string Total) {
@@ -554,17 +554,17 @@ namespace GalaxyVibesPos.Report.Sale {
                         SalesDate,
                         SalesTime,
                         SalesRemarks,
-                        SalePrice,
-                        Quantity,
+                        SalesSalePrice,
+                        SalesQuantity,
                         NetPayable,
                         SalesCustomerName,
-                        SoldBy,
-                        ReceivedAmount,
+                        SalesSoldBy,
+                        SalesReceivedAmount,
                         ReturnAmount,
                         CustomerName,
-                        Vat,
+                        SalesVat,
                         ProductName,
-                        Discount,
+                        TotalDiscount,
                         SubTotal,
                         TotalAmount,
                         Total};
@@ -594,17 +594,17 @@ namespace GalaxyVibesPos.Report.Sale {
                 this.columnSalesDate = base.Columns["SalesDate"];
                 this.columnSalesTime = base.Columns["SalesTime"];
                 this.columnSalesRemarks = base.Columns["SalesRemarks"];
-                this.columnSalePrice = base.Columns["SalePrice"];
-                this.columnQuantity = base.Columns["Quantity"];
+                this.columnSalesSalePrice = base.Columns["SalesSalePrice"];
+                this.columnSalesQuantity = base.Columns["SalesQuantity"];
                 this.columnNetPayable = base.Columns["NetPayable"];
                 this.columnSalesCustomerName = base.Columns["SalesCustomerName"];
-                this.columnSoldBy = base.Columns["SoldBy"];
-                this.columnReceivedAmount = base.Columns["ReceivedAmount"];
+                this.columnSalesSoldBy = base.Columns["SalesSoldBy"];
+                this.columnSalesReceivedAmount = base.Columns["SalesReceivedAmount"];
                 this.columnReturnAmount = base.Columns["ReturnAmount"];
                 this.columnCustomerName = base.Columns["CustomerName"];
-                this.columnVat = base.Columns["Vat"];
+                this.columnSalesVat = base.Columns["SalesVat"];
                 this.columnProductName = base.Columns["ProductName"];
-                this.columnDiscount = base.Columns["Discount"];
+                this.columnTotalDiscount = base.Columns["TotalDiscount"];
                 this.columnSubTotal = base.Columns["SubTotal"];
                 this.columnTotalAmount = base.Columns["TotalAmount"];
                 this.columnTotal = base.Columns["Total"];
@@ -621,40 +621,34 @@ namespace GalaxyVibesPos.Report.Sale {
                 base.Columns.Add(this.columnSalesTime);
                 this.columnSalesRemarks = new global::System.Data.DataColumn("SalesRemarks", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSalesRemarks);
-                this.columnSalePrice = new global::System.Data.DataColumn("SalePrice", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSalePrice);
-                this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQuantity);
+                this.columnSalesSalePrice = new global::System.Data.DataColumn("SalesSalePrice", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSalesSalePrice);
+                this.columnSalesQuantity = new global::System.Data.DataColumn("SalesQuantity", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSalesQuantity);
                 this.columnNetPayable = new global::System.Data.DataColumn("NetPayable", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNetPayable);
                 this.columnSalesCustomerName = new global::System.Data.DataColumn("SalesCustomerName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSalesCustomerName);
-                this.columnSoldBy = new global::System.Data.DataColumn("SoldBy", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSoldBy);
-                this.columnReceivedAmount = new global::System.Data.DataColumn("ReceivedAmount", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnReceivedAmount);
+                this.columnSalesSoldBy = new global::System.Data.DataColumn("SalesSoldBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSalesSoldBy);
+                this.columnSalesReceivedAmount = new global::System.Data.DataColumn("SalesReceivedAmount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSalesReceivedAmount);
                 this.columnReturnAmount = new global::System.Data.DataColumn("ReturnAmount", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnReturnAmount);
                 this.columnCustomerName = new global::System.Data.DataColumn("CustomerName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCustomerName);
-                this.columnVat = new global::System.Data.DataColumn("Vat", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVat);
+                this.columnSalesVat = new global::System.Data.DataColumn("SalesVat", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSalesVat);
                 this.columnProductName = new global::System.Data.DataColumn("ProductName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnProductName);
-                this.columnDiscount = new global::System.Data.DataColumn("Discount", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDiscount);
+                this.columnTotalDiscount = new global::System.Data.DataColumn("TotalDiscount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalDiscount);
                 this.columnSubTotal = new global::System.Data.DataColumn("SubTotal", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubTotal);
                 this.columnTotalAmount = new global::System.Data.DataColumn("TotalAmount", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalAmount);
                 this.columnTotal = new global::System.Data.DataColumn("Total", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotal);
-                this.columnSalePrice.Caption = "SalesSalePrice";
-                this.columnQuantity.Caption = "SalesQuantity";
-                this.columnSoldBy.Caption = "SalesSoldBy";
-                this.columnReceivedAmount.Caption = "SalesReceivedAmount";
-                this.columnVat.Caption = "SalesVat";
-                this.columnDiscount.Caption = "TotalDiscount";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -722,7 +716,7 @@ namespace GalaxyVibesPos.Report.Sale {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                SaleDataSet ds = new SaleDataSet();
+                SalesDataSet ds = new SalesDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -861,33 +855,33 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SalePrice {
+            public string SalesSalePrice {
                 get {
                     try {
-                        return ((string)(this[this.tableSales.SalePriceColumn]));
+                        return ((string)(this[this.tableSales.SalesSalePriceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SalePrice\' in table \'Sales\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SalesSalePrice\' in table \'Sales\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSales.SalePriceColumn] = value;
+                    this[this.tableSales.SalesSalePriceColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Quantity {
+            public string SalesQuantity {
                 get {
                     try {
-                        return ((string)(this[this.tableSales.QuantityColumn]));
+                        return ((string)(this[this.tableSales.SalesQuantityColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Quantity\' in table \'Sales\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SalesQuantity\' in table \'Sales\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSales.QuantityColumn] = value;
+                    this[this.tableSales.SalesQuantityColumn] = value;
                 }
             }
             
@@ -925,33 +919,33 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SoldBy {
+            public string SalesSoldBy {
                 get {
                     try {
-                        return ((string)(this[this.tableSales.SoldByColumn]));
+                        return ((string)(this[this.tableSales.SalesSoldByColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SoldBy\' in table \'Sales\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SalesSoldBy\' in table \'Sales\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSales.SoldByColumn] = value;
+                    this[this.tableSales.SalesSoldByColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ReceivedAmount {
+            public string SalesReceivedAmount {
                 get {
                     try {
-                        return ((string)(this[this.tableSales.ReceivedAmountColumn]));
+                        return ((string)(this[this.tableSales.SalesReceivedAmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ReceivedAmount\' in table \'Sales\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SalesReceivedAmount\' in table \'Sales\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSales.ReceivedAmountColumn] = value;
+                    this[this.tableSales.SalesReceivedAmountColumn] = value;
                 }
             }
             
@@ -989,17 +983,17 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Vat {
+            public string SalesVat {
                 get {
                     try {
-                        return ((string)(this[this.tableSales.VatColumn]));
+                        return ((string)(this[this.tableSales.SalesVatColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Vat\' in table \'Sales\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SalesVat\' in table \'Sales\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSales.VatColumn] = value;
+                    this[this.tableSales.SalesVatColumn] = value;
                 }
             }
             
@@ -1021,17 +1015,17 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Discount {
+            public string TotalDiscount {
                 get {
                     try {
-                        return ((string)(this[this.tableSales.DiscountColumn]));
+                        return ((string)(this[this.tableSales.TotalDiscountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Discount\' in table \'Sales\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalDiscount\' in table \'Sales\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSales.DiscountColumn] = value;
+                    this[this.tableSales.TotalDiscountColumn] = value;
                 }
             }
             
@@ -1133,26 +1127,26 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSalePriceNull() {
-                return this.IsNull(this.tableSales.SalePriceColumn);
+            public bool IsSalesSalePriceNull() {
+                return this.IsNull(this.tableSales.SalesSalePriceColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSalePriceNull() {
-                this[this.tableSales.SalePriceColumn] = global::System.Convert.DBNull;
+            public void SetSalesSalePriceNull() {
+                this[this.tableSales.SalesSalePriceColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsQuantityNull() {
-                return this.IsNull(this.tableSales.QuantityColumn);
+            public bool IsSalesQuantityNull() {
+                return this.IsNull(this.tableSales.SalesQuantityColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetQuantityNull() {
-                this[this.tableSales.QuantityColumn] = global::System.Convert.DBNull;
+            public void SetSalesQuantityNull() {
+                this[this.tableSales.SalesQuantityColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1181,26 +1175,26 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSoldByNull() {
-                return this.IsNull(this.tableSales.SoldByColumn);
+            public bool IsSalesSoldByNull() {
+                return this.IsNull(this.tableSales.SalesSoldByColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSoldByNull() {
-                this[this.tableSales.SoldByColumn] = global::System.Convert.DBNull;
+            public void SetSalesSoldByNull() {
+                this[this.tableSales.SalesSoldByColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsReceivedAmountNull() {
-                return this.IsNull(this.tableSales.ReceivedAmountColumn);
+            public bool IsSalesReceivedAmountNull() {
+                return this.IsNull(this.tableSales.SalesReceivedAmountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetReceivedAmountNull() {
-                this[this.tableSales.ReceivedAmountColumn] = global::System.Convert.DBNull;
+            public void SetSalesReceivedAmountNull() {
+                this[this.tableSales.SalesReceivedAmountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1229,14 +1223,14 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVatNull() {
-                return this.IsNull(this.tableSales.VatColumn);
+            public bool IsSalesVatNull() {
+                return this.IsNull(this.tableSales.SalesVatColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVatNull() {
-                this[this.tableSales.VatColumn] = global::System.Convert.DBNull;
+            public void SetSalesVatNull() {
+                this[this.tableSales.SalesVatColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1253,14 +1247,14 @@ namespace GalaxyVibesPos.Report.Sale {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDiscountNull() {
-                return this.IsNull(this.tableSales.DiscountColumn);
+            public bool IsTotalDiscountNull() {
+                return this.IsNull(this.tableSales.TotalDiscountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDiscountNull() {
-                this[this.tableSales.DiscountColumn] = global::System.Convert.DBNull;
+            public void SetTotalDiscountNull() {
+                this[this.tableSales.TotalDiscountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -178,10 +178,10 @@
     <Compile Include="Models\ProductAdd.cs" />
     <Compile Include="Models\ViewBag\ProductUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report\Sale\SaleDataSet.Designer.cs">
+    <Compile Include="Report\Sale\SalesDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+      <DependentUpon>SalesDataSet.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -615,16 +615,16 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
-    <Content Include="Report\Sale\SaleDataSet.xsc">
-      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+    <Content Include="Report\Sale\SalesDataSet.xsc">
+      <DependentUpon>SalesDataSet.xsd</DependentUpon>
     </Content>
-    <None Include="Report\Sale\SaleDataSet.xsd">
+    <None Include="Report\Sale\SalesDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SaleDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>SalesDataSet.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Report\Sale\SaleDataSet.xss">
-      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+    <Content Include="Report\Sale\SalesDataSet.xss">
+      <DependentUpon>SalesDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />

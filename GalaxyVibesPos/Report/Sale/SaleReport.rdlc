@@ -6,16 +6,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.68664in</Width>
+              <Width>1.82403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.81337in</Width>
+              <Width>1.04451in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.31052in</Width>
+              <Width>1.07938in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26799in</Width>
+              <Width>1.36174in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -24,21 +24,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox11">
+                    <Textbox Name="Textbox12">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>       Name</Value>
+                              <Value>Product Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox11</rd:DefaultName>
+                      <rd:DefaultName>Textbox12</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -149,7 +149,7 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ProductName">
+                    <Textbox Name="ProductName1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -163,7 +163,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ProductName</rd:DefaultName>
+                      <rd:DefaultName>ProductName1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -179,21 +179,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Quantity">
+                    <Textbox Name="SalesQuantity">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Quantity.Value</Value>
+                              <Value>=Fields!SalesQuantity.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Quantity</rd:DefaultName>
+                      <rd:DefaultName>SalesQuantity</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -209,21 +209,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="SalePrice">
+                    <Textbox Name="SalesSalePrice">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!SalePrice.Value</Value>
+                              <Value>=Fields!SalesSalePrice.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>SalePrice</rd:DefaultName>
+                      <rd:DefaultName>SalesSalePrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -289,11 +289,11 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>SaleDataSet</DataSetName>
+        <DataSetName>SalesDataSet</DataSetName>
         <Top>0.30083in</Top>
         <Left>0.19667in</Left>
         <Height>0.5in</Height>
-        <Width>5.07852in</Width>
+        <Width>5.30966in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -302,7 +302,6 @@
       </Tablix>
       <Line Name="Line1">
         <Top>1.07167in</Top>
-        <Left>0in</Left>
         <Height>0in</Height>
         <Width>5.7515in</Width>
         <ZIndex>1</ZIndex>
@@ -314,7 +313,6 @@
       </Line>
       <Line Name="Line2">
         <Top>2.0625in</Top>
-        <Left>0in</Left>
         <Height>0in</Height>
         <Width>5.7515in</Width>
         <ZIndex>2</ZIndex>
@@ -517,7 +515,6 @@
       </Textbox>
       <Line Name="Line4">
         <Top>3.82031in</Top>
-        <Left>0in</Left>
         <Height>0in</Height>
         <Width>5.7515in</Width>
         <ZIndex>10</ZIndex>
@@ -665,7 +662,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>1.14111in</Top>
-        <Left>4.0072in</Left>
+        <Left>4.1322in</Left>
         <Height>0.25in</Height>
         <Width>1.22633in</Width>
         <ZIndex>15</ZIndex>
@@ -686,7 +683,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Discount.Value</Value>
+                <Value>=Fields!TotalDiscount.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -695,7 +692,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>1.5517in</Top>
-        <Left>4.0072in</Left>
+        <Left>4.1322in</Left>
         <Height>0.25in</Height>
         <Width>1.22632in</Width>
         <ZIndex>16</ZIndex>
@@ -716,15 +713,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value xml:space="preserve"> </Value>
-                <Style />
-              </TextRun>
-              <TextRun>
                 <Value>=Fields!TotalAmount.Value</Value>
-                <Style />
-              </TextRun>
-              <TextRun>
-                <Value xml:space="preserve">  </Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -733,7 +722,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>2.16628in</Top>
-        <Left>4.0072in</Left>
+        <Left>4.1322in</Left>
         <Height>0.25in</Height>
         <Width>1.26799in</Width>
         <ZIndex>17</ZIndex>
@@ -754,7 +743,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Vat.Value</Value>
+                <Value>=Fields!SalesVat.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -763,7 +752,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>2.52566in</Top>
-        <Left>4.0072in</Left>
+        <Left>4.1322in</Left>
         <Height>0.25in</Height>
         <Width>1.22632in</Width>
         <ZIndex>18</ZIndex>
@@ -793,7 +782,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>3.02826in</Top>
-        <Left>4.0072in</Left>
+        <Left>4.1322in</Left>
         <Height>0.25in</Height>
         <Width>1.22632in</Width>
         <ZIndex>19</ZIndex>
@@ -814,7 +803,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!ReceivedAmount.Value</Value>
+                <Value>=Fields!SalesReceivedAmount.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -823,9 +812,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>3.40066in</Top>
-        <Left>4.0072in</Left>
+        <Left>4.1322in</Left>
         <Height>0.25in</Height>
-        <Width>1.22633in</Width>
+        <Width>1.50472in</Width>
         <ZIndex>20</ZIndex>
         <Style>
           <Border>
@@ -853,7 +842,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>3.91628in</Top>
-        <Left>4.0072in</Left>
+        <Left>4.1322in</Left>
         <Height>0.25in</Height>
         <Width>1.22632in</Width>
         <ZIndex>21</ZIndex>
@@ -883,7 +872,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>4.22878in</Top>
-        <Left>3.99678in</Left>
+        <Left>4.12178in</Left>
         <Height>0.25in</Height>
         <Width>1.23674in</Width>
         <ZIndex>22</ZIndex>
@@ -904,7 +893,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!SoldBy.Value</Value>
+                <Value>=Fields!SalesSoldBy.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -913,7 +902,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>4.49267in</Top>
-        <Left>3.99678in</Left>
+        <Left>4.12178in</Left>
         <Height>0.25in</Height>
         <Width>1.23674in</Width>
         <ZIndex>23</ZIndex>
@@ -931,7 +920,7 @@
     <Height>5.16016in</Height>
     <Style />
   </Body>
-  <Width>5.7515in</Width>
+  <Width>6.27519in</Width>
   <Page>
     <PageHeader>
       <Height>3.71875in</Height>
@@ -1253,7 +1242,7 @@
                   <Style />
                 </TextRun>
                 <TextRun>
-                  <Value>=Fields!CustomerName.Value</Value>
+                  <Value>=Fields!SalesCustomerName.Value</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -1371,11 +1360,18 @@
       </ConnectionProperties>
       <rd:DataSourceID>03b418f3-dc00-443c-86ef-3ad4aa37aa07</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="SalesDataSet">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>2e849f5d-1a90-4f21-aa8d-ebc56b648512</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="SaleDataSet">
+    <DataSet Name="SalesDataSet">
       <Query>
-        <DataSourceName>SaleDataSet</DataSourceName>
+        <DataSourceName>SalesDataSet</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -1395,12 +1391,12 @@
           <DataField>SalesRemarks</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="SalePrice">
-          <DataField>SalePrice</DataField>
+        <Field Name="SalesSalePrice">
+          <DataField>SalesSalePrice</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
+        <Field Name="SalesQuantity">
+          <DataField>SalesQuantity</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="NetPayable">
@@ -1411,12 +1407,12 @@
           <DataField>SalesCustomerName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="SoldBy">
-          <DataField>SoldBy</DataField>
+        <Field Name="SalesSoldBy">
+          <DataField>SalesSoldBy</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ReceivedAmount">
-          <DataField>ReceivedAmount</DataField>
+        <Field Name="SalesReceivedAmount">
+          <DataField>SalesReceivedAmount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ReturnAmount">
@@ -1427,16 +1423,16 @@
           <DataField>CustomerName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Vat">
-          <DataField>Vat</DataField>
+        <Field Name="SalesVat">
+          <DataField>SalesVat</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ProductName">
           <DataField>ProductName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Discount">
-          <DataField>Discount</DataField>
+        <Field Name="TotalDiscount">
+          <DataField>TotalDiscount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="SubTotal">
@@ -1453,8 +1449,8 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>SaleDataSet</rd:DataSetName>
-        <rd:SchemaPath>E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\Report\Sale\SaleDataSet.xsd</rd:SchemaPath>
+        <rd:DataSetName>SalesDataSet</rd:DataSetName>
+        <rd:SchemaPath>E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\Report\Sale\SalesDataSet.xsd</rd:SchemaPath>
         <rd:TableName>Sales</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

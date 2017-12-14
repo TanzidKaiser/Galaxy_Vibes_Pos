@@ -149,59 +149,45 @@ namespace GalaxyVibesPos.Controllers
             }
 
             CustomerLedgerCreate(aCustomerLedger);
-            ExportSaleInvoice(List);
+            //ExportSaleInvoice(List);
             return Json(flag, JsonRequestBehavior.AllowGet);
         }
 
-        private void ExportSaleInvoice(List<Sale> list)
+        private ActionResult ExportSaleInvoice(List<Sale> list)
         {
-            var SaleReport = new[]
+            List<SaleTemp> SaleList = new List<SaleTemp>();
+            
+            foreach (var name in list)
             {
-               new {
-                   SalesNo = string.Empty,
-                   SalesDate = string.Empty,
-                   SalesTime = string.Empty,
-                   SalesRemarks = string.Empty,
-                   SalePrice = (double?)0,
-                   Quantity = (double?)0,
-                   NetPayable = string.Empty,
-                   CustomerName = string.Empty,
-                   SoldBy = string.Empty,
-                   ReceivedAmount = (double?)0,
-                   ReturnAmount = string.Empty,
-                   Vat = string.Empty,
-                   ProductName = string.Empty,
-                   Discount = string.Empty,
-                   SubTotal = string.Empty,
-                   TotalAmount = string.Empty,
-                   Total = (double?)0
-               }
-            }.ToList();
-            SaleReport.Clear();
-            foreach (var item in list)
-            {
-                var aItem = new { SalesNo = item.SalesNo, SalesDate = item.SalesDate,
-                    SalesTime = item.SalesTime,
-                    SalesRemarks = item.SalesRemarks,
-                    SalePrice = item.SalesSalePrice,
-                    Quantity = item.SalesQuantity,
-                    NetPayable = item.NetPayable,
-                    CustomerName = item.SalesCustomerName,
-                    SoldBy = item.SalesSoldBy,
-                    ReceivedAmount = item.SalesReceivedAmount,
-                    ReturnAmount = item.ReturnAmount,
-                    Vat = item.SalesVat,
-                    ProductName = item.ProductName,
-                    Discount = item.TotalDiscount,
-                    SubTotal = item.SubTotal,
-                    TotalAmount = item.TotalAmount,
-                    Total = item.Total
-                };
-                SaleReport.Add(aItem);
+                SaleTemp aSale = new SaleTemp();
+                aSale.SalesDate = name.SalesDate;
+                aSale.SalesTime = name.SalesTime;
+                //aSale.SalesNo = name.SalesNo;
+                //aSale.SalesCustomerName = name.SalesCustomerName;
+
+                //var ProductName = db.productDetails.Where(x => x.ProductDetailsID == name.SalesProductID).Select(x => x.ProductName).FirstOrDefault();
+                //aSale.ProductName = ProductName;
+
+                //aSale.SalesQuantity = Convert.ToInt32(name.SalesQuantity);
+                //aSale.SalesSalePrice = Convert.ToInt32(name.SalesSalePrice);
+
+                //var total = name.SalesQuantity * name.SalesSalePrice;
+                //aSale.Total = Convert.ToInt32(total);
+
+                //aSale.SubTotal = name.SubTotal;
+                //aSale.TotalDiscount = name.TotalDiscount;
+                //aSale.TotalAmount = name.TotalAmount;
+                //aSale.SalesVat = name.SalesVat;
+                //aSale.NetPayable = name.NetPayable;
+                //aSale.SalesReceivedAmount = Convert.ToInt32(name.SalesReceivedAmount);
+                //aSale.ReturnAmount = name.ReturnAmount;
+                //aSale.SalesRemarks = name.SalesRemarks;
+                //aSale.SalesSoldBy = name.SalesSoldBy;
+                SaleList.Add(aSale);
             }
             ReportDataSource reportDataSource = new ReportDataSource();
-            reportDataSource.Name = "SaleDataSet";
-            reportDataSource.Value = SaleReport;
+            reportDataSource.Name = "SalesDataSet";
+            reportDataSource.Value = SaleList;
 
             string mimeType = string.Empty;
             string encodeing = string.Empty;
@@ -219,8 +205,9 @@ namespace GalaxyVibesPos.Controllers
             Response.Clear();
             Response.ContentType = mimeType;
             Response.AddHeader("content-disposition", "attachment;filename=file." + fileNameExtension);
-            Response.BinaryWrite(bytes);
-            Response.Flush();
+            //Response.BinaryWrite(bytes);
+            //Response.Flush();
+            return File(bytes, fileNameExtension);
         }
 
         private void CustomerLedgerCreate(CustomerLedger aCustomerLedger)
