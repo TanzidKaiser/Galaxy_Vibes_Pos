@@ -8,6 +8,7 @@ using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
 using GalaxyVibesPos.Models.Temp_Class;
 using Microsoft.Reporting.WebForms;
+using System.Web.Script.Serialization;
 
 namespace GalaxyVibesPos.Controllers
 {
@@ -36,10 +37,16 @@ namespace GalaxyVibesPos.Controllers
             }
 
             ViewBag.date = DateTime.Now.ToString("M/d/yyyy");
-            ViewBag.time = DateTime.Now.ToString("hh:mm:ss tt");
+            //ViewBag.time = DateTime.Now.ToString("hh:mm:ss tt");
 
             return View();
         }
+        //[HttpPost]
+        //public ActionResult AddSales(Sale aSale,)
+        //{
+        //    //ExportSaleInvoice(temp);
+        //    return RedirectToAction("AddSales",false);
+        //}
 
         //Get Customer Name in Dropdown By Select Company Name 
 
@@ -153,38 +160,21 @@ namespace GalaxyVibesPos.Controllers
             return Json(flag, JsonRequestBehavior.AllowGet);
         }
 
-        private ActionResult ExportSaleInvoice(List<Sale> list)
+        public void ExportSaleInvoice(string encrift)
         {
-            List<SaleTemp> SaleList = new List<SaleTemp>();
-            
-            foreach (var name in list)
-            {
-                SaleTemp aSale = new SaleTemp();
-                aSale.SalesDate = name.SalesDate;
-                aSale.SalesTime = name.SalesTime;
-                //aSale.SalesNo = name.SalesNo;
-                //aSale.SalesCustomerName = name.SalesCustomerName;
 
-                //var ProductName = db.productDetails.Where(x => x.ProductDetailsID == name.SalesProductID).Select(x => x.ProductName).FirstOrDefault();
-                //aSale.ProductName = ProductName;
+            byte[] b = Convert.FromBase64String(encrift);
+            System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+            System.Text.Decoder utf8Decoder = encoder.GetDecoder();
 
-                //aSale.SalesQuantity = Convert.ToInt32(name.SalesQuantity);
-                //aSale.SalesSalePrice = Convert.ToInt32(name.SalesSalePrice);
+            int charCount = utf8Decoder.GetCharCount(b, 0, b.Length);
+            char[] decodedChar = new char[charCount];
+            utf8Decoder.GetChars(b, 0, b.Length, decodedChar, 0);
+            string result = new string(decodedChar);
 
-                //var total = name.SalesQuantity * name.SalesSalePrice;
-                //aSale.Total = Convert.ToInt32(total);
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Sale[] SaleList = js.Deserialize<Sale[]>(result);
 
-                //aSale.SubTotal = name.SubTotal;
-                //aSale.TotalDiscount = name.TotalDiscount;
-                //aSale.TotalAmount = name.TotalAmount;
-                //aSale.SalesVat = name.SalesVat;
-                //aSale.NetPayable = name.NetPayable;
-                //aSale.SalesReceivedAmount = Convert.ToInt32(name.SalesReceivedAmount);
-                //aSale.ReturnAmount = name.ReturnAmount;
-                //aSale.SalesRemarks = name.SalesRemarks;
-                //aSale.SalesSoldBy = name.SalesSoldBy;
-                SaleList.Add(aSale);
-            }
             ReportDataSource reportDataSource = new ReportDataSource();
             reportDataSource.Name = "SalesDataSet";
             reportDataSource.Value = SaleList;
@@ -205,9 +195,9 @@ namespace GalaxyVibesPos.Controllers
             Response.Clear();
             Response.ContentType = mimeType;
             Response.AddHeader("content-disposition", "attachment;filename=file." + fileNameExtension);
-            //Response.BinaryWrite(bytes);
-            //Response.Flush();
-            return File(bytes, fileNameExtension);
+            Response.BinaryWrite(bytes);
+            Response.Flush();
+            //return RedirectToAction("AddSales");
         }
 
         private void CustomerLedgerCreate(CustomerLedger aCustomerLedger)

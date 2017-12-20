@@ -67,4 +67,5 @@ namespace GalaxyVibesPos.Models
         [NotMapped]
         public string ReturnAmount { get; set; }
     }
+   
 }
