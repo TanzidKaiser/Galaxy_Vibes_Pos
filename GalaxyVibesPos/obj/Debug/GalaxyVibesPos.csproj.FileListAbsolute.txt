@@ -144,3 +144,14 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Microsoft.ReportViewer.ProcessingO
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Microsoft.ReportViewer.WebForms.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\RdlCompile.cache
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\RdlCompile.compiled
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Microsoft.SqlServer.Types.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\de\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\es\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\fr\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\it\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\ja\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\ko\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\pt\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\ru\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
