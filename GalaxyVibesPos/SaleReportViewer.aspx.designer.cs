@@ -31,15 +31,6 @@ namespace GalaxyVibesPos {
         protected global::System.Web.UI.WebControls.TextBox FrmDateTxt;
         
         /// <summary>
-        /// FromDateImg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton FromDateImg;
-        
-        /// <summary>
         /// ToDateTxt control.
         /// </summary>
         /// <remarks>
@@ -47,15 +38,6 @@ namespace GalaxyVibesPos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ToDateTxt;
-        
-        /// <summary>
-        /// ToDateImg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ToDateImg;
         
         /// <summary>
         /// SearchBtn control.
@@ -67,15 +49,6 @@ namespace GalaxyVibesPos {
         protected global::System.Web.UI.WebControls.Button SearchBtn;
         
         /// <summary>
-        /// Calendar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar;
-        
-        /// <summary>
         /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
@@ -85,12 +58,12 @@ namespace GalaxyVibesPos {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// ReportViewer1 control.
+        /// SaleReportView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.Reporting.WebForms.ReportViewer ReportViewer1;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer SaleReportView;
     }
 }

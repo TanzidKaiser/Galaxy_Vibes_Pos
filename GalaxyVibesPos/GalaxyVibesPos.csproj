@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.Designer.cs">
       <DependentUpon>201711260717117_addCategoryMainToPurchaseTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712260534028_salesDateTypeUpdate.cs" />
+    <Compile Include="Migrations\201712260534028_salesDateTypeUpdate.Designer.cs">
+      <DependentUpon>201712260534028_salesDateTypeUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryMain.cs" />
@@ -178,7 +182,7 @@
     <Compile Include="Models\ProductAdd.cs" />
     <Compile Include="Models\ViewBag\ProductUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report\Sale\SalesDataSet.Designer.cs">
+    <Compile Include="SalesDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SalesDataSet.xsd</DependentUpon>
@@ -624,15 +628,15 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
-    <Content Include="Report\Sale\SalesDataSet.xsc">
+    <Content Include="SalesDataSet.xsc">
       <DependentUpon>SalesDataSet.xsd</DependentUpon>
     </Content>
-    <None Include="Report\Sale\SalesDataSet.xsd">
+    <None Include="SalesDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SalesDataSet.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Report\Sale\SalesDataSet.xss">
+    <Content Include="SalesDataSet.xss">
       <DependentUpon>SalesDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
@@ -695,8 +699,11 @@
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
       <DependentUpon>201711260717117_addCategoryMainToPurchaseTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\ReportViewer.rdlc" />
+    <EmbeddedResource Include="Migrations\201712260534028_salesDateTypeUpdate.resx">
+      <DependentUpon>201712260534028_salesDateTypeUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Sale\SaleReport.rdlc" />
+    <EmbeddedResource Include="Report\Sale\SaleReportViewer.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

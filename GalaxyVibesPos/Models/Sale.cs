@@ -14,7 +14,7 @@ namespace GalaxyVibesPos.Models
         public int SalesID { get; set; }
         public int CompanyID { get; set; }
         public string SalesNo { get; set; }
-        public string SalesDate { get; set; }
+        public DateTime SalesDate { get; set; }
         public string SalesTime { get; set; }
         public Nullable<int> SalesCustomerID { get; set; }
         public string SalesRemarks { get; set; }

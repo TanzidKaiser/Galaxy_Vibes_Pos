@@ -154,4 +154,5 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\pt\Microsoft.SqlServer.Types.resou
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\ru\Microsoft.SqlServer.Types.resources.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.salesDateTypeUpdate.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache

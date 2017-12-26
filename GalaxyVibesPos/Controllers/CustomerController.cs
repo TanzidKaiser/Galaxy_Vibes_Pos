@@ -57,7 +57,8 @@ namespace GalaxyVibesPos.Controllers
                     {
                         aCustomerLedger.IsPreviousDue = 1;
                     }
-                    string date = DateTime.Now.ToString("M/d/yyyy");
+                    var nowDate = DateTime.Now.ToString("M/d/yyyy");
+                    var date = Convert.ToDateTime(nowDate);
                     aCustomerLedger.ReceiveDate = date;
                     aCustomerLedger.InvoiceNo = "Previous Due";
                     aCustomerLedger.Remarks = "Previous Due";
