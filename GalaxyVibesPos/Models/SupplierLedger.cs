@@ -9,7 +9,7 @@ namespace GalaxyVibesPos.Models
     public class SupplierLedger
     {
         public int ID { get; set; }
-        public string ReceiveDate { get; set; }
+        public DateTime ReceiveDate { get; set; }
         public int SupplierID { get; set; }
         public string InvoiceNo { get; set; }
         public Nullable<double> Debit { get; set; }

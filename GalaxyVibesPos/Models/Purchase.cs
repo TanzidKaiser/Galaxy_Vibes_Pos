@@ -14,7 +14,7 @@ namespace GalaxyVibesPos.Models
         public int PurchaseID { get; set; }
         public string PurchaseNo { get; set; }
         public Nullable<int> CompanyID { get; set; }
-        public string PurchaseDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
         public Nullable<int> SupplierID { get; set; }
         public string PurchaseSupplierInvoiceNo { get; set; }
         public string PurchaseRemarks { get; set; }
@@ -40,5 +40,15 @@ namespace GalaxyVibesPos.Models
         public string PurchaseName { get; set; }
         [NotMapped]
         public int PurchaseReturnQty { get; set; }
+        [NotMapped]
+        public string CompanyName { get; set; }
+        [NotMapped]
+        public string SupplierName { get; set; }
+        [NotMapped]
+        public string ProductName { get; set; }
+        [NotMapped]
+        public string ProductCode { get; set; }
+        [NotMapped]
+        public string SubCategoryName { get; set; }
     }
 }

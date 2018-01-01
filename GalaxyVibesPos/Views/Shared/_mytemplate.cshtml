@@ -110,6 +110,7 @@
                 <a href="#"><i class="icon icon-th-list"></i> <span>Sale</span> <span class="label label-important">1</span></a>
                 <ul>
                     <li>@Html.ActionLink("Add Sale", "AddSales", "Sales")</li>
+                    <li>@Html.ActionLink("Sale Return", "SalesReturn", "Sales")</li>
 
                 </ul>
             </li>
@@ -117,6 +118,7 @@
                 <a href="#"><i class="icon icon-th-list"></i> <span>Purchase</span> <span class="label label-important">1</span></a>
                 <ul>
                     <li>@Html.ActionLink("Add Purchase", "PurchaseAdd", "Purchase")</li>
+                    <li>@Html.ActionLink("Purchase Return", "PUrchaseReturn", "Purchase")</li>
 
                 </ul>
             </li>
@@ -134,9 +136,15 @@
                 <a href="#"><i class="icon icon-th-list"></i> <span>Supplier</span> <span class="label label-important">3</span></a>
                 <ul>
                     <li>@Html.ActionLink("Add Supplier", "AddSupplier", "Supplier")</li>
-                    <li>@Html.ActionLink("Supplier Ledger", "AddSupplierLedger", "Supplier")</li>
-                    <li>@Html.ActionLink("Supplier Report", "AddCustomer", "Customer")</li>
+                    <li>@Html.ActionLink("Supplier Ledger", "AddSupplierLedger", "Supplier")</li>                    
                     <li>@Html.ActionLink("Supplier Group Setting", "GroupSettings", "SupplierGroupSettings")</li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a href="#"><i class="icon icon-th-list"></i> <span>Report</span> <span class="label label-important">3</span></a>
+                <ul>                    
+                    <a href="SaleReportViewer.aspx" class="btn btn-info">Sale Report</a>
+                    <a href="PurchaseReportView.aspx" class="btn btn-info">Purchase Report</a>
                 </ul>
             </li>
 

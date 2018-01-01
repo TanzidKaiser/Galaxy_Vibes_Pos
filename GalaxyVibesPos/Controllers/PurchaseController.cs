@@ -9,6 +9,8 @@ using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Web.Script.Serialization;
+using Microsoft.Reporting.WebForms;
 
 namespace GalaxyVibesPos.Controllers
 {
@@ -40,9 +42,6 @@ namespace GalaxyVibesPos.Controllers
         public JsonResult Save(List<Purchase> List)
         {
 
-
-
-
             Purchase aPurchaserForLedger = new Purchase();
 
             foreach (var item in List)
@@ -71,15 +70,7 @@ namespace GalaxyVibesPos.Controllers
                 db.SaveChanges();
 
                 StockIncrement(item.PurchaseProductID, item.PurchaseQuantity);
-
-
-
-
-
             }
-
-
-
 
             // Supplier ledger create function
 
@@ -88,8 +79,56 @@ namespace GalaxyVibesPos.Controllers
             return Json("Save Successfull", JsonRequestBehavior.AllowGet);
         }
 
+        public void ExportPurchaseInvoice(string encrift)
+        {
+            List<Purchase> purchase = new List<Purchase>();
 
-     
+            byte[] b = Convert.FromBase64String(encrift);
+            System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+            System.Text.Decoder utf8Decoder = encoder.GetDecoder();
+
+            int charCount = utf8Decoder.GetCharCount(b, 0, b.Length);
+            char[] decodedChar = new char[charCount];
+            utf8Decoder.GetChars(b, 0, b.Length, decodedChar, 0);
+            string result = new string(decodedChar);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Purchase[] PurchaseList = js.Deserialize<Purchase[]>(result);
+
+            foreach(var a in PurchaseList)
+            {
+                Purchase aPurchase = new Purchase();
+                aPurchase.PurchaseNo = a.PurchaseNo;
+                aPurchase.PurchaseDate = a.PurchaseDate;
+                aPurchase.PurchaseSupplierInvoiceNo = a.PurchaseSupplierInvoiceNo;
+                aPurchase.ProductCode = db.productDetails.First(p => p.ProductDetailsID == a.PurchaseProductID).Code;
+                aPurchase.ProductName = db.productDetails.First(p => p.ProductDetailsID == a.PurchaseProductID).ProductName;               
+                purchase.Add(aPurchase);
+            }
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "PurchaseDataSet";
+            reportDataSource.Value = purchase;
+
+            string mimeType = string.Empty;
+            string encodeing = string.Empty;
+            string fileNameExtension = "pdf";
+            Warning[] warnings;
+            string[] streams;
+
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Report/Purchase/PurchaseReport.rdlc");
+            localReport.DataSources.Add(reportDataSource);
+
+            byte[] bytes = localReport.Render("PDF", null, out mimeType, out encodeing, out fileNameExtension, out streams, out warnings);
+
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment;filename=file." + fileNameExtension);
+            Response.BinaryWrite(bytes);
+            Response.Flush();           
+        }
+
 
         private void StockIncrement(int? productID, double? quantity)
         {
@@ -99,7 +138,7 @@ namespace GalaxyVibesPos.Controllers
 
         }
 
-        private void SupplierLedgerCreate(string invoiceNO, double? totalAmount, int? supplierID, string date)
+        private void SupplierLedgerCreate(string invoiceNO, double? totalAmount, int? supplierID, DateTime date)
         {
 
             SupplierLedger aSupplierLedger = new SupplierLedger();
@@ -180,7 +219,7 @@ namespace GalaxyVibesPos.Controllers
             DatabaseContext db = new DatabaseContext();
 
             var allSearch = (from N in db.productDetails
-                             where N.Code.StartsWith(Prefix)
+                             where N.Code.StartsWith(Prefix) || N.ProductName.StartsWith(Prefix)
                              select new { N.Code, N.Stoke, N.ProductName, N.UnitID, N.PurchasePrice, N.ProductDetailsID, N.CategorySub.SubCategoryName, N.SalePrice });
 
 
@@ -295,7 +334,7 @@ namespace GalaxyVibesPos.Controllers
 
                 i = db.SaveChanges();
             }
-            
+
             return i;
 
         }

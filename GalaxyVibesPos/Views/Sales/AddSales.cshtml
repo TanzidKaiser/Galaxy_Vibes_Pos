@@ -177,7 +177,7 @@
                                             <label class="control-label span6" id="levelWidth">Discount</label>
                                             <div class="controls" id="inputMargin">
                                                 <label class="span6"><input type="radio" name="SalesProductDiscount" checked="checked" id="forParcent" style="margin: 0px 4px 7px" /><input type="text" id="parcentValue" style="width:50px" /> % </label>
-                                                <label class="span6"><input type="radio" name="SalesProductDiscount" id="forTaka" style=" margin 0px 4px 7px" /><input type="text" id="tkValue" style="width:50px" /> Tk </label>
+                                                <label class="span6"><input type="radio" name="SalesProductDiscount" id="forTaka" style="margin: 0px 4px 7px" /><input type="text" id="tkValue" style="width:50px" /> Tk </label>
                                             </div>
                                         </div>
 
@@ -467,7 +467,7 @@
                                         </div>
                                         <div class="control-group">
 
-                                            <div class="controls" id="inputMargin" style=" margin 15px 18px 0px -7px;">
+                                            <div class="controls" id="inputMargin" style="margin: 15px 18px 0px -7px;">
                                                 <label id="ColorForCheckboxLebel"><input type="checkbox" id="TotalAmount" />Sales Without Print</label>
 
                                             </div>
@@ -477,8 +477,8 @@
 
                                             <div class="controls" id="inputMargin" style="margin: 0px 0px 0px 0px">
                                                 <label class="span4"><input type="radio" id="Cash" name="radio1" value="Cash" checked style="margin: 0px 4px 7px" />Cash </label>
-                                                <label class="span4"><input type="radio" id="Due" name="radio1" value="Due" style=" margin 0px 4px 7px" />Due </label>
-                                                <label class="span4"><input type="radio" id="Cheque" name="radio1" value="Cheque" style=" margin 0px 4px 7px" />Cheque </label>
+                                                <label class="span4"><input type="radio" id="Due" name="radio1" value="Due" style="margin: 0px 4px 7px" />Due </label>
+                                                <label class="span4"><input type="radio" id="Cheque" name="radio1" value="Cheque" style="margin: 0px 4px 7px" />Cheque </label>
                                             </div>
                                         </div>
                                     </div>
@@ -584,8 +584,7 @@
                                 $("#ProductPrice").val(item.SalePrice);
                                 $("#PurchaseProductID").val(item.ProductDetailsID);
                                 $("#SubCategoryName").val(item.SubCategoryName);
-                                return { label: item.Code, value: item.Code };
-
+                                return { label: item.Code, value: item.Code };                           
                             }))
 
                         }

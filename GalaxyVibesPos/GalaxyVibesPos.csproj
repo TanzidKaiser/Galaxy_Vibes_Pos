@@ -158,6 +158,10 @@
     <Compile Include="Migrations\201712260534028_salesDateTypeUpdate.Designer.cs">
       <DependentUpon>201712260534028_salesDateTypeUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712270621414_typeChangeStringToDateSupplierAndPurchase.cs" />
+    <Compile Include="Migrations\201712270621414_typeChangeStringToDateSupplierAndPurchase.Designer.cs">
+      <DependentUpon>201712270621414_typeChangeStringToDateSupplierAndPurchase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryMain.cs" />
@@ -182,7 +186,19 @@
     <Compile Include="Models\ProductAdd.cs" />
     <Compile Include="Models\ViewBag\ProductUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalesDataSet.Designer.cs">
+    <Compile Include="PurchaseReportView.aspx.cs">
+      <DependentUpon>PurchaseReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PurchaseReportView.aspx.designer.cs">
+      <DependentUpon>PurchaseReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Purchase\PurchaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Sale\SalesDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SalesDataSet.xsd</DependentUpon>
@@ -533,6 +549,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="PurchaseReportView.aspx" />
     <Content Include="SaleReportViewer.aspx" />
     <Content Include="Scripts\AngulaControler\myApp.js" />
     <Content Include="Scripts\angular.js" />
@@ -628,15 +645,26 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
-    <Content Include="SalesDataSet.xsc">
+    <Content Include="Report\Sale\SalesDataSet.xsc">
       <DependentUpon>SalesDataSet.xsd</DependentUpon>
     </Content>
-    <None Include="SalesDataSet.xsd">
+    <Content Include="Report\Purchase\PurchaseDataSet.xsc">
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\Purchase\PurchaseDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PurchaseDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\Purchase\PurchaseDataSet.xss">
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\Sale\SalesDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SalesDataSet.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="SalesDataSet.xss">
+    <Content Include="Report\Sale\SalesDataSet.xss">
       <DependentUpon>SalesDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
@@ -702,6 +730,11 @@
     <EmbeddedResource Include="Migrations\201712260534028_salesDateTypeUpdate.resx">
       <DependentUpon>201712260534028_salesDateTypeUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270621414_typeChangeStringToDateSupplierAndPurchase.resx">
+      <DependentUpon>201712270621414_typeChangeStringToDateSupplierAndPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Purchase\PurchaseReport.rdlc" />
+    <EmbeddedResource Include="Report\Purchase\PurchaseReportViewer.rdlc" />
     <EmbeddedResource Include="Report\Sale\SaleReport.rdlc" />
     <EmbeddedResource Include="Report\Sale\SaleReportViewer.rdlc" />
   </ItemGroup>

@@ -624,38 +624,6 @@
             $("#TotalAmount").val(sum);
         }
     </script>
-
-    @*<script>
-            function AddID() {
-
-                //var $tableBody = $("#Table").find("tbody");
-                var totaRow = $('#Table tbody tr').length;
-                if (totaRow == 0)
-                {
-                    //var newValue = parseInt($ trLast.find("#SlNO").val()) + 1;
-                    $('#SlNO').html(0);
-                }
-                //$trLast = $tableBody.find("tr:last"),
-                //$trNew = $trLast.clone();
-                //$trNew.find("#OperationalInstructiontxt").val("");
-                //var newValue = parseInt($trLast.find("#SlNO").val()) + 1;
-                //$trNew.find("#SlNO").val(newValue);
-                //var id = $trNew;
-                //$('#SlNO').html(id);
-                //$trLast.after($trNew);
-
-        };
-        </script>*@
-
-    @*<script>
-                   var $tableBody = $("#myTable").find("tbody"),
-                   $trLast = $tableBody.find("tr:last"),
-                   $trNew = $trLast.clone();
-                   $trNew.find("#OperationalInstructiontxt").val("");
-                    var newValue = parseInt($trLast.find("#SlNO").val()) + 1;
-                   $trNew.find("#SlNO").val(newValue);
-        </script>*@
-
     <script>
         $(document).ready(function () {
             $("#submitBtn").click(function () {
@@ -695,7 +663,12 @@
                         data: JSON.stringify(List),
                         contentType: 'application/json',
                         success: function (data) {
-                            alert(data);                            
+                            alert(data);
+                            setTimeout(location.reload.bind(location), 2000);
+                            var SerializeList = JSON.stringify(List);
+                            var Encode = btoa(SerializeList);
+                            var Url = '@Url.Action("ExportPurchaseInvoice", "Purchase")' + '/?encrift=' + Encode;
+                            window.location = Url;
                         },
                     });
                 }
@@ -703,7 +676,7 @@
 
                     alert("Please Add Minimum One Item");
                 };
-                window.location.href = "/Purchase/PurchaseAdd";
+                //window.location.href = "/Purchase/PurchaseAdd";
             });
         })
     </script>
