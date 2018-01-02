@@ -1,0 +1,184 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.ProductUnit>
+@{
+    ViewBag.Title = "AddUnit";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span7">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Unit</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="SubmitForm">
+                                    <input data-val="true" id="UnitID" name="UnitID" type="hidden">
+                                    <div class="control-group">
+
+                                        <label class="control-label">Customer Name</label>
+                                        <div class="controls">
+                                            <input type="text" name="UnitSize" id="UnitSize" placeholder="Unit" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
+                                        <button type="button" id="UpdateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        }
+                    </div>
+                    @if (@ViewBag.Message == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5> Unit Name Already Exist ! </h5>
+                        </div>
+                    }
+                    @if (@ViewBag.Message == 1)
+                    {
+                        <div class="alert alert-success alert-block" id="Msg">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Success!</h4>
+                            <h5>Unit Name Save Successfully !</h5>
+                        </div>
+                    }
+                    @if (@ViewBag.Message == 2)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Warn!</h4>
+                            <h5>Null Field Not Except!</h5>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="span5">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Unit List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped" id="myTables">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">ID</td>
+                                    <td style="font-size:medium">Name</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr class="odd gradeX">
+                                        <td>
+
+
+                                            @Html.DisplayFor(m => item.UnitID)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(m => item.UnitSize)
+
+                                        </td>
+                                        <td>
+                                            <button type="button" id="EditCustomer" class="btn" onclick="EditUnit(@item.UnitID,this)">Edit</button> |
+                                            <button type="button" id="EditCustomer" class="btn" onclick="DelateUnit(@item.UnitID,this)">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function EditUnit(id, num) {
+
+            $.ajax({
+
+                url: '/Settings/EditUnit',
+                data: { 'unitId': id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#UnitID").val(response.UnitID);
+                    $("#UnitSize").val(response.UnitSize);
+                    $("#addBtn").hide();
+
+                },
+            });
+        }
+        function DelateUnit(id, num) {
+
+            $.ajax({
+
+                url: '/Settings/DelateUnit',
+                data: { 'unitId': id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+                    alert(response);
+                    window.location.href = "/Settings/AddUnit";
+                },
+            });
+        }
+    </script>
+    <script>
+        $("#UpdateBtn").click(function () {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Settings/UpdateUnit",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/Settings/AddUnit";
+
+                }
+            })
+        })
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+
+}

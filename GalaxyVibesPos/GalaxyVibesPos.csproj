@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Contrib.System.Printing.Xps, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Contrib.System.Printing.Xps.0.4.0\lib\net40\Contrib.System.Printing.Xps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -66,9 +70,11 @@
       <HintPath>..\packages\Microsoft.ReportViewer.WebForms.v12.12.0.0.0\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -145,6 +151,7 @@
     <Compile Include="Controllers\CustomerGroupSettingsController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\SupplierGroupSettingsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -162,6 +169,10 @@
     <Compile Include="Migrations\201712270621414_typeChangeStringToDateSupplierAndPurchase.Designer.cs">
       <DependentUpon>201712270621414_typeChangeStringToDateSupplierAndPurchase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801020845180_ProductUnitAdd.cs" />
+    <Compile Include="Migrations\201801020845180_ProductUnitAdd.Designer.cs">
+      <DependentUpon>201801020845180_ProductUnitAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryMain.cs" />
@@ -174,8 +185,6 @@
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Sale.cs" />
-    <Compile Include="Models\Temp Class\PurchaseTemp.cs" />
-    <Compile Include="Models\Temp Class\SaleTemp.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupplierCompany.cs" />
     <Compile Include="Models\SupplierGroup.cs" />
@@ -184,7 +193,7 @@
     <Compile Include="Models\ViewBag\GroupViewModel.cs" />
     <Compile Include="Models\ViewBag\ItemSattingViewModel.cs" />
     <Compile Include="Models\ProductAdd.cs" />
-    <Compile Include="Models\ViewBag\ProductUnit.cs" />
+    <Compile Include="Models\ProductUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseReportView.aspx.cs">
       <DependentUpon>PurchaseReportView.aspx</DependentUpon>
@@ -722,6 +731,7 @@
     <Content Include="Views\Sales\AddSales.cshtml" />
     <Content Include="Views\Purchase\PUrchaseReturn.cshtml" />
     <Content Include="Views\Sales\SalesReturn.cshtml" />
+    <Content Include="Views\Settings\AddUnit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
@@ -732,6 +742,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712270621414_typeChangeStringToDateSupplierAndPurchase.resx">
       <DependentUpon>201712270621414_typeChangeStringToDateSupplierAndPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801020845180_ProductUnitAdd.resx">
+      <DependentUpon>201801020845180_ProductUnitAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Purchase\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Report\Purchase\PurchaseReportViewer.rdlc" />

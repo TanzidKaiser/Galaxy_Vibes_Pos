@@ -6,10 +6,10 @@ using System.Web.Mvc;
 using GalaxyVibesPos.Models;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
-using GalaxyVibesPos.Models.Temp_Class;
 using Microsoft.Reporting.WebForms;
 using System.Web.Script.Serialization;
-
+using System.Printing;
+using System.Drawing.Printing;
 namespace GalaxyVibesPos.Controllers
 {
     public class SalesController : Controller
@@ -197,7 +197,15 @@ namespace GalaxyVibesPos.Controllers
             Response.AddHeader("content-disposition", "attachment;filename=file." + fileNameExtension);
             Response.BinaryWrite(bytes);
             Response.Flush();
-            //return RedirectToAction("AddSales");
+
+            //var pq = LocalPrintServer.GetDefaultPrintQueue();
+            //using (var job = pq.AddJob())
+            //using (var s = job.JobStream)
+            //{
+            //    s.Write(bytes, 0, bytes.Length);
+            //}
+           
+
         }
 
         private void CustomerLedgerCreate(CustomerLedger aCustomerLedger)

@@ -190,7 +190,7 @@ namespace GalaxyVibesPos.Controllers
 
             ViewBag.MainCategoryList = list;
 
-            ViewBag.ProductUnit = GetUnit();
+            //ViewBag.ProductUnit = GetUnit();
 
             return View();
 
@@ -504,21 +504,21 @@ namespace GalaxyVibesPos.Controllers
         //---Cascading Dropdown For Product Details--- !
 
 
-        private List<ProductUnit> GetUnit()
-        {
-            List<ProductUnit> productUnit = new List<ProductUnit>
-            {
-                new ProductUnit{UnitID = 1, UnitSize = "PCS"},
-                new ProductUnit{UnitID = 2, UnitSize = "Carton(12)"},
-                new ProductUnit{UnitID = 3, UnitSize = "Carton(24)"},
-                new ProductUnit{UnitID = 4, UnitSize = "Carton(36)"},
-                new ProductUnit{UnitID = 5, UnitSize = "Carton(48)"},
-                new ProductUnit{UnitID = 6, UnitSize = "Carton(601)"},
-                new ProductUnit{UnitID = 7, UnitSize = "Carton(72)"}
+        //private List<ProductUnit> GetUnit()
+        //{
+        //    List<ProductUnit> productUnit = new List<ProductUnit>
+        //    {
+        //        new ProductUnit{UnitID = 1, UnitSize = "PCS"},
+        //        new ProductUnit{UnitID = 2, UnitSize = "Carton(12)"},
+        //        new ProductUnit{UnitID = 3, UnitSize = "Carton(24)"},
+        //        new ProductUnit{UnitID = 4, UnitSize = "Carton(36)"},
+        //        new ProductUnit{UnitID = 5, UnitSize = "Carton(48)"},
+        //        new ProductUnit{UnitID = 6, UnitSize = "Carton(601)"},
+        //        new ProductUnit{UnitID = 7, UnitSize = "Carton(72)"}
 
-            };
-            return productUnit;
-        }
+        //    };
+        //    return productUnit;
+        //}
 
         // When selct product dropdown all input field will bind selected product data 
 

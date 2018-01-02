@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GalaxyVibesPos.Models;
-using GalaxyVibesPos.Models.Temp_Class;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
 using System.Data.Entity;
