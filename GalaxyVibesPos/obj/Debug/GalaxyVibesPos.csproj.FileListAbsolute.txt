@@ -158,5 +158,6 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.sa
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.typeChangeStringToDateSupplierAndPurchase.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Contrib.System.Printing.Xps.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Contrib.System.Printing.Xps.xml
-E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.ProductUnitAdd.resources
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.addMainLocationAndLocationAndSubLocationCreate.resources
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache

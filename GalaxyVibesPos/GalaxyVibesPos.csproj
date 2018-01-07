@@ -154,6 +154,7 @@
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\SupplierGroupSettingsController.cs" />
+    <Compile Include="Controllers\WareHouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,6 +174,10 @@
     <Compile Include="Migrations\201801020845180_ProductUnitAdd.Designer.cs">
       <DependentUpon>201801020845180_ProductUnitAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801070522198_addMainLocationAndLocationAndSubLocationCreate.cs" />
+    <Compile Include="Migrations\201801070522198_addMainLocationAndLocationAndSubLocationCreate.Designer.cs">
+      <DependentUpon>201801070522198_addMainLocationAndLocationAndSubLocationCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryMain.cs" />
@@ -182,6 +187,9 @@
     <Compile Include="Models\CustomerLedger.cs" />
     <Compile Include="Models\DatabaseContext\DatabaseContext.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LocationMain.cs" />
+    <Compile Include="Models\LocationSub.cs" />
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Sale.cs" />
@@ -194,6 +202,7 @@
     <Compile Include="Models\ViewBag\ItemSattingViewModel.cs" />
     <Compile Include="Models\ProductAdd.cs" />
     <Compile Include="Models\ProductUnit.cs" />
+    <Compile Include="Models\ViewBag\LocationSettingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseReportView.aspx.cs">
       <DependentUpon>PurchaseReportView.aspx</DependentUpon>
@@ -732,6 +741,7 @@
     <Content Include="Views\Purchase\PUrchaseReturn.cshtml" />
     <Content Include="Views\Sales\SalesReturn.cshtml" />
     <Content Include="Views\Settings\AddUnit.cshtml" />
+    <Content Include="Views\WareHouse\AddWireHouse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
@@ -745,6 +755,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801020845180_ProductUnitAdd.resx">
       <DependentUpon>201801020845180_ProductUnitAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801070522198_addMainLocationAndLocationAndSubLocationCreate.resx">
+      <DependentUpon>201801070522198_addMainLocationAndLocationAndSubLocationCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Purchase\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Report\Purchase\PurchaseReportViewer.rdlc" />

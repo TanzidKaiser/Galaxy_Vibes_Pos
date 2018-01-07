@@ -1,0 +1,224 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.ViewBag.LocationSettingViewModel>
+@{
+    ViewBag.Title = "AddWireHouse";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+
+        <h1>Item Sattings</h1>
+
+
+    </div>>
+    <div class="container-fluid">
+        <br />
+        <br />
+        <hr />
+
+        <div class="row-fluid">
+            <div class="span9">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#MainCatagory" data-toggle="tab">Add Warehouse</a>
+                            </li>
+
+                            <li>
+                                <a href="#Category" data-toggle="tab">Add Rack</a>
+                            </li>
+                            <li>
+                                <a href="#SubCategory" data-toggle="tab">Add Cell</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div id="MainCatagory" class="tab-pane active">
+                            <div class="widget-content nopadding">
+                                @*<form action="#" method="get" class="form-horizontal">*@
+                                <form class="form-horizontal">
+
+                                    <fieldset id="mainCategorySubmitForm">
+                                        <div class="control-group">
+                                            <br />
+                                            <label class="control-label">Add Warehouse:</label>
+                                            <div class="controls">
+                                                <input type="text" id="LocationMainName" name="LocationMainName" class="span11" placeholder="Add Wirehouse" />
+
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-control">
+                                            <button type="button" id="WirehouseBtn" class="btn btn-success" style="margin:15px">Save</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div id="Category" class="tab-pane">
+                            <div class="widget-content nopadding">
+                                <form class="form-horizontal">
+                                    <fieldset id="categorySubmitForm">
+                                        <div class="control-group">
+                                            <label class="control-label">Main Location</label>
+                                            <div class="controls">
+                                                @Html.DropDownList("LocationMainID", ViewBag.MainLocations as List<SelectListItem>)
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Add Rack:</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" name="LocationName" placeholder="Add Rack" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-actions">
+                                            <button type="button" id="RackBtn" class="btn btn-success">Save</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="SubCategory" class="tab-pane">
+                            <div class="widget-content nopadding">
+                                <form class="form-horizontal">
+                                    <fieldset id="CallSubmitForm">
+                                        <div class="control-grohttp://localhost:61211/Home/charts.htmlup">
+                                            <label class="control-label">Add Cell:</label>
+                                            <div class="controls">
+
+
+                                                @Html.DropDownList("LocationMainID", ViewBag.MainLocations as List<SelectListItem>, new { @id = "LocationMaionForCell" })
+
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select Cell:</label>
+                                            <div class="controls">
+
+                                                @Html.DropDownList("LocationID", new SelectList(string.Empty, "Value", "Text"), "Select Cell", new { @id = "LocationForCell" })
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Add Cell:</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" name="LocationSubName" placeholder="Add Cell" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-actions">
+                                            <button type="button" id="CellBtn" class="btn btn-success">Save</button>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#WirehouseBtn").click(function () {
+            var data = $("#mainCategorySubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/WareHouse/SaveWareHouseInDatabase",
+                data: data,
+                success: function (result) {
+                    if (result == 1) {
+                        alert("Save Successfull");
+                    }
+                    else if (result == 2) {
+                        alert("Wirehouse name already Exists");
+                    }
+                    else {
+                        alert("Exception, Please try Again");
+                    }
+
+
+                    window.location.href = "/WareHouse/AddWireHouse";
+                }
+            })
+        })
+    </script>
+    <script>
+        $("#RackBtn").click(function () {
+            var data = $("#categorySubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/WareHouse/SaveRackInDatabase",
+                data: data,
+                success: function (result) {
+
+                    alert(result);
+
+                    window.location.href = "/WareHouse/AddWireHouse";
+                }
+            })
+        })
+    </script>
+    <script>
+        $("#CellBtn").click(function () {
+            var data = $("#CallSubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/WareHouse/SaveCallInDatabase",
+                data: data,
+                success: function (result) {
+
+                    alert(result);
+
+                    window.location.href = "/WareHouse/AddWireHouse";
+                }
+            })
+        })
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#LocationMaionForCell").change(function () {
+                $("#LocationForCell").empty();
+                var locationMainID = $(this).val();;
+                var json = { LocationMainID: locationMainID, }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetLocationByMainLocation", "WareHouse")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (response) {
+
+                        $.each(response, function (i, state) {
+                            $("#LocationForCell").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve country states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+}
