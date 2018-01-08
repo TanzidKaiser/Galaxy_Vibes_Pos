@@ -21,30 +21,32 @@
                         <h5>Personal-info</h5>
                     </div>
                     <div class="widget-content nopadding">
-                        @Html.AntiForgeryToken()
-                        <form class="form-horizontal">
+                       
+                            @Html.AntiForgeryToken()
+                            <form class="form-horizontal">
 
-                            <fieldset id="mainCategorySubmitForm">
-                                <div class="control-group">
-                                    <br />
-                                    @Html.HiddenFor(model => model.MainCategoryID)
-                                    <label class="control-label">Add Main Category:</label>
-                                    <div class="controls">
-                                        @Html.EditorFor(model => model.MaincategoryName)
+                                <fieldset id="mainCategorySubmitForm">
+                                    <div class="control-group">
+                                        <br />
+                                        @Html.HiddenFor(model => model.MainCategoryID)
+                                        <label class="control-label">Add Main Category:</label>
+                                        <div class="controls">
+                                            @Html.EditorFor(model => model.MaincategoryName)
+                                        </div>
                                     </div>
-                                </div>
-                                <br />
-                                @*<div class="form-control">
-                                        <input type="submit" value="Save" class="btn btn-success" style="margin:15px"/>                                 
-                                </div>*@
-                                <div class="form-control">
-                                    <button type="button" id="MainCategoryBtn" class="btn btn-success" style="margin:15px">Save</button>
-                                </div>
-                            </fieldset>
-                        </form>
-                        <div>
-                            @Html.ActionLink("Back to List", "MainCategoryIndex")
-                        </div>                       
+                                    <br />
+                                    @*<div class="form-control">
+                                                <input type="submit" value="Save" class="btn btn-success" style="margin:15px"/>
+                                        </div>*@
+                                    <div class="form-control">
+                                        <button type="button" id="MainCategoryBtn" class="btn btn-success" style="margin:15px">Save</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <div>
+                                @Html.ActionLink("Back to List", "MainCategoryIndex")
+                            </div>
+                        
                     </div>
                 </div>
             </div>
@@ -56,22 +58,22 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-@*.........Save Main Category........*@
-<script>
-    $("#MainCategoryBtn").click(function () {
-        var data = $("#mainCategorySubmitForm").serialize();
-        $.ajax({
-            type: "Post",
-            url: "/ItemSatting/SaveMainCategoryInDatabase",
-            data: data,
-            success: function (result) {
-                alert(result);
-                window.location.href = "/ItemSatting/MainCategoryIndex";
+    @*.........Save Main Category........*@
+    <script>
+        $("#MainCategoryBtn").click(function () {
+            var data = $("#mainCategorySubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/ItemSatting/SaveMainCategoryInDatabase",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/ItemSatting/MainCategoryIndex";
 
 
-            }
+                }
+            })
         })
-    })
-</script>
+    </script>
 
 }
