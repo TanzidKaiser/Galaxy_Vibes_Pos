@@ -1,0 +1,64 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.Location>
+
+@{
+    ViewBag.Title = "RackIndex";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <p>
+                @Html.ActionLink("Create New", "AddWireHouse", null, new { @style = "color:red;" })
+            </p>
+
+            <div class="widget-box span10">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Data table</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped" id="myTable">
+                        <thead>
+                            <tr>
+                                <th style="font-size:small;color:green">Warehouse</th>
+                                <th style="font-size:small;color:green">Rack</th>
+                                <th style="font-size:small;color:red;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LocationMain.LocationMainName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LocationName)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "RackEdit", new { id = item.LocationID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.LocationID })
+                                        <a href="" onclick="delete(@item.LocationID)">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+@Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function Rackdelete(id){
+          
+        }
+    </script>
+}

@@ -14,6 +14,14 @@ namespace GalaxyVibesPos.Controllers
         // GET: WareHouse
         public ActionResult AddWireHouse()
         {
+
+            ViewBag.MainLocations = GetWarehouse();
+            return View();
+        }
+
+        // WarehouseNames return For Dropdown
+        public dynamic GetWarehouse()
+        {
             var mainLocations = db.LocationMain.ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem { Text = "Select Warehouse", Value = "0" });
@@ -22,9 +30,7 @@ namespace GalaxyVibesPos.Controllers
                 list.Add(new SelectListItem { Text = m.LocationMainName, Value = Convert.ToString(m.LocationMainID) });
 
             }
-            ViewBag.MainLocations = list;
-
-            return View();
+            return list;
         }
 
         public ActionResult SaveWareHouseInDatabase(LocationMain model)
@@ -43,6 +49,7 @@ namespace GalaxyVibesPos.Controllers
 
             return Json(i, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult SaveRackInDatabase(Location model)
         {
             int i = 0;
@@ -159,6 +166,39 @@ namespace GalaxyVibesPos.Controllers
         }
 
         //Rack Edit And Index 
+
+        public ActionResult RackIndex()
+        {
+            return View(db.Location.ToList());
+        }
+        public ActionResult RackEdit(int id)
+        {
+            var rack = db.Location.Find(id);
+            if (rack == null)
+            {
+                ViewBag.Msg = 1;
+                return View();
+
+            }
+            ViewBag.Warehouse = GetWarehouse();
+            return View(rack);
+        }
+        [HttpPost]
+        public ActionResult RackUpdate(Location data)
+        {
+            var Msg = "";
+            db.Entry(data).State = EntityState.Modified;
+            int i = db.SaveChanges();
+            if (i == 1)
+            {
+                Msg = "Update Successfully";
+            }
+            else
+            {
+                Msg = "Exception, Please Try Again";
+            }
+            return Json(Msg, JsonRequestBehavior.AllowGet);
+        }
 
 
     }

@@ -1,0 +1,87 @@
+﻿@model GalaxyVibesPos.Models.Location
+
+@{
+    ViewBag.Title = "RackEdit";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <hr />
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Edit</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal">
+                            <fieldset id="rackSubmitForm">
+                                <div class="control-group">
+                                    <br />
+                                    @Html.HiddenFor(model => model.LocationID)
+                                    <label class="control-label">Select Warehouse</label>
+                                        <div class="controls">
+
+                                            @Html.DropDownList("LocationMainID", ViewBag.Warehouse as List<SelectListItem>)
+                                        </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Rack:</label>
+                                    <div class="controls">
+
+                                        @Html.EditorFor(model => model.LocationName)
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-actions">
+                                    <button type="button" id="updateBtn" class="btn btn-success">Update</button>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                        <div>
+                            @Html.ActionLink("Back to List", "RackIndex",null,new { @style="color:red"})
+                        </div>
+                    </div>
+                    @if (ViewBag.Msg == 1)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5>Http Request Not Found</h5>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        $("#updateBtn").click(function () {
+            var data = $("#rackSubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/WareHouse/RackUpdate",
+                data: data,
+                success: function (result) {
+                    alert(result);
+
+                    window.location.href = "/WareHouse/RackIndex";
+
+
+                }
+            })
+        })
+    </script>
+
+}

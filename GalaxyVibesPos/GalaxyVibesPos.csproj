@@ -744,6 +744,8 @@
     <Content Include="Views\WareHouse\AddWireHouse.cshtml" />
     <Content Include="Views\WareHouse\WirehouseIndex.cshtml" />
     <Content Include="Views\WareHouse\WirehouseEdit.cshtml" />
+    <Content Include="Views\WareHouse\RackIndex.cshtml" />
+    <Content Include="Views\WareHouse\RackEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
