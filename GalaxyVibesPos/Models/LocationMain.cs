@@ -13,5 +13,6 @@ namespace GalaxyVibesPos.Models
         [Key]
         public int LocationMainID { get; set; }
         public string LocationMainName { get; set; }
+       
     }
 }

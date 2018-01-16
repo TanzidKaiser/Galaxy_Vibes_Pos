@@ -150,7 +150,6 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\pt\Microsoft.SqlServer.Types.resou
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\ru\Microsoft.SqlServer.Types.resources.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
-E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.addCategoryMainToPurchaseTable.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.salesDateTypeUpdate.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.typeChangeStringToDateSupplierAndPurchase.resources
@@ -161,3 +160,4 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\RdlCompile.cache
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\RdlCompile.compiled
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.pdb
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache

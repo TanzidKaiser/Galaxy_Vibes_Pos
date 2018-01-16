@@ -1,12 +1,9 @@
-﻿@model IEnumerable<GalaxyVibesPos.Models.Location>
+﻿@model IEnumerable<GalaxyVibesPos.Models.LocationSub>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CellIndex";
     Layout = "~/Views/Shared/_mytemplate.cshtml";
 }
-
-<h2>Index</h2>
-
 <div id="content">
     <div id="content-header">
         <div id="breadcrumb">
@@ -30,6 +27,7 @@
                             <tr>
                                 <th style="font-size:small;color:green">Warehouse</th>
                                 <th style="font-size:small;color:green">Rack</th>
+                                <th style="font-size:small;color:green">Cell</th>
                                 <th style="font-size:small;color:red;">Action</th>
                             </tr>
                         </thead>
@@ -38,15 +36,19 @@
                             {
                                 <tr>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Location.LocationName)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.LocationMain.LocationMainName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LocationName)
+                                        @Html.DisplayFor(modelItem => item.LocationSubName)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "RackEdit", new { id = item.LocationID }) |
-                                        @Html.ActionLink("Delete", "RackIndex", new { id = item.LocationID })
-                                       
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.LocationSubID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.LocationSubID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.LocationSubID })
+
                                     </td>
                                 </tr>
                             }
@@ -65,18 +67,42 @@
         </div>
     </div>
 </div>
-@section scripts{
+@*<h2>CellIndex</h2>
 
-    <script type="text/javascript">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Location.LocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationMain.LocationMainName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationSubName)
+            </th>
+            <th></th>
+        </tr>
 
-        $(document).ready(function () {
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationMain.LocationMainName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationSubName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.LocationSubID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.LocationSubID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.LocationSubID })
+            </td>
+        </tr>
+    }
 
-            window.setTimeout(function () {
-                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
-                    $(this).remove();
-                });
-            }, 5000);
-
-        });
-    </script>
-}
+    </table>*@

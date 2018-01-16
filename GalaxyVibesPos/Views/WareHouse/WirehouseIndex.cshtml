@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <p>
-                @Html.ActionLink("Create New", "AddWireHouse",null,new { @style="color:red;"})
+                @Html.ActionLink("Create New", "AddWireHouse", null, new { @style = "color:red;" })
             </p>
 
             <div class="widget-box span10">
@@ -37,16 +37,41 @@
                                         @Html.DisplayFor(modelItem => item.LocationMainName)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "WirehouseEdit", new { id = item.LocationMainID }) |                                       
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.LocationMainID })
+                                        @Html.ActionLink("Edit", "WirehouseEdit", new { id = item.LocationMainID }) |
+                                        @Html.ActionLink("Delete", "WirehouseIndex", new { id = item.LocationMainID })
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">সতর্কতা বার্তা !</h4>
+                            <h5>@ViewBag.Msg;</h5>
+                        </div>
+                    }
+                  
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
+@section scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+
+        });
+    </script>
+}

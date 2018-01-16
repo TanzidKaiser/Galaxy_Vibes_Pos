@@ -130,11 +130,28 @@ namespace GalaxyVibesPos.Controllers
             return Json(Msg, JsonRequestBehavior.AllowGet);
         }
         //Warehouse Edit
-        public ActionResult WirehouseIndex()
+        //[HttpGet]
+        public ActionResult WirehouseIndex(int? id)
         {
-
+            if(id == null)
+            { 
             return View(db.LocationMain.ToList());
-        }
+            }
+            else
+            {
+                try {
+
+                    var Wirehousedelete = db.LocationMain.Find(id);
+                    db.LocationMain.Remove(Wirehousedelete);
+                    db.SaveChanges();
+                    return View(db.LocationMain.ToList());
+                }catch(Exception)
+                {
+                    ViewBag.Msg = "আপনি সরাসরি ওয়্যারহাউজের নাম মুছে দিতে পারেন না । এক্ষেত্রে আগে আপনাকে একই ওয়্যারহাউজের রেকের নাম ও তার নিকট থাকা Cell নাম মুছতে হবে । ধন্যবাদ !";
+                }
+            }
+            return View(db.LocationMain.ToList());
+        }        
         public ActionResult WirehouseEdit(int id)
         {
             var wirehouse = db.LocationMain.Find(id);
@@ -167,9 +184,32 @@ namespace GalaxyVibesPos.Controllers
 
         //Rack Edit And Index 
 
-        public ActionResult RackIndex()
+
+        public ActionResult RackIndex(int? id)
         {
-            return View(db.Location.ToList());
+            var location = db.Location.ToList();
+
+            if (id == null)
+            {
+                return View(location);
+            }
+            else
+            {
+                try
+                {
+
+                    var Wirehousedelete = db.Location.Find(id);
+                    db.Location.Remove(Wirehousedelete);
+                    db.SaveChanges();
+                    return View(location);
+                }
+                catch (Exception)
+                {
+                    ViewBag.Msg = "আপনি সরাসরি রেকের নাম মুছে দিতে পারেন না । এক্ষেত্রে আগে আপনাকে একই রেকের নিকট থাকা Cell নাম মুছতে হবে । ধন্যবাদ !";
+                }
+            }
+            return View(location);
+
         }
         public ActionResult RackEdit(int id)
         {
@@ -199,6 +239,33 @@ namespace GalaxyVibesPos.Controllers
             }
             return Json(Msg, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult CellIndex(int? id)
+        {
+            var locationSub = db.LocationSub.ToList();
+
+            if (id == null)
+            {
+                return View(locationSub);
+            }
+            else
+            {
+                try
+                {
+
+                    var Wirehousedelete = db.Location.Find(id);
+                    db.Location.Remove(Wirehousedelete);
+                    db.SaveChanges();
+                    return View(locationSub);
+                }
+                catch (Exception)
+                {
+                    ViewBag.Msg = "আপনি সরাসরি রেকের নাম মুছে দিতে পারেন না । এক্ষেত্রে আগে আপনাকে একই রেকের নিকট থাকা Cell নাম মুছতে হবে । ধন্যবাদ !";
+                }
+            }
+            return View(locationSub);
+
+        }
+
 
 
     }
