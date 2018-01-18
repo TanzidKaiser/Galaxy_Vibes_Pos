@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201801070522198_addMainLocationAndLocationAndSubLocationCreate.Designer.cs">
       <DependentUpon>201801070522198_addMainLocationAndLocationAndSubLocationCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801181030005_createForeignUnitInProduct.cs" />
+    <Compile Include="Migrations\201801181030005_createForeignUnitInProduct.Designer.cs">
+      <DependentUpon>201801181030005_createForeignUnitInProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryMain.cs" />
@@ -747,6 +751,7 @@
     <Content Include="Views\WareHouse\RackEdit.cshtml" />
     <Content Include="Views\WareHouse\RackIndex.cshtml" />
     <Content Include="Views\WareHouse\CellIndex.cshtml" />
+    <Content Include="Views\WareHouse\CellEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
@@ -763,6 +768,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801070522198_addMainLocationAndLocationAndSubLocationCreate.resx">
       <DependentUpon>201801070522198_addMainLocationAndLocationAndSubLocationCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801181030005_createForeignUnitInProduct.resx">
+      <DependentUpon>201801181030005_createForeignUnitInProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Purchase\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Report\Purchase\PurchaseReportViewer.rdlc" />

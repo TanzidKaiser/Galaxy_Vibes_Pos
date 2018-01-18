@@ -13,5 +13,6 @@ namespace GalaxyVibesPos.Models
         [Key]
         public int UnitID { get; set; }
         public string UnitSize { get; set; }
+        public virtual List<ProductDetails> ProductList { get; set; }
     }
 }

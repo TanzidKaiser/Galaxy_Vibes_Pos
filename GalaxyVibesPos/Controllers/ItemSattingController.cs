@@ -190,13 +190,38 @@ namespace GalaxyVibesPos.Controllers
 
             ViewBag.MainCategoryList = list;
 
-            //ViewBag.ProductUnit = GetUnit();
-
+            ViewBag.ProductUnit = GetUnit();
+            ViewBag.Warehouse = GetWarehouse();
             return View();
 
 
         }
+        //Get All Unit Name
+        public dynamic GetUnit()
+        {
+            var units = db.ProductUnit.ToList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Text = "Select Unit", Value = "0" });
+            foreach (var m in units)
+            {
+                list.Add(new SelectListItem { Text = m.UnitSize, Value = Convert.ToString(m.UnitID) });
 
+            }
+            return list;
+        }
+        //Get All Warehouse Name
+        public dynamic GetWarehouse()
+        {
+            var mainLocations = db.LocationMain.ToList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Text = "Select Warehouse", Value = "0" });
+            foreach (var m in mainLocations)
+            {
+                list.Add(new SelectListItem { Text = m.LocationMainName, Value = Convert.ToString(m.LocationMainID) });
+
+            }
+            return list;
+        }
 
         //--------- Save Main Category --------- !
 
@@ -417,6 +442,9 @@ namespace GalaxyVibesPos.Controllers
                 productDetail.Description = model.Description;
                 productDetail.UnitID = model.UnitID;
                 productDetail.MinimumProductQuantity = model.MinimumProductQuantity;
+                productDetail.WarehouseID = model.LocationMainID;
+                productDetail.RackID = model.LocationID;
+                productDetail.CellID = model.LocationSubID;
 
                 db.SaveChanges();
                 Msg = "Product Details update Successfully";
@@ -501,25 +529,7 @@ namespace GalaxyVibesPos.Controllers
             return Json(subCategories, JsonRequestBehavior.AllowGet);
         }
 
-        //---Cascading Dropdown For Product Details--- !
-
-
-        //private List<ProductUnit> GetUnit()
-        //{
-        //    List<ProductUnit> productUnit = new List<ProductUnit>
-        //    {
-        //        new ProductUnit{UnitID = 1, UnitSize = "PCS"},
-        //        new ProductUnit{UnitID = 2, UnitSize = "Carton(12)"},
-        //        new ProductUnit{UnitID = 3, UnitSize = "Carton(24)"},
-        //        new ProductUnit{UnitID = 4, UnitSize = "Carton(36)"},
-        //        new ProductUnit{UnitID = 5, UnitSize = "Carton(48)"},
-        //        new ProductUnit{UnitID = 6, UnitSize = "Carton(601)"},
-        //        new ProductUnit{UnitID = 7, UnitSize = "Carton(72)"}
-
-        //    };
-        //    return productUnit;
-        //}
-
+       
         // When selct product dropdown all input field will bind selected product data 
 
         public JsonResult DataBindForInputField(int mainCatID)

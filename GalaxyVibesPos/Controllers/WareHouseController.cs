@@ -32,6 +32,18 @@ namespace GalaxyVibesPos.Controllers
             }
             return list;
         }
+        public dynamic GetRackName()
+        {
+            var Location = db.Location.ToList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Text = "Select Rack", Value = "0" });
+            foreach (var m in Location)
+            {
+                list.Add(new SelectListItem { Text = m.LocationName, Value = Convert.ToString(m.LocationID) });
+
+            }
+            return list;
+        }
 
         public ActionResult SaveWareHouseInDatabase(LocationMain model)
         {
@@ -89,7 +101,7 @@ namespace GalaxyVibesPos.Controllers
             var Recks = db.Location.Where(p => p.LocationMainID == LocationMainID).ToList();
 
             List<SelectListItem> CellList = new List<SelectListItem>();
-            CellList.Add(new SelectListItem { Text = "Select Cell", Value = "0" });
+            CellList.Add(new SelectListItem { Text = "Select Rack", Value = "0" });
             foreach (var m in Recks)
             {
                 CellList.Add(new SelectListItem { Text = m.LocationName, Value = Convert.ToString(m.LocationID) });
@@ -98,6 +110,21 @@ namespace GalaxyVibesPos.Controllers
 
 
             return Json(new SelectList(CellList, "Value", "Text", JsonRequestBehavior.AllowGet));
+        }
+        public ActionResult GetLocationSubByLocation(int LocationID)
+        {
+            var Recks = db.LocationSub.Where(p => p.LocationID == LocationID).ToList();
+
+            List<SelectListItem> RackList = new List<SelectListItem>();
+            RackList.Add(new SelectListItem { Text = "Select Cell", Value = "0" });
+            foreach (var m in Recks)
+            {
+                RackList.Add(new SelectListItem { Text = m.LocationSubName, Value = Convert.ToString(m.LocationSubID) });
+
+            }
+
+
+            return Json(new SelectList(RackList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
 
         public ActionResult SaveCallInDatabase(LocationSub model)
@@ -251,20 +278,49 @@ namespace GalaxyVibesPos.Controllers
             {
                 try
                 {
-
-                    var Wirehousedelete = db.Location.Find(id);
-                    db.Location.Remove(Wirehousedelete);
+                    var Wirehousedelete = db.LocationSub.Find(id);
+                    db.LocationSub.Remove(Wirehousedelete);
                     db.SaveChanges();
                     return View(locationSub);
                 }
                 catch (Exception)
                 {
-                    ViewBag.Msg = "আপনি সরাসরি রেকের নাম মুছে দিতে পারেন না । এক্ষেত্রে আগে আপনাকে একই রেকের নিকট থাকা Cell নাম মুছতে হবে । ধন্যবাদ !";
+                    ViewBag.Msg = "ভিতরগত কোন সমস্যা হয়েছে, পুনরায় চেষ্টা করুন । ধন্যবাদ !";
                 }
             }
             return View(locationSub);
 
         }
+        public ActionResult CellEdit(int id)
+        {
+            var cell = db.LocationSub.Find(id);
+            if (cell == null)
+            {
+                ViewBag.Msg = 1;
+                return View();
+
+            }
+            ViewBag.Warehouse = GetWarehouse();
+            ViewBag.RackName = GetRackName();
+            return View(cell);
+        }
+        [HttpPost]
+        public ActionResult CellUpdate(LocationSub data)
+        {
+            var Msg = "";
+            db.Entry(data).State = EntityState.Modified;
+            int i = db.SaveChanges();
+            if (i == 1)
+            {
+                Msg = "Update Successfully";
+            }
+            else
+            {
+                Msg = "Exception, Please Try Again";
+            }
+            return Json(Msg, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 

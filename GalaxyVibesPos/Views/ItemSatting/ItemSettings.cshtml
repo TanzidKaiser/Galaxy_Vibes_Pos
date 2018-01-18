@@ -11,14 +11,12 @@
             <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
         </div>
 
-        <h1>Item Sattings</h1>
-
-
-    </div>>
+        <h1 style="color:green;font-weight:bold">ITEM SETTING</h1>
+    </div>
     <div class="container-fluid">
         <br />
         <br />
-        <hr />
+        <hr style="border-color:green" />
 
         <div class="row-fluid">
             <div class="span9">
@@ -240,15 +238,7 @@
                                             <div class="controls">
 
                                                 @Html.DropDownList("ProductDetailsID", new SelectList(string.Empty, "Value", "Text"), "Select Product", new { @name = "ProductName", @id = "ProductDropdownForProductDetails" })
-
-                                                @*@Html.DropDownList("ProductName", new SelectList(string.Empty, "Value", "Text"), "Select Product", new { @name = "ProductName" })*@
-
-
-                                                @*@Html.DropDownListFor(m => m.ProductName, new SelectList(ViewBag.ProductList as System.Collections.IEnumerable,"ProductName"), "Select Product", new { @name = "ProductName" })*@
-
-                                                @*@Html.DropDownListFor(m => m.ProductID, new SelectList(Enumerable.Empty<SelectListItem>(), "ProductID", "ProductName"), "--Select Product--", new { @name = "ProductName", @id = "ProductDropdownForProductDetails" })*@
-
-
+                                           
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -278,9 +268,31 @@
                                         <div class="control-group">
                                             <label class="control-label">Unit Name:</label>
                                             <div class="controls">
-                                                @Html.DropDownListFor(m => m.UnitID, new SelectList(ViewBag.ProductUnit as System.Collections.IEnumerable, "UnitID", "UnitSize"), "Unit Size", new { @name = "UnitSize" })
+                                                @Html.DropDownList("UnitID", ViewBag.ProductUnit as List<SelectListItem>) | <a href="~/Settings/AddUnit" class="btn btn-info">Add Unit</a>
                                             </div>
                                         </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Wirehouse Name:</label>
+                                            <div class="controls">
+                                                @Html.DropDownList("LocationMainID", ViewBag.Warehouse as List<SelectListItem>) | <a href="~/WareHouse/AddWireHouse" class="btn btn-info">Add Warehouse</a>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select Rack:</label>
+                                            <div class="controls">
+
+                                                @Html.DropDownList("LocationID", new SelectList(string.Empty, "Value", "Text"), "Select Rack")
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select Cell:</label>
+                                            <div class="controls">
+
+                                                @Html.DropDownList("LocationSubID", new SelectList(string.Empty, "Value", "Text"), "Select Cell", new { @id = "LocationSubID" })
+                                            </div>
+                                        </div>
+
+
                                         <br />
                                         <div class="form-actions">
                                             <button type="button" id="AddProductDetailsBtn" class="btn btn-success">Save</button>
@@ -302,7 +314,7 @@
 
 @section Scripts{
 
- 
+
     @Scripts.Render("~/bundles/jqueryval")
 
     @*.........Save Main Category........*@
@@ -673,9 +685,93 @@
 
 
     </script>
+    <script type="text/javascript">
 
+        $(document).ready(function () {
 
-    @* when select product dropdown all input field will bind selected product data  *@
+            $("#LocationMainID").change(function () {
+                $("#LocationID").empty();
+                var locationMainID = $(this).val();;
+                var json = { LocationMainID: locationMainID, }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetLocationByMainLocation", "WareHouse")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (response) {
+
+                        $.each(response, function (i, state) {
+                            $("#LocationID").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve country states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#LocationID").change(function () {
+                $("#LocationSubID").empty();
+                var locationID = $(this).val();;
+                var json = { LocationID: locationID, }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetLocationSubByLocation", "WareHouse")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (response) {
+
+                        $.each(response, function (i, state) {
+                            $("#LocationSubID").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve country states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+    @*<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#ProductDropdownForProductDetails").change(function () {
+                $("#LocationSubID").empty();
+                var locationID = $(this).val();;
+                var json = { LocationID: locationID, }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetLocationSubByLocation", "WareHouse")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (response) {
+
+                        $.each(response, function (i, state) {
+                            $("#LocationSubID").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve country states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>*@
+}
+
+@* when select product dropdown all input field will bind selected product data  *@
 
 
 

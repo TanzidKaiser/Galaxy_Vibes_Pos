@@ -45,9 +45,20 @@ namespace GalaxyVibesPos.Models
         public virtual CategoryMain CategoryMain { get; set; }
         [ForeignKey("CategoryID")]
         public virtual Category Category { get; set; }
-        [ForeignKey("SubCategoryID")]
+        [ForeignKey("SubCategoryID")]       
         public virtual CategorySub CategorySub { get; set; }
+        [ForeignKey("UnitID")]
+        public virtual ProductUnit ProductUnit { get; set; }
         public virtual List<Sale> SaleList { get; set; }
         public virtual List<Purchase> PurchaseList { get; set; }
+         
+
+        [NotMapped]
+        public int LocationMainID { get; set; }
+        [NotMapped]
+        public int LocationID { get; set; }
+        [NotMapped]
+        public int LocationSubID { get; set; }
+      
     }
 }

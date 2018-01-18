@@ -14,12 +14,14 @@
         <div class="row-fluid">
             <div class="span7">
                 <div class="widget-box">
+                    <a href="~/ItemSatting/ItemSettings" style="color:red;font-weight:normal; margin:10px">Go to Product Setting</a>
                     <div class="widget-title">
 
                         <span class="icon"> <i class="icon-align-justify"></i> </span>
                         <h5>Add Unit</h5>
                     </div>
                     <div class="widget-content nopadding">
+                        
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
@@ -30,7 +32,7 @@
                                     <input data-val="true" id="UnitID" name="UnitID" type="hidden">
                                     <div class="control-group">
 
-                                        <label class="control-label">Customer Name</label>
+                                        <label class="control-label">Unit Name</label>
                                         <div class="controls">
                                             <input type="text" name="UnitSize" id="UnitSize" placeholder="Unit" />
                                         </div>

@@ -23,6 +23,7 @@
         <div class="row-fluid">
             <div class="span9">
                 <div class="widget-box">
+                     <a href="~/ItemSatting/ItemSettings" style="color:red;font-weight:normal; margin:10px">Go to Product Setting</a>
                     <div class="widget-title">
                         <span class="icon"> <i class="icon-align-justify"></i> </span>
                         <ul class="nav nav-tabs">
@@ -92,7 +93,7 @@
                                 <form class="form-horizontal">
                                     <fieldset id="CallSubmitForm">
                                         <div class="control-grohttp://localhost:61211/Home/charts.htmlup">
-                                            <label class="control-label">Add Cell:</label>
+                                            <label class="control-label">Select Warehouse:</label>
                                             <div class="controls">
 
 
@@ -102,10 +103,10 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label class="control-label">Select Cell:</label>
+                                            <label class="control-label">Select Rack:</label>
                                             <div class="controls">
 
-                                                @Html.DropDownList("LocationID", new SelectList(string.Empty, "Value", "Text"), "Select Cell", new { @id = "LocationForCell" })
+                                                @Html.DropDownList("LocationID", new SelectList(string.Empty, "Value", "Text"), "Select Rack", new { @id = "LocationForCell" })
                                             </div>
                                         </div>
                                         <div class="control-group">
