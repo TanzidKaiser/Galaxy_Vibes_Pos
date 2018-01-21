@@ -90,6 +90,7 @@ E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.Commo
 E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
 E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
 E:\Work\GalaxyVibesPos\GalaxyVibesPos\bin\stdole.dll
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\EntityFramework.xml
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\GalaxyVibesPos.dll.config
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\GalaxyVibesPos.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\GalaxyVibesPos.pdb
@@ -129,7 +130,6 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Microsoft.SqlServer.Types.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\stdole.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\Contrib.System.Printing.Xps.xml
-E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\EntityFramework.xml
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\EntityFramework.SqlServer.xml
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\System.Web.Helpers.xml
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\bin\System.Web.Mvc.xml
@@ -155,10 +155,10 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.sa
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.typeChangeStringToDateSupplierAndPurchase.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.ProductUnitAdd.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.addMainLocationAndLocationAndSubLocationCreate.resources
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.createForeignUnitInProduct.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csproj.GenerateResource.Cache
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\RdlCompile.cache
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\RdlCompile.compiled
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.pdb
-E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache
-E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.createForeignUnitInProduct.resources
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.ReplaceWirehouseandRackandCellTable.resources

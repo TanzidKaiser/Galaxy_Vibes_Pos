@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GalaxyVibesPos.Models.LocationMain>
+﻿@model IEnumerable<GalaxyVibesPos.Models.Warehouse>
 
 @{
     ViewBag.Title = "WirehouseIndex";
@@ -34,11 +34,11 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LocationMainName)
+                                        @Html.DisplayFor(modelItem => item.WarehouseName)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "WirehouseEdit", new { id = item.LocationMainID }) |
-                                        @Html.ActionLink("Delete", "WirehouseIndex", new { id = item.LocationMainID })
+                                        @Html.ActionLink("Edit", "WirehouseEdit", new { id = item.WarehouseID }) |
+                                        @Html.ActionLink("Delete", "WirehouseIndex", new { id = item.WarehouseID })
                                     </td>
                                 </tr>
                             }

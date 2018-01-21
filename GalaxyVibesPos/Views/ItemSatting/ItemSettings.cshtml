@@ -274,21 +274,21 @@
                                         <div class="control-group">
                                             <label class="control-label">Wirehouse Name:</label>
                                             <div class="controls">
-                                                @Html.DropDownList("LocationMainID", ViewBag.Warehouse as List<SelectListItem>) | <a href="~/WareHouse/AddWireHouse" class="btn btn-info">Add Warehouse</a>
+                                                @Html.DropDownList("WarehouseID", ViewBag.Warehouse as List<SelectListItem>) | <a href="~/WareHouse/AddWireHouse" class="btn btn-info">Add Warehouse</a>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Select Rack:</label>
                                             <div class="controls">
 
-                                                @Html.DropDownList("LocationID", new SelectList(string.Empty, "Value", "Text"), "Select Rack")
+                                                @Html.DropDownList("RackID", new SelectList(string.Empty, "Value", "Text"), "Select Rack")
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Select Cell:</label>
                                             <div class="controls">
 
-                                                @Html.DropDownList("LocationSubID", new SelectList(string.Empty, "Value", "Text"), "Select Cell", new { @id = "LocationSubID" })
+                                                @Html.DropDownList("CellID", new SelectList(string.Empty, "Value", "Text"), "Select Cell", new { @id = "CellID" })
                                             </div>
                                         </div>
 
@@ -689,24 +689,24 @@
 
         $(document).ready(function () {
 
-            $("#LocationMainID").change(function () {
-                $("#LocationID").empty();
-                var locationMainID = $(this).val();;
-                var json = { LocationMainID: locationMainID, }
+            $("#WarehouseID").change(function () {
+                $("#RackID").empty();
+                var warehouseID = $(this).val();;
+                var json = { WarehouseID: warehouseID, }
                 $.ajax({
                     type: "post",
-                    url: '@Url.Action("GetLocationByMainLocation", "WareHouse")',
+                    url: '@Url.Action("GetRacksByWarehouse", "WareHouse")',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(json),
                     success: function (response) {
 
                         $.each(response, function (i, state) {
-                            $("#LocationID").append('<option value="' + state.Value + '">' +
+                            $("#RackID").append('<option value="' + state.Value + '">' +
                                  state.Text + '</option>');
                         });
                     },
                     error: function (ex) {
-                        alert('Failed to retrieve country states.' + ex);
+                        alert('Failed to retrieve Racks.' + ex);
                     }
                 });
                 return false;
@@ -717,19 +717,19 @@
 
         $(document).ready(function () {
 
-            $("#LocationID").change(function () {
-                $("#LocationSubID").empty();
-                var locationID = $(this).val();;
-                var json = { LocationID: locationID, }
+            $("#RackID").change(function () {
+                $("#CellID").empty();
+                var cellID = $(this).val();;
+                var json = { CellID: cellID, }
                 $.ajax({
                     type: "post",
-                    url: '@Url.Action("GetLocationSubByLocation", "WareHouse")',
+                    url: '@Url.Action("GetCellByRack", "WareHouse")',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(json),
                     success: function (response) {
 
                         $.each(response, function (i, state) {
-                            $("#LocationSubID").append('<option value="' + state.Value + '">' +
+                            $("#CellID").append('<option value="' + state.Value + '">' +
                                  state.Text + '</option>');
                         });
                     },

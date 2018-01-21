@@ -1,4 +1,4 @@
-﻿@model GalaxyVibesPos.Models.LocationSub
+﻿@model GalaxyVibesPos.Models.Cell
 
 @{
     ViewBag.Title = "CellEdit";
@@ -24,25 +24,25 @@
                             <fieldset id="CellSubmitForm">
                                 <div class="control-group">
                                     <br />
-                                    @Html.HiddenFor(model => model.LocationSubID)
+                                    @Html.HiddenFor(model => model.CellID)
                                     <label class="control-label">Select Warehouse</label>
                                     <div class="controls">
 
-                                        @Html.DropDownList("LocationMainID", ViewBag.Warehouse as List<SelectListItem>)
+                                        @Html.DropDownList("WarehouseID", ViewBag.Warehouse as List<SelectListItem>)
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Select Rack:</label>
                                     <div class="controls">
 
-                                        @Html.DropDownList("LocationID", ViewBag.RackName as List<SelectListItem>)
+                                        @Html.DropDownList("RackID", ViewBag.RackName as List<SelectListItem>)
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Cell:</label>
                                     <div class="controls">
 
-                                        @Html.EditorFor(model => model.LocationSubName)
+                                        @Html.EditorFor(model => model.CellName)
                                     </div>
                                 </div>
                                 <br />

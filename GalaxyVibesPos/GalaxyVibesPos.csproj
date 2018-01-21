@@ -16,7 +16,8 @@
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -182,6 +183,10 @@
     <Compile Include="Migrations\201801181030005_createForeignUnitInProduct.Designer.cs">
       <DependentUpon>201801181030005_createForeignUnitInProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801211013369_ReplaceWirehouseandRackandCellTable.cs" />
+    <Compile Include="Migrations\201801211013369_ReplaceWirehouseandRackandCellTable.Designer.cs">
+      <DependentUpon>201801211013369_ReplaceWirehouseandRackandCellTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryMain.cs" />
@@ -191,9 +196,9 @@
     <Compile Include="Models\CustomerLedger.cs" />
     <Compile Include="Models\DatabaseContext\DatabaseContext.cs" />
     <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\LocationMain.cs" />
-    <Compile Include="Models\LocationSub.cs" />
+    <Compile Include="Models\Rack.cs" />
+    <Compile Include="Models\Warehouse.cs" />
+    <Compile Include="Models\Cell.cs" />
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Sale.cs" />
@@ -772,6 +777,9 @@
     <EmbeddedResource Include="Migrations\201801181030005_createForeignUnitInProduct.resx">
       <DependentUpon>201801181030005_createForeignUnitInProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801211013369_ReplaceWirehouseandRackandCellTable.resx">
+      <DependentUpon>201801211013369_ReplaceWirehouseandRackandCellTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Purchase\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Report\Purchase\PurchaseReportViewer.rdlc" />
     <EmbeddedResource Include="Report\Sale\SaleReport.rdlc" />
@@ -805,7 +813,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61211</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61212/</IISUrl>
+          <IISUrl>http://localhost:61215/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

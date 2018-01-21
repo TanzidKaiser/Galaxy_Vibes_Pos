@@ -27,8 +27,8 @@ namespace GalaxyVibesPos.Models
         public DbSet<SupplierLedger> SupplierLedger { get; set; }
         public DbSet<Purchase> Purchase { get; set; }
         public DbSet<ProductUnit> ProductUnit { get; set; }
-        public DbSet<LocationMain> LocationMain { get; set;}
-        public DbSet<Location> Location { get; set; }
-        public DbSet<LocationSub> LocationSub { get; set; }
+        public DbSet<Warehouse> Warehouse { get; set;}
+        public DbSet<Rack> Rack { get; set; }
+        public DbSet<Cell> Cell { get; set; }
     }
 }

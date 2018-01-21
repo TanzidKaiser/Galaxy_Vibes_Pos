@@ -15,43 +15,43 @@ namespace GalaxyVibesPos.Controllers
         public ActionResult AddWireHouse()
         {
 
-            ViewBag.MainLocations = GetWarehouse();
+            ViewBag.Warehouse = GetWarehouse();
             return View();
         }
 
         // WarehouseNames return For Dropdown
         public dynamic GetWarehouse()
         {
-            var mainLocations = db.LocationMain.ToList();
+            var warehouses = db.Warehouse.ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem { Text = "Select Warehouse", Value = "0" });
-            foreach (var m in mainLocations)
+            foreach (var m in warehouses)
             {
-                list.Add(new SelectListItem { Text = m.LocationMainName, Value = Convert.ToString(m.LocationMainID) });
+                list.Add(new SelectListItem { Text = m.WarehouseName, Value = Convert.ToString(m.WarehouseID) });
 
             }
             return list;
         }
         public dynamic GetRackName()
         {
-            var Location = db.Location.ToList();
+            var racks = db.Rack.ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem { Text = "Select Rack", Value = "0" });
-            foreach (var m in Location)
+            foreach (var m in racks)
             {
-                list.Add(new SelectListItem { Text = m.LocationName, Value = Convert.ToString(m.LocationID) });
+                list.Add(new SelectListItem { Text = m.RackName, Value = Convert.ToString(m.RackID) });
 
             }
             return list;
         }
 
-        public ActionResult SaveWareHouseInDatabase(LocationMain model)
+        public ActionResult SaveWareHouseInDatabase(Warehouse model)
         {
             int i = 0;
-            var nameExists = db.LocationMain.Where(p => p.LocationMainName == model.LocationMainName).FirstOrDefault();
+            var nameExists = db.Warehouse.Where(p => p.WarehouseName == model.WarehouseName).FirstOrDefault();
             if (nameExists == null)
             {
-                db.LocationMain.Add(model);
+                db.Warehouse.Add(model);
                 i = db.SaveChanges();
             }
             else
@@ -62,17 +62,17 @@ namespace GalaxyVibesPos.Controllers
             return Json(i, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult SaveRackInDatabase(Location model)
+        public ActionResult SaveRackInDatabase(Rack model)
         {
             int i = 0;
             var Msg = "";
 
-            var locationExists = db.Location.Where(p => p.LocationMainID == model.LocationMainID && p.LocationName == model.LocationName).FirstOrDefault();
+            var locationExists = db.Rack.Where(p => p.WarehouseID == model.WarehouseID && p.RackName == model.RackName).FirstOrDefault();
             if (locationExists == null)
             {
                 try
                 {
-                    db.Location.Add(model);
+                    db.Rack.Add(model);
                     i = db.SaveChanges();
                     if (i == 1)
                     {
@@ -96,30 +96,30 @@ namespace GalaxyVibesPos.Controllers
             return Json(Msg, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetLocationByMainLocation(int LocationMainID)
+        public ActionResult GetRacksByWarehouse(int WarehouseID)
         {
-            var Recks = db.Location.Where(p => p.LocationMainID == LocationMainID).ToList();
+            var recks = db.Rack.Where(p => p.WarehouseID == WarehouseID).ToList();
 
             List<SelectListItem> CellList = new List<SelectListItem>();
             CellList.Add(new SelectListItem { Text = "Select Rack", Value = "0" });
-            foreach (var m in Recks)
+            foreach (var m in recks) 
             {
-                CellList.Add(new SelectListItem { Text = m.LocationName, Value = Convert.ToString(m.LocationID) });
+                CellList.Add(new SelectListItem { Text = m.RackName, Value = Convert.ToString(m.RackID) });
 
             }
 
 
             return Json(new SelectList(CellList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
-        public ActionResult GetLocationSubByLocation(int LocationID)
+        public ActionResult GetCellByRack(int CellID)
         {
-            var Recks = db.LocationSub.Where(p => p.LocationID == LocationID).ToList();
+            var racks = db.Cell.Where(p => p.RackID == CellID).ToList();
 
             List<SelectListItem> RackList = new List<SelectListItem>();
             RackList.Add(new SelectListItem { Text = "Select Cell", Value = "0" });
-            foreach (var m in Recks)
+            foreach (var m in racks)
             {
-                RackList.Add(new SelectListItem { Text = m.LocationSubName, Value = Convert.ToString(m.LocationSubID) });
+                RackList.Add(new SelectListItem { Text = m.CellName, Value = Convert.ToString(m.CellID) });
 
             }
 
@@ -127,16 +127,16 @@ namespace GalaxyVibesPos.Controllers
             return Json(new SelectList(RackList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
 
-        public ActionResult SaveCallInDatabase(LocationSub model)
+        public ActionResult SaveCallInDatabase(Cell model)
         {
             int i = 0;
             var Msg = "";
-            var CallExists = db.LocationSub.Where(p => p.LocationSubName == model.LocationSubName && p.LocationID == model.LocationID && p.LocationMainID == model.LocationMainID).FirstOrDefault();
+            var CallExists = db.Cell.Where(p => p.CellName == model.CellName && p.RackID == model.RackID && p.WarehouseID == model.WarehouseID).FirstOrDefault();
             if (CallExists == null)
             {
                 try
                 {
-                    db.LocationSub.Add(model);
+                    db.Cell.Add(model);
                     i = db.SaveChanges();
                     if (i == 1)
                     {
@@ -162,26 +162,26 @@ namespace GalaxyVibesPos.Controllers
         {
             if(id == null)
             { 
-            return View(db.LocationMain.ToList());
+            return View(db.Warehouse.ToList());
             }
             else
             {
                 try {
 
-                    var Wirehousedelete = db.LocationMain.Find(id);
-                    db.LocationMain.Remove(Wirehousedelete);
+                    var Wirehousedelete = db.Warehouse.Find(id);
+                    db.Warehouse.Remove(Wirehousedelete);
                     db.SaveChanges();
-                    return View(db.LocationMain.ToList());
+                    return View(db.Warehouse.ToList());
                 }catch(Exception)
                 {
                     ViewBag.Msg = "আপনি সরাসরি ওয়্যারহাউজের নাম মুছে দিতে পারেন না । এক্ষেত্রে আগে আপনাকে একই ওয়্যারহাউজের রেকের নাম ও তার নিকট থাকা Cell নাম মুছতে হবে । ধন্যবাদ !";
                 }
             }
-            return View(db.LocationMain.ToList());
+            return View(db.Warehouse.ToList());
         }        
         public ActionResult WirehouseEdit(int id)
         {
-            var wirehouse = db.LocationMain.Find(id);
+            var wirehouse = db.Warehouse.Find(id);
             if (wirehouse == null)
             {
                 ViewBag.Msg = 1;
@@ -191,7 +191,7 @@ namespace GalaxyVibesPos.Controllers
             return View(wirehouse);
         }
         [HttpPost]
-        public ActionResult WirehouseUpdate(LocationMain data)
+        public ActionResult WirehouseUpdate(Warehouse data)
         {
             var Msg = "";
             db.Entry(data).State = EntityState.Modified;
@@ -214,7 +214,7 @@ namespace GalaxyVibesPos.Controllers
 
         public ActionResult RackIndex(int? id)
         {
-            var location = db.Location.ToList();
+            var location = db.Rack.ToList();
 
             if (id == null)
             {
@@ -225,8 +225,8 @@ namespace GalaxyVibesPos.Controllers
                 try
                 {
 
-                    var Wirehousedelete = db.Location.Find(id);
-                    db.Location.Remove(Wirehousedelete);
+                    var Wirehousedelete = db.Rack.Find(id);
+                    db.Rack.Remove(Wirehousedelete);
                     db.SaveChanges();
                     return View(location);
                 }
@@ -240,7 +240,7 @@ namespace GalaxyVibesPos.Controllers
         }
         public ActionResult RackEdit(int id)
         {
-            var rack = db.Location.Find(id);
+            var rack = db.Rack.Find(id);
             if (rack == null)
             {
                 ViewBag.Msg = 1;
@@ -251,7 +251,7 @@ namespace GalaxyVibesPos.Controllers
             return View(rack);
         }
         [HttpPost]
-        public ActionResult RackUpdate(Location data)
+        public ActionResult RackUpdate(Rack data)
         {
             var Msg = "";
             db.Entry(data).State = EntityState.Modified;
@@ -268,7 +268,7 @@ namespace GalaxyVibesPos.Controllers
         }
         public ActionResult CellIndex(int? id)
         {
-            var locationSub = db.LocationSub.ToList();
+            var locationSub = db.Cell.ToList();
 
             if (id == null)
             {
@@ -278,8 +278,8 @@ namespace GalaxyVibesPos.Controllers
             {
                 try
                 {
-                    var Wirehousedelete = db.LocationSub.Find(id);
-                    db.LocationSub.Remove(Wirehousedelete);
+                    var Wirehousedelete = db.Cell.Find(id);
+                    db.Cell.Remove(Wirehousedelete);
                     db.SaveChanges();
                     return View(locationSub);
                 }
@@ -293,7 +293,7 @@ namespace GalaxyVibesPos.Controllers
         }
         public ActionResult CellEdit(int id)
         {
-            var cell = db.LocationSub.Find(id);
+            var cell = db.Cell.Find(id);
             if (cell == null)
             {
                 ViewBag.Msg = 1;
@@ -305,7 +305,7 @@ namespace GalaxyVibesPos.Controllers
             return View(cell);
         }
         [HttpPost]
-        public ActionResult CellUpdate(LocationSub data)
+        public ActionResult CellUpdate(Cell data)
         {
             var Msg = "";
             db.Entry(data).State = EntityState.Modified;

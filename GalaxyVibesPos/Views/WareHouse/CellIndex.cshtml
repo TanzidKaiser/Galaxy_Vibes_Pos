@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GalaxyVibesPos.Models.LocationSub>
+﻿@model IEnumerable<GalaxyVibesPos.Models.Cell>
 
 @{
     ViewBag.Title = "CellIndex";
@@ -36,17 +36,17 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Location.LocationName)
+                                        @Html.DisplayFor(modelItem => item.Warehouse.WarehouseName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LocationMain.LocationMainName)
+                                        @Html.DisplayFor(modelItem => item.Rack.RackName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LocationSubName)
+                                        @Html.DisplayFor(modelItem => item.CellName)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "CellEdit", new { id = item.LocationSubID }) |                                     
-                                        @Html.ActionLink("Delete", "CellIndex", new { id = item.LocationSubID })
+                                        @Html.ActionLink("Edit", "CellEdit", new { id = item.CellID }) |                                     
+                                        @Html.ActionLink("Delete", "CellIndex", new { id = item.CellID })
 
                                     </td>
                                 </tr>

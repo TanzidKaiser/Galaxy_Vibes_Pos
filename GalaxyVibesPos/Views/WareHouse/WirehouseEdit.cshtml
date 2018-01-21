@@ -1,4 +1,4 @@
-﻿@model GalaxyVibesPos.Models.LocationMain
+﻿@model GalaxyVibesPos.Models.Warehouse
 
 @{
     ViewBag.Title = "WirehouseEdit";
@@ -27,10 +27,10 @@
                             <fieldset id="WarehouseSubmitForm">
                                 <div class="control-group">
                                     <br />
-                                    @Html.HiddenFor(model => model.LocationMainID)
+                                    @Html.HiddenFor(model => model.WarehouseID)
                                     <label class="control-label">Add Main Category:</label>
                                     <div class="controls">
-                                        @Html.EditorFor(model => model.LocationMainName)
+                                        @Html.EditorFor(model => model.WarehouseName)
                                     </div>
                                 </div>
                                 <br />

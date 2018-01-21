@@ -50,7 +50,7 @@
                                             <br />
                                             <label class="control-label">Add Warehouse:</label>
                                             <div class="controls">
-                                                <input type="text" id="LocationMainName" name="LocationMainName" class="span11" placeholder="Add Wirehouse" />
+                                                <input type="text" id="WarehouseName" name="WarehouseName" class="span11" placeholder="Add Wirehouse" />
 
                                             </div>
                                         </div>
@@ -71,13 +71,13 @@
                                         <div class="control-group">
                                             <label class="control-label">Main Location</label>
                                             <div class="controls">
-                                                @Html.DropDownList("LocationMainID", ViewBag.MainLocations as List<SelectListItem>)
+                                                @Html.DropDownList("WarehouseID", ViewBag.Warehouse as List<SelectListItem>)
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Add Rack:</label>
                                             <div class="controls">
-                                                <input type="text" class="span11" name="LocationName" placeholder="Add Rack" />
+                                                <input type="text" class="span11" name="RackName" placeholder="Add Rack" />
                                             </div>
                                         </div>
                                         <br />
@@ -97,7 +97,7 @@
                                             <div class="controls">
 
 
-                                                @Html.DropDownList("LocationMainID", ViewBag.MainLocations as List<SelectListItem>, new { @id = "LocationMaionForCell" })
+                                                @Html.DropDownList("WarehouseID", ViewBag.Warehouse as List<SelectListItem>, new { @id = "LocationMaionForCell" })
 
 
                                             </div>
@@ -106,13 +106,13 @@
                                             <label class="control-label">Select Rack:</label>
                                             <div class="controls">
 
-                                                @Html.DropDownList("LocationID", new SelectList(string.Empty, "Value", "Text"), "Select Rack", new { @id = "LocationForCell" })
+                                                @Html.DropDownList("RackID", new SelectList(string.Empty, "Value", "Text"), "Select Rack", new { @id = "LocationForCell" })
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Add Cell:</label>
                                             <div class="controls">
-                                                <input type="text" class="span11" name="LocationSubName" placeholder="Add Cell" />
+                                                <input type="text" class="span11" name="CellName" placeholder="Add Cell" />
                                             </div>
                                         </div>
                                         <br />
@@ -200,11 +200,11 @@
 
             $("#LocationMaionForCell").change(function () {
                 $("#LocationForCell").empty();
-                var locationMainID = $(this).val();;
-                var json = { LocationMainID: locationMainID, }
+                var warehouseID = $(this).val();;
+                var json = { WarehouseID: warehouseID, }
                 $.ajax({
                     type: "post",
-                    url: '@Url.Action("GetLocationByMainLocation", "WareHouse")',
+                    url: '@Url.Action("GetRacksByWarehouse", "WareHouse")',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(json),
                     success: function (response) {
@@ -215,7 +215,7 @@
                         });
                     },
                     error: function (ex) {
-                        alert('Failed to retrieve country states.' + ex);
+                        alert('Failed to retrieve Racks.' + ex);
                     }
                 });
                 return false;

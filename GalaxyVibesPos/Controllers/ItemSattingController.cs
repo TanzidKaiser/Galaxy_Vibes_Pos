@@ -212,12 +212,12 @@ namespace GalaxyVibesPos.Controllers
         //Get All Warehouse Name
         public dynamic GetWarehouse()
         {
-            var mainLocations = db.LocationMain.ToList();
+            var warehouses = db.Warehouse.ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem { Text = "Select Warehouse", Value = "0" });
-            foreach (var m in mainLocations)
+            foreach (var m in warehouses)
             {
-                list.Add(new SelectListItem { Text = m.LocationMainName, Value = Convert.ToString(m.LocationMainID) });
+                list.Add(new SelectListItem { Text = m.WarehouseName, Value = Convert.ToString(m.WarehouseID) });
 
             }
             return list;
@@ -442,9 +442,9 @@ namespace GalaxyVibesPos.Controllers
                 productDetail.Description = model.Description;
                 productDetail.UnitID = model.UnitID;
                 productDetail.MinimumProductQuantity = model.MinimumProductQuantity;
-                productDetail.WarehouseID = model.LocationMainID;
-                productDetail.RackID = model.LocationID;
-                productDetail.CellID = model.LocationSubID;
+                productDetail.WarehouseID = model.WarehouseID;
+                productDetail.RackID = model.RackID;
+                productDetail.CellID = model.CellID;
 
                 db.SaveChanges();
                 Msg = "Product Details update Successfully";

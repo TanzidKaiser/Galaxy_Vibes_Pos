@@ -39,12 +39,17 @@ namespace GalaxyVibesPos.Models
         public Nullable<double> Stoke { get; set; }
         public string Description { set; get; }        
         public Nullable<double> MinimumProductQuantity { get; set; }
-        public int LocationMainID { get; set; }
-        public string LocationMainName { get; set; }
-        public int LocationID { get; set; }
-        public string LocationName { get; set; }
-        public int LocationSubID { get; set; }
-        public String LocationSubName { get; set; }
+
+        //Warehouse
+        public int WarehouseID { get; set; }
+        public string WarehouseName { get; set; }
+        //Rack
+        public int RackID { get; set; }
+        public string RackName { get; set; }
+        //Cell
+        public int CellID { get; set; }
+        public String CellName { get; set; }
+
         public Nullable<int> Status { get; set; }
 
     }
