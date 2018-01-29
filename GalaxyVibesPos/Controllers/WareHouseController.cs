@@ -133,7 +133,7 @@ namespace GalaxyVibesPos.Controllers
             var Msg = "";
             var CallExists = db.Cell.Where(p => p.CellName == model.CellName && p.RackID == model.RackID && p.WarehouseID == model.WarehouseID).FirstOrDefault();
             if (CallExists == null)
-            {
+            { 
                 try
                 {
                     db.Cell.Add(model);
@@ -180,7 +180,7 @@ namespace GalaxyVibesPos.Controllers
             return View(db.Warehouse.ToList());
         }        
         public ActionResult WirehouseEdit(int id)
-        {
+        { 
             var wirehouse = db.Warehouse.Find(id);
             if (wirehouse == null)
             {
@@ -232,7 +232,7 @@ namespace GalaxyVibesPos.Controllers
                 }
                 catch (Exception)
                 {
-                    ViewBag.Msg = "আপনি সরাসরি রেকের নাম মুছে দিতে পারেন না । এক্ষেত্রে আগে আপনাকে একই রেকের নিকট থাকা Cell নাম মুছতে হবে । ধন্যবাদ !";
+                    ViewBag.Msg = "আপনি সরাসরি রেকের নাম মুছে দিতে পারেন না । এক্ষেত্রে আগে আপনাকে একই রেকের নিকট থাকা Cell এর নাম মুছতে হবে । ধন্যবাদ !";
                 }
             }
             return View(location);

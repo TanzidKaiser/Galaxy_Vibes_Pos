@@ -1,0 +1,333 @@
+﻿@model GalaxyVibesPos.Models.Purchase
+
+@{
+    ViewBag.Title = "Damage";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+    }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+</style>
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Product Purchase</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+
+                        @*<div class="form-horizontal">*@
+
+
+                        <div class="widget-content">
+
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <input data-val="true" id="PurchaseProductID" name="PurchaseProductID" type="hidden">
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Supplier Invoice No</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="PurchaseSupplierInvoiceNo" id="PurchaseSupplierInvoiceNo" class="span12" placeholder="Invoice No" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Product Search</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductSearch" class="span12" placeholder="Product Search" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Currently Stoke</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="Stoke" id="Stoke" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="span4">
+
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Date</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="date" name="PurchaseDate" id="PurchaseDate" class="span12" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Track No</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" class="span12" id="PurchaseNo" value="@ViewBag.trackNo" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Product Code</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductCode" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Product Name</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="ProductName" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="span4">
+
+
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Time</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" id="CurrentTime" class="span12" value="@ViewBag.time" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Unit Type</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="UnitType" id="UnitType" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Price</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="PurchaseProductPrice" id="PurchaseProductPrice" class="span12" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Quantity</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="text" name="PurchaseQuantity" id="PurchaseQuantity" class="span12" placeholder="Quantity" />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <hr />
+                            @* ------ *@
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <fieldset id="CustomerSubmitForm">
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <table class="table table-bordered table-invoice-full" id="Table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="head0">ID</th>
+                                                        <th class="head1">Product ID</th>
+                                                        <th class="head0 right">Product Name</th>
+                                                        <th class="head1 right">Quantity</th>
+                                                        <th class="head0 right">Price</th>
+                                                        <th class="head0 right">Purchase No</th>
+                                                        <th class="head0 right">Total</th>
+                                                        <th></th>
+                                                        <th></th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <hr />
+                                <div class="row-fluid">
+                                    <div class="span3">
+
+                                        <div class="control-group">
+
+                                            <label class="control-label span6" id="levelWidth">Item Total</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="TotalItem" class="span12" />
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="control-group">
+
+                                            <label class="control-label span6" id="levelWidth">Product Total</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="ProductTotal" class="span12" />
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+
+                                            <label class="control-label span6" id="levelWidth">Total Amount</label>
+                                            <div class="controls" id="inputMargin">
+                                                <input type="text" id="TotalAmount" class="span12" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="span6">
+
+                                        <div class="form-control">
+                                            <button type="button" id="addBtn" class="btn btn-success" style="margin-bottom:16px">Add</button>
+                                            <button type="button" id="submitBtn" class="btn btn-success" style="margin-bottom:16px;margin-left:8px">Receive</button>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            }
+
+
+                            @*---------*@
+                        </div>
+
+
+                        @*</div>*@
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            var now = new Date();
+            var month = (now.getMonth() + 1);
+            var day = now.getDate();
+            if (month < 10)
+                month = "0" + month;
+            if (day < 10)
+                day = "0" + day;
+            var today = now.getFullYear() + '-' + month + '-' + day;
+
+            $('#PurchaseDate').val(today);
+        });
+    </script>
+    <script type="text/javascript">
+        $("#ProductSearch").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    async: false,
+                    cache: false,
+                    type: "POST",
+                    url: "@(Url.Action("GetProducts", "DamageProduct"))",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+
+                        response($.map(data, function (item) {
+                            if (item.key == 0) {
+                                return { value: item.Code, stoke: item.Stoke, name: item.ProductName, unit: item.unit, price: item.PurchasePrice, code: item.Code };
+                            }
+                            else
+                            {
+                                return { value: item.ProductName, stoke: item.Stoke, name: item.ProductName, unit: item.UnitSize, price: item.PurchasePrice, code: item.Code };
+                            }
+                        }));
+
+                    }
+                })
+
+            },
+            minLength: 2,
+            select: function (event, ui) {
+
+                $("#Stoke").val(ui.item.stoke);
+                $("#ProductCode").val(ui.item.code);
+                $("#ProductName").val(ui.item.name);
+                $("#UnitType").val(ui.item.unit);
+                $("#PurchaseProductPrice").val(ui.item.price);
+            },
+
+        });
+    </script>
+}

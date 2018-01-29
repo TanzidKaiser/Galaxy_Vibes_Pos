@@ -16,8 +16,7 @@
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44392</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -147,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DamageProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemSattingController.cs" />
     <Compile Include="Controllers\CustomerGroupSettingsController.cs" />
@@ -757,6 +757,7 @@
     <Content Include="Views\WareHouse\RackIndex.cshtml" />
     <Content Include="Views\WareHouse\CellIndex.cshtml" />
     <Content Include="Views\WareHouse\CellEdit.cshtml" />
+    <Content Include="Views\DamageProduct\Damage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">

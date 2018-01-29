@@ -30,11 +30,14 @@
                                     <td style="font-size:medium">Category</td>
                                     <td style="font-size:medium">Sub Category</td>
                                     <td style="font-size:medium">Product Name</td>
-                                    <td style="font-size:medium">Purchase Price</td>
-                                    <td style="font-size:medium">Sale Price</td>
-                                    <td style="font-size:medium">Description</td>
+                                    <td style="font-size:medium">P_Price</td>
+                                    <td style="font-size:medium">S_Price</td>
+                                    <td style="font-size:medium">Detail</td>
                                     <td style="font-size:medium">Unit</td>
-                                    <td style="font-size:medium">Minimum Order</td>
+                                    <td style="font-size:medium">Warehouse</td>
+                                    <td style="font-size:medium">Rack</td>
+                                    <td style="font-size:medium">Cell</td>
+                                    <td style="font-size:medium">Order</td>
                                     <td></td>
                                 </tr>
                             </thead>
@@ -67,6 +70,15 @@
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ProductUnit.UnitSize)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Warehouse.WarehouseName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Rack.RackName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cell.CellName)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.MinimumProductQuantity)
