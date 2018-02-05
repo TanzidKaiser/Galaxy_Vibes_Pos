@@ -562,40 +562,43 @@
             });
         })
     </script>
+    <script type="text/javascript">
+        $("#ProductSearch").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    async: false,
+                    cache: false,
+                    type: "POST",
+                    url: "@(Url.Action("GetProductBySearch", "Purchase"))",
+                    data: { Prefix: request.term },
+                    success: function (data) {
 
-    <script>
-        $(document).ready(function () {
-            $("#ProductSearch").autocomplete({
+                        response($.map(data, function (item) {
+                            if (item.key == 0) {
+                                return { value: item.Code, ProductDetailsID: item.ProductDetailsID, stoke: item.Stoke, name: item.ProductName, unit: item.UnitSize, price: item.SalePrice, SubCategoryName: item.SubCategoryName, code: item.Code };
+                            }
+                            else {
+                                return { value: item.ProductName, ProductDetailsID: item.ProductDetailsID, stoke: item.Stoke, name: item.ProductName, unit: item.UnitSize, price: item.PurchasePrice, SubCategoryName: item.SubCategoryName, code: item.Code };
+                            }
+                        }));
 
-                source: function (request, response) {
+                    }
+                })
 
-                    $.ajax({
-                        url: "/Purchase/GetProductBySearch",
-                        type: "POST",
-                        dataType: "json",
-                        data: { Prefix: request.term },
-                        success: function (data) {
-                            response($.map(data, function (item) {
+            },
+            //minLength: 2,
+            select: function (event, ui) {
 
-                                $("#Stoke").val(item.Stoke);
-                                $("#SalesProductID").val(item.ProductDetailsID);
-                                $("#ProductName").val(item.ProductName);
-                                $("#UnitType").val(item.UnitID);
-                                $("#ProductPrice").val(item.SalePrice);
-                                $("#PurchaseProductID").val(item.ProductDetailsID);
-                                $("#SubCategoryName").val(item.SubCategoryName);
-                                return { label: item.Code, value: item.Code };                           
-                            }))
+                $("#Stoke").val(ui.item.stoke);
+                $("#SalesProductID").val(ui.item.ProductDetailsID);               
+                $("#ProductName").val(ui.item.name);
+                $("#UnitType").val(ui.item.unit);
+                $("#ProductPrice").val(ui.item.price);
+                $("#SubCategoryName").val(ui.item.SubCategoryName);
 
-                        }
-                    })
-                },
-                minLength: 4,
-                messages: {
-                    noResults: "", results: ""
-                }
-            });
-        })
+            },
+
+        });
     </script>
     <script>
         $(document).ready(function () {

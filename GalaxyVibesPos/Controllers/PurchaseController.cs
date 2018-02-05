@@ -217,13 +217,24 @@ namespace GalaxyVibesPos.Controllers
         {
             DatabaseContext db = new DatabaseContext();
 
-            var allSearch = (from N in db.productDetails
-                             where N.Code.StartsWith(Prefix) || N.ProductName.StartsWith(Prefix)
-                             select new { N.Code, N.Stoke, N.ProductName, N.UnitID, N.PurchasePrice, N.ProductDetailsID, N.CategorySub.SubCategoryName, N.SalePrice });
+            if (Prefix.StartsWith("p0") || Prefix.StartsWith("P0"))
+            {
+                var allSearch = (from N in db.productDetails
+                                 where N.Code.StartsWith(Prefix)
+                                 select new { N.Code, N.Stoke, N.ProductName, N.ProductUnit.UnitSize, N.PurchasePrice, N.ProductDetailsID, N.CategorySub.SubCategoryName, N.SalePrice, key = 0 });
+                return Json(allSearch, JsonRequestBehavior.AllowGet);
 
+            }
+            else
+            {
+                var allSearch = (from N in db.productDetails
+                                 where N.ProductName.StartsWith(Prefix)
+                                 select new { N.Code, N.Stoke, N.ProductName, N.ProductUnit.UnitSize, N.PurchasePrice, N.ProductDetailsID, N.CategorySub.SubCategoryName, N.SalePrice, key = 1 });
+                return Json(allSearch, JsonRequestBehavior.AllowGet);
 
+            }
 
-            return Json(allSearch, JsonRequestBehavior.AllowGet);
+          
         }
 
         //Purchase Return

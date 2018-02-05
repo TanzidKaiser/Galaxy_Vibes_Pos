@@ -29,12 +29,12 @@ namespace GalaxyVibesPos.Controllers
         }
         public JsonResult GetProducts(string Prefix)
         {
-           
+
             if (Prefix.StartsWith("p0") || Prefix.StartsWith("P0"))
             {
                 var result = (from n in db.productDetails
-                          where n.Code.StartsWith(Prefix)
-                          select new {n.Code,n.Stoke,n.ProductName,n.ProductUnit.UnitSize, n.PurchasePrice,key=0 }).ToList();
+                              where n.Code.StartsWith(Prefix)
+                              select new { n.Code, n.Stoke, n.ProductName, n.ProductUnit.UnitSize, n.PurchasePrice, n.ProductDetailsID, key = 0 }).ToList();
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -42,12 +42,12 @@ namespace GalaxyVibesPos.Controllers
             {
                 var result = (from n in db.productDetails
                               where n.ProductName.StartsWith(Prefix)
-                              select new { n.Code, n.Stoke, n.ProductName, n.ProductUnit.UnitSize, n.PurchasePrice,key=1 }).ToList();
+                              select new { n.Code, n.Stoke, n.ProductName, n.ProductUnit.UnitSize, n.PurchasePrice, n.ProductDetailsID, key = 1 }).ToList();
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-            
+
         }
-     
+
     }
 }

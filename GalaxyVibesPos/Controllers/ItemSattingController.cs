@@ -17,6 +17,7 @@ namespace GalaxyVibesPos.Controllers
         //-----For Main Category Index Edit
 
         // index
+        
         public ActionResult MainCategoryIndex()
         {
             return View(db.CategoryMain.ToList());
@@ -394,9 +395,10 @@ namespace GalaxyVibesPos.Controllers
 
         }
         // Get Code For ProductDetails tbl 
-
+        
         public string getProductCode()
         {
+            
             string code = null;
             var maxID = db.productDetails.OrderByDescending(x => x.ProductDetailsID).FirstOrDefault();
 

@@ -192,7 +192,7 @@
                                             <table class="table table-bordered table-invoice-full" id="Table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="head0">ID</th>
+                                                        <th class="head0">SL#</th>
                                                         <th class="head1">Product ID</th>
                                                         <th class="head0 right">Product Name</th>
                                                         <th class="head1 right">Quantity</th>
@@ -278,7 +278,115 @@
 @section Scripts{
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>   
+    <script>
+        $(document).ready(function () {
+            $("#addBtn").click(function () {
+
+
+                var isValidate = CheckValidateForAdd();
+                var productID = $("#PurchaseProductID").val();
+                var productName = $("#ProductName").val();
+                var quantity = $("#PurchaseQuantity").val();
+                var price = $("#PurchaseProductPrice").val();
+                var purchaseNo = $("#PurchaseNo").val();
+                var total = price * quantity;
+                var SerialNo = GetSerialNo()+1;
+                if (isValidate) {
+                    var markup = "<tr><td id=SlNO>" + SerialNo + "</td><td class=totalProduct>" + productID + "</td><td>" + productName + "</td><td class=totalQuantity>" + quantity + "</td><td class=PurchaseProductPrice>" + price + "</td><td>" + purchaseNo + "</td><td class =PurchaseTotal>" + total + "</td><td>" + ' <button type="button" id="removeBtn" class="btn btn-info btn-lg"><i class="icon-remove-circle"></i></button>' + "</td></tr>";
+
+                    $("#Table tbody").append(markup);
+
+                    ProductQuantitysum();
+
+                    TotalAmount();
+                    
+                    var totalItem = $('#Table tbody tr').length;
+                    $("#TotalItem").val(totalItem);
+                    //AddID();
+                    FieldValueNUll();
+                    $("#ProductSearch").focus();
+
+                }
+            });
+        });
+    </script>
+    <script>
+
+        // Check Validation
+
+        function CheckValidateForAdd() {
+
+            var invoiceNO = $("#PurchaseSupplierInvoiceNo").val();
+            var productSearch = $("#ProductSearch").val();
+            var quantity = $('#PurchaseQuantity').val();
+
+            if (invoiceNO == "") {
+
+                alert("Required Invoice NO");
+                return false;
+            };
+            if (productSearch == "") {
+
+                alert("Required Product Name ");
+                return false;
+            };
+            if (quantity == "") {
+
+                alert("Required Quantity");
+                return false;
+            };
+
+
+            return true;
+        }
+
+        function ProductQuantitysum() {
+            var sum = 0;
+            $('.totalQuantity').each(function () {
+                var value = $(this).text();
+                //add only if the value is number
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+
+            });
+            $('#ProductTotal').val(sum);
+        };
+
+        function TotalAmount() {
+            var sum = 0;
+            $('.PurchaseTotal').each(function () {
+
+                var value = $(this).text();
+
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            $("#TotalAmount").val(sum);
+        }
+
+        function GetSerialNo() {
+            
+            var rows = $('#Table tbody tr').length;           
+            return rows;
+        }
+
+        function FieldValueNUll() {
+
+            document.getElementById("PurchaseSupplierInvoiceNo").disabled = true;
+            document.getElementById("ProductSearch").value = "";
+            document.getElementById("PurchaseQuantity").value = "";
+            document.getElementById("Stoke").value = "";
+            document.getElementById("ProductCode").value = "";
+            document.getElementById("ProductName").value = "";
+            document.getElementById("UnitType").value = "";
+            document.getElementById("PurchaseProductPrice").value = "";
+
+
+        }
+    </script>
     <script>
         $(document).ready(function () {
             var now = new Date();
@@ -306,11 +414,10 @@
 
                         response($.map(data, function (item) {
                             if (item.key == 0) {
-                                return { value: item.Code, stoke: item.Stoke, name: item.ProductName, unit: item.unit, price: item.PurchasePrice, code: item.Code };
+                                return { value: item.Code, stoke: item.Stoke, name: item.ProductName, unit: item.UnitSize, price: item.PurchasePrice, code: item.Code, ProductID: item.ProductDetailsID };
                             }
-                            else
-                            {
-                                return { value: item.ProductName, stoke: item.Stoke, name: item.ProductName, unit: item.UnitSize, price: item.PurchasePrice, code: item.Code };
+                            else {
+                                return { value: item.ProductName, stoke: item.Stoke, name: item.ProductName, unit: item.UnitSize, price: item.PurchasePrice, code: item.Code, ProductID: item.ProductDetailsID };
                             }
                         }));
 
@@ -318,14 +425,16 @@
                 })
 
             },
-            minLength: 2,
-            select: function (event, ui) {
 
+            select: function (event, ui) {
+                $("#PurchaseProductID").val(ui.item.ProductID);
+                $("#Stoke").val(ui.item.stoke);
                 $("#Stoke").val(ui.item.stoke);
                 $("#ProductCode").val(ui.item.code);
                 $("#ProductName").val(ui.item.name);
                 $("#UnitType").val(ui.item.unit);
                 $("#PurchaseProductPrice").val(ui.item.price);
+                $("#PurchaseQuantity").focus();
             },
 
         });
