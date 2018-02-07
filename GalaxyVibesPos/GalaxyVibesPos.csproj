@@ -194,6 +194,7 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerLedger.cs" />
+    <Compile Include="Models\DamageProductReceive.cs" />
     <Compile Include="Models\DatabaseContext\DatabaseContext.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Rack.cs" />

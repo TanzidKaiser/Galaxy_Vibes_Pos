@@ -69,7 +69,7 @@
 
                                         <label class="control-label span6" id="levelWidth">Supplier Invoice No</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="text" name="PurchaseSupplierInvoiceNo" id="PurchaseSupplierInvoiceNo" class="span12" placeholder="Invoice No" />
+                                            <input type="text" name="PurchaseSupplierInvoiceNo" id="PurchaseSupplierInvoiceNo" onkeypress="return MoveCursorProductSearch(event);" class="span12" placeholder="Invoice No" />
 
                                         </div>
 
@@ -170,7 +170,7 @@
 
                                         <label class="control-label span6" id="levelWidth">Quantity</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="text" name="PurchaseQuantity" id="PurchaseQuantity" class="span12" placeholder="Quantity" />
+                                            <input type="text" name="PurchaseQuantity" id="PurchaseQuantity" onkeypress="return enterKey(event);" class="span12" placeholder="Quantity" />
 
                                         </div>
 
@@ -250,7 +250,7 @@
 
                                         <div class="form-control">
                                             <button type="button" id="addBtn" class="btn btn-success" style="margin-bottom:16px">Add</button>
-                                            <button type="button" id="submitBtn" class="btn btn-success" style="margin-bottom:16px;margin-left:8px">Receive</button>
+                                            <button type="button" id="ReceiveBtn" class="btn btn-success" style="margin-bottom:16px;margin-left:8px">Receive</button>
                                         </div>
 
                                     </div>
@@ -278,11 +278,10 @@
 @section Scripts{
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-ui.js"></script>   
+    <script src="~/Scripts/jquery-ui.js"></script>
     <script>
         $(document).ready(function () {
             $("#addBtn").click(function () {
-
 
                 var isValidate = CheckValidateForAdd();
                 var productID = $("#PurchaseProductID").val();
@@ -291,8 +290,9 @@
                 var price = $("#PurchaseProductPrice").val();
                 var purchaseNo = $("#PurchaseNo").val();
                 var total = price * quantity;
-                var SerialNo = GetSerialNo()+1;
+                var SerialNo = GetSerialNo() + 1;
                 if (isValidate) {
+
                     var markup = "<tr><td id=SlNO>" + SerialNo + "</td><td class=totalProduct>" + productID + "</td><td>" + productName + "</td><td class=totalQuantity>" + quantity + "</td><td class=PurchaseProductPrice>" + price + "</td><td>" + purchaseNo + "</td><td class =PurchaseTotal>" + total + "</td><td>" + ' <button type="button" id="removeBtn" class="btn btn-info btn-lg"><i class="icon-remove-circle"></i></button>' + "</td></tr>";
 
                     $("#Table tbody").append(markup);
@@ -300,10 +300,10 @@
                     ProductQuantitysum();
 
                     TotalAmount();
-                    
+
                     var totalItem = $('#Table tbody tr').length;
                     $("#TotalItem").val(totalItem);
-                    //AddID();
+
                     FieldValueNUll();
                     $("#ProductSearch").focus();
 
@@ -341,35 +341,9 @@
             return true;
         }
 
-        function ProductQuantitysum() {
-            var sum = 0;
-            $('.totalQuantity').each(function () {
-                var value = $(this).text();
-                //add only if the value is number
-                if (!isNaN(value) && value.length != 0) {
-                    sum += parseFloat(value);
-                }
-
-            });
-            $('#ProductTotal').val(sum);
-        };
-
-        function TotalAmount() {
-            var sum = 0;
-            $('.PurchaseTotal').each(function () {
-
-                var value = $(this).text();
-
-                if (!isNaN(value) && value.length != 0) {
-                    sum += parseFloat(value);
-                }
-            });
-            $("#TotalAmount").val(sum);
-        }
-
         function GetSerialNo() {
-            
-            var rows = $('#Table tbody tr').length;           
+
+            var rows = $('#Table tbody tr').length;
             return rows;
         }
 
@@ -386,7 +360,77 @@
 
 
         }
+
+        //Remove cell from Table
+
+        $('#Table').on('click', '#removeBtn', function () {
+            $(this).parents('tr').remove();
+
+            var totalItem = ($('#Table tbody tr').length + 1) - 1;
+            $("#TotalItem").val(totalItem);
+
+            //var SerialNo = GetSerialNo();
+
+            ProductQuantitysum();
+            TotalAmount();
+
+            if (totalItem == 0) {
+                document.getElementById("PurchaseSupplierInvoiceNo").disabled = false;
+                document.getElementById("ProductSearch").value = "";
+                document.getElementById("PurchaseQuantity").value = "";
+            }
+        });
+
+
+
+        function TotalAmount() {
+            var sum = 0;
+            $('.PurchaseTotal').each(function () {
+
+                var value = $(this).text();
+
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+            $("#TotalAmount").val(sum);
+        }
+
+        function ProductQuantitysum() {
+            var sum = 0;
+            $('.totalQuantity').each(function () {
+                var value = $(this).text();
+                //add only if the value is number
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+
+            });
+            $('#ProductTotal').val(sum);
+        };
+        function enterKey(e) {
+            // look for window.event in case event isn't passed in
+            e = e || window.event;
+            if (e.keyCode == 13) {
+                document.getElementById('addBtn').click();
+                return false;
+            }
+            return true;
+        }
+        //When enter click cursor move product Seach
+        function MoveCursorProductSearch(e) {
+            // look for window.event in case event isn't passed in
+            e = e || window.event;
+            if (e.keyCode == 13) {
+                $("#ProductSearch").focus();
+                return false;
+            }
+            return true;
+        }
+
+
     </script>
+
     <script>
         $(document).ready(function () {
             var now = new Date();
@@ -399,8 +443,11 @@
             var today = now.getFullYear() + '-' + month + '-' + day;
 
             $('#PurchaseDate').val(today);
+
+            $("#PurchaseSupplierInvoiceNo").focus();
         });
     </script>
+
     <script type="text/javascript">
         $("#ProductSearch").autocomplete({
             source: function (request, response) {
@@ -420,13 +467,13 @@
                                 return { value: item.ProductName, stoke: item.Stoke, name: item.ProductName, unit: item.UnitSize, price: item.PurchasePrice, code: item.Code, ProductID: item.ProductDetailsID };
                             }
                         }));
-
                     }
                 })
 
             },
 
             select: function (event, ui) {
+
                 $("#PurchaseProductID").val(ui.item.ProductID);
                 $("#Stoke").val(ui.item.stoke);
                 $("#Stoke").val(ui.item.stoke);
@@ -436,7 +483,85 @@
                 $("#PurchaseProductPrice").val(ui.item.price);
                 $("#PurchaseQuantity").focus();
             },
-
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $("#ReceiveBtn").click(function () {
+                
+                var rowNo = $('#Table tbody tr').length;
+                var List = [];
+                if (rowNo >= 1) {
+                    $('#Table tbody tr').each(function () {
+
+                        $this = $(this);
+                        var saleItem = {
+
+
+                            CompanyName: $("#CompanyName").val(),
+                            SalesCustomerName: $("#SalesCustomerName").val(),
+
+                            SalesNo: $("#SalesNo").val(),
+                            SalesDate: $("#SaleDate").val(),                           
+                            SalesProductID: $this.find("td.SalesProductID").text(),
+                            ProductName: $this.find("td.ProductName").text(),
+                            SalesSalePrice: $this.find('td.PurchaseProductPrice').text(),
+                            SalesQuantity: $this.find('td.totalQuantity').text(),
+                            Total: $this.find('td.Total').text(),
+
+                            SalesReceivedAmount: $("#ReceiveAmount").val(),
+
+
+                            SalesChangeAmount: $("#ReturnAmount").val(),
+                            SalesPuechaseBy: $("#SalesPuechaseBy").val(),
+                            SalesPurchaseByContact: $("#SalesPurchaseByContact").val(),
+
+                            DueAmount: parseFloat($("#DueAmount").val()),
+
+                            //......For Sale report
+
+                            SubTotal: ($("#TotalAmount").val()),
+                            TotalDiscount: ($("#TotalDiscount").val()),
+                            SalesVat: ($("#TotalVat").val()),
+                            TotalAmount: ($("#TotalMinusDiscount").val()),
+                            NetPayable: ($("#NetTotal").val()),
+                            ReturnAmount: ($("#ReturnAmount").val()),
+                        };
+                        List.push(saleItem);
+                    });
+                    $.ajax({
+                        type: 'post',
+                        url: "/Sales/Save",
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(List),
+                        contentType: 'application/json',
+                        success: function (flag) {
+                            if (flag == 1) {
+
+                                alert("Save Successful");
+                                setTimeout(location.reload.bind(location), 2000);
+                                var SerializeList = JSON.stringify(List);
+                                var Encode = btoa(SerializeList);
+                                var Url = '@Url.Action("ExportSaleInvoice", "Sales")' + '/?encrift=' + Encode;
+                                window.location = Url;
+
+
+                            }
+                            else {
+                                alert("Some Exception here, Please try Again !")
+                            }
+
+                        },
+                    });
+
+                }
+                else {
+                    alert("Please Add Minimum One Item");
+                };
+
+            });
+        })
     </script>
 }
