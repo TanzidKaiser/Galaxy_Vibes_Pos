@@ -1,7 +1,6 @@
-﻿@model GalaxyVibesPos.Models.Purchase
-
+﻿@model IEnumerable<GalaxyVibesPos.Models.DamageProductReceive>
 @{
-    ViewBag.Title = "Damage";
+    ViewBag.Title = "DamageReceive";
     Layout = "~/Views/Shared/_mytemplate.cshtml";
 }
 
@@ -69,7 +68,7 @@
 
                                         <label class="control-label span6" id="levelWidth">Supplier Invoice No</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="text" name="PurchaseSupplierInvoiceNo" id="PurchaseSupplierInvoiceNo" onkeypress="return MoveCursorProductSearch(event);" class="span12" placeholder="Invoice No" />
+                                            <input type="text" name="InvoiceNo" id="InvoiceNo" onkeypress="return MoveCursorProductSearch(event);" class="span12" placeholder="Invoice No" />
 
                                         </div>
 
@@ -100,7 +99,7 @@
 
                                         <label class="control-label span6" id="levelWidth">Date</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="date" name="PurchaseDate" id="PurchaseDate" class="span12" />
+                                            <input type="date" name="DamageProductDate" id="DamageProductDate" class="span12" />
 
                                         </div>
 
@@ -109,7 +108,7 @@
 
                                         <label class="control-label span6" id="levelWidth">Track No</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="text" class="span12" id="PurchaseNo" value="@ViewBag.trackNo" disabled />
+                                            <input type="text" class="span12" id="DamageProductNo" value="@ViewBag.trackNo" disabled />
 
                                         </div>
 
@@ -317,7 +316,7 @@
 
         function CheckValidateForAdd() {
 
-            var invoiceNO = $("#PurchaseSupplierInvoiceNo").val();
+            var invoiceNO = $("#InvoiceNo").val();
             var productSearch = $("#ProductSearch").val();
             var quantity = $('#PurchaseQuantity').val();
 
@@ -349,7 +348,7 @@
 
         function FieldValueNUll() {
 
-            document.getElementById("PurchaseSupplierInvoiceNo").disabled = true;
+            document.getElementById("InvoiceNo").disabled = true;
             document.getElementById("ProductSearch").value = "";
             document.getElementById("PurchaseQuantity").value = "";
             document.getElementById("Stoke").value = "";
@@ -375,7 +374,7 @@
             TotalAmount();
 
             if (totalItem == 0) {
-                document.getElementById("PurchaseSupplierInvoiceNo").disabled = false;
+                document.getElementById("InvoiceNo").disabled = false;
                 document.getElementById("ProductSearch").value = "";
                 document.getElementById("PurchaseQuantity").value = "";
             }
@@ -442,7 +441,7 @@
                 day = "0" + day;
             var today = now.getFullYear() + '-' + month + '-' + day;
 
-            $('#PurchaseDate').val(today);
+            $('#DamageProductDate').val(today);
 
             $("#PurchaseSupplierInvoiceNo").focus();
         });
@@ -489,50 +488,37 @@
         $(document).ready(function () {
 
             $("#ReceiveBtn").click(function () {
-                
+
                 var rowNo = $('#Table tbody tr').length;
                 var List = [];
                 if (rowNo >= 1) {
                     $('#Table tbody tr').each(function () {
 
                         $this = $(this);
-                        var saleItem = {
+                        var DamageItem = {
 
-
-                            CompanyName: $("#CompanyName").val(),
-                            SalesCustomerName: $("#SalesCustomerName").val(),
-
-                            SalesNo: $("#SalesNo").val(),
-                            SalesDate: $("#SaleDate").val(),                           
-                            SalesProductID: $this.find("td.SalesProductID").text(),
-                            ProductName: $this.find("td.ProductName").text(),
-                            SalesSalePrice: $this.find('td.PurchaseProductPrice').text(),
-                            SalesQuantity: $this.find('td.totalQuantity').text(),
-                            Total: $this.find('td.Total').text(),
-
-                            SalesReceivedAmount: $("#ReceiveAmount").val(),
-
-
-                            SalesChangeAmount: $("#ReturnAmount").val(),
-                            SalesPuechaseBy: $("#SalesPuechaseBy").val(),
-                            SalesPurchaseByContact: $("#SalesPurchaseByContact").val(),
-
-                            DueAmount: parseFloat($("#DueAmount").val()),
+                            DamageProductNo: $("#DamageProductNo").val(),
+                            InvoiceNo: $("#InvoiceNo").val(),
+                            DamageProductDate: $("#DamageProductDate").val(),
+                            DamageProductProductID: $this.find("td.totalProduct").text(),
+                            DamageProductPrice: $this.find('td.PurchaseProductPrice').text(),
+                            DamageProductQuantity: $this.find('td.totalQuantity').text(),
+                            DamageProductTotal: $this.find('td.PurchaseTotal').text(),
 
                             //......For Sale report
+                            //SubTotal: ($("#TotalAmount").val()),
+                            //TotalDiscount: ($("#TotalDiscount").val()),
+                            //SalesVat: ($("#TotalVat").val()),
+                            //TotalAmount: ($("#TotalMinusDiscount").val()),
+                            //NetPayable: ($("#NetTotal").val()),
+                            //ReturnAmount: ($("#ReturnAmount").val()),
 
-                            SubTotal: ($("#TotalAmount").val()),
-                            TotalDiscount: ($("#TotalDiscount").val()),
-                            SalesVat: ($("#TotalVat").val()),
-                            TotalAmount: ($("#TotalMinusDiscount").val()),
-                            NetPayable: ($("#NetTotal").val()),
-                            ReturnAmount: ($("#ReturnAmount").val()),
                         };
-                        List.push(saleItem);
+                        List.push(DamageItem);
                     });
                     $.ajax({
                         type: 'post',
-                        url: "/Sales/Save",
+                        url: "/DamageProduct/DamageReceive",
                         dataType: 'json',
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(List),
@@ -541,12 +527,12 @@
                             if (flag == 1) {
 
                                 alert("Save Successful");
-                                setTimeout(location.reload.bind(location), 2000);
+                                @*setTimeout(location.reload.bind(location), 2000);
                                 var SerializeList = JSON.stringify(List);
                                 var Encode = btoa(SerializeList);
                                 var Url = '@Url.Action("ExportSaleInvoice", "Sales")' + '/?encrift=' + Encode;
-                                window.location = Url;
-
+                                window.location = Url;*@
+                                window.location.reload();
 
                             }
                             else {
@@ -560,8 +546,9 @@
                 else {
                     alert("Please Add Minimum One Item");
                 };
-
+                     
             });
+            
         })
     </script>
 }

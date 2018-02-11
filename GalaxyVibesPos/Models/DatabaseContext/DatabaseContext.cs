@@ -30,5 +30,7 @@ namespace GalaxyVibesPos.Models
         public DbSet<Warehouse> Warehouse { get; set;}
         public DbSet<Rack> Rack { get; set; }
         public DbSet<Cell> Cell { get; set; }
+        public DbSet<DamageProductReceive> DamageProductReceive { get; set; }
+        public DbSet<Income> Income { get; set; }
     }
 }

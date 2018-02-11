@@ -1,0 +1,231 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.Income>
+@{
+    ViewBag.Title = "OtherIncome";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span5">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Other Income</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="SubmitForm">
+                                    <input data-val="true" id="ID" name="ID" type="hidden">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label span6" id="levelWidth">Date</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="date" class="span5" id="Date" name="Date" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Description</label>
+                                        <div class="controls">
+                                            <textarea class="span11" id="Description" name="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Remarks</label>
+                                        <div class="controls">
+                                            <input type="text" name="Remarks" id="Remarks" class="span11" placeholder="Remarks" />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Amount</label>
+                                        <div class="controls">
+                                            <input type="text" name="Amount" id="Amount" class="span11" placeholder="Amount" />
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="button" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
+                                        <button type="button" id="updateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="span7">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Income List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">ID</td>
+                                    <td style="font-size:medium">Date</td>
+                                    <td style="font-size:medium">Description</td>
+                                    <td style="font-size:medium">Remarks</td>
+                                    <td style="font-size:medium">Amount</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            @if (ViewBag.incomeList != null)
+                            {
+                                <tbody>
+                                    @foreach (var item in ViewBag.incomeList)
+                                    {
+
+                                        <tr class="odd gradeX">
+                                            <td>
+
+                                                @item.ID
+
+                                            </td>
+                                            <td>
+
+                                                @item.Date
+
+                                            </td>
+                                            <td>
+
+                                                @item.Description
+
+                                            </td>
+                                            <td>
+
+                                                @item.Remarks
+
+                                            </td>
+                                            <td>
+
+                                                @item.Amount
+
+                                            </td>
+                                            <td>
+                                                <button type="button" id="EditCustomer" class="btn" onclick="EditCustomer(@item.ID,this)">Edit</button>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var now = new Date();
+            var month = (now.getMonth() + 1);
+            var day = now.getDate();
+            if (month < 10)
+                month = "0" + month;
+            if (day < 10)
+                day = "0" + day;
+            var today = now.getFullYear() + '-' + month + '-' + day;
+
+            $('#Date').val(today);
+        });
+
+    </script>
+    <script type="text/javascript">
+        function EditCustomer(id, num) {
+
+            $.ajax({
+
+                url: '/Accounts/EditIncome',
+                data: { Id: id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#ID").val(response.ID);
+                    $("#Date").val(response.Date);
+                    $("#Description").val(response.Description);
+                    $("#Remarks").val(response.Remarks);
+                    $("#Amount").val(response.Amount);
+                    $("#addBtn").hide();
+                },
+            });
+        };
+
+        $("#addBtn").click(function () {
+            if (CheckValidate()) {
+                var data = $("#SubmitForm").serialize();
+                $.ajax({
+                    type: "Post",
+                    url: "/Accounts/OtherIncome",
+                    data: data,
+                    success: function (result) {
+                        alert(result);
+                        window.location.href = "/Accounts/OtherIncome";
+                    }
+                })
+            }
+        });
+
+        $("#updateBtn").click(function () {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Accounts/IncomeUpdate",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/Accounts/OtherIncome";
+                }
+            })
+        });
+        function CheckValidate() {
+
+            var date = $("#Date").val();
+            var description = $("#Description").val();
+            var amount = $("#Amount").val();
+
+            if (date == "") {
+
+                alert("Required Date");
+                return false;
+            };
+            if (description == "") {
+
+                alert("Required Description");
+                return false;
+            };
+            if (amount == "") {
+
+                alert("Required Amount");
+                return false;
+            };
+
+            return true;
+        }
+    </script>
+}

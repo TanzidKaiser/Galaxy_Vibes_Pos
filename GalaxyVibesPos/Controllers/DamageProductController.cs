@@ -9,8 +9,9 @@ namespace GalaxyVibesPos.Controllers
     public class DamageProductController : Controller
     {
         DatabaseContext db = new DatabaseContext();
+
         // GET: DamageProduct
-        public ActionResult Damage()
+        public ActionResult DamageReceive()
         {
             string date = DateTime.Now.ToString("Mdyyyy");
             string time = DateTime.Now.ToString("hhmmss");
@@ -22,11 +23,40 @@ namespace GalaxyVibesPos.Controllers
 
             return View();
         }
+
         [HttpPost]
-        public ActionResult Damage(Purchase model)
+        public ActionResult DamageReceive(List<DamageProductReceive> List)
         {
-            return View();
+            var flag = 0;
+
+            foreach (var product in List)
+            {
+                DamageProductReceive dmr = new DamageProductReceive();
+
+                dmr.DamageProductNo = product.DamageProductNo;
+                dmr.CompanyID = 0;
+                dmr.DamageProductDate = product.DamageProductDate;
+                dmr.SupplierID = 0;
+                dmr.InvoiceNo = product.InvoiceNo;
+                dmr.DamageProductRemarks = product.DamageProductRemarks;
+                dmr.DamageProductProductID = product.DamageProductProductID;
+                dmr.DamageProductPrice = product.DamageProductPrice;
+                dmr.DamageProductQuantity = product.DamageProductQuantity;
+                dmr.DamageProductTotal = product.DamageProductTotal;
+
+                db.DamageProductReceive.Add(dmr);
+
+                int i = db.SaveChanges();
+
+                if(i>0)
+                {
+                    flag = 1;
+                }
+            }
+
+            return Json(flag, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult GetProducts(string Prefix)
         {
 
