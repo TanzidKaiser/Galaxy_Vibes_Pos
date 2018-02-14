@@ -75,18 +75,7 @@
                                     <fieldset id="categorySubmitForm">
                                         <div class="control-group">
                                             <label class="control-label">Select Main category</label>
-                                            <div class="controls">
-                                                @*@Html.DropDownListFor(m => m.MainCategoryID, ViewBag.MainCategoryList as SelectList, "Select Main Category", new { @name = "MaincategoryName" })*@
-                                                @*<select name="MaincategoryName">
-                                                        <option value="">Select Main category</option>
-
-                                                        @foreach (var Model in ViewBag.MainCategoryList)
-                                                        {
-                                                            <option value="@Model.MainCategoryID">@Model.MaincategoryName</option>
-                                                        }
-                                                    </select>*@
-                                                @*@Html.DropDownListFor(m => m.MainCategoryID, new SelectList(ViewBag.MainCategoryList as System.Collections.IEnumerable, "MainCategoryID", "MaincategoryName"), "Select Main Category", new { @name = "MaincategoryName" })*@
-
+                                            <div class="controls">                                               
                                                 @Html.DropDownList("MainCategoryID", ViewBag.MainCategoryList as List<SelectListItem>, new { @name = "MaincategoryName", @id = "MainCategory" })
                                             </div>
                                         </div>

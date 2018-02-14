@@ -121,7 +121,20 @@
 
                 </ul>
             </li>
-
+            <li class="submenu">
+                <a href="#"><i class="icon icon-th-list"></i> <span>Damage Product</span> <span class="label label-important">1</span></a>
+                <ul>
+                    <li>@Html.ActionLink("Damage Product Receive", "DamageReceive", "DamageProduct")</li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a href="#"><i class="icon icon-th-list"></i> <span>Accounts</span> <span class="label label-important">1</span></a>
+                <ul>
+                    <li>@Html.ActionLink("Customer Payment/Receive", "CustomerPaymentOrReceive", "Accounts")</li>
+                    <li>@Html.ActionLink("Other Income", "OtherIncome", "Accounts")</li>
+                    <li>@Html.ActionLink("Expense", "ExpenseCreate", "Accounts")</li>
+                </ul>
+            </li>
             <li class="submenu">
                 <a href="#"><i class="icon icon-th-list"></i> <span>Customer</span> <span class="label label-important">4</span></a>
                 <ul>
@@ -135,34 +148,34 @@
                 <a href="#"><i class="icon icon-th-list"></i> <span>Supplier</span> <span class="label label-important">3</span></a>
                 <ul>
                     <li>@Html.ActionLink("Add Supplier", "AddSupplier", "Supplier")</li>
-                    <li>@Html.ActionLink("Supplier Ledger", "AddSupplierLedger", "Supplier")</li>                    
+                    <li>@Html.ActionLink("Supplier Ledger", "AddSupplierLedger", "Supplier")</li>
                     <li>@Html.ActionLink("Supplier Group Setting", "GroupSettings", "SupplierGroupSettings")</li>
                 </ul>
             </li>
             <li class="submenu">
                 <a href="#"><i class="icon icon-th-list"></i> <span>Setting</span> <span class="label label-important">3</span></a>
                 <ul>
-                    <li>@Html.ActionLink("Add Unit", "AddUnit", "Settings")</li> 
-                    <li>@Html.ActionLink("Add Warehouse", "AddWireHouse", "WareHouse")</li>          
+                    <li>@Html.ActionLink("Add Unit", "AddUnit", "Settings")</li>
+                    <li>@Html.ActionLink("Add Warehouse", "AddWireHouse", "WareHouse")</li>
                 </ul>
             </li>
             <li class="submenu">
                 <a href="#"><i class="icon icon-th-list"></i> <span>Report</span> <span class="label label-important">3</span></a>
-                <ul>                    
+                <ul>
                     <a href="http://localhost:61215/SaleReportViewer.aspx" class="btn btn-info">Sale Report</a>
                     <a href="http://localhost:61215/PurchaseReportView.aspx" class="btn btn-info">Purchase Report</a>
-                    
-                    
+
+
                 </ul>
             </li>
-           
-           
+
+
 
 
 
 
         </ul>
-        
+
 
     </div>
     <!--sidebar-menu-->

@@ -196,6 +196,10 @@
     <Compile Include="Migrations\201802100649404_IncomeTblCreate.Designer.cs">
       <DependentUpon>201802100649404_IncomeTblCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802140636387_ExpenseCreate.cs" />
+    <Compile Include="Migrations\201802140636387_ExpenseCreate.Designer.cs">
+      <DependentUpon>201802140636387_ExpenseCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryMain.cs" />
@@ -205,6 +209,7 @@
     <Compile Include="Models\CustomerLedger.cs" />
     <Compile Include="Models\DamageProductReceive.cs" />
     <Compile Include="Models\DatabaseContext\DatabaseContext.cs" />
+    <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Income.cs" />
     <Compile Include="Models\Rack.cs" />
@@ -770,6 +775,8 @@
     <Content Include="Views\WareHouse\CellEdit.cshtml" />
     <Content Include="Views\DamageProduct\DamageReceive.cshtml" />
     <Content Include="Views\Accounts\OtherIncome.cshtml" />
+    <Content Include="Views\Accounts\ExpenseCreate.cshtml" />
+    <Content Include="Views\Accounts\CustomerPaymentOrReceive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">
@@ -798,6 +805,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802100649404_IncomeTblCreate.resx">
       <DependentUpon>201802100649404_IncomeTblCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802140636387_ExpenseCreate.resx">
+      <DependentUpon>201802140636387_ExpenseCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Purchase\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Report\Purchase\PurchaseReportViewer.rdlc" />

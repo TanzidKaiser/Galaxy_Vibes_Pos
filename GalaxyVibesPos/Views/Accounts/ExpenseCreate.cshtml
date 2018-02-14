@@ -1,6 +1,6 @@
-﻿@model IEnumerable<GalaxyVibesPos.Models.Income>
+﻿@model IEnumerable<GalaxyVibesPos.Models.Expense>
 @{
-    ViewBag.Title = "OtherIncome";
+    ViewBag.Title = "ExpenseCreate";
     Layout = "~/Views/Shared/_mytemplate.cshtml";
 }
 <div id="content">
@@ -32,10 +32,15 @@
 
                                         <label class="control-label span6" id="levelWidth">Date</label>
                                         <div class="controls" id="inputMargin">
-                                            <input type="date" class="span5" id="Date" name="Date" />
-
+                                            <input type="date" class="span5" id="Date" onload="GetDate()" name="Date" />
                                         </div>
 
+                                    </div>
+                                    <div class="control-group">
+                                        <lebel class="control-label">Expense Type</lebel>
+                                        <div class="controls" id="inputMargin">
+                                            @Html.DropDownList("ExpenseType", ViewBag.ExpenseType as List<SelectListItem>)
+                                        </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Description</label>
@@ -44,7 +49,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Remarks</label>
+                                        <label class="control-label" id="invoice">Remarks</label>
                                         <div class="controls">
                                             <input type="text" name="Remarks" id="Remarks" class="span11" placeholder="Remarks" />
                                         </div>
@@ -79,7 +84,7 @@
                         <h5>Income List</h5>
                     </div>
                     <div class="widget-content nopadding">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="myTable">
 
                             <thead>
                                 <tr>
@@ -91,10 +96,10 @@
                                     <td></td>
                                 </tr>
                             </thead>
-                            @if (ViewBag.incomeList != null)
+                            @if (ViewBag.ExpenseList != null)
                             {
                                 <tbody>
-                                    @foreach (var item in ViewBag.incomeList)
+                                    @foreach (var item in ViewBag.ExpenseList)
                                     {
 
                                         <tr class="odd gradeX">
@@ -124,7 +129,7 @@
 
                                             </td>
                                             <td>
-                                                <button type="button" class="btn" onclick="EditIncome(@item.ID,this)">Edit</button>
+                                                <button type="button" id="EditCustomer" class="btn" onclick="EditExpense(@item.ID,this)">Edit</button>
                                             </td>
 
                                         </tr>
@@ -141,7 +146,10 @@
 @section scripts{
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        window.load = GetDate();
+        window.load = $("#updateBtn").hide();
+        function GetDate() {
+
             var now = new Date();
             var month = (now.getMonth() + 1);
             var day = now.getDate();
@@ -152,60 +160,39 @@
             var today = now.getFullYear() + '-' + month + '-' + day;
 
             $('#Date').val(today);
-        });
+        }
 
     </script>
-    <script type="text/javascript">
-        function EditIncome(id, num) {
-
-            $.ajax({
-
-                url: '/Accounts/EditIncome',
-                data: { Id: id },
-                type: "post",
-                cache: false,
-                success: function (response) {
-
-                    $("#ID").val(response.ID);
-                    $("#Date").val(response.Date);
-                    $("#Description").val(response.Description);
-                    $("#Remarks").val(response.Remarks);
-                    $("#Amount").val(response.Amount);
-                    $("#addBtn").hide();
-                },
-            });
-        };
-
+    <script>
         $("#addBtn").click(function () {
             if (CheckValidate()) {
                 var data = $("#SubmitForm").serialize();
+                alert(data);
                 $.ajax({
                     type: "Post",
-                    url: "/Accounts/OtherIncome",
+                    url: "/Accounts/ExpenseCreate",
                     data: data,
                     success: function (result) {
                         alert(result);
-                        window.location.href = "/Accounts/OtherIncome";
+                        //window.location.href = "/Accounts/ExpenseCreate";
+                        AllFealdNull();
+                        GetDate();
                     }
                 })
             }
         });
+        function AllFealdNull() {
 
-        $("#updateBtn").click(function () {
-            var data = $("#SubmitForm").serialize();
-            $.ajax({
-                type: "Post",
-                url: "/Accounts/IncomeUpdate",
-                data: data,
-                success: function (result) {
-                    alert(result);
-                    window.location.href = "/Accounts/OtherIncome";
-                }
-            })
-        });
+            document.getElementById("ExpenseType").selectedIndex = "0";
+            $("#Description").val('');
+            $("#Amount").val('');
+            $("#Remarks").val('');
+            $("#Date").val('');
+        }
         function CheckValidate() {
 
             var date = $("#Date").val();
+            var expenseType = $("#ExpenseType").val();
             var description = $("#Description").val();
             var amount = $("#Amount").val();
 
@@ -214,6 +201,10 @@
                 alert("Required Date");
                 return false;
             };
+            if ($("#ExpenseType option:selected").text() == 'Select Expense Type') {
+                alert("Select Expense Type");
+                return false;
+            }
             if (description == "") {
 
                 alert("Required Description");
@@ -227,5 +218,59 @@
 
             return true;
         }
+
+        $("#ExpenseType").change(function LebelChange() {
+
+            if ($("#ExpenseType option:selected").text() == 'Special Discount') {
+                $("#invoice").text("Invoice No");               
+                $('#Remarks').attr('placeholder', "Invoice NO");
+            }
+            else
+            {
+                $("#invoice").text("Remarks");
+                $('#Remarks').attr('placeholder', "Remarks");
+            }
+        })
+    </script>
+
+    @*-----Edit and Update----*@
+
+    <script>
+
+        function EditExpense(id, num) {
+           
+            $.ajax({
+
+                url: '/Accounts/EditExpense',
+                data: { Id: id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+                    $("#ID").val(response.ID);
+                    $("#ExpenseType").val(response.ExpenseType);
+                    $("#Date").val(response.Date);
+                    $("#Description").val(response.Description);
+                    $("#Remarks").val(response.Remarks);
+                    $("#Amount").val(response.Amount);
+                    $("#addBtn").hide();
+                    $("#updateBtn").show();
+                },                                
+            });            
+        };
+
+        $("#updateBtn").click(function () {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Accounts/ExpenseUpdate",
+                data: data,
+                success: function (result) {
+
+                    alert(result);
+
+                    window.location.href = "/Accounts/ExpenseCreate";
+                }
+            })
+        });
     </script>
 }

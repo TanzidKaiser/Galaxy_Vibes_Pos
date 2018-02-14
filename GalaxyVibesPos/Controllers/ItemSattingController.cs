@@ -468,26 +468,14 @@ namespace GalaxyVibesPos.Controllers
             if (ModelState.IsValid)
             {
 
-                productDetail = db.productDetails.SingleOrDefault(x => x.ProductDetailsID == model.ProductDetailsID);
-                //productDetail.MainCategoryID = model.MainCategoryID;
-                //productDetail.CategoryID = model.CategoryID;
-                //productDetail.SubCategoryID = model.SubCategoryID;
-                //productDetail.Code = model.Code;
+                productDetail = db.productDetails.SingleOrDefault(x => x.ProductDetailsID == model.ProductDetailsID);              
                 productDetail.ProductName = model.ProductName;
                 productDetail.PurchasePrice = model.PurchasePrice;
-                productDetail.SalePrice = model.SalePrice;
-                //productDetail.Stoke = model.Stoke;
-                productDetail.Description = model.Description;
-                // productDetail.UnitID = model.UnitID;
-                productDetail.MinimumProductQuantity = model.MinimumProductQuantity;
-                //productDetail.WarehouseID = model.WarehouseID;
-                //productDetail.RackID = model.RackID;
-                //productDetail.CellID = model.CellID;
-                //productDetail.Status = model.Status;
+                productDetail.SalePrice = model.SalePrice;               
+                productDetail.Description = model.Description;              
+                productDetail.MinimumProductQuantity = model.MinimumProductQuantity;             
                 db.SaveChanges();
                 Msg = "Product Details update Successfully";
-
-
 
             }
 
