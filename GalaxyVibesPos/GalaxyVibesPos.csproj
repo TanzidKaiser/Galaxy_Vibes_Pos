@@ -777,6 +777,7 @@
     <Content Include="Views\Accounts\OtherIncome.cshtml" />
     <Content Include="Views\Accounts\ExpenseCreate.cshtml" />
     <Content Include="Views\Accounts\CustomerPaymentOrReceive.cshtml" />
+    <Content Include="Views\Accounts\CustomerPaymentOrReceiveIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711260717117_addCategoryMainToPurchaseTable.resx">

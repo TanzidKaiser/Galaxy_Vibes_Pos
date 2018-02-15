@@ -4,8 +4,7 @@
     Layout = "~/Views/Shared/_mytemplate.cshtml";
 }
 <style>
-    .lebel {
-        width: 129px;
+    label {
         font-size: 11px;
         font-weight: bold;
         color: #dc7e1b;
@@ -19,7 +18,7 @@
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span5">
+            <div class="span10">
                 <div class="widget-box">
                     <div class="widget-title">
 
@@ -37,18 +36,27 @@
                                     <input data-val="true" id="ID" name="ID" type="hidden">
                                     <div class="control-group">
                                         <div>
-                                            <lebel class="control-label">Select Type</lebel>
+                                            <label class="control-label">Select Type</label>
                                         </div>
                                         <div class="controls" id="inputMargin" style="margin: 6px 0px 0px 196px">
-                                            <label class="span4"><input type="radio" id="Cash" name="radio1" value="Cash" checked style="margin: 0px 4px 7px" />Payment</label>
-                                            <label class="span4"><input type="radio" id="Due" name="radio1" value="Due" style="margin: 0px 4px 7px" />Receive</label>
+                                            <label class="span4"><input type="radio" id="Payment" name="PaymentSelect" value="Payment" checked style="margin: 0px 4px 7px" />Payment</label>
+                                            <label class="span4"><input type="radio" id="Receive" name="PaymentSelect" value="Receive" style="margin: 0px 4px 7px" />Receive</label>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <lebel class="control-label">Customer Name</lebel>
+
+                                        <label class="control-label span6" id="levelWidth">Date</label>
+                                        <div class="controls" id="inputMargin">
+                                            <input type="date" class="span5" id="Date" name="ReceiveDate" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Customer Name</label>
                                         <div class="controls" id="inputMargin">
 
-                                            @*@Html.DropDownList("ExpenseType", ViewBag.ExpenseType as List<SelectListItem>)*@
+                                            @Html.DropDownList("CustomerID", ViewBag.Customers as List<SelectListItem>)
 
                                         </div>
                                     </div>
@@ -62,28 +70,28 @@
                                         <label class="control-label" id="invoice">Payment type</label>
                                         <div class="controls">
 
-                                            @*@Html.DropDownList("ExpenseType", ViewBag.ExpenseType as List<SelectListItem>)*@
+                                            @Html.DropDownList("PaymentType", ViewBag.PaymentTypes as List<SelectListItem>)
 
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Bank Name</label>
                                         <div class="controls">
-                                            <input type="text" name="Amount" id="Amount" class="span11" placeholder="Amount" />
+                                            <input type="text" name="BankName" id="BankName" class="span11" placeholder="Bank Name" disabled />
 
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Cheque No.</label>
                                         <div class="controls">
-                                            <input type="text" name="Amount" id="Amount" class="span11" placeholder="Amount" />
+                                            <input type="text" name="ChequeNo" id="ChequeNo" class="span11" placeholder="Cheque No." disabled />
 
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Cheque Date</label>
                                         <div class="controls">
-                                            <input type="text" name="Amount" id="Amount" class="span11" placeholder="Amount" />
+                                            <input type="text" name="ChequeDate" id="ChequeDate" class="span11" placeholder="Cheque Date" disabled />
 
                                         </div>
                                     </div>
@@ -97,13 +105,13 @@
                                     <div class="control-group">
                                         <label class="control-label">Remarks</label>
                                         <div class="controls">
-                                            <input type="text" name="Amount" id="Amount" class="span11" placeholder="Amount" />
+                                            <input type="text" name="Remarks" id="Remarks" class="span11" placeholder="Remarks" />
 
                                         </div>
                                     </div>
                                     <br />
                                     <div class="form-control">
-                                        <button type="button" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
+                                        <button type="submit" id="addBtn" class="btn btn-success" style="margin:15px">Add</button>
                                         <button type="button" id="updateBtn" class="btn btn-success" style="margin:15px">Update</button>
                                     </div>
                                 </fieldset>
@@ -115,70 +123,39 @@
                 </div>
 
             </div>
-            <div class="span7">
-                <div class="widget-box">
-                    <div class="widget-title">
 
-                        <span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>Income List</h5>
-                    </div>
-                    <div class="widget-content nopadding">
-                        <table class="table table-bordered table-striped" id="myTable">
-
-                            <thead>
-                                <tr>
-                                    <td style="font-size:medium">ID</td>
-                                    <td style="font-size:medium">Date</td>
-                                    <td style="font-size:medium">Description</td>
-                                    <td style="font-size:medium">Remarks</td>
-                                    <td style="font-size:medium">Amount</td>
-                                    <td></td>
-                                </tr>
-                            </thead>
-                            @if (ViewBag.ExpenseList != null)
-                            {
-                                <tbody>
-                                    @foreach (var item in ViewBag.ExpenseList)
-                                    {
-
-                                        <tr class="odd gradeX">
-                                            <td>
-
-                                                @item.ID
-
-                                            </td>
-                                            <td>
-
-                                                @item.Date
-
-                                            </td>
-                                            <td>
-
-                                                @item.Description
-
-                                            </td>
-                                            <td>
-
-                                                @item.Remarks
-
-                                            </td>
-                                            <td>
-
-                                                @item.Amount
-
-                                            </td>
-                                            <td>
-                                                <button type="button" id="EditCustomer" class="btn" onclick="EditExpense(@item.ID,this)">Edit</button>
-                                            </td>
-
-                                        </tr>
-                                    }
-                                </tbody>
-                            }
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var now = new Date();
+            var month = (now.getMonth() + 1);
+            var day = now.getDate();
+            if (month < 10)
+                month = "0" + month;
+            if (day < 10)
+                day = "0" + day;
+            var today = now.getFullYear() + '-' + month + '-' + day;
+
+            $('#Date').val(today);
+        });
+
+    </script>
+    <script>
+        $("#PaymentType").change(function () {
+
+            if ($("#PaymentType option:selected").text() == 'Check') {
+                $("#BankName").prop('disabled', false);
+                $("#ChequeNo").prop('disabled', false);
+                $("#ChequeDate").prop('disabled', false);
+            }
+            else {
+                $("#BankName").prop('disabled', true);
+                $("#ChequeNo").prop('disabled', true);
+                $("#ChequeDate").prop('disabled', true);
+            }
+        })
+    </script>
+}

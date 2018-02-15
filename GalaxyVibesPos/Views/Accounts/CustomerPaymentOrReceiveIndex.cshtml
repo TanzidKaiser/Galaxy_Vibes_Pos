@@ -1,0 +1,90 @@
+﻿@model IEnumerable<GalaxyVibesPos.Models.CustomerLedger>
+@{
+    ViewBag.Title = "CustomerPaymentOrReceiveIndex";
+    Layout = "~/Views/Shared/_mytemplate.cshtml";
+}
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <p>
+                @Html.ActionLink("Create New", "ItemSettings")
+            </p>
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5> Index</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped" id="myTable">
+                        <thead>
+                            <tr>
+                                <td style="font-size:medium">Id</td>
+                                <td style="font-size:medium">Date</td>
+                                <td style="font-size:medium">Invoice No</td>
+                                <td style="font-size:medium">Ledger Debit</td>
+                                <td style="font-size:medium">Ledger Credit</td>
+                                <td style="font-size:medium">Payment Type</td>
+                                <td style="font-size:medium">Bank Name</td>
+                                <td style="font-size:medium">Cheque No</td>
+                                <td style="font-size:medium">Cheque Date</td>
+                                <td style="font-size:medium">Remarks</td>    
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ID)
+                                    </td>
+                                    <td>
+                                        
+                                        @Html.DisplayFor(modelItem => item.ReceiveDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InvoiceNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Debit)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Credit)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PaymentType)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BankName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ChequeNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ChequeDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Remarks)
+                                    </td>                                    
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID })                                     
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

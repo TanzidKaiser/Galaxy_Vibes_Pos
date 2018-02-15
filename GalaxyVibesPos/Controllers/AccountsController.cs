@@ -99,7 +99,7 @@ namespace GalaxyVibesPos.Controllers
             var list = GetExpenseTypelist();
             ViewBag.ExpenseList = db.Expense.ToList();
 
-            if (i >=0 )
+            if (i >= 0)
             {
                 msg = "Save Successfully";
             }
@@ -140,7 +140,7 @@ namespace GalaxyVibesPos.Controllers
                 Amount = income.Amount
             };
 
-            return Json(item, JsonRequestBehavior.AllowGet);            
+            return Json(item, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ExpenseUpdate(Expense model)
         {
@@ -171,10 +171,57 @@ namespace GalaxyVibesPos.Controllers
         }
 
         // Customer payment Or Receive
-         
+
         public ActionResult CustomerPaymentOrReceive()
         {
+            ViewBag.Customers = GetCustomers();
+            ViewBag.PaymentTypes = GetPaymentType();
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult CustomerPaymentOrReceive(CustomerLedger model)
+        {
+
+            return View();
+        }
+
+        public ActionResult CustomerPaymentOrReceiveIndex()
+        {
+            var customerLedgerList = db.CustomerLedger.ToList();
+            return View(customerLedgerList);
+        }
+
+        public dynamic GetCustomers()
+        {
+            var customers = from cust in db.Customer
+                            select new { Name = cust.CustomerName, Id = cust.CustomerID };
+
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Text = "Select Customer", Value="0" });
+            foreach (var a in customers)
+            {
+                list.Add(new SelectListItem { Text = a.Name, Value = Convert.ToString(a.Id) });
+            }
+
+            return list;
+        }
+        public dynamic GetPaymentType()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            var paymentTypes = new[] {
+
+                new { Name="Cash" ,Id ="Cash"},
+                new {Name="Check" ,Id ="Check" }
+            }.ToList();
+
+            foreach (var a in paymentTypes)
+            {
+                list.Add(new SelectListItem { Text = a.Name, Value = a.Id });
+            }
+
+            return list;
         }
 
     }

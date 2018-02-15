@@ -26,5 +26,9 @@ namespace GalaxyVibesPos.Models
         public virtual Customer Customer { get; set; }
         [NotMapped]
         public Nullable<double> PreviouaDue { get; set; }
+        [NotMapped ]
+        public string PaymentSelect { get; set; }
+        [NotMapped]
+        public int Amount { get; set; }
     }
 }
