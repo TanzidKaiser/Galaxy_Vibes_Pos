@@ -308,8 +308,9 @@ namespace GalaxyVibesPos.Controllers
         {
             int i = 0;
             var aPurchase = db.Purchase.Where(p => p.PurchaseID == purchase.PurchaseID).FirstOrDefault();
-
             var aSupplierLedger = db.SupplierLedger.SingleOrDefault(p => p.InvoiceNo == aPurchase.PurchaseSupplierInvoiceNo);
+            //Create New Ledger when return purchase Product
+
 
             aSupplierLedger.Credit = aPurchase.PurchaseTotal;
 

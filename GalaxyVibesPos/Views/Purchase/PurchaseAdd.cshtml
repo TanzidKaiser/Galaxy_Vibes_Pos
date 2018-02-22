@@ -292,7 +292,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                                                        
+
                                     <div class="span6">
 
                                         <div class="form-control">
@@ -459,26 +459,41 @@
                         data: { Prefix: request.term },
                         success: function (data) {
                             response($.map(data, function (item) {
-                                $("#Stoke").val(item.Stoke);
-                                $("#ProductCode").val(item.Code);
-                                $("#ProductName").val(item.ProductName);
-                                $("#UnitType").val(item.UnitID);
-                                $("#PurchaseProductPrice").val(item.PurchasePrice);
-                                $("#PurchaseProductID").val(item.ProductDetailsID);
-                                return { label: item.Code, value: item.Code };
+                                if (item.key == 0) {                                  
+                                    return {
+                                        value: item.Code, stoke: item.Stoke, ProductCode: item.Code, name: item.ProductName, unit: item.UnitSize,
+                                        purchasePrice: item.PurchasePrice, ProductDetailsID: item.ProductDetailsID
+                                    };
 
+                                }
+                                else
+                                {
+                                    return {
+                                        value: item.ProductName, stoke: item.Stoke, ProductCode: item.Code, name: item.ProductName, unit: item.UnitSize,
+                                        purchasePrice: item.PurchasePrice, ProductDetailsID: item.ProductDetailsID
+                                    };
+                                }
                             }))
 
                         }
                     })
+                },
+                select: function (event, ui) {
+
+                    $("#Stoke").val(ui.item.stoke);
+                    $("#ProductCode").val(ui.item.ProductCode);
+                    $("#ProductName").val(ui.item.name);
+                    $("#UnitType").val(ui.item.unit);
+                    $("#PurchaseProductPrice").val(ui.item.purchasePrice);
+                    $("#PurchaseProductID").val(ui.item.ProductDetailsID);
+
                 },
                 messages: {
                     noResults: "", results: ""
                 }
             });
         })
-    </script>
-
+    </script>  
     <script>
         $(document).ready(function () {
             $("#addBtn").click(function () {
@@ -673,7 +688,7 @@
 
                     alert("Please Add Minimum One Item");
                 };
-               
+
             });
         })
     </script>

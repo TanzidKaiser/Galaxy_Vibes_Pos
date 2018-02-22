@@ -16,6 +16,6 @@ namespace GalaxyVibesPos.Models
         public virtual List<Rack> Rack { get; set; }
         public virtual List<Cell> Cell { get; set; }
         public virtual List<ProductDetails> ProductDetails { get; set; }
-       
+
     }
 }

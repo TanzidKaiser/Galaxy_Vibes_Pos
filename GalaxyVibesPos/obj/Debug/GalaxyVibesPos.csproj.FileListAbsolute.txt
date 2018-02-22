@@ -162,7 +162,7 @@ E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\RdlCompile.compiled
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.dll
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.pdb
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.ReplaceWirehouseandRackandCellTable.resources
-E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.DamageProductReceiveCreate.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.IncomeTblCreate.resources
 E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.Migrations.ExpenseCreate.resources
+E:\GitHub\Galaxy_Vibes_Pos\GalaxyVibesPos\obj\Debug\GalaxyVibesPos.csprojResolveAssemblyReference.cache

@@ -75,7 +75,7 @@
                                     <fieldset id="categorySubmitForm">
                                         <div class="control-group">
                                             <label class="control-label">Select Main category</label>
-                                            <div class="controls">                                               
+                                            <div class="controls">
                                                 @Html.DropDownList("MainCategoryID", ViewBag.MainCategoryList as List<SelectListItem>, new { @name = "MaincategoryName", @id = "MainCategory" })
                                             </div>
                                         </div>
@@ -227,31 +227,31 @@
                                             <div class="controls">
 
                                                 @Html.DropDownList("ProductDetailsID", new SelectList(string.Empty, "Value", "Text"), "Select Product", new { @name = "ProductName", @id = "ProductDropdownForProductDetails" })
-                                           
+
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Purchase Price:</label>
                                             <div class="controls">
-                                                <input type="text" id="PurchasePrice" name="PurchasePrice" class="span11" placeholder="Purchase Price" />
+                                                <input type="text" id="purchasePrice" name="PurchasePrice" class="span11" placeholder="Purchase Price" />
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Sale Price:</label>
                                             <div class="controls">
-                                                <input type="text" id="SalePrice" name="SalePrice" class="span11" placeholder="Sale Price" />
+                                                <input type="text" id="salePrice" name="SalePrice" class="span11" placeholder="Sale Price" />
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Product Description</label>
                                             <div class="controls">
-                                                <textarea class="span11" id="Description" name="Description"></textarea>
+                                                <textarea class="span11" id="description" name="Description"></textarea>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Minimum Order Level:</label>
                                             <div class="controls">
-                                                <input type="text" id="MinimumProductQuantity" name="MinimumProductQuantity" class="span11" placeholder="Minimum Order Level" />
+                                                <input type="text" id="minimumProductQuantity" name="MinimumProductQuantity" class="span11" placeholder="Minimum Order Level" />
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -678,6 +678,77 @@
 
         $(document).ready(function () {
 
+            $("#ProductDropdownForProductDetails").change(function () {
+                var productID = $(this).val();;
+                var rackSelect = $("#RackID");
+                rackSelect.empty();
+                var cellSelect = $("#CellID");
+                cellSelect.empty();
+                var json = { ProductID: productID, }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetProductDetails", "ItemSatting")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (response) {
+                        
+                        
+                            $.each(response.RackList, function (index, itemData) {
+
+                                rackSelect.append($('<option/>', {
+
+                                    value: itemData.Value,
+
+                                    text: itemData.Text
+
+                                }));
+
+                            });
+                            $.each(response.CellList, function (index, itemData) {
+
+                                cellSelect.append($('<option/>', {
+
+                                    value: itemData.Value,
+
+                                    text: itemData.Text
+
+                                }));
+
+                            });
+                      
+                        response($.map(response.Item, function (item) {
+                            $("#purchasePrice").val(item.PurchasePrice);
+                            $("#salePrice").val(item.SalePrice);
+                            $("#description").val(item.Description);
+                            $("#minimumProductQuantity").val(item.MinOrderLevel);
+                            $("#UnitID").val(item.UnitName);
+                            if (item.Warehouse != 0) {
+                               
+                                $("#WarehouseID").val(item.Warehouse);
+                            }
+                            if (item.Warehouse != 0) {
+                                $("#RackID").val(item.Rack);
+                            }
+                            if (item.Warehouse != 0) {
+                                $("#CellID").val(item.Cell);
+
+                            }
+
+                        }))
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Racks.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
             $("#WarehouseID").change(function () {
                 $("#RackID").empty();
                 var warehouseID = $(this).val();;
@@ -730,40 +801,9 @@
             })
         });
     </script>
-    @*<script type="text/javascript">
 
-        $(document).ready(function () {
-
-            $("#ProductDropdownForProductDetails").change(function () {
-                $("#LocationSubID").empty();
-                var locationID = $(this).val();;
-                var json = { LocationID: locationID, }
-                $.ajax({
-                    type: "post",
-                    url: '@Url.Action("GetLocationSubByLocation", "WareHouse")',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(json),
-                    success: function (response) {
-
-                        $.each(response, function (i, state) {
-                            $("#LocationSubID").append('<option value="' + state.Value + '">' +
-                                 state.Text + '</option>');
-                        });
-                    },
-                    error: function (ex) {
-                        alert('Failed to retrieve country states.' + ex);
-                    }
-                });
-                return false;
-            })
-        });
-    </script>*@
 }
 
 @* when select product dropdown all input field will bind selected product data  *@
 
-
-
-
-}
 

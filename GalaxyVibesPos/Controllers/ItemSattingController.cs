@@ -17,7 +17,7 @@ namespace GalaxyVibesPos.Controllers
         //-----For Main Category Index Edit
 
         // index
-        
+
         public ActionResult MainCategoryIndex()
         {
             return View(db.CategoryMain.ToList());
@@ -395,17 +395,17 @@ namespace GalaxyVibesPos.Controllers
 
         }
         // Get Code For ProductDetails tbl 
-        
+
         public string getProductCode()
         {
-            
+
             string code = null;
             var maxID = db.productDetails.OrderByDescending(x => x.ProductDetailsID).FirstOrDefault();
 
-            if(maxID != null)
+            if (maxID != null)
             {
-                
-                code = "P00" + Convert.ToString(maxID.ProductDetailsID + 1); 
+
+                code = "P00" + Convert.ToString(maxID.ProductDetailsID + 1);
             }
             else
             {
@@ -413,7 +413,7 @@ namespace GalaxyVibesPos.Controllers
                 code = "P001";
 
             }
-          
+
             return code;
 
         }
@@ -444,9 +444,18 @@ namespace GalaxyVibesPos.Controllers
                 productDetail.Description = model.Description;
                 productDetail.UnitID = model.UnitID;
                 productDetail.MinimumProductQuantity = model.MinimumProductQuantity;
-                productDetail.WarehouseID = model.WarehouseID;
-                productDetail.RackID = model.RackID;
-                productDetail.CellID = model.CellID;
+                if (model.WarehouseID != 0)
+                {
+                    productDetail.WarehouseID = model.WarehouseID;
+                }
+                if (model.RackID != 0)
+                {
+                    productDetail.RackID = model.RackID;
+                }
+                if (model.CellID != 0)
+                {
+                    productDetail.CellID = model.CellID;
+                }
 
                 db.SaveChanges();
                 Msg = "Product Details update Successfully";
@@ -468,12 +477,12 @@ namespace GalaxyVibesPos.Controllers
             if (ModelState.IsValid)
             {
 
-                productDetail = db.productDetails.SingleOrDefault(x => x.ProductDetailsID == model.ProductDetailsID);              
+                productDetail = db.productDetails.SingleOrDefault(x => x.ProductDetailsID == model.ProductDetailsID);
                 productDetail.ProductName = model.ProductName;
                 productDetail.PurchasePrice = model.PurchasePrice;
-                productDetail.SalePrice = model.SalePrice;               
-                productDetail.Description = model.Description;              
-                productDetail.MinimumProductQuantity = model.MinimumProductQuantity;             
+                productDetail.SalePrice = model.SalePrice;
+                productDetail.Description = model.Description;
+                productDetail.MinimumProductQuantity = model.MinimumProductQuantity;
                 db.SaveChanges();
                 Msg = "Product Details update Successfully";
 
@@ -519,7 +528,7 @@ namespace GalaxyVibesPos.Controllers
             return Json(subCategories, JsonRequestBehavior.AllowGet);
         }
 
-       
+
         // When selct product dropdown all input field will bind selected product data 
 
         public JsonResult DataBindForInputField(int mainCatID)
@@ -557,5 +566,53 @@ namespace GalaxyVibesPos.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetProductDetails(int ProductID)
+        {
+            var item = db.productDetails.Where(p => p.ProductDetailsID == ProductID).Select(a => new
+            {
+                PurchasePrice = a.PurchasePrice,
+                SalePrice = a.SalePrice,
+                Description = a.Description,
+                MinOrderLevel = a.MinimumProductQuantity,
+                UnitName = a.UnitID,
+                Warehouse = a.WarehouseID,
+                Rack = a.RackID,
+                Cell = a.CellID
+            });
+
+          
+               var rackList = GetRacks();
+               var cellList = GetCell();
+            
+            
+           
+          
+            return Json(new { Item = item, RackList = rackList, CellList = cellList }, JsonRequestBehavior.AllowGet);
+        }
+
+        private dynamic GetRacks()
+        {
+            var rack = db.Rack.ToList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            //list.Add(new SelectListItem { Text = "Select Rack", Value = "0" });
+            foreach (var a in rack)
+            {
+                list.Add(new SelectListItem { Text = a.RackName, Value = Convert.ToString(a.RackID) });
+            }
+            return list;
+
+        }
+        private dynamic GetCell()
+        {
+            var cells = db.Cell.ToList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            //list.Add(new SelectListItem { Text = "Select Cell", Value = "0" });
+            foreach (var a in cells)
+            {
+                list.Add(new SelectListItem { Text = a.CellName, Value = Convert.ToString(a.CellID) });
+            }
+            return list;
+
+        }
     }
 }
