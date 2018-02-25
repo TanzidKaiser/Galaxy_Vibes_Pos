@@ -98,10 +98,10 @@ namespace GalaxyVibesPos.Controllers
                 aSale.SalesQuantity = item.SalesQuantity;
                 aSale.SalesSalePrice = item.SalesSalePrice;
                 aSale.SalesTime = item.SalesTime;
-                aSale.SalesTotal = item.SalesTotal;
+                aSale.SalesTotal = item.Total;
                 
 
-                double? vatTotal = (((item.SalesTotal * 5) / 100) + item.SalesTotal);
+                double? vatTotal = (((item.Total * 5) / 100) + item.Total);
 
 
                 aSale.SalesVatTotal = vatTotal;

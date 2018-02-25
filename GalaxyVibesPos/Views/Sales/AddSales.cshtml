@@ -590,7 +590,7 @@
             select: function (event, ui) {
 
                 $("#Stoke").val(ui.item.stoke);
-                $("#SalesProductID").val(ui.item.ProductDetailsID);               
+                $("#SalesProductID").val(ui.item.ProductDetailsID);
                 $("#ProductName").val(ui.item.name);
                 $("#UnitType").val(ui.item.unit);
                 $("#ProductPrice").val(ui.item.price);
@@ -623,6 +623,7 @@
                     $("#Table tbody").append(markup);
 
                     ProductQuantitysum();
+
                     $("#TotalAmount").val(TotalAmount());
 
                     $("#TotalVat").val((GetVat(TotalMinusDiscount())));
@@ -630,9 +631,11 @@
                     $("#TotalMinusDiscount").val(TotalMinusDiscount());
 
                     $("#TotalDiscount").val(TotalDiscount());
+
                     $("#NetTotal").val(TotalNetAmount());
 
                     var totalItem = $('#Table tbody tr').length;
+
                     $("#TotalItem").val(totalItem);
 
                     FieldValueNUll();
@@ -703,7 +706,20 @@
         }
 
         function TotalNetAmount() {
-            return TotalMinusDiscount() + parseFloat($("#TotalVat").val());
+
+            var TotalNet = TotalMinusDiscount() + parseFloat($("#TotalVat").val());
+            if (TotalNet % 1 == 0)
+            {
+                return TotalNet
+            }
+            else
+            {
+                var n = TotalNet % 1;
+
+                var adjust = 1.00 - n;
+
+                return TotalNet + adjust;
+            }
         }
 
         function getDiscount(total) {
@@ -801,11 +817,13 @@
             var netAmount = TotalNetAmount();
             var receiveAmount = $(this).val();
             if (receiveAmount >= netAmount) {
+
                 $("#ReturnAmount").val(receiveAmount - netAmount);
                 $("#DueAmount").val('');
             }
             else {
                 $("#DueAmount").val(netAmount - receiveAmount);
+
                 $("#ReturnAmount").val('');
             }
         });
@@ -814,6 +832,7 @@
 
     <script>
         $(document).ready(function () {
+
             $("#SaleBtn").click(function () {
 
                 var totalRow = $('#Table tbody tr').length;
@@ -838,7 +857,9 @@
                 var strTime = hours + ':' + minutes + ' ' + ampm;
 
                 var rowNo = $('#Table tbody tr').length;
+
                 var List = [];
+
                 if (rowNo >= 1) {
                     $('#Table tbody tr').each(function () {
 
@@ -869,14 +890,13 @@
                             SalesPurchaseByContact: $("#SalesPurchaseByContact").val(),
 
                             DueAmount: parseFloat($("#DueAmount").val()),
+                           
+                            SubTotal: $("#TotalAmount").val(),                            
 
-                            //......For Sale report
-
-                            SubTotal: ($("#TotalAmount").val()),
                             TotalDiscount: ($("#TotalDiscount").val()),
                             SalesVat: ($("#TotalVat").val()),
                             TotalAmount: ($("#TotalMinusDiscount").val()),
-                            NetPayable: ($("#NetTotal").val()),
+                            NetPayable: ($("#NetTotal").val()),                          
                             ReturnAmount: ($("#ReturnAmount").val()),
                         };
                         List.push(saleItem);
