@@ -99,7 +99,7 @@ namespace GalaxyVibesPos.Controllers
                 aSale.SalesSalePrice = item.SalesSalePrice;
                 aSale.SalesTime = item.SalesTime;
                 aSale.SalesTotal = item.Total;
-                
+
 
                 double? vatTotal = (((item.Total * 5) / 100) + item.Total);
 
@@ -202,7 +202,7 @@ namespace GalaxyVibesPos.Controllers
             //{
             //    s.Write(bytes, 0, bytes.Length);
             //}
-           
+
 
         }
 
@@ -311,15 +311,16 @@ namespace GalaxyVibesPos.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult SalesReturn(string SalesProductID, string InvoiceNo, string PurchaseReturnQty, string NetReturnPrice, string AvgDiscount)
+        public ActionResult SalesReturn(string SalesID, string SalesProductID, string InvoiceNo, string PurchaseReturnQty, string NetReturnPrice, string AvgDiscount)
         {
 
+            int salesID = Convert.ToInt32(SalesID);
             int? productID = Convert.ToInt32(SalesProductID);
             double? returnQty = Convert.ToInt32(PurchaseReturnQty);
             double? avgDiscount = Convert.ToDouble(AvgDiscount);
             double? returnPrice = Convert.ToDouble(NetReturnPrice);
 
-            SaleUpdate(InvoiceNo, returnQty, returnPrice, avgDiscount);
+            SaleUpdate(InvoiceNo, returnQty, returnPrice, avgDiscount,salesID);
             CustomerLedgerUpdate(InvoiceNo);
             int i = StokeUpdate(productID, returnQty);
             ViewBag.Msg = i;
@@ -330,14 +331,15 @@ namespace GalaxyVibesPos.Controllers
         {
             double? debit = 0;
             double? credit = 0;
+            double? salesVatTotal = 0;
+            double? salesReceivedAmount = 0;
 
-            var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo).FirstOrDefault();
+            var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo).ToList();
 
             var customerInfo = db.CustomerLedger.Where(p => p.InvoiceNo == invoiceNo).Select(x => new { CustomerID = x.CustomerID, ID = x.ID, NetAmount = x.Credit }).FirstOrDefault();
             var LedgerList = db.CustomerLedger.Where(p => p.CustomerID == customerInfo.CustomerID).ToList();
 
-
-
+          
             foreach (var a in LedgerList)
             {
 
@@ -347,14 +349,24 @@ namespace GalaxyVibesPos.Controllers
 
             }
 
-            //debit = debit + aSale.SalesVatTotal;
-            //credit = credit + aSale.SalesReceivedAmount;
+            foreach (var a in aSale)
+            {
+                salesVatTotal += a.SalesVatTotal;
+                salesReceivedAmount = a.SalesReceivedAmount-a.SalesChangeAmount;
+            }
+
+            if(salesVatTotal % 1 != 0)
+            {
+                var n = salesVatTotal % 1;
+                var adjust = 1.00 - n;
+                salesVatTotal += adjust;
+            }
 
             var previousDue = debit - credit;
 
             var aLedger = db.CustomerLedger.SingleOrDefault(p => p.InvoiceNo == invoiceNo);
-            aLedger.Debit = aSale.SalesVatTotal;
-            aLedger.Credit = aSale.SalesReceivedAmount;
+            aLedger.Debit = salesVatTotal;
+            aLedger.Credit = salesReceivedAmount;
 
             var aCustomer = db.Customer.SingleOrDefault(p => p.CustomerID == customerInfo.CustomerID);
             aCustomer.PreviousDue = previousDue;
@@ -369,19 +381,23 @@ namespace GalaxyVibesPos.Controllers
             return i;
         }
 
-        private void SaleUpdate(string invoiceNo, double? returnQty, double? returnPrice, double? avgDiscount)
+        private void SaleUpdate(string invoiceNo, double? returnQty, double? returnPrice, double? avgDiscount, int salesID)
         {
-            var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo).FirstOrDefault();
+            
+            var receiveAmountList = db.Sale.Where(p => p.SalesNo == invoiceNo).ToList(); 
+           
+            var aSale = db.Sale.Where(p => p.SalesNo == invoiceNo && p.SalesID == salesID).FirstOrDefault();
+            
             if (aSale != null)
             {
 
                 var SalesQty = aSale.SalesQuantity - returnQty;
                 var SalesProductDiscount = aSale.SalesProductDiscount - (avgDiscount * returnQty);
-                var SalesTotal = (aSale.SalesSalePrice * SalesQty) - (avgDiscount * returnQty);
+                var SalesTotal = (aSale.SalesSalePrice * SalesQty) - (avgDiscount * SalesQty);
                 var SalesVatRate = ((5 * SalesTotal) / 100);
                 var SalesVatTotal = SalesVatRate + SalesTotal;
 
-                var sales = db.Sale.SingleOrDefault(p => p.SalesNo == invoiceNo);
+                var sales = db.Sale.SingleOrDefault(p => p.SalesNo == invoiceNo && p.SalesID == salesID);
 
                 sales.SalesQuantity = SalesQty;
                 sales.SalesProductDiscount = SalesProductDiscount;
@@ -389,7 +405,13 @@ namespace GalaxyVibesPos.Controllers
                 sales.SalesVatRate = SalesVatRate;
                 sales.SalesVatTotal = SalesVatTotal;
 
-                aSale.SalesReceivedAmount = aSale.SalesReceivedAmount - returnPrice;
+                foreach(var a in receiveAmountList)
+                {
+                    var receiveAmountUpdate = db.Sale.SingleOrDefault(p => p.SalesID == a.SalesID);
+
+                    receiveAmountUpdate.SalesReceivedAmount = receiveAmountUpdate.SalesReceivedAmount - returnPrice;
+                }
+                
 
             }
         }
@@ -435,14 +457,22 @@ namespace GalaxyVibesPos.Controllers
 
         public JsonResult GetSalesCustomerInfo(string Data)
         {
-            var id = Convert.ToInt32(Data);
-            var customerInfo = db.Customer.Where(p => p.CustomerID == id).FirstOrDefault();
-            var aCustomer = new
+            var aCustomer = new { CustomerName = string.Empty, GroupName = string.Empty, Address = string.Empty };
+                       
+            var id = Convert.ToInt32(Data);            
+            var customerId = db.Sale.First(p => p.SalesID == id).SalesCustomerID;
+            var customerInfo = db.Customer.Where(p => p.CustomerID == customerId).FirstOrDefault();
+
+            if (customerInfo != null)
             {
-                CustomerName = customerInfo.CustomerName,
-                GroupName = customerInfo.GroupName,
-                Address = customerInfo.Address
-            };
+                aCustomer = new
+                {
+                    CustomerName = customerInfo.CustomerName,
+                    GroupName = customerInfo.GroupName,
+                    Address = customerInfo.Address
+                };
+            }
+
             return Json(aCustomer, JsonRequestBehavior.AllowGet);
         }
 

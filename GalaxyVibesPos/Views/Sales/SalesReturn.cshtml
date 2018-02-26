@@ -139,7 +139,7 @@
 
                                 <fieldset id="form">
                                     <div class="col-lg-4 col-md-4">
-                                        <input data-val="true" id="PurchaseProductID" name="PurchaseProductID" type="hidden">
+                                        <input data-val="true" id="SalesID" name="SalesID" type="hidden">
                                         <div class="control-group">
 
                                             <label class="control-label span12" id="levelWidth">Product ID</label>
@@ -253,7 +253,7 @@
                             </div>
 
                         </div>
-                        @if (ViewBag.Msg != 0)
+                        @if (ViewBag.Msg == 1)
                         {
                             <div class="alert alert-success alert-block">
                                 <a class="close" data-dismiss="alert" href="#">×</a>
@@ -400,8 +400,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            var List = [];
+           
             $(document).on('click', '#editBtn', function (e) {
+                var List = [];
                 $(this).parent().siblings('td').each(function () {
                     List.push($(this).text());
                 })
@@ -421,6 +422,7 @@
                                 $("#Address").val(result.Address);
                             },
                         });
+                        $("#SalesID").val(List[i]);
                     }
                     if (i == 1) {
                         $("#SalesProductID").val(List[i]);
@@ -447,7 +449,7 @@
             });
 
         })
-       
+
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -498,11 +500,16 @@
                 var Price = $("#SalesPurchasePrice").val();
                 var returnQuentity = $("#PurchaseReturnQty").val();
                 var Return = Price * returnQuentity;
-               
+
                 var netReturn = Return - adjustment;
                 var vatReturn = 5 * netReturn / 100;
                 var netTotal = netReturn - vatReturn;
-
+                if (netTotal % 1 != 0)
+                {
+                    var n = netTotal % 1;
+                    var adjust = 1.00 - n;
+                    netTotal += adjust;
+                }
                 $("#ProductNetReturn").val(netReturn);
                 $("#ProductVatReturn").val(vatReturn);
                 $("#ProductNetTotal").val(netTotal);
@@ -518,5 +525,17 @@
 
         });
 
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
     </script>
 }
