@@ -396,7 +396,10 @@ namespace GalaxyVibesPos.Controllers
                 var SalesTotal = (aSale.SalesSalePrice * SalesQty) - (avgDiscount * SalesQty);
                 var SalesVatRate = ((5 * SalesTotal) / 100);
                 var SalesVatTotal = SalesVatRate + SalesTotal;
-
+                if(SalesVatTotal % 1 != 0)
+                {
+                    SalesVatTotal += (1.00 - (SalesVatTotal % 1));
+                }
                 var sales = db.Sale.SingleOrDefault(p => p.SalesNo == invoiceNo && p.SalesID == salesID);
 
                 sales.SalesQuantity = SalesQty;
@@ -409,7 +412,7 @@ namespace GalaxyVibesPos.Controllers
                 {
                     var receiveAmountUpdate = db.Sale.SingleOrDefault(p => p.SalesID == a.SalesID);
 
-                    receiveAmountUpdate.SalesReceivedAmount = receiveAmountUpdate.SalesReceivedAmount - returnPrice;
+                    receiveAmountUpdate.SalesReceivedAmount = receiveAmountUpdate.SalesReceivedAmount - SalesVatTotal;
                 }
                 
 

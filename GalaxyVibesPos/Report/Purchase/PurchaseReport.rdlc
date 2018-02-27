@@ -6,24 +6,24 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.0594in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.0594in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.63542in</Width>
+              <Width>0.71256in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.28125in</Width>
+              <Width>0.64497in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.0594in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.27604in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -64,7 +64,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Product Name</Value>
+                              <Value> Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -94,7 +94,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Purchase Product Price</Value>
+                              <Value> Price</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -124,7 +124,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Purchase Quantity</Value>
+                              <Value> Quantity</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -154,7 +154,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Purchase Total</Value>
+                              <Value> Total</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -178,7 +178,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.27604in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -354,10 +354,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseDataSet</DataSetName>
-        <Top>0.25917in</Top>
+        <Top>0.20709in</Top>
         <Left>0.28in</Left>
-        <Height>0.5in</Height>
-        <Width>5.91667in</Width>
+        <Height>0.55208in</Height>
+        <Width>4.53573in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -381,7 +381,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
-        <Top>1.11234in</Top>
+        <Top>1.36234in</Top>
         <Left>0.28in</Left>
         <Height>0.25in</Height>
         <Width>3.47633in</Width>
@@ -411,7 +411,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox32</rd:DefaultName>
-        <Top>1.49843in</Top>
+        <Top>1.74843in</Top>
         <Left>0.28in</Left>
         <Height>0.25in</Height>
         <Width>3.47632in</Width>
@@ -441,7 +441,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox32</rd:DefaultName>
-        <Top>1.80567in</Top>
+        <Top>2.05567in</Top>
         <Left>0.28in</Left>
         <Height>0.25in</Height>
         <Width>3.47633in</Width>
@@ -456,11 +456,67 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox21">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value> Total : TK  </Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox21</rd:DefaultName>
+        <Top>0.82861in</Top>
+        <Left>2.72738in</Left>
+        <Height>0.25in</Height>
+        <Width>0.99658in</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox13">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!TotalAmount.Value, "PurchaseDataSet")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>0.8425in</Top>
+        <Left>3.78in</Left>
+        <Height>0.25in</Height>
+        <Width>1.03573in</Width>
+        <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>2.67708in</Height>
     <Style />
   </Body>
-  <Width>7.86333in</Width>
+  <Width>5.30618in</Width>
   <Page>
     <PageHeader>
       <Height>2.91667in</Height>
@@ -472,7 +528,7 @@
           <Value>download</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.03125in</Top>
-          <Left>3.35305in</Left>
+          <Left>2.10305in</Left>
           <Height>0.88542in</Height>
           <Width>0.90625in</Width>
           <Style>
@@ -506,7 +562,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.95833in</Top>
-          <Left>2.71243in</Left>
+          <Left>1.46243in</Left>
           <Height>0.46875in</Height>
           <Width>2.3125in</Width>
           <ZIndex>1</ZIndex>
@@ -536,7 +592,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>1.63194in</Top>
-          <Left>1.02604in</Left>
+          <Left>0.27604in</Left>
           <Height>0.25in</Height>
           <Width>0.62848in</Width>
           <ZIndex>2</ZIndex>
@@ -566,7 +622,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>1.63194in</Top>
-          <Left>1.72396in</Left>
+          <Left>0.97396in</Left>
           <Height>0.25in</Height>
           <Width>1.07403in</Width>
           <ZIndex>3</ZIndex>
@@ -596,7 +652,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>1.63194in</Top>
-          <Left>4.71243in</Left>
+          <Left>2.96243in</Left>
           <Height>0.25in</Height>
           <Width>0.375in</Width>
           <ZIndex>4</ZIndex>
@@ -626,7 +682,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>1.63194in</Top>
-          <Left>5.15687in</Left>
+          <Left>3.47979in</Left>
           <Height>0.25in</Height>
           <Width>0.63103in</Width>
           <ZIndex>5</ZIndex>
@@ -727,8 +783,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox9</rd:DefaultName>
-          <Top>2.08208in</Top>
-          <Left>4.71243in</Left>
+          <Top>1.95138in</Top>
+          <Left>2.96243in</Left>
           <Height>0.25in</Height>
           <Width>2.08333in</Width>
           <ZIndex>8</ZIndex>
@@ -749,8 +805,8 @@
         </Border>
       </Style>
     </PageHeader>
-    <PageHeight>20in</PageHeight>
-    <PageWidth>11.69in</PageWidth>
+    <PageHeight>12in</PageHeight>
+    <PageWidth>5.5in</PageWidth>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
@@ -820,6 +876,10 @@
         </Field>
         <Field Name="ProductCode">
           <DataField>ProductCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalAmount">
+          <DataField>TotalAmount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

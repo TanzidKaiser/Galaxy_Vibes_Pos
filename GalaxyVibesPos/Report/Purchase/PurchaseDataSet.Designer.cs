@@ -305,6 +305,8 @@ namespace GalaxyVibesPos.Report.Purchase {
             
             private global::System.Data.DataColumn columnProductCode;
             
+            private global::System.Data.DataColumn columnTotalAmount;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PurchaseDataTable() {
@@ -444,6 +446,14 @@ namespace GalaxyVibesPos.Report.Purchase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TotalAmountColumn {
+                get {
+                    return this.columnTotalAmount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -479,7 +489,7 @@ namespace GalaxyVibesPos.Report.Purchase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PurchaseRow AddPurchaseRow(string PurchaseNo, int CompanyName, string PurchaseDate, int SupplierName, string PurchaseSupplierInvoiceNo, string PurchaseRemarks, int ProductName, double PurchaseProductPrice, double PurchaseQuantity, double PurchaseTotal, string SubCategoryName, string ProductCode) {
+            public PurchaseRow AddPurchaseRow(string PurchaseNo, int CompanyName, string PurchaseDate, int SupplierName, string PurchaseSupplierInvoiceNo, string PurchaseRemarks, int ProductName, double PurchaseProductPrice, double PurchaseQuantity, double PurchaseTotal, string SubCategoryName, string ProductCode, string TotalAmount) {
                 PurchaseRow rowPurchaseRow = ((PurchaseRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -494,7 +504,8 @@ namespace GalaxyVibesPos.Report.Purchase {
                         PurchaseQuantity,
                         PurchaseTotal,
                         SubCategoryName,
-                        ProductCode};
+                        ProductCode,
+                        TotalAmount};
                 rowPurchaseRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPurchaseRow);
                 return rowPurchaseRow;
@@ -530,6 +541,7 @@ namespace GalaxyVibesPos.Report.Purchase {
                 this.columnPurchaseTotal = base.Columns["PurchaseTotal"];
                 this.columnSubCategoryName = base.Columns["SubCategoryName"];
                 this.columnProductCode = base.Columns["ProductCode"];
+                this.columnTotalAmount = base.Columns["TotalAmount"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -561,6 +573,8 @@ namespace GalaxyVibesPos.Report.Purchase {
                 base.Columns.Add(this.columnSubCategoryName);
                 this.columnProductCode = new global::System.Data.DataColumn("ProductCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnProductCode);
+                this.columnTotalAmount = new global::System.Data.DataColumn("TotalAmount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalAmount);
                 this.columnPurchaseID.AutoIncrement = true;
                 this.columnPurchaseID.AutoIncrementSeed = -1;
                 this.columnPurchaseID.AutoIncrementStep = -1;
@@ -918,6 +932,22 @@ namespace GalaxyVibesPos.Report.Purchase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TotalAmount {
+                get {
+                    try {
+                        return ((string)(this[this.tablePurchase.TotalAmountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalAmount\' in table \'Purchase\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePurchase.TotalAmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPurchaseNoNull() {
                 return this.IsNull(this.tablePurchase.PurchaseNoColumn);
             }
@@ -1058,6 +1088,18 @@ namespace GalaxyVibesPos.Report.Purchase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetProductCodeNull() {
                 this[this.tablePurchase.ProductCodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalAmountNull() {
+                return this.IsNull(this.tablePurchase.TotalAmountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalAmountNull() {
+                this[this.tablePurchase.TotalAmountColumn] = global::System.Convert.DBNull;
             }
         }
         

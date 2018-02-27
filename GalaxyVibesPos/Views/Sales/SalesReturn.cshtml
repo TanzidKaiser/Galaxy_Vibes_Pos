@@ -222,7 +222,7 @@
                                         </div>
                                         <div class="control-group">
 
-                                            <label class="control-label span12" id="levelWidth">Vat-Retun</label>
+                                            <label class="control-label span12" id="levelWidth">Vat</label>
                                             <div class="controls" id="inputMargin">
                                                 <input type="text" id="ProductVatReturn" class="span10" />
 
@@ -253,7 +253,7 @@
                             </div>
 
                         </div>
-                        @if (ViewBag.Msg == 1)
+                        @if (ViewBag.Msg == 6)
                         {
                             <div class="alert alert-success alert-block">
                                 <a class="close" data-dismiss="alert" href="#">×</a>
@@ -400,7 +400,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-           
+
             $(document).on('click', '#editBtn', function (e) {
                 var List = [];
                 $(this).parent().siblings('td').each(function () {
@@ -473,18 +473,41 @@
     </script>
     <script>
         $("#PurchaseReturnQty").bind('keyup keypress blur', function () {
+
             var Price = $("#SalesPurchasePrice").val();
             var quentity = $("#SalesQuantity").val();
             var returnQuentity = $("#PurchaseReturnQty").val();
+            var avgDiscount = $("#AvgDiscount").val();
+            
             if (returnQuentity >= 0 && returnQuentity <= quentity) {
 
-                var netReturn = Price * returnQuentity;
 
+                var adjustment = avgDiscount * returnQuentity;
+                var netReturn = (Price * returnQuentity) - adjustment;
+                var vat = 5 * netReturn / 100;
+                var netTotal = netReturn + vat;
+
+                if (netTotal % 1 != 0) {
+                    var n = netTotal % 1;
+                    var adjust = 1.00 - n;
+                    netTotal += adjust;
+                }
                 $("#ProductNetReturn").val(netReturn);
+                $("#Adjusment").val(adjustment);
+                $("#ProductVatReturn").val(vat);
+                $("#ProductNetTotal").val(netTotal);
 
             }
+
             else {
-                $("#ProductNetReturn").val('');
+                var Price = $("#SalesPurchasePrice").val();
+                var returnQuentity = $("#PurchaseReturnQty").val();
+                var Return = Price * returnQuentity;
+                $("#ProductNetReturn").val(Return);
+                //$("#ProductNetReturn").val('');
+                $("#ProductVatReturn").val('');
+                $("#ProductNetTotal").val('');
+                $("#Adjusment").val('');
             }
         });
 
@@ -495,17 +518,15 @@
 
             var adjustment = $("#Adjusment").val();
 
-            if (adjustment > 0) {
-                //var netPrice = $("#ProductNetReturn").val();
+            if (adjustment >= 0) {
                 var Price = $("#SalesPurchasePrice").val();
                 var returnQuentity = $("#PurchaseReturnQty").val();
                 var Return = Price * returnQuentity;
 
                 var netReturn = Return - adjustment;
                 var vatReturn = 5 * netReturn / 100;
-                var netTotal = netReturn - vatReturn;
-                if (netTotal % 1 != 0)
-                {
+                var netTotal = netReturn + vatReturn;
+                if (netTotal % 1 != 0) {
                     var n = netTotal % 1;
                     var adjust = 1.00 - n;
                     netTotal += adjust;

@@ -94,14 +94,18 @@ namespace GalaxyVibesPos.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             Purchase[] PurchaseList = js.Deserialize<Purchase[]>(result);
 
-            foreach(var a in PurchaseList)
+            foreach (var a in PurchaseList)
             {
                 Purchase aPurchase = new Purchase();
                 aPurchase.PurchaseNo = a.PurchaseNo;
                 aPurchase.PurchaseDate = a.PurchaseDate;
                 aPurchase.PurchaseSupplierInvoiceNo = a.PurchaseSupplierInvoiceNo;
                 aPurchase.ProductCode = db.productDetails.First(p => p.ProductDetailsID == a.PurchaseProductID).Code;
-                aPurchase.ProductName = db.productDetails.First(p => p.ProductDetailsID == a.PurchaseProductID).ProductName;               
+                aPurchase.ProductName = db.productDetails.First(p => p.ProductDetailsID == a.PurchaseProductID).ProductName;
+                aPurchase.PurchaseProductPrice = a.PurchaseProductPrice;
+                aPurchase.PurchaseQuantity = a.PurchaseQuantity;
+                aPurchase.PurchaseTotal = a.PurchaseTotal;
+                aPurchase.TotalAmount = a.TotalAmount;
                 purchase.Add(aPurchase);
             }
             ReportDataSource reportDataSource = new ReportDataSource();
